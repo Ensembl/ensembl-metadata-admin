@@ -57,6 +57,7 @@ class Genome(models.Model):
     genome_uuid = models.CharField(max_length=128, default=uuid.uuid1, unique=True)
     assembly = models.ForeignKey(Assembly, models.CASCADE, related_name='genomes')
     organism = models.ForeignKey(Organism, models.CASCADE, related_name='genomes')
+    created = models.DateTimeField(auto_now_add=True)
 
     def releases(self):
         return GenomeRelease.objects.filter(genome_id=self.genome_id)
