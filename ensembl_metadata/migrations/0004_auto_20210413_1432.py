@@ -33,7 +33,7 @@ class Migration(migrations.Migration):
         migrations.AddField(
             model_name='genomedataset',
             name='release',
-            field=models.ForeignKey(default=0, on_delete=django.db.models.deletion.CASCADE, related_name='genome_datasets', to='ensembl_metadata.release'),
+            field=models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, related_name='genome_datasets', to='ensembl_metadata.release'),
             preserve_default=False,
         ),
         migrations.AlterModelTable(
@@ -46,7 +46,7 @@ class Migration(migrations.Migration):
         migrations.AddField(
             model_name='dataset',
             name='dataset_source',
-            field=models.ForeignKey(default=0, on_delete=django.db.models.deletion.CASCADE, related_name='datasets', to='ensembl_metadata.datasetsource'),
+            field=models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, related_name='datasets', to='ensembl_metadata.datasetsource'),
             preserve_default=False,
         ),
     ]
