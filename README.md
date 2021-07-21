@@ -1,29 +1,29 @@
-Ensembl Metadata Registry
-===============================
+# Ensembl Metadata Registry
 
-[![Documentation Status](https://readthedocs.org/projects/ensembl-metadata-registry/badge/?version=latest)](http://ensembl-metadata-registry.readthedocs.io/en/latest/?badge=latest) [![Build Status](https://travis-ci.org/Ensembl/ensembl-metadata-registry.svg?branch=master)](https://travis-ci.org/Ensembl/ensembl-metadata-registry)
+[![Build Status](https://travis-ci.com/Ensembl/ensembl-metadata-admin.svg?branch=master)](https://travis-ci.com/Ensembl/ensembl-metadata-admin)
 
-Provides REST data access to ensembl-metadata database over HTTP
+Django ORM and admin layer for the Ensembl Metadata database.
 
-# Requirements
-- Python 3.6+
-- virtualenvwrapper
-- MySQL 5.6+
+## System Requirements
 
-Installation
-------------
-Clone the project from git
+- Python 3.8+
+- MySQL Client
+
+## Usage
+
+Clone the repository:
 ```
-git clone https://github.com/Ensembl/ensembl-metadata-registry.git
+git clone -b master https://github.com/Ensembl/ensembl-metadata-admin.git
 ```
 
-Create the Python environment
-```
-mkvirtualenv emrenv -p /usr/bin/python3
-workon emrenv
+Install the environment (with pyenv)
 
-cd metadata_registry
-pip install -r requirements.txt 
+```
+cd ensembl-metadata-admin
+pyenv virtualenv 3.8 ensembl_metadata_admin
+pyenv local ensembl_metadata_admin
+pip install --upgrade pip
+pip install -r requirements.txt
 ```
 
 Provide the right credentials to connect to the ensembl-metadata database in secrets.py
@@ -35,7 +35,7 @@ cp secrets_template.py secrets.py
 
 Create an environment variable for the settings
 ```
-export DJANGO_SETTINGS_MODULE=metadata_registry.settings.base
+export DJANGO_SETTINGS_MODULE=metadata_registry.settings.standard
 ```
 
 Run the migrate step, for a pre-existing database
