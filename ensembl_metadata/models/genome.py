@@ -97,9 +97,9 @@ class DatasetType(models.Model):
 
     dataset_type_id = models.AutoField(primary_key=True)
     name = models.CharField(max_length=32)
-    label = models.CharField(max_length=32)
+    label = models.CharField(max_length=128)
     topic = models.CharField(max_length=32, choices=DatasetTopic.choices)
-    description = models.CharField(max_length=255)
+    description = models.CharField(max_length=255, blank=True, null=True)
     details_uri = models.CharField(max_length=255, blank=True, null=True)
 
     class Meta:
@@ -114,27 +114,39 @@ class Dataset(models.Model):
     dataset_source = models.ForeignKey(DatasetSource, on_delete=models.CASCADE,
                                        related_name='datasets')
     name = models.CharField(max_length=128)
+    label = models.CharField(max_length=128)
     version = models.CharField(max_length=128, blank=True, null=True)
     created = models.DateTimeField(auto_now_add=True)
 
     def attributes(self):
-        return DatasetStatistic.objects.filter(dataset_id=self.dataset_id)
+        return DatasetAttribute.objects.filter(dataset_id=self.dataset_id)
 
     class Meta:
         db_table = 'dataset'
 
 
-class DatasetStatistic(models.Model):
-    dataset_statistic_id = models.AutoField(primary_key=True)
-    dataset = models.ForeignKey(Dataset, on_delete=models.CASCADE,
-                                related_name='statistics')
-    type = models.CharField(max_length=32)
+class Attribute(models.Model):
+    attribute_id = models.AutoField(primary_key=True)
     name = models.CharField(max_length=128)
+    label = models.CharField(max_length=128)
+    description = models.CharField(max_length=255, blank=True, null=True)
+
+    class Meta:
+        db_table = 'attribute'
+
+
+class DatasetAttribute(models.Model):
+    dataset_attribute_id = models.AutoField(primary_key=True)
+    dataset = models.ForeignKey(Dataset, on_delete=models.CASCADE,
+                                related_name='attributes')
+    attribute = models.ForeignKey(Attribute, on_delete=models.CASCADE,
+                                  related_name='attributes')
+    type = models.CharField(max_length=32)
     value = models.CharField(max_length=128)
 
     class Meta:
-        db_table = 'dataset_statistic'
-        unique_together = (('dataset', 'type', 'name'),)
+        db_table = 'dataset_attribute'
+        unique_together = (('dataset', 'attribute', 'type'),)
 
 
 class GenomeDataset(models.Model):
@@ -159,3 +171,4 @@ class GenomeRelease(models.Model):
 
     class Meta:
         db_table = 'genome_release'
+

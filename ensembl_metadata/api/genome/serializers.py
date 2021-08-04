@@ -1,7 +1,7 @@
 from rest_framework import serializers
 from ensembl_metadata.models.genome import \
     Organism, OrganismGroup, OrganismGroupMember, \
-    Dataset, DatasetSource, DatasetStatistic, \
+    Attribute, Dataset, DatasetSource, DatasetAttribute, \
     Genome, GenomeDataset, GenomeRelease
 from ensembl_metadata.api.assembly.serializers import AssemblySerializer
 from ensembl_metadata.api.release.serializers import ReleaseSerializer
@@ -28,16 +28,24 @@ class OrganismGroupMemberSerializer(serializers.ModelSerializer):
         exclude = ['organism_group_member_id']
 
 
+class AttributeSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Attribute
+        exclude = ['attribute_id']
+
+
+class DatasetAttributeSerializer(serializers.ModelSerializer):
+    attribute = AttributeSerializer(many=False, required=True)
+
+    class Meta:
+        model = DatasetAttribute
+        fields = ('type', 'value')
+
+
 class DatasetSourceSerializer(serializers.ModelSerializer):
     class Meta:
         model = DatasetSource
         exclude = ['dataset_source_id']
-
-
-class DatasetStatisticSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = DatasetStatistic
-        fields = ('type', 'name', 'value')
 
 
 class DatasetSerializer(serializers.ModelSerializer):
@@ -65,3 +73,4 @@ class GenomeReleaseSerializer(serializers.ModelSerializer):
     class Meta:
         model = GenomeRelease
         exclude = ['genome_release_id']
+
