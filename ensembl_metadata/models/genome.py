@@ -146,7 +146,7 @@ class DatasetAttribute(models.Model):
 
     class Meta:
         db_table = 'dataset_attribute'
-        unique_together = (('dataset', 'attribute', 'type'),)
+        unique_together = (('dataset', 'attribute', 'type', 'value'),)
 
 
 class GenomeDataset(models.Model):
