@@ -1,0 +1,4697 @@
+[
+{
+  "model": "ncbi_taxonomy.taxonomynode",
+  "pk": 1,
+  "fields": {
+    "parent": null,
+    "rank": "no rank",
+    "genbank_hidden_flag": 0,
+    "left_index": 1,
+    "right_index": 4659470,
+    "root_id": 1
+  }
+},
+{
+  "model": "ncbi_taxonomy.taxonomynode",
+  "pk": 2759,
+  "fields": {
+    "parent": 131567,
+    "rank": "superkingdom",
+    "genbank_hidden_flag": 0,
+    "left_index": 1501069,
+    "right_index": 4624358,
+    "root_id": 1
+  }
+},
+{
+  "model": "ncbi_taxonomy.taxonomynode",
+  "pk": 3193,
+  "fields": {
+    "parent": 131221,
+    "rank": "clade",
+    "genbank_hidden_flag": 0,
+    "left_index": 1545213,
+    "right_index": 1983706,
+    "root_id": 1
+  }
+},
+{
+  "model": "ncbi_taxonomy.taxonomynode",
+  "pk": 3398,
+  "fields": {
+    "parent": 58024,
+    "rank": "class",
+    "genbank_hidden_flag": 0,
+    "left_index": 1564525,
+    "right_index": 1962892,
+    "root_id": 1
+  }
+},
+{
+  "model": "ncbi_taxonomy.taxonomynode",
+  "pk": 4447,
+  "fields": {
+    "parent": 1437183,
+    "rank": "clade",
+    "genbank_hidden_flag": 0,
+    "left_index": 1565235,
+    "right_index": 1655908,
+    "root_id": 1
+  }
+},
+{
+  "model": "ncbi_taxonomy.taxonomynode",
+  "pk": 4479,
+  "fields": {
+    "parent": 38820,
+    "rank": "family",
+    "genbank_hidden_flag": 0,
+    "left_index": 1579743,
+    "right_index": 1599330,
+    "root_id": 1
+  }
+},
+{
+  "model": "ncbi_taxonomy.taxonomynode",
+  "pk": 4734,
+  "fields": {
+    "parent": 1437197,
+    "rank": "clade",
+    "genbank_hidden_flag": 1,
+    "left_index": 1574271,
+    "right_index": 1617740,
+    "root_id": 1
+  }
+},
+{
+  "model": "ncbi_taxonomy.taxonomynode",
+  "pk": 6072,
+  "fields": {
+    "parent": 33208,
+    "rank": "clade",
+    "genbank_hidden_flag": 1,
+    "left_index": 2349492,
+    "right_index": 4533187,
+    "root_id": 1
+  }
+},
+{
+  "model": "ncbi_taxonomy.taxonomynode",
+  "pk": 6073,
+  "fields": {
+    "parent": 6072,
+    "rank": "phylum",
+    "genbank_hidden_flag": 0,
+    "left_index": 2349493,
+    "right_index": 2374868,
+    "root_id": 1
+  }
+},
+{
+  "model": "ncbi_taxonomy.taxonomynode",
+  "pk": 6074,
+  "fields": {
+    "parent": 6073,
+    "rank": "class",
+    "genbank_hidden_flag": 0,
+    "left_index": 2349494,
+    "right_index": 2355319,
+    "root_id": 1
+  }
+},
+{
+  "model": "ncbi_taxonomy.taxonomynode",
+  "pk": 6656,
+  "fields": {
+    "parent": 88770,
+    "rank": "phylum",
+    "genbank_hidden_flag": 0,
+    "left_index": 2409943,
+    "right_index": 4147390,
+    "root_id": 1
+  }
+},
+{
+  "model": "ncbi_taxonomy.taxonomynode",
+  "pk": 6960,
+  "fields": {
+    "parent": 197562,
+    "rank": "subphylum",
+    "genbank_hidden_flag": 0,
+    "left_index": 2642486,
+    "right_index": 4147173,
+    "root_id": 1
+  }
+},
+{
+  "model": "ncbi_taxonomy.taxonomynode",
+  "pk": 7088,
+  "fields": {
+    "parent": 85604,
+    "rank": "order",
+    "genbank_hidden_flag": 0,
+    "left_index": 3842079,
+    "right_index": 4114456,
+    "root_id": 1
+  }
+},
+{
+  "model": "ncbi_taxonomy.taxonomynode",
+  "pk": 7496,
+  "fields": {
+    "parent": 85512,
+    "rank": "subclass",
+    "genbank_hidden_flag": 0,
+    "left_index": 2679443,
+    "right_index": 4146126,
+    "root_id": 1
+  }
+},
+{
+  "model": "ncbi_taxonomy.taxonomynode",
+  "pk": 7711,
+  "fields": {
+    "parent": 33511,
+    "rank": "phylum",
+    "genbank_hidden_flag": 0,
+    "left_index": 4315543,
+    "right_index": 4531548,
+    "root_id": 1
+  }
+},
+{
+  "model": "ncbi_taxonomy.taxonomynode",
+  "pk": 7742,
+  "fields": {
+    "parent": 89593,
+    "rank": "clade",
+    "genbank_hidden_flag": 0,
+    "left_index": 4317669,
+    "right_index": 4531510,
+    "root_id": 1
+  }
+},
+{
+  "model": "ncbi_taxonomy.taxonomynode",
+  "pk": 7776,
+  "fields": {
+    "parent": 7742,
+    "rank": "clade",
+    "genbank_hidden_flag": 1,
+    "left_index": 4317670,
+    "right_index": 4530317,
+    "root_id": 1
+  }
+},
+{
+  "model": "ncbi_taxonomy.taxonomynode",
+  "pk": 8287,
+  "fields": {
+    "parent": 117571,
+    "rank": "superclass",
+    "genbank_hidden_flag": 1,
+    "left_index": 4419717,
+    "right_index": 4530314,
+    "root_id": 1
+  }
+},
+{
+  "model": "ncbi_taxonomy.taxonomynode",
+  "pk": 8457,
+  "fields": {
+    "parent": 32524,
+    "rank": "clade",
+    "genbank_hidden_flag": 1,
+    "left_index": 4443565,
+    "right_index": 4504924,
+    "root_id": 1
+  }
+},
+{
+  "model": "ncbi_taxonomy.taxonomynode",
+  "pk": 8492,
+  "fields": {
+    "parent": 1329799,
+    "rank": "clade",
+    "genbank_hidden_flag": 0,
+    "left_index": 4469318,
+    "right_index": 4504921,
+    "root_id": 1
+  }
+},
+{
+  "model": "ncbi_taxonomy.taxonomynode",
+  "pk": 8782,
+  "fields": {
+    "parent": 436492,
+    "rank": "class",
+    "genbank_hidden_flag": 0,
+    "left_index": 4469333,
+    "right_index": 4504776,
+    "root_id": 1
+  }
+},
+{
+  "model": "ncbi_taxonomy.taxonomynode",
+  "pk": 8825,
+  "fields": {
+    "parent": 8782,
+    "rank": "infraclass",
+    "genbank_hidden_flag": 0,
+    "left_index": 4469610,
+    "right_index": 4504769,
+    "root_id": 1
+  }
+},
+{
+  "model": "ncbi_taxonomy.taxonomynode",
+  "pk": 9347,
+  "fields": {
+    "parent": 32525,
+    "rank": "clade",
+    "genbank_hidden_flag": 0,
+    "left_index": 4506283,
+    "right_index": 4530288,
+    "root_id": 1
+  }
+},
+{
+  "model": "ncbi_taxonomy.taxonomynode",
+  "pk": 9608,
+  "fields": {
+    "parent": 379584,
+    "rank": "family",
+    "genbank_hidden_flag": 0,
+    "left_index": 4514492,
+    "right_index": 4514733,
+    "root_id": 1
+  }
+},
+{
+  "model": "ncbi_taxonomy.taxonomynode",
+  "pk": 9611,
+  "fields": {
+    "parent": 9608,
+    "rank": "genus",
+    "genbank_hidden_flag": 0,
+    "left_index": 4514493,
+    "right_index": 4514594,
+    "root_id": 1
+  }
+},
+{
+  "model": "ncbi_taxonomy.taxonomynode",
+  "pk": 9612,
+  "fields": {
+    "parent": 9611,
+    "rank": "species",
+    "genbank_hidden_flag": 1,
+    "left_index": 4514494,
+    "right_index": 4514533,
+    "root_id": 1
+  }
+},
+{
+  "model": "ncbi_taxonomy.taxonomynode",
+  "pk": 9615,
+  "fields": {
+    "parent": 9612,
+    "rank": "subspecies",
+    "genbank_hidden_flag": 1,
+    "left_index": 4514495,
+    "right_index": 4514496,
+    "root_id": 1
+  }
+},
+{
+  "model": "ncbi_taxonomy.taxonomynode",
+  "pk": 9721,
+  "fields": {
+    "parent": 2653789,
+    "rank": "infraorder",
+    "genbank_hidden_flag": 0,
+    "left_index": 4517320,
+    "right_index": 4517791,
+    "root_id": 1
+  }
+},
+{
+  "model": "ncbi_taxonomy.taxonomynode",
+  "pk": 9761,
+  "fields": {
+    "parent": 9721,
+    "rank": "parvorder",
+    "genbank_hidden_flag": 0,
+    "left_index": 4517721,
+    "right_index": 4517784,
+    "root_id": 1
+  }
+},
+{
+  "model": "ncbi_taxonomy.taxonomynode",
+  "pk": 9765,
+  "fields": {
+    "parent": 9761,
+    "rank": "family",
+    "genbank_hidden_flag": 0,
+    "left_index": 4517728,
+    "right_index": 4517763,
+    "root_id": 1
+  }
+},
+{
+  "model": "ncbi_taxonomy.taxonomynode",
+  "pk": 9766,
+  "fields": {
+    "parent": 9765,
+    "rank": "genus",
+    "genbank_hidden_flag": 0,
+    "left_index": 4517729,
+    "right_index": 4517756,
+    "root_id": 1
+  }
+},
+{
+  "model": "ncbi_taxonomy.taxonomynode",
+  "pk": 9771,
+  "fields": {
+    "parent": 9766,
+    "rank": "species",
+    "genbank_hidden_flag": 1,
+    "left_index": 4517742,
+    "right_index": 4517743,
+    "root_id": 1
+  }
+},
+{
+  "model": "ncbi_taxonomy.taxonomynode",
+  "pk": 9821,
+  "fields": {
+    "parent": 35497,
+    "rank": "family",
+    "genbank_hidden_flag": 0,
+    "left_index": 4517174,
+    "right_index": 4517283,
+    "root_id": 1
+  }
+},
+{
+  "model": "ncbi_taxonomy.taxonomynode",
+  "pk": 9822,
+  "fields": {
+    "parent": 9821,
+    "rank": "genus",
+    "genbank_hidden_flag": 0,
+    "left_index": 4517175,
+    "right_index": 4517244,
+    "root_id": 1
+  }
+},
+{
+  "model": "ncbi_taxonomy.taxonomynode",
+  "pk": 9823,
+  "fields": {
+    "parent": 9822,
+    "rank": "species",
+    "genbank_hidden_flag": 1,
+    "left_index": 4517176,
+    "right_index": 4517207,
+    "root_id": 1
+  }
+},
+{
+  "model": "ncbi_taxonomy.taxonomynode",
+  "pk": 9845,
+  "fields": {
+    "parent": 91561,
+    "rank": "suborder",
+    "genbank_hidden_flag": 0,
+    "left_index": 4515523,
+    "right_index": 4517172,
+    "root_id": 1
+  }
+},
+{
+  "model": "ncbi_taxonomy.taxonomynode",
+  "pk": 9895,
+  "fields": {
+    "parent": 35500,
+    "rank": "family",
+    "genbank_hidden_flag": 0,
+    "left_index": 4516183,
+    "right_index": 4517132,
+    "root_id": 1
+  }
+},
+{
+  "model": "ncbi_taxonomy.taxonomynode",
+  "pk": 9922,
+  "fields": {
+    "parent": 9963,
+    "rank": "genus",
+    "genbank_hidden_flag": 0,
+    "left_index": 4516435,
+    "right_index": 4516490,
+    "root_id": 1
+  }
+},
+{
+  "model": "ncbi_taxonomy.taxonomynode",
+  "pk": 9925,
+  "fields": {
+    "parent": 9922,
+    "rank": "species",
+    "genbank_hidden_flag": 1,
+    "left_index": 4516442,
+    "right_index": 4516445,
+    "root_id": 1
+  }
+},
+{
+  "model": "ncbi_taxonomy.taxonomynode",
+  "pk": 9963,
+  "fields": {
+    "parent": 9895,
+    "rank": "subfamily",
+    "genbank_hidden_flag": 0,
+    "left_index": 4516430,
+    "right_index": 4516757,
+    "root_id": 1
+  }
+},
+{
+  "model": "ncbi_taxonomy.taxonomynode",
+  "pk": 9989,
+  "fields": {
+    "parent": 314147,
+    "rank": "order",
+    "genbank_hidden_flag": 0,
+    "left_index": 4520485,
+    "right_index": 4530256,
+    "root_id": 1
+  }
+},
+{
+  "model": "ncbi_taxonomy.taxonomynode",
+  "pk": 10066,
+  "fields": {
+    "parent": 337687,
+    "rank": "family",
+    "genbank_hidden_flag": 0,
+    "left_index": 4523948,
+    "right_index": 4526607,
+    "root_id": 1
+  }
+},
+{
+  "model": "ncbi_taxonomy.taxonomynode",
+  "pk": 10114,
+  "fields": {
+    "parent": 39107,
+    "rank": "genus",
+    "genbank_hidden_flag": 0,
+    "left_index": 4524476,
+    "right_index": 4524763,
+    "root_id": 1
+  }
+},
+{
+  "model": "ncbi_taxonomy.taxonomynode",
+  "pk": 10116,
+  "fields": {
+    "parent": 10114,
+    "rank": "species",
+    "genbank_hidden_flag": 1,
+    "left_index": 4524487,
+    "right_index": 4524490,
+    "root_id": 1
+  }
+},
+{
+  "model": "ncbi_taxonomy.taxonomynode",
+  "pk": 13436,
+  "fields": {
+    "parent": 2750048,
+    "rank": "genus",
+    "genbank_hidden_flag": 0,
+    "left_index": 2354421,
+    "right_index": 2354486,
+    "root_id": 1
+  }
+},
+{
+  "model": "ncbi_taxonomy.taxonomynode",
+  "pk": 30458,
+  "fields": {
+    "parent": 8825,
+    "rank": "order",
+    "genbank_hidden_flag": 0,
+    "left_index": 4498927,
+    "right_index": 4499652,
+    "root_id": 1
+  }
+},
+{
+  "model": "ncbi_taxonomy.taxonomynode",
+  "pk": 30462,
+  "fields": {
+    "parent": 30458,
+    "rank": "family",
+    "genbank_hidden_flag": 0,
+    "left_index": 4499516,
+    "right_index": 4499637,
+    "root_id": 1
+  }
+},
+{
+  "model": "ncbi_taxonomy.taxonomynode",
+  "pk": 32523,
+  "fields": {
+    "parent": 1338369,
+    "rank": "clade",
+    "genbank_hidden_flag": 1,
+    "left_index": 4419793,
+    "right_index": 4530312,
+    "root_id": 1
+  }
+},
+{
+  "model": "ncbi_taxonomy.taxonomynode",
+  "pk": 32524,
+  "fields": {
+    "parent": 32523,
+    "rank": "clade",
+    "genbank_hidden_flag": 1,
+    "left_index": 4443564,
+    "right_index": 4530311,
+    "root_id": 1
+  }
+},
+{
+  "model": "ncbi_taxonomy.taxonomynode",
+  "pk": 32525,
+  "fields": {
+    "parent": 40674,
+    "rank": "clade",
+    "genbank_hidden_flag": 1,
+    "left_index": 4504952,
+    "right_index": 4530289,
+    "root_id": 1
+  }
+},
+{
+  "model": "ncbi_taxonomy.taxonomynode",
+  "pk": 32561,
+  "fields": {
+    "parent": 8457,
+    "rank": "clade",
+    "genbank_hidden_flag": 1,
+    "left_index": 4443566,
+    "right_index": 4504923,
+    "root_id": 1
+  }
+},
+{
+  "model": "ncbi_taxonomy.taxonomynode",
+  "pk": 33090,
+  "fields": {
+    "parent": 2759,
+    "rank": "kingdom",
+    "genbank_hidden_flag": 0,
+    "left_index": 1519832,
+    "right_index": 1986321,
+    "root_id": 1
+  }
+},
+{
+  "model": "ncbi_taxonomy.taxonomynode",
+  "pk": 33154,
+  "fields": {
+    "parent": 2759,
+    "rank": "clade",
+    "genbank_hidden_flag": 1,
+    "left_index": 1986322,
+    "right_index": 4533887,
+    "root_id": 1
+  }
+},
+{
+  "model": "ncbi_taxonomy.taxonomynode",
+  "pk": 33208,
+  "fields": {
+    "parent": 33154,
+    "rank": "kingdom",
+    "genbank_hidden_flag": 0,
+    "left_index": 2338963,
+    "right_index": 4533198,
+    "root_id": 1
+  }
+},
+{
+  "model": "ncbi_taxonomy.taxonomynode",
+  "pk": 33213,
+  "fields": {
+    "parent": 6072,
+    "rank": "clade",
+    "genbank_hidden_flag": 1,
+    "left_index": 2375577,
+    "right_index": 4533186,
+    "root_id": 1
+  }
+},
+{
+  "model": "ncbi_taxonomy.taxonomynode",
+  "pk": 33317,
+  "fields": {
+    "parent": 33213,
+    "rank": "clade",
+    "genbank_hidden_flag": 1,
+    "left_index": 2375578,
+    "right_index": 4303877,
+    "root_id": 1
+  }
+},
+{
+  "model": "ncbi_taxonomy.taxonomynode",
+  "pk": 33340,
+  "fields": {
+    "parent": 7496,
+    "rank": "infraclass",
+    "genbank_hidden_flag": 0,
+    "left_index": 2697302,
+    "right_index": 4146117,
+    "root_id": 1
+  }
+},
+{
+  "model": "ncbi_taxonomy.taxonomynode",
+  "pk": 33392,
+  "fields": {
+    "parent": 33340,
+    "rank": "cohort",
+    "genbank_hidden_flag": 0,
+    "left_index": 2838081,
+    "right_index": 4146052,
+    "root_id": 1
+  }
+},
+{
+  "model": "ncbi_taxonomy.taxonomynode",
+  "pk": 33415,
+  "fields": {
+    "parent": 37572,
+    "rank": "family",
+    "genbank_hidden_flag": 0,
+    "left_index": 3959850,
+    "right_index": 3973945,
+    "root_id": 1
+  }
+},
+{
+  "model": "ncbi_taxonomy.taxonomynode",
+  "pk": 33511,
+  "fields": {
+    "parent": 33213,
+    "rank": "clade",
+    "genbank_hidden_flag": 1,
+    "left_index": 4303878,
+    "right_index": 4531867,
+    "root_id": 1
+  }
+},
+{
+  "model": "ncbi_taxonomy.taxonomynode",
+  "pk": 33554,
+  "fields": {
+    "parent": 314145,
+    "rank": "order",
+    "genbank_hidden_flag": 0,
+    "left_index": 4513958,
+    "right_index": 4515459,
+    "root_id": 1
+  }
+},
+{
+  "model": "ncbi_taxonomy.taxonomynode",
+  "pk": 35493,
+  "fields": {
+    "parent": 33090,
+    "rank": "phylum",
+    "genbank_hidden_flag": 0,
+    "left_index": 1544483,
+    "right_index": 1986246,
+    "root_id": 1
+  }
+},
+{
+  "model": "ncbi_taxonomy.taxonomynode",
+  "pk": 35497,
+  "fields": {
+    "parent": 91561,
+    "rank": "suborder",
+    "genbank_hidden_flag": 0,
+    "left_index": 4517173,
+    "right_index": 4517308,
+    "root_id": 1
+  }
+},
+{
+  "model": "ncbi_taxonomy.taxonomynode",
+  "pk": 35500,
+  "fields": {
+    "parent": 9845,
+    "rank": "infraorder",
+    "genbank_hidden_flag": 0,
+    "left_index": 4515548,
+    "right_index": 4517171,
+    "root_id": 1
+  }
+},
+{
+  "model": "ncbi_taxonomy.taxonomynode",
+  "pk": 37516,
+  "fields": {
+    "parent": 6074,
+    "rank": "subclass",
+    "genbank_hidden_flag": 0,
+    "left_index": 2349495,
+    "right_index": 2354510,
+    "root_id": 1
+  }
+},
+{
+  "model": "ncbi_taxonomy.taxonomynode",
+  "pk": 37567,
+  "fields": {
+    "parent": 41197,
+    "rank": "clade",
+    "genbank_hidden_flag": 0,
+    "left_index": 3843919,
+    "right_index": 4024630,
+    "root_id": 1
+  }
+},
+{
+  "model": "ncbi_taxonomy.taxonomynode",
+  "pk": 37572,
+  "fields": {
+    "parent": 104431,
+    "rank": "superfamily",
+    "genbank_hidden_flag": 0,
+    "left_index": 3949987,
+    "right_index": 3975662,
+    "root_id": 1
+  }
+},
+{
+  "model": "ncbi_taxonomy.taxonomynode",
+  "pk": 38820,
+  "fields": {
+    "parent": 4734,
+    "rank": "order",
+    "genbank_hidden_flag": 0,
+    "left_index": 1579742,
+    "right_index": 1613489,
+    "root_id": 1
+  }
+},
+{
+  "model": "ncbi_taxonomy.taxonomynode",
+  "pk": 39107,
+  "fields": {
+    "parent": 10066,
+    "rank": "subfamily",
+    "genbank_hidden_flag": 0,
+    "left_index": 4524209,
+    "right_index": 4526314,
+    "root_id": 1
+  }
+},
+{
+  "model": "ncbi_taxonomy.taxonomynode",
+  "pk": 40040,
+  "fields": {
+    "parent": 33415,
+    "rank": "subfamily",
+    "genbank_hidden_flag": 0,
+    "left_index": 3961335,
+    "right_index": 3962790,
+    "root_id": 1
+  }
+},
+{
+  "model": "ncbi_taxonomy.taxonomynode",
+  "pk": 40674,
+  "fields": {
+    "parent": 32524,
+    "rank": "class",
+    "genbank_hidden_flag": 0,
+    "left_index": 4504925,
+    "right_index": 4530310,
+    "root_id": 1
+  }
+},
+{
+  "model": "ncbi_taxonomy.taxonomynode",
+  "pk": 41191,
+  "fields": {
+    "parent": 7088,
+    "rank": "suborder",
+    "genbank_hidden_flag": 0,
+    "left_index": 3842448,
+    "right_index": 4027309,
+    "root_id": 1
+  }
+},
+{
+  "model": "ncbi_taxonomy.taxonomynode",
+  "pk": 41196,
+  "fields": {
+    "parent": 41191,
+    "rank": "infraorder",
+    "genbank_hidden_flag": 1,
+    "left_index": 3842557,
+    "right_index": 4027294,
+    "root_id": 1
+  }
+},
+{
+  "model": "ncbi_taxonomy.taxonomynode",
+  "pk": 41197,
+  "fields": {
+    "parent": 41196,
+    "rank": "parvorder",
+    "genbank_hidden_flag": 1,
+    "left_index": 3843918,
+    "right_index": 4027293,
+    "root_id": 1
+  }
+},
+{
+  "model": "ncbi_taxonomy.taxonomynode",
+  "pk": 50557,
+  "fields": {
+    "parent": 6960,
+    "rank": "class",
+    "genbank_hidden_flag": 0,
+    "left_index": 2679441,
+    "right_index": 4147120,
+    "root_id": 1
+  }
+},
+{
+  "model": "ncbi_taxonomy.taxonomynode",
+  "pk": 56312,
+  "fields": {
+    "parent": 30462,
+    "rank": "genus",
+    "genbank_hidden_flag": 0,
+    "left_index": 4499517,
+    "right_index": 4499630,
+    "root_id": 1
+  }
+},
+{
+  "model": "ncbi_taxonomy.taxonomynode",
+  "pk": 56313,
+  "fields": {
+    "parent": 56312,
+    "rank": "species",
+    "genbank_hidden_flag": 1,
+    "left_index": 4499518,
+    "right_index": 4499551,
+    "root_id": 1
+  }
+},
+{
+  "model": "ncbi_taxonomy.taxonomynode",
+  "pk": 58023,
+  "fields": {
+    "parent": 3193,
+    "rank": "clade",
+    "genbank_hidden_flag": 0,
+    "left_index": 1564522,
+    "right_index": 1983705,
+    "root_id": 1
+  }
+},
+{
+  "model": "ncbi_taxonomy.taxonomynode",
+  "pk": 58024,
+  "fields": {
+    "parent": 78536,
+    "rank": "clade",
+    "genbank_hidden_flag": 0,
+    "left_index": 1564524,
+    "right_index": 1966385,
+    "root_id": 1
+  }
+},
+{
+  "model": "ncbi_taxonomy.taxonomynode",
+  "pk": 66017,
+  "fields": {
+    "parent": 1293360,
+    "rank": "genus",
+    "genbank_hidden_flag": 0,
+    "left_index": 1582613,
+    "right_index": 1582760,
+    "root_id": 1
+  }
+},
+{
+  "model": "ncbi_taxonomy.taxonomynode",
+  "pk": 78536,
+  "fields": {
+    "parent": 58023,
+    "rank": "clade",
+    "genbank_hidden_flag": 1,
+    "left_index": 1564523,
+    "right_index": 1982098,
+    "root_id": 1
+  }
+},
+{
+  "model": "ncbi_taxonomy.taxonomynode",
+  "pk": 85512,
+  "fields": {
+    "parent": 50557,
+    "rank": "clade",
+    "genbank_hidden_flag": 1,
+    "left_index": 2679442,
+    "right_index": 4146609,
+    "root_id": 1
+  }
+},
+{
+  "model": "ncbi_taxonomy.taxonomynode",
+  "pk": 85604,
+  "fields": {
+    "parent": 33392,
+    "rank": "superorder",
+    "genbank_hidden_flag": 1,
+    "left_index": 3842078,
+    "right_index": 4139479,
+    "root_id": 1
+  }
+},
+{
+  "model": "ncbi_taxonomy.taxonomynode",
+  "pk": 88770,
+  "fields": {
+    "parent": 1206794,
+    "rank": "clade",
+    "genbank_hidden_flag": 1,
+    "left_index": 2409942,
+    "right_index": 4150563,
+    "root_id": 1
+  }
+},
+{
+  "model": "ncbi_taxonomy.taxonomynode",
+  "pk": 89593,
+  "fields": {
+    "parent": 7711,
+    "rank": "subphylum",
+    "genbank_hidden_flag": 0,
+    "left_index": 4317668,
+    "right_index": 4531511,
+    "root_id": 1
+  }
+},
+{
+  "model": "ncbi_taxonomy.taxonomynode",
+  "pk": 91561,
+  "fields": {
+    "parent": 314145,
+    "rank": "order",
+    "genbank_hidden_flag": 0,
+    "left_index": 4515460,
+    "right_index": 4517811,
+    "root_id": 1
+  }
+},
+{
+  "model": "ncbi_taxonomy.taxonomynode",
+  "pk": 104431,
+  "fields": {
+    "parent": 37567,
+    "rank": "clade",
+    "genbank_hidden_flag": 1,
+    "left_index": 3898672,
+    "right_index": 4024609,
+    "root_id": 1
+  }
+},
+{
+  "model": "ncbi_taxonomy.taxonomynode",
+  "pk": 104514,
+  "fields": {
+    "parent": 171580,
+    "rank": "genus",
+    "genbank_hidden_flag": 0,
+    "left_index": 3961734,
+    "right_index": 3962023,
+    "root_id": 1
+  }
+},
+{
+  "model": "ncbi_taxonomy.taxonomynode",
+  "pk": 113334,
+  "fields": {
+    "parent": 104514,
+    "rank": "species",
+    "genbank_hidden_flag": 1,
+    "left_index": 3961745,
+    "right_index": 3961746,
+    "root_id": 1
+  }
+},
+{
+  "model": "ncbi_taxonomy.taxonomynode",
+  "pk": 117570,
+  "fields": {
+    "parent": 7776,
+    "rank": "clade",
+    "genbank_hidden_flag": 1,
+    "left_index": 4322111,
+    "right_index": 4530316,
+    "root_id": 1
+  }
+},
+{
+  "model": "ncbi_taxonomy.taxonomynode",
+  "pk": 117571,
+  "fields": {
+    "parent": 117570,
+    "rank": "clade",
+    "genbank_hidden_flag": 0,
+    "left_index": 4322112,
+    "right_index": 4530315,
+    "root_id": 1
+  }
+},
+{
+  "model": "ncbi_taxonomy.taxonomynode",
+  "pk": 131221,
+  "fields": {
+    "parent": 35493,
+    "rank": "subphylum",
+    "genbank_hidden_flag": 1,
+    "left_index": 1545212,
+    "right_index": 1986237,
+    "root_id": 1
+  }
+},
+{
+  "model": "ncbi_taxonomy.taxonomynode",
+  "pk": 131567,
+  "fields": {
+    "parent": 1,
+    "rank": "no rank",
+    "genbank_hidden_flag": 1,
+    "left_index": 430252,
+    "right_index": 4624359,
+    "root_id": 1
+  }
+},
+{
+  "model": "ncbi_taxonomy.taxonomynode",
+  "pk": 147369,
+  "fields": {
+    "parent": 147370,
+    "rank": "subfamily",
+    "genbank_hidden_flag": 0,
+    "left_index": 1579797,
+    "right_index": 1584604,
+    "root_id": 1
+  }
+},
+{
+  "model": "ncbi_taxonomy.taxonomynode",
+  "pk": 147370,
+  "fields": {
+    "parent": 4479,
+    "rank": "clade",
+    "genbank_hidden_flag": 0,
+    "left_index": 1579796,
+    "right_index": 1588799,
+    "root_id": 1
+  }
+},
+{
+  "model": "ncbi_taxonomy.taxonomynode",
+  "pk": 147428,
+  "fields": {
+    "parent": 1648036,
+    "rank": "tribe",
+    "genbank_hidden_flag": 0,
+    "left_index": 1582605,
+    "right_index": 1584590,
+    "root_id": 1
+  }
+},
+{
+  "model": "ncbi_taxonomy.taxonomynode",
+  "pk": 171578,
+  "fields": {
+    "parent": 40040,
+    "rank": "tribe",
+    "genbank_hidden_flag": 1,
+    "left_index": 3961662,
+    "right_index": 3962447,
+    "root_id": 1
+  }
+},
+{
+  "model": "ncbi_taxonomy.taxonomynode",
+  "pk": 171580,
+  "fields": {
+    "parent": 171578,
+    "rank": "subtribe",
+    "genbank_hidden_flag": 1,
+    "left_index": 3961733,
+    "right_index": 3962058,
+    "root_id": 1
+  }
+},
+{
+  "model": "ncbi_taxonomy.taxonomynode",
+  "pk": 197562,
+  "fields": {
+    "parent": 197563,
+    "rank": "clade",
+    "genbank_hidden_flag": 1,
+    "left_index": 2566615,
+    "right_index": 4147248,
+    "root_id": 1
+  }
+},
+{
+  "model": "ncbi_taxonomy.taxonomynode",
+  "pk": 197563,
+  "fields": {
+    "parent": 6656,
+    "rank": "clade",
+    "genbank_hidden_flag": 1,
+    "left_index": 2558854,
+    "right_index": 4147389,
+    "root_id": 1
+  }
+},
+{
+  "model": "ncbi_taxonomy.taxonomynode",
+  "pk": 252671,
+  "fields": {
+    "parent": 13436,
+    "rank": "species",
+    "genbank_hidden_flag": 1,
+    "left_index": 2354432,
+    "right_index": 2354433,
+    "root_id": 1
+  }
+},
+{
+  "model": "ncbi_taxonomy.taxonomynode",
+  "pk": 314145,
+  "fields": {
+    "parent": 1437010,
+    "rank": "superorder",
+    "genbank_hidden_flag": 0,
+    "left_index": 4506989,
+    "right_index": 4517812,
+    "root_id": 1
+  }
+},
+{
+  "model": "ncbi_taxonomy.taxonomynode",
+  "pk": 314146,
+  "fields": {
+    "parent": 1437010,
+    "rank": "superorder",
+    "genbank_hidden_flag": 0,
+    "left_index": 4517813,
+    "right_index": 4530258,
+    "root_id": 1
+  }
+},
+{
+  "model": "ncbi_taxonomy.taxonomynode",
+  "pk": 314147,
+  "fields": {
+    "parent": 314146,
+    "rank": "clade",
+    "genbank_hidden_flag": 0,
+    "left_index": 4519930,
+    "right_index": 4530257,
+    "root_id": 1
+  }
+},
+{
+  "model": "ncbi_taxonomy.taxonomynode",
+  "pk": 337687,
+  "fields": {
+    "parent": 1963758,
+    "rank": "clade",
+    "genbank_hidden_flag": 0,
+    "left_index": 4523947,
+    "right_index": 4529934,
+    "root_id": 1
+  }
+},
+{
+  "model": "ncbi_taxonomy.taxonomynode",
+  "pk": 379584,
+  "fields": {
+    "parent": 33554,
+    "rank": "suborder",
+    "genbank_hidden_flag": 0,
+    "left_index": 4514491,
+    "right_index": 4515386,
+    "root_id": 1
+  }
+},
+{
+  "model": "ncbi_taxonomy.taxonomynode",
+  "pk": 436486,
+  "fields": {
+    "parent": 8492,
+    "rank": "clade",
+    "genbank_hidden_flag": 0,
+    "left_index": 4469319,
+    "right_index": 4504786,
+    "root_id": 1
+  }
+},
+{
+  "model": "ncbi_taxonomy.taxonomynode",
+  "pk": 436489,
+  "fields": {
+    "parent": 436486,
+    "rank": "clade",
+    "genbank_hidden_flag": 0,
+    "left_index": 4469330,
+    "right_index": 4504785,
+    "root_id": 1
+  }
+},
+{
+  "model": "ncbi_taxonomy.taxonomynode",
+  "pk": 436491,
+  "fields": {
+    "parent": 436489,
+    "rank": "clade",
+    "genbank_hidden_flag": 0,
+    "left_index": 4469331,
+    "right_index": 4504784,
+    "root_id": 1
+  }
+},
+{
+  "model": "ncbi_taxonomy.taxonomynode",
+  "pk": 436492,
+  "fields": {
+    "parent": 436491,
+    "rank": "clade",
+    "genbank_hidden_flag": 0,
+    "left_index": 4469332,
+    "right_index": 4504783,
+    "root_id": 1
+  }
+},
+{
+  "model": "ncbi_taxonomy.taxonomynode",
+  "pk": 500008,
+  "fields": {
+    "parent": 37516,
+    "rank": "order",
+    "genbank_hidden_flag": 0,
+    "left_index": 2352758,
+    "right_index": 2354499,
+    "root_id": 1
+  }
+},
+{
+  "model": "ncbi_taxonomy.taxonomynode",
+  "pk": 507980,
+  "fields": {
+    "parent": 56313,
+    "rank": "subspecies",
+    "genbank_hidden_flag": 1,
+    "left_index": 4499523,
+    "right_index": 4499524,
+    "root_id": 1
+  }
+},
+{
+  "model": "ncbi_taxonomy.taxonomynode",
+  "pk": 1010633,
+  "fields": {
+    "parent": 66017,
+    "rank": "species",
+    "genbank_hidden_flag": 1,
+    "left_index": 1582658,
+    "right_index": 1582659,
+    "root_id": 1
+  }
+},
+{
+  "model": "ncbi_taxonomy.taxonomynode",
+  "pk": 1206794,
+  "fields": {
+    "parent": 33317,
+    "rank": "clade",
+    "genbank_hidden_flag": 0,
+    "left_index": 2375583,
+    "right_index": 4150942,
+    "root_id": 1
+  }
+},
+{
+  "model": "ncbi_taxonomy.taxonomynode",
+  "pk": 1293360,
+  "fields": {
+    "parent": 147428,
+    "rank": "subtribe",
+    "genbank_hidden_flag": 0,
+    "left_index": 1582612,
+    "right_index": 1582783,
+    "root_id": 1
+  }
+},
+{
+  "model": "ncbi_taxonomy.taxonomynode",
+  "pk": 1329799,
+  "fields": {
+    "parent": 32561,
+    "rank": "clade",
+    "genbank_hidden_flag": 0,
+    "left_index": 4467759,
+    "right_index": 4504922,
+    "root_id": 1
+  }
+},
+{
+  "model": "ncbi_taxonomy.taxonomynode",
+  "pk": 1338369,
+  "fields": {
+    "parent": 8287,
+    "rank": "clade",
+    "genbank_hidden_flag": 1,
+    "left_index": 4419730,
+    "right_index": 4530313,
+    "root_id": 1
+  }
+},
+{
+  "model": "ncbi_taxonomy.taxonomynode",
+  "pk": 1437010,
+  "fields": {
+    "parent": 9347,
+    "rank": "clade",
+    "genbank_hidden_flag": 1,
+    "left_index": 4506988,
+    "right_index": 4530263,
+    "root_id": 1
+  }
+},
+{
+  "model": "ncbi_taxonomy.taxonomynode",
+  "pk": 1437183,
+  "fields": {
+    "parent": 3398,
+    "rank": "clade",
+    "genbank_hidden_flag": 1,
+    "left_index": 1565234,
+    "right_index": 1962879,
+    "root_id": 1
+  }
+},
+{
+  "model": "ncbi_taxonomy.taxonomynode",
+  "pk": 1437197,
+  "fields": {
+    "parent": 4447,
+    "rank": "subclass",
+    "genbank_hidden_flag": 1,
+    "left_index": 1570682,
+    "right_index": 1655907,
+    "root_id": 1
+  }
+},
+{
+  "model": "ncbi_taxonomy.taxonomynode",
+  "pk": 1648036,
+  "fields": {
+    "parent": 147369,
+    "rank": "no rank",
+    "genbank_hidden_flag": 0,
+    "left_index": 1582604,
+    "right_index": 1584591,
+    "root_id": 1
+  }
+},
+{
+  "model": "ncbi_taxonomy.taxonomynode",
+  "pk": 1963758,
+  "fields": {
+    "parent": 9989,
+    "rank": "suborder",
+    "genbank_hidden_flag": 0,
+    "left_index": 4523946,
+    "right_index": 4530207,
+    "root_id": 1
+  }
+},
+{
+  "model": "ncbi_taxonomy.taxonomynode",
+  "pk": 2653789,
+  "fields": {
+    "parent": 91561,
+    "rank": "suborder",
+    "genbank_hidden_flag": 0,
+    "left_index": 4517319,
+    "right_index": 4517810,
+    "root_id": 1
+  }
+},
+{
+  "model": "ncbi_taxonomy.taxonomynode",
+  "pk": 2750048,
+  "fields": {
+    "parent": 2750049,
+    "rank": "family",
+    "genbank_hidden_flag": 0,
+    "left_index": 2354420,
+    "right_index": 2354487,
+    "root_id": 1
+  }
+},
+{
+  "model": "ncbi_taxonomy.taxonomynode",
+  "pk": 2750049,
+  "fields": {
+    "parent": 500008,
+    "rank": "clade",
+    "genbank_hidden_flag": 0,
+    "left_index": 2354345,
+    "right_index": 2354492,
+    "root_id": 1
+  }
+},
+{
+  "model": "ncbi_taxonomy.taxonomyname",
+  "pk": 1,
+  "fields": {
+    "taxon": 1,
+    "name": "all",
+    "name_class": "synonym"
+  }
+},
+{
+  "model": "ncbi_taxonomy.taxonomyname",
+  "pk": 2,
+  "fields": {
+    "taxon": 1,
+    "name": "root",
+    "name_class": "scientific name"
+  }
+},
+{
+  "model": "ncbi_taxonomy.taxonomyname",
+  "pk": 21712,
+  "fields": {
+    "taxon": 2759,
+    "name": "Eucarya",
+    "name_class": "synonym"
+  }
+},
+{
+  "model": "ncbi_taxonomy.taxonomyname",
+  "pk": 21713,
+  "fields": {
+    "taxon": 2759,
+    "name": "Eucaryotae",
+    "name_class": "synonym"
+  }
+},
+{
+  "model": "ncbi_taxonomy.taxonomyname",
+  "pk": 21714,
+  "fields": {
+    "taxon": 2759,
+    "name": "eucaryotes",
+    "name_class": "genbank common name"
+  }
+},
+{
+  "model": "ncbi_taxonomy.taxonomyname",
+  "pk": 21715,
+  "fields": {
+    "taxon": 2759,
+    "name": "Eukarya",
+    "name_class": "synonym"
+  }
+},
+{
+  "model": "ncbi_taxonomy.taxonomyname",
+  "pk": 21716,
+  "fields": {
+    "taxon": 2759,
+    "name": "Eukaryotae",
+    "name_class": "synonym"
+  }
+},
+{
+  "model": "ncbi_taxonomy.taxonomyname",
+  "pk": 21717,
+  "fields": {
+    "taxon": 2759,
+    "name": "Eukaryota",
+    "name_class": "scientific name"
+  }
+},
+{
+  "model": "ncbi_taxonomy.taxonomyname",
+  "pk": 21718,
+  "fields": {
+    "taxon": 2759,
+    "name": "eukaryotes",
+    "name_class": "blast name"
+  }
+},
+{
+  "model": "ncbi_taxonomy.taxonomyname",
+  "pk": 21719,
+  "fields": {
+    "taxon": 2759,
+    "name": "eukaryotes",
+    "name_class": "common name"
+  }
+},
+{
+  "model": "ncbi_taxonomy.taxonomyname",
+  "pk": 22521,
+  "fields": {
+    "taxon": 3193,
+    "name": "Embryophyta",
+    "name_class": "scientific name"
+  }
+},
+{
+  "model": "ncbi_taxonomy.taxonomyname",
+  "pk": 22522,
+  "fields": {
+    "taxon": 3193,
+    "name": "higher plants",
+    "name_class": "common name"
+  }
+},
+{
+  "model": "ncbi_taxonomy.taxonomyname",
+  "pk": 22523,
+  "fields": {
+    "taxon": 3193,
+    "name": "land plants",
+    "name_class": "blast name"
+  }
+},
+{
+  "model": "ncbi_taxonomy.taxonomyname",
+  "pk": 22524,
+  "fields": {
+    "taxon": 3193,
+    "name": "land plants",
+    "name_class": "common name"
+  }
+},
+{
+  "model": "ncbi_taxonomy.taxonomyname",
+  "pk": 22525,
+  "fields": {
+    "taxon": 3193,
+    "name": "plants",
+    "name_class": "common name"
+  }
+},
+{
+  "model": "ncbi_taxonomy.taxonomyname",
+  "pk": 23047,
+  "fields": {
+    "taxon": 3398,
+    "name": "Angiospermae",
+    "name_class": "synonym"
+  }
+},
+{
+  "model": "ncbi_taxonomy.taxonomyname",
+  "pk": 23048,
+  "fields": {
+    "taxon": 3398,
+    "name": "angiosperms",
+    "name_class": "common name"
+  }
+},
+{
+  "model": "ncbi_taxonomy.taxonomyname",
+  "pk": 23049,
+  "fields": {
+    "taxon": 3398,
+    "name": "flowering plants",
+    "name_class": "blast name"
+  }
+},
+{
+  "model": "ncbi_taxonomy.taxonomyname",
+  "pk": 23050,
+  "fields": {
+    "taxon": 3398,
+    "name": "flowering plants",
+    "name_class": "genbank common name"
+  }
+},
+{
+  "model": "ncbi_taxonomy.taxonomyname",
+  "pk": 23051,
+  "fields": {
+    "taxon": 3398,
+    "name": "Magnoliophyta",
+    "name_class": "synonym"
+  }
+},
+{
+  "model": "ncbi_taxonomy.taxonomyname",
+  "pk": 23052,
+  "fields": {
+    "taxon": 3398,
+    "name": "Magnoliopsida",
+    "name_class": "scientific name"
+  }
+},
+{
+  "model": "ncbi_taxonomy.taxonomyname",
+  "pk": 26225,
+  "fields": {
+    "taxon": 4447,
+    "name": "Liliopsida",
+    "name_class": "scientific name"
+  }
+},
+{
+  "model": "ncbi_taxonomy.taxonomyname",
+  "pk": 26226,
+  "fields": {
+    "taxon": 4447,
+    "name": "monocots",
+    "name_class": "blast name"
+  }
+},
+{
+  "model": "ncbi_taxonomy.taxonomyname",
+  "pk": 26227,
+  "fields": {
+    "taxon": 4447,
+    "name": "monocots",
+    "name_class": "common name"
+  }
+},
+{
+  "model": "ncbi_taxonomy.taxonomyname",
+  "pk": 26228,
+  "fields": {
+    "taxon": 4447,
+    "name": "Monocotyledoneae",
+    "name_class": "synonym"
+  }
+},
+{
+  "model": "ncbi_taxonomy.taxonomyname",
+  "pk": 26229,
+  "fields": {
+    "taxon": 4447,
+    "name": "monocotyledons",
+    "name_class": "genbank common name"
+  }
+},
+{
+  "model": "ncbi_taxonomy.taxonomyname",
+  "pk": 26310,
+  "fields": {
+    "taxon": 4479,
+    "name": "Bambusaceae Nakai, 1943",
+    "name_class": "authority"
+  }
+},
+{
+  "model": "ncbi_taxonomy.taxonomyname",
+  "pk": 26311,
+  "fields": {
+    "taxon": 4479,
+    "name": "Bambusaceae",
+    "name_class": "synonym"
+  }
+},
+{
+  "model": "ncbi_taxonomy.taxonomyname",
+  "pk": 26312,
+  "fields": {
+    "taxon": 4479,
+    "name": "Gramineae",
+    "name_class": "synonym"
+  }
+},
+{
+  "model": "ncbi_taxonomy.taxonomyname",
+  "pk": 26313,
+  "fields": {
+    "taxon": 4479,
+    "name": "grass family",
+    "name_class": "common name"
+  }
+},
+{
+  "model": "ncbi_taxonomy.taxonomyname",
+  "pk": 26314,
+  "fields": {
+    "taxon": 4479,
+    "name": "Poaceae Barnhart, 1895",
+    "name_class": "authority"
+  }
+},
+{
+  "model": "ncbi_taxonomy.taxonomyname",
+  "pk": 26315,
+  "fields": {
+    "taxon": 4479,
+    "name": "Poaceae",
+    "name_class": "scientific name"
+  }
+},
+{
+  "model": "ncbi_taxonomy.taxonomyname",
+  "pk": 27110,
+  "fields": {
+    "taxon": 4734,
+    "name": "Commelinidae",
+    "name_class": "synonym"
+  }
+},
+{
+  "model": "ncbi_taxonomy.taxonomyname",
+  "pk": 27111,
+  "fields": {
+    "taxon": 4734,
+    "name": "commelinids",
+    "name_class": "scientific name"
+  }
+},
+{
+  "model": "ncbi_taxonomy.taxonomyname",
+  "pk": 27112,
+  "fields": {
+    "taxon": 4734,
+    "name": "Commeliniflorae",
+    "name_class": "synonym"
+  }
+},
+{
+  "model": "ncbi_taxonomy.taxonomyname",
+  "pk": 31212,
+  "fields": {
+    "taxon": 6072,
+    "name": "Eumetazoa",
+    "name_class": "scientific name"
+  }
+},
+{
+  "model": "ncbi_taxonomy.taxonomyname",
+  "pk": 31213,
+  "fields": {
+    "taxon": 6073,
+    "name": "cnidarians",
+    "name_class": "blast name"
+  }
+},
+{
+  "model": "ncbi_taxonomy.taxonomyname",
+  "pk": 31214,
+  "fields": {
+    "taxon": 6073,
+    "name": "cnidarians",
+    "name_class": "genbank common name"
+  }
+},
+{
+  "model": "ncbi_taxonomy.taxonomyname",
+  "pk": 31215,
+  "fields": {
+    "taxon": 6073,
+    "name": "Cnidaria",
+    "name_class": "scientific name"
+  }
+},
+{
+  "model": "ncbi_taxonomy.taxonomyname",
+  "pk": 31216,
+  "fields": {
+    "taxon": 6073,
+    "name": "Coelenterata",
+    "name_class": "in-part"
+  }
+},
+{
+  "model": "ncbi_taxonomy.taxonomyname",
+  "pk": 31217,
+  "fields": {
+    "taxon": 6073,
+    "name": "coelenterates",
+    "name_class": "common name"
+  }
+},
+{
+  "model": "ncbi_taxonomy.taxonomyname",
+  "pk": 31218,
+  "fields": {
+    "taxon": 6074,
+    "name": "hydrozoans",
+    "name_class": "blast name"
+  }
+},
+{
+  "model": "ncbi_taxonomy.taxonomyname",
+  "pk": 31219,
+  "fields": {
+    "taxon": 6074,
+    "name": "hydrozoans",
+    "name_class": "genbank common name"
+  }
+},
+{
+  "model": "ncbi_taxonomy.taxonomyname",
+  "pk": 31220,
+  "fields": {
+    "taxon": 6074,
+    "name": "Hydrozoa",
+    "name_class": "scientific name"
+  }
+},
+{
+  "model": "ncbi_taxonomy.taxonomyname",
+  "pk": 32228,
+  "fields": {
+    "taxon": 6656,
+    "name": "Arthropoda",
+    "name_class": "scientific name"
+  }
+},
+{
+  "model": "ncbi_taxonomy.taxonomyname",
+  "pk": 32229,
+  "fields": {
+    "taxon": 6656,
+    "name": "arthropods",
+    "name_class": "blast name"
+  }
+},
+{
+  "model": "ncbi_taxonomy.taxonomyname",
+  "pk": 32230,
+  "fields": {
+    "taxon": 6656,
+    "name": "arthropods",
+    "name_class": "genbank common name"
+  }
+},
+{
+  "model": "ncbi_taxonomy.taxonomyname",
+  "pk": 32809,
+  "fields": {
+    "taxon": 6960,
+    "name": "Atelocerata",
+    "name_class": "in-part"
+  }
+},
+{
+  "model": "ncbi_taxonomy.taxonomyname",
+  "pk": 32810,
+  "fields": {
+    "taxon": 6960,
+    "name": "Hexapoda",
+    "name_class": "scientific name"
+  }
+},
+{
+  "model": "ncbi_taxonomy.taxonomyname",
+  "pk": 32811,
+  "fields": {
+    "taxon": 6960,
+    "name": "hexapods",
+    "name_class": "blast name"
+  }
+},
+{
+  "model": "ncbi_taxonomy.taxonomyname",
+  "pk": 32812,
+  "fields": {
+    "taxon": 6960,
+    "name": "insects",
+    "name_class": "genbank common name"
+  }
+},
+{
+  "model": "ncbi_taxonomy.taxonomyname",
+  "pk": 32813,
+  "fields": {
+    "taxon": 6960,
+    "name": "Tracheata",
+    "name_class": "in-part"
+  }
+},
+{
+  "model": "ncbi_taxonomy.taxonomyname",
+  "pk": 32814,
+  "fields": {
+    "taxon": 6960,
+    "name": "Uniramia",
+    "name_class": "in-part"
+  }
+},
+{
+  "model": "ncbi_taxonomy.taxonomyname",
+  "pk": 33099,
+  "fields": {
+    "taxon": 7088,
+    "name": "butterflies and moths",
+    "name_class": "genbank common name"
+  }
+},
+{
+  "model": "ncbi_taxonomy.taxonomyname",
+  "pk": 33100,
+  "fields": {
+    "taxon": 7088,
+    "name": "Lepidoptera",
+    "name_class": "scientific name"
+  }
+},
+{
+  "model": "ncbi_taxonomy.taxonomyname",
+  "pk": 33101,
+  "fields": {
+    "taxon": 7088,
+    "name": "moths",
+    "name_class": "blast name"
+  }
+},
+{
+  "model": "ncbi_taxonomy.taxonomyname",
+  "pk": 33102,
+  "fields": {
+    "taxon": 7088,
+    "name": "moths",
+    "name_class": "common name"
+  }
+},
+{
+  "model": "ncbi_taxonomy.taxonomyname",
+  "pk": 33767,
+  "fields": {
+    "taxon": 7496,
+    "name": "Pterygota",
+    "name_class": "scientific name"
+  }
+},
+{
+  "model": "ncbi_taxonomy.taxonomyname",
+  "pk": 33768,
+  "fields": {
+    "taxon": 7496,
+    "name": "winged insects",
+    "name_class": "genbank common name"
+  }
+},
+{
+  "model": "ncbi_taxonomy.taxonomyname",
+  "pk": 34066,
+  "fields": {
+    "taxon": 7711,
+    "name": "Chordata",
+    "name_class": "scientific name"
+  }
+},
+{
+  "model": "ncbi_taxonomy.taxonomyname",
+  "pk": 34067,
+  "fields": {
+    "taxon": 7711,
+    "name": "chordates",
+    "name_class": "blast name"
+  }
+},
+{
+  "model": "ncbi_taxonomy.taxonomyname",
+  "pk": 34068,
+  "fields": {
+    "taxon": 7711,
+    "name": "chordates",
+    "name_class": "genbank common name"
+  }
+},
+{
+  "model": "ncbi_taxonomy.taxonomyname",
+  "pk": 34128,
+  "fields": {
+    "taxon": 7742,
+    "name": "Vertebrata Cuvier, 1812",
+    "name_class": "authority"
+  }
+},
+{
+  "model": "ncbi_taxonomy.taxonomyname",
+  "pk": 34129,
+  "fields": {
+    "taxon": 7742,
+    "name": "Vertebrata",
+    "name_class": "scientific name"
+  }
+},
+{
+  "model": "ncbi_taxonomy.taxonomyname",
+  "pk": 34130,
+  "fields": {
+    "taxon": 7742,
+    "name": "vertebrates",
+    "name_class": "blast name"
+  }
+},
+{
+  "model": "ncbi_taxonomy.taxonomyname",
+  "pk": 34131,
+  "fields": {
+    "taxon": 7742,
+    "name": "vertebrates",
+    "name_class": "genbank common name"
+  }
+},
+{
+  "model": "ncbi_taxonomy.taxonomyname",
+  "pk": 34201,
+  "fields": {
+    "taxon": 7776,
+    "name": "Gnathostomata",
+    "name_class": "scientific name"
+  }
+},
+{
+  "model": "ncbi_taxonomy.taxonomyname",
+  "pk": 34202,
+  "fields": {
+    "taxon": 7776,
+    "name": "jawed vertebrates",
+    "name_class": "genbank common name"
+  }
+},
+{
+  "model": "ncbi_taxonomy.taxonomyname",
+  "pk": 35565,
+  "fields": {
+    "taxon": 8287,
+    "name": "Sarcopterygii",
+    "name_class": "scientific name"
+  }
+},
+{
+  "model": "ncbi_taxonomy.taxonomyname",
+  "pk": 36085,
+  "fields": {
+    "taxon": 8457,
+    "name": "Sauropsida",
+    "name_class": "scientific name"
+  }
+},
+{
+  "model": "ncbi_taxonomy.taxonomyname",
+  "pk": 36086,
+  "fields": {
+    "taxon": 8457,
+    "name": "sauropsids",
+    "name_class": "genbank common name"
+  }
+},
+{
+  "model": "ncbi_taxonomy.taxonomyname",
+  "pk": 36187,
+  "fields": {
+    "taxon": 8492,
+    "name": "Archosauria",
+    "name_class": "scientific name"
+  }
+},
+{
+  "model": "ncbi_taxonomy.taxonomyname",
+  "pk": 37022,
+  "fields": {
+    "taxon": 8782,
+    "name": "Aves",
+    "name_class": "scientific name"
+  }
+},
+{
+  "model": "ncbi_taxonomy.taxonomyname",
+  "pk": 37023,
+  "fields": {
+    "taxon": 8782,
+    "name": "avian",
+    "name_class": "synonym"
+  }
+},
+{
+  "model": "ncbi_taxonomy.taxonomyname",
+  "pk": 37024,
+  "fields": {
+    "taxon": 8782,
+    "name": "birds",
+    "name_class": "blast name"
+  }
+},
+{
+  "model": "ncbi_taxonomy.taxonomyname",
+  "pk": 37025,
+  "fields": {
+    "taxon": 8782,
+    "name": "birds",
+    "name_class": "genbank common name"
+  }
+},
+{
+  "model": "ncbi_taxonomy.taxonomyname",
+  "pk": 37111,
+  "fields": {
+    "taxon": 8825,
+    "name": "Neognathae",
+    "name_class": "scientific name"
+  }
+},
+{
+  "model": "ncbi_taxonomy.taxonomyname",
+  "pk": 38264,
+  "fields": {
+    "taxon": 9347,
+    "name": "eutherian mammals",
+    "name_class": "common name"
+  }
+},
+{
+  "model": "ncbi_taxonomy.taxonomyname",
+  "pk": 38265,
+  "fields": {
+    "taxon": 9347,
+    "name": "Eutheria",
+    "name_class": "scientific name"
+  }
+},
+{
+  "model": "ncbi_taxonomy.taxonomyname",
+  "pk": 38266,
+  "fields": {
+    "taxon": 9347,
+    "name": "Placentalia",
+    "name_class": "synonym"
+  }
+},
+{
+  "model": "ncbi_taxonomy.taxonomyname",
+  "pk": 38267,
+  "fields": {
+    "taxon": 9347,
+    "name": "placental mammals",
+    "name_class": "common name"
+  }
+},
+{
+  "model": "ncbi_taxonomy.taxonomyname",
+  "pk": 38268,
+  "fields": {
+    "taxon": 9347,
+    "name": "placentals",
+    "name_class": "blast name"
+  }
+},
+{
+  "model": "ncbi_taxonomy.taxonomyname",
+  "pk": 38269,
+  "fields": {
+    "taxon": 9347,
+    "name": "placentals",
+    "name_class": "genbank common name"
+  }
+},
+{
+  "model": "ncbi_taxonomy.taxonomyname",
+  "pk": 38916,
+  "fields": {
+    "taxon": 9608,
+    "name": "Canidae",
+    "name_class": "scientific name"
+  }
+},
+{
+  "model": "ncbi_taxonomy.taxonomyname",
+  "pk": 38917,
+  "fields": {
+    "taxon": 9608,
+    "name": "dog, coyote, wolf, fox",
+    "name_class": "genbank common name"
+  }
+},
+{
+  "model": "ncbi_taxonomy.taxonomyname",
+  "pk": 38918,
+  "fields": {
+    "taxon": 9611,
+    "name": "Canis",
+    "name_class": "scientific name"
+  }
+},
+{
+  "model": "ncbi_taxonomy.taxonomyname",
+  "pk": 38919,
+  "fields": {
+    "taxon": 9612,
+    "name": "Canis lupus Linnaeus, 1758",
+    "name_class": "authority"
+  }
+},
+{
+  "model": "ncbi_taxonomy.taxonomyname",
+  "pk": 38920,
+  "fields": {
+    "taxon": 9612,
+    "name": "Canis lupus",
+    "name_class": "scientific name"
+  }
+},
+{
+  "model": "ncbi_taxonomy.taxonomyname",
+  "pk": 38921,
+  "fields": {
+    "taxon": 9612,
+    "name": "gray wolf",
+    "name_class": "genbank common name"
+  }
+},
+{
+  "model": "ncbi_taxonomy.taxonomyname",
+  "pk": 38922,
+  "fields": {
+    "taxon": 9612,
+    "name": "grey wolf",
+    "name_class": "common name"
+  }
+},
+{
+  "model": "ncbi_taxonomy.taxonomyname",
+  "pk": 38926,
+  "fields": {
+    "taxon": 9615,
+    "name": "beagle dog",
+    "name_class": "includes"
+  }
+},
+{
+  "model": "ncbi_taxonomy.taxonomyname",
+  "pk": 38927,
+  "fields": {
+    "taxon": 9615,
+    "name": "beagle dogs",
+    "name_class": "includes"
+  }
+},
+{
+  "model": "ncbi_taxonomy.taxonomyname",
+  "pk": 38928,
+  "fields": {
+    "taxon": 9615,
+    "name": "Canis canis",
+    "name_class": "synonym"
+  }
+},
+{
+  "model": "ncbi_taxonomy.taxonomyname",
+  "pk": 38929,
+  "fields": {
+    "taxon": 9615,
+    "name": "Canis domesticus",
+    "name_class": "synonym"
+  }
+},
+{
+  "model": "ncbi_taxonomy.taxonomyname",
+  "pk": 38930,
+  "fields": {
+    "taxon": 9615,
+    "name": "Canis familiaris Linnaeus, 1758",
+    "name_class": "authority"
+  }
+},
+{
+  "model": "ncbi_taxonomy.taxonomyname",
+  "pk": 38931,
+  "fields": {
+    "taxon": 9615,
+    "name": "Canis familiaris",
+    "name_class": "synonym"
+  }
+},
+{
+  "model": "ncbi_taxonomy.taxonomyname",
+  "pk": 38932,
+  "fields": {
+    "taxon": 9615,
+    "name": "Canis lupus familiaris Linnaeus, 1758",
+    "name_class": "authority"
+  }
+},
+{
+  "model": "ncbi_taxonomy.taxonomyname",
+  "pk": 38933,
+  "fields": {
+    "taxon": 9615,
+    "name": "Canis lupus familiaris",
+    "name_class": "scientific name"
+  }
+},
+{
+  "model": "ncbi_taxonomy.taxonomyname",
+  "pk": 38934,
+  "fields": {
+    "taxon": 9615,
+    "name": "dog",
+    "name_class": "genbank common name"
+  }
+},
+{
+  "model": "ncbi_taxonomy.taxonomyname",
+  "pk": 38935,
+  "fields": {
+    "taxon": 9615,
+    "name": "dogs",
+    "name_class": "common name"
+  }
+},
+{
+  "model": "ncbi_taxonomy.taxonomyname",
+  "pk": 39175,
+  "fields": {
+    "taxon": 9721,
+    "name": "cetaceans",
+    "name_class": "common name"
+  }
+},
+{
+  "model": "ncbi_taxonomy.taxonomyname",
+  "pk": 39176,
+  "fields": {
+    "taxon": 9721,
+    "name": "Cetacea",
+    "name_class": "scientific name"
+  }
+},
+{
+  "model": "ncbi_taxonomy.taxonomyname",
+  "pk": 39177,
+  "fields": {
+    "taxon": 9721,
+    "name": "whale",
+    "name_class": "common name"
+  }
+},
+{
+  "model": "ncbi_taxonomy.taxonomyname",
+  "pk": 39178,
+  "fields": {
+    "taxon": 9721,
+    "name": "whales, dolphins, and porpoises",
+    "name_class": "common name"
+  }
+},
+{
+  "model": "ncbi_taxonomy.taxonomyname",
+  "pk": 39179,
+  "fields": {
+    "taxon": 9721,
+    "name": "whales & dolphins",
+    "name_class": "blast name"
+  }
+},
+{
+  "model": "ncbi_taxonomy.taxonomyname",
+  "pk": 39180,
+  "fields": {
+    "taxon": 9721,
+    "name": "whales",
+    "name_class": "genbank common name"
+  }
+},
+{
+  "model": "ncbi_taxonomy.taxonomyname",
+  "pk": 39276,
+  "fields": {
+    "taxon": 9761,
+    "name": "baleen whales",
+    "name_class": "genbank common name"
+  }
+},
+{
+  "model": "ncbi_taxonomy.taxonomyname",
+  "pk": 39277,
+  "fields": {
+    "taxon": 9761,
+    "name": "Mysticeti",
+    "name_class": "scientific name"
+  }
+},
+{
+  "model": "ncbi_taxonomy.taxonomyname",
+  "pk": 39286,
+  "fields": {
+    "taxon": 9765,
+    "name": "Balaenopteridae",
+    "name_class": "scientific name"
+  }
+},
+{
+  "model": "ncbi_taxonomy.taxonomyname",
+  "pk": 39287,
+  "fields": {
+    "taxon": 9765,
+    "name": "finback whales",
+    "name_class": "common name"
+  }
+},
+{
+  "model": "ncbi_taxonomy.taxonomyname",
+  "pk": 39288,
+  "fields": {
+    "taxon": 9765,
+    "name": "rorquals",
+    "name_class": "genbank common name"
+  }
+},
+{
+  "model": "ncbi_taxonomy.taxonomyname",
+  "pk": 39289,
+  "fields": {
+    "taxon": 9766,
+    "name": "Balaenoptera Lacepede, 1804",
+    "name_class": "authority"
+  }
+},
+{
+  "model": "ncbi_taxonomy.taxonomyname",
+  "pk": 39290,
+  "fields": {
+    "taxon": 9766,
+    "name": "Balaenoptera",
+    "name_class": "scientific name"
+  }
+},
+{
+  "model": "ncbi_taxonomy.taxonomyname",
+  "pk": 39307,
+  "fields": {
+    "taxon": 9771,
+    "name": "Balaenoptera musculus (Linnaeus, 1758)",
+    "name_class": "authority"
+  }
+},
+{
+  "model": "ncbi_taxonomy.taxonomyname",
+  "pk": 39308,
+  "fields": {
+    "taxon": 9771,
+    "name": "Balaenoptera musculus",
+    "name_class": "scientific name"
+  }
+},
+{
+  "model": "ncbi_taxonomy.taxonomyname",
+  "pk": 39309,
+  "fields": {
+    "taxon": 9771,
+    "name": "Blue whale",
+    "name_class": "genbank common name"
+  }
+},
+{
+  "model": "ncbi_taxonomy.taxonomyname",
+  "pk": 39442,
+  "fields": {
+    "taxon": 9821,
+    "name": "boars",
+    "name_class": "common name"
+  }
+},
+{
+  "model": "ncbi_taxonomy.taxonomyname",
+  "pk": 39443,
+  "fields": {
+    "taxon": 9821,
+    "name": "pigs",
+    "name_class": "genbank common name"
+  }
+},
+{
+  "model": "ncbi_taxonomy.taxonomyname",
+  "pk": 39444,
+  "fields": {
+    "taxon": 9821,
+    "name": "Suidae",
+    "name_class": "scientific name"
+  }
+},
+{
+  "model": "ncbi_taxonomy.taxonomyname",
+  "pk": 39445,
+  "fields": {
+    "taxon": 9822,
+    "name": "Sus",
+    "name_class": "scientific name"
+  }
+},
+{
+  "model": "ncbi_taxonomy.taxonomyname",
+  "pk": 39446,
+  "fields": {
+    "taxon": 9823,
+    "name": "pig",
+    "name_class": "genbank common name"
+  }
+},
+{
+  "model": "ncbi_taxonomy.taxonomyname",
+  "pk": 39447,
+  "fields": {
+    "taxon": 9823,
+    "name": "pigs",
+    "name_class": "common name"
+  }
+},
+{
+  "model": "ncbi_taxonomy.taxonomyname",
+  "pk": 39448,
+  "fields": {
+    "taxon": 9823,
+    "name": "Sus scrofa Linnaeus, 1758",
+    "name_class": "authority"
+  }
+},
+{
+  "model": "ncbi_taxonomy.taxonomyname",
+  "pk": 39449,
+  "fields": {
+    "taxon": 9823,
+    "name": "Sus scrofa",
+    "name_class": "scientific name"
+  }
+},
+{
+  "model": "ncbi_taxonomy.taxonomyname",
+  "pk": 39450,
+  "fields": {
+    "taxon": 9823,
+    "name": "swine",
+    "name_class": "common name"
+  }
+},
+{
+  "model": "ncbi_taxonomy.taxonomyname",
+  "pk": 39451,
+  "fields": {
+    "taxon": 9823,
+    "name": "wild boar",
+    "name_class": "common name"
+  }
+},
+{
+  "model": "ncbi_taxonomy.taxonomyname",
+  "pk": 39505,
+  "fields": {
+    "taxon": 9845,
+    "name": "Ruminantia",
+    "name_class": "scientific name"
+  }
+},
+{
+  "model": "ncbi_taxonomy.taxonomyname",
+  "pk": 39605,
+  "fields": {
+    "taxon": 9895,
+    "name": "Bovidae",
+    "name_class": "scientific name"
+  }
+},
+{
+  "model": "ncbi_taxonomy.taxonomyname",
+  "pk": 39661,
+  "fields": {
+    "taxon": 9922,
+    "name": "Capra",
+    "name_class": "scientific name"
+  }
+},
+{
+  "model": "ncbi_taxonomy.taxonomyname",
+  "pk": 39668,
+  "fields": {
+    "taxon": 9925,
+    "name": "African dwarf goat",
+    "name_class": "includes"
+  }
+},
+{
+  "model": "ncbi_taxonomy.taxonomyname",
+  "pk": 39669,
+  "fields": {
+    "taxon": 9925,
+    "name": "African dwarf goats",
+    "name_class": "includes"
+  }
+},
+{
+  "model": "ncbi_taxonomy.taxonomyname",
+  "pk": 39670,
+  "fields": {
+    "taxon": 9925,
+    "name": "Capra aegagrus hircus",
+    "name_class": "synonym"
+  }
+},
+{
+  "model": "ncbi_taxonomy.taxonomyname",
+  "pk": 39671,
+  "fields": {
+    "taxon": 9925,
+    "name": "Capra hircus Linnaeus, 1758",
+    "name_class": "authority"
+  }
+},
+{
+  "model": "ncbi_taxonomy.taxonomyname",
+  "pk": 39672,
+  "fields": {
+    "taxon": 9925,
+    "name": "Capra hircus",
+    "name_class": "scientific name"
+  }
+},
+{
+  "model": "ncbi_taxonomy.taxonomyname",
+  "pk": 39673,
+  "fields": {
+    "taxon": 9925,
+    "name": "domestic goat",
+    "name_class": "common name"
+  }
+},
+{
+  "model": "ncbi_taxonomy.taxonomyname",
+  "pk": 39674,
+  "fields": {
+    "taxon": 9925,
+    "name": "goat",
+    "name_class": "genbank common name"
+  }
+},
+{
+  "model": "ncbi_taxonomy.taxonomyname",
+  "pk": 39675,
+  "fields": {
+    "taxon": 9925,
+    "name": "goats",
+    "name_class": "common name"
+  }
+},
+{
+  "model": "ncbi_taxonomy.taxonomyname",
+  "pk": 39676,
+  "fields": {
+    "taxon": 9925,
+    "name": "Naine d'Afrique de l'Ouest",
+    "name_class": "includes"
+  }
+},
+{
+  "model": "ncbi_taxonomy.taxonomyname",
+  "pk": 39738,
+  "fields": {
+    "taxon": 9963,
+    "name": "Caprinae",
+    "name_class": "scientific name"
+  }
+},
+{
+  "model": "ncbi_taxonomy.taxonomyname",
+  "pk": 39793,
+  "fields": {
+    "taxon": 9989,
+    "name": "rodent",
+    "name_class": "genbank common name"
+  }
+},
+{
+  "model": "ncbi_taxonomy.taxonomyname",
+  "pk": 39794,
+  "fields": {
+    "taxon": 9989,
+    "name": "Rodentia",
+    "name_class": "scientific name"
+  }
+},
+{
+  "model": "ncbi_taxonomy.taxonomyname",
+  "pk": 39795,
+  "fields": {
+    "taxon": 9989,
+    "name": "rodents",
+    "name_class": "blast name"
+  }
+},
+{
+  "model": "ncbi_taxonomy.taxonomyname",
+  "pk": 39953,
+  "fields": {
+    "taxon": 10066,
+    "name": "Muridae",
+    "name_class": "scientific name"
+  }
+},
+{
+  "model": "ncbi_taxonomy.taxonomyname",
+  "pk": 40084,
+  "fields": {
+    "taxon": 10114,
+    "name": "rat",
+    "name_class": "common name"
+  }
+},
+{
+  "model": "ncbi_taxonomy.taxonomyname",
+  "pk": 40085,
+  "fields": {
+    "taxon": 10114,
+    "name": "rats",
+    "name_class": "common name"
+  }
+},
+{
+  "model": "ncbi_taxonomy.taxonomyname",
+  "pk": 40086,
+  "fields": {
+    "taxon": 10114,
+    "name": "Rattus",
+    "name_class": "scientific name"
+  }
+},
+{
+  "model": "ncbi_taxonomy.taxonomyname",
+  "pk": 40090,
+  "fields": {
+    "taxon": 10116,
+    "name": "brown rat",
+    "name_class": "common name"
+  }
+},
+{
+  "model": "ncbi_taxonomy.taxonomyname",
+  "pk": 40091,
+  "fields": {
+    "taxon": 10116,
+    "name": "Buffalo rat",
+    "name_class": "includes"
+  }
+},
+{
+  "model": "ncbi_taxonomy.taxonomyname",
+  "pk": 40092,
+  "fields": {
+    "taxon": 10116,
+    "name": "laboratory rat",
+    "name_class": "includes"
+  }
+},
+{
+  "model": "ncbi_taxonomy.taxonomyname",
+  "pk": 40093,
+  "fields": {
+    "taxon": 10116,
+    "name": "Norway rat",
+    "name_class": "genbank common name"
+  }
+},
+{
+  "model": "ncbi_taxonomy.taxonomyname",
+  "pk": 40094,
+  "fields": {
+    "taxon": 10116,
+    "name": "rat",
+    "name_class": "common name"
+  }
+},
+{
+  "model": "ncbi_taxonomy.taxonomyname",
+  "pk": 40095,
+  "fields": {
+    "taxon": 10116,
+    "name": "rats",
+    "name_class": "common name"
+  }
+},
+{
+  "model": "ncbi_taxonomy.taxonomyname",
+  "pk": 40096,
+  "fields": {
+    "taxon": 10116,
+    "name": "Rattus norvegicus",
+    "name_class": "scientific name"
+  }
+},
+{
+  "model": "ncbi_taxonomy.taxonomyname",
+  "pk": 40097,
+  "fields": {
+    "taxon": 10116,
+    "name": "Rattus PC12 clone IS",
+    "name_class": "includes"
+  }
+},
+{
+  "model": "ncbi_taxonomy.taxonomyname",
+  "pk": 40098,
+  "fields": {
+    "taxon": 10116,
+    "name": "Rattus sp. strain Wistar",
+    "name_class": "includes"
+  }
+},
+{
+  "model": "ncbi_taxonomy.taxonomyname",
+  "pk": 40099,
+  "fields": {
+    "taxon": 10116,
+    "name": "Sprague-Dawley rat",
+    "name_class": "includes"
+  }
+},
+{
+  "model": "ncbi_taxonomy.taxonomyname",
+  "pk": 40100,
+  "fields": {
+    "taxon": 10116,
+    "name": "Wistar rats",
+    "name_class": "includes"
+  }
+},
+{
+  "model": "ncbi_taxonomy.taxonomyname",
+  "pk": 40101,
+  "fields": {
+    "taxon": 10116,
+    "name": "zitter rats",
+    "name_class": "includes"
+  }
+},
+{
+  "model": "ncbi_taxonomy.taxonomyname",
+  "pk": 45670,
+  "fields": {
+    "taxon": 13436,
+    "name": "Clytia",
+    "name_class": "scientific name"
+  }
+},
+{
+  "model": "ncbi_taxonomy.taxonomyname",
+  "pk": 58088,
+  "fields": {
+    "taxon": 30458,
+    "name": "owls",
+    "name_class": "genbank common name"
+  }
+},
+{
+  "model": "ncbi_taxonomy.taxonomyname",
+  "pk": 58089,
+  "fields": {
+    "taxon": 30458,
+    "name": "Strigiformes",
+    "name_class": "scientific name"
+  }
+},
+{
+  "model": "ncbi_taxonomy.taxonomyname",
+  "pk": 58099,
+  "fields": {
+    "taxon": 30462,
+    "name": "barn owls",
+    "name_class": "genbank common name"
+  }
+},
+{
+  "model": "ncbi_taxonomy.taxonomyname",
+  "pk": 58100,
+  "fields": {
+    "taxon": 30462,
+    "name": "Tytonidae",
+    "name_class": "scientific name"
+  }
+},
+{
+  "model": "ncbi_taxonomy.taxonomyname",
+  "pk": 61504,
+  "fields": {
+    "taxon": 32523,
+    "name": "Tetrapoda",
+    "name_class": "scientific name"
+  }
+},
+{
+  "model": "ncbi_taxonomy.taxonomyname",
+  "pk": 61505,
+  "fields": {
+    "taxon": 32523,
+    "name": "tetrapods",
+    "name_class": "genbank common name"
+  }
+},
+{
+  "model": "ncbi_taxonomy.taxonomyname",
+  "pk": 61506,
+  "fields": {
+    "taxon": 32524,
+    "name": "Amniota",
+    "name_class": "scientific name"
+  }
+},
+{
+  "model": "ncbi_taxonomy.taxonomyname",
+  "pk": 61507,
+  "fields": {
+    "taxon": 32524,
+    "name": "amniotes",
+    "name_class": "genbank common name"
+  }
+},
+{
+  "model": "ncbi_taxonomy.taxonomyname",
+  "pk": 61508,
+  "fields": {
+    "taxon": 32525,
+    "name": "Theria Parker & Haswell, 1897",
+    "name_class": "authority"
+  }
+},
+{
+  "model": "ncbi_taxonomy.taxonomyname",
+  "pk": 61509,
+  "fields": {
+    "taxon": 32525,
+    "name": "Theria",
+    "name_class": "scientific name"
+  }
+},
+{
+  "model": "ncbi_taxonomy.taxonomyname",
+  "pk": 61578,
+  "fields": {
+    "taxon": 32561,
+    "name": "Diapsida",
+    "name_class": "synonym"
+  }
+},
+{
+  "model": "ncbi_taxonomy.taxonomyname",
+  "pk": 61579,
+  "fields": {
+    "taxon": 32561,
+    "name": "diapsids",
+    "name_class": "genbank common name"
+  }
+},
+{
+  "model": "ncbi_taxonomy.taxonomyname",
+  "pk": 61580,
+  "fields": {
+    "taxon": 32561,
+    "name": "Sauria",
+    "name_class": "scientific name"
+  }
+},
+{
+  "model": "ncbi_taxonomy.taxonomyname",
+  "pk": 62294,
+  "fields": {
+    "taxon": 33090,
+    "name": "Chlorobionta Jeffrey, 1982",
+    "name_class": "authority"
+  }
+},
+{
+  "model": "ncbi_taxonomy.taxonomyname",
+  "pk": 62295,
+  "fields": {
+    "taxon": 33090,
+    "name": "Chlorobionta",
+    "name_class": "synonym"
+  }
+},
+{
+  "model": "ncbi_taxonomy.taxonomyname",
+  "pk": 62296,
+  "fields": {
+    "taxon": 33090,
+    "name": "Chlorophyta/Embryophyta group",
+    "name_class": "equivalent name"
+  }
+},
+{
+  "model": "ncbi_taxonomy.taxonomyname",
+  "pk": 62297,
+  "fields": {
+    "taxon": 33090,
+    "name": "chlorophyte/embryophyte group",
+    "name_class": "equivalent name"
+  }
+},
+{
+  "model": "ncbi_taxonomy.taxonomyname",
+  "pk": 62298,
+  "fields": {
+    "taxon": 33090,
+    "name": "Chloroplastida Adl et al. 2005",
+    "name_class": "authority"
+  }
+},
+{
+  "model": "ncbi_taxonomy.taxonomyname",
+  "pk": 62299,
+  "fields": {
+    "taxon": 33090,
+    "name": "Chloroplastida",
+    "name_class": "synonym"
+  }
+},
+{
+  "model": "ncbi_taxonomy.taxonomyname",
+  "pk": 62300,
+  "fields": {
+    "taxon": 33090,
+    "name": "green plants",
+    "name_class": "blast name"
+  }
+},
+{
+  "model": "ncbi_taxonomy.taxonomyname",
+  "pk": 62301,
+  "fields": {
+    "taxon": 33090,
+    "name": "green plants",
+    "name_class": "common name"
+  }
+},
+{
+  "model": "ncbi_taxonomy.taxonomyname",
+  "pk": 62302,
+  "fields": {
+    "taxon": 33090,
+    "name": "Viridiplantae Cavalier-Smith, 1981",
+    "name_class": "authority"
+  }
+},
+{
+  "model": "ncbi_taxonomy.taxonomyname",
+  "pk": 62303,
+  "fields": {
+    "taxon": 33090,
+    "name": "Viridiplantae",
+    "name_class": "scientific name"
+  }
+},
+{
+  "model": "ncbi_taxonomy.taxonomyname",
+  "pk": 62478,
+  "fields": {
+    "taxon": 33154,
+    "name": "Fungi/Metazoa group",
+    "name_class": "synonym"
+  }
+},
+{
+  "model": "ncbi_taxonomy.taxonomyname",
+  "pk": 62479,
+  "fields": {
+    "taxon": 33154,
+    "name": "Opisthokonta Cavalier-Smith 1987",
+    "name_class": "authority"
+  }
+},
+{
+  "model": "ncbi_taxonomy.taxonomyname",
+  "pk": 62480,
+  "fields": {
+    "taxon": 33154,
+    "name": "Opisthokonta",
+    "name_class": "scientific name"
+  }
+},
+{
+  "model": "ncbi_taxonomy.taxonomyname",
+  "pk": 62481,
+  "fields": {
+    "taxon": 33154,
+    "name": "opisthokonts",
+    "name_class": "synonym"
+  }
+},
+{
+  "model": "ncbi_taxonomy.taxonomyname",
+  "pk": 62658,
+  "fields": {
+    "taxon": 33208,
+    "name": "Animalia",
+    "name_class": "synonym"
+  }
+},
+{
+  "model": "ncbi_taxonomy.taxonomyname",
+  "pk": 62659,
+  "fields": {
+    "taxon": 33208,
+    "name": "animals",
+    "name_class": "blast name"
+  }
+},
+{
+  "model": "ncbi_taxonomy.taxonomyname",
+  "pk": 62660,
+  "fields": {
+    "taxon": 33208,
+    "name": "metazoans",
+    "name_class": "genbank common name"
+  }
+},
+{
+  "model": "ncbi_taxonomy.taxonomyname",
+  "pk": 62661,
+  "fields": {
+    "taxon": 33208,
+    "name": "Metazoa",
+    "name_class": "scientific name"
+  }
+},
+{
+  "model": "ncbi_taxonomy.taxonomyname",
+  "pk": 62662,
+  "fields": {
+    "taxon": 33208,
+    "name": "multicellular animals",
+    "name_class": "common name"
+  }
+},
+{
+  "model": "ncbi_taxonomy.taxonomyname",
+  "pk": 62664,
+  "fields": {
+    "taxon": 33213,
+    "name": "Bilateria",
+    "name_class": "scientific name"
+  }
+},
+{
+  "model": "ncbi_taxonomy.taxonomyname",
+  "pk": 62687,
+  "fields": {
+    "taxon": 33317,
+    "name": "Protostomia",
+    "name_class": "scientific name"
+  }
+},
+{
+  "model": "ncbi_taxonomy.taxonomyname",
+  "pk": 62705,
+  "fields": {
+    "taxon": 33340,
+    "name": "Neoptera",
+    "name_class": "scientific name"
+  }
+},
+{
+  "model": "ncbi_taxonomy.taxonomyname",
+  "pk": 62785,
+  "fields": {
+    "taxon": 33392,
+    "name": "Endopterygota",
+    "name_class": "scientific name"
+  }
+},
+{
+  "model": "ncbi_taxonomy.taxonomyname",
+  "pk": 62786,
+  "fields": {
+    "taxon": 33392,
+    "name": "Holometabola",
+    "name_class": "synonym"
+  }
+},
+{
+  "model": "ncbi_taxonomy.taxonomyname",
+  "pk": 62823,
+  "fields": {
+    "taxon": 33415,
+    "name": "brush-footed butterflies",
+    "name_class": "common name"
+  }
+},
+{
+  "model": "ncbi_taxonomy.taxonomyname",
+  "pk": 62824,
+  "fields": {
+    "taxon": 33415,
+    "name": "brushfoots",
+    "name_class": "genbank common name"
+  }
+},
+{
+  "model": "ncbi_taxonomy.taxonomyname",
+  "pk": 62825,
+  "fields": {
+    "taxon": 33415,
+    "name": "Nymphalidae",
+    "name_class": "scientific name"
+  }
+},
+{
+  "model": "ncbi_taxonomy.taxonomyname",
+  "pk": 62826,
+  "fields": {
+    "taxon": 33415,
+    "name": "Satyridae",
+    "name_class": "includes"
+  }
+},
+{
+  "model": "ncbi_taxonomy.taxonomyname",
+  "pk": 62958,
+  "fields": {
+    "taxon": 33511,
+    "name": "deuterostomes",
+    "name_class": "common name"
+  }
+},
+{
+  "model": "ncbi_taxonomy.taxonomyname",
+  "pk": 62959,
+  "fields": {
+    "taxon": 33511,
+    "name": "Deuterostomia",
+    "name_class": "scientific name"
+  }
+},
+{
+  "model": "ncbi_taxonomy.taxonomyname",
+  "pk": 63068,
+  "fields": {
+    "taxon": 33554,
+    "name": "Carnivora",
+    "name_class": "scientific name"
+  }
+},
+{
+  "model": "ncbi_taxonomy.taxonomyname",
+  "pk": 63069,
+  "fields": {
+    "taxon": 33554,
+    "name": "carnivores",
+    "name_class": "blast name"
+  }
+},
+{
+  "model": "ncbi_taxonomy.taxonomyname",
+  "pk": 63070,
+  "fields": {
+    "taxon": 33554,
+    "name": "carnivores",
+    "name_class": "genbank common name"
+  }
+},
+{
+  "model": "ncbi_taxonomy.taxonomyname",
+  "pk": 67844,
+  "fields": {
+    "taxon": 35493,
+    "name": "Streptophyta Bremer, 1985",
+    "name_class": "authority"
+  }
+},
+{
+  "model": "ncbi_taxonomy.taxonomyname",
+  "pk": 67845,
+  "fields": {
+    "taxon": 35493,
+    "name": "Streptophyta",
+    "name_class": "scientific name"
+  }
+},
+{
+  "model": "ncbi_taxonomy.taxonomyname",
+  "pk": 67848,
+  "fields": {
+    "taxon": 35497,
+    "name": "Suiformes",
+    "name_class": "in-part"
+  }
+},
+{
+  "model": "ncbi_taxonomy.taxonomyname",
+  "pk": 67849,
+  "fields": {
+    "taxon": 35497,
+    "name": "Suina",
+    "name_class": "scientific name"
+  }
+},
+{
+  "model": "ncbi_taxonomy.taxonomyname",
+  "pk": 67851,
+  "fields": {
+    "taxon": 35500,
+    "name": "Pecora",
+    "name_class": "scientific name"
+  }
+},
+{
+  "model": "ncbi_taxonomy.taxonomyname",
+  "pk": 73553,
+  "fields": {
+    "taxon": 37516,
+    "name": "Hydroida",
+    "name_class": "synonym"
+  }
+},
+{
+  "model": "ncbi_taxonomy.taxonomyname",
+  "pk": 73554,
+  "fields": {
+    "taxon": 37516,
+    "name": "Hydroidolina",
+    "name_class": "scientific name"
+  }
+},
+{
+  "model": "ncbi_taxonomy.taxonomyname",
+  "pk": 73555,
+  "fields": {
+    "taxon": 37516,
+    "name": "Hydroidomedusae",
+    "name_class": "synonym"
+  }
+},
+{
+  "model": "ncbi_taxonomy.taxonomyname",
+  "pk": 73637,
+  "fields": {
+    "taxon": 37567,
+    "name": "Ditrysia",
+    "name_class": "scientific name"
+  }
+},
+{
+  "model": "ncbi_taxonomy.taxonomyname",
+  "pk": 73646,
+  "fields": {
+    "taxon": 37572,
+    "name": "butterflies",
+    "name_class": "blast name"
+  }
+},
+{
+  "model": "ncbi_taxonomy.taxonomyname",
+  "pk": 73647,
+  "fields": {
+    "taxon": 37572,
+    "name": "butterflies",
+    "name_class": "genbank common name"
+  }
+},
+{
+  "model": "ncbi_taxonomy.taxonomyname",
+  "pk": 73648,
+  "fields": {
+    "taxon": 37572,
+    "name": "Papilionoidea",
+    "name_class": "scientific name"
+  }
+},
+{
+  "model": "ncbi_taxonomy.taxonomyname",
+  "pk": 76608,
+  "fields": {
+    "taxon": 38820,
+    "name": "Cyperales",
+    "name_class": "includes"
+  }
+},
+{
+  "model": "ncbi_taxonomy.taxonomyname",
+  "pk": 76609,
+  "fields": {
+    "taxon": 38820,
+    "name": "Poales",
+    "name_class": "scientific name"
+  }
+},
+{
+  "model": "ncbi_taxonomy.taxonomyname",
+  "pk": 76610,
+  "fields": {
+    "taxon": 38820,
+    "name": "Typhales",
+    "name_class": "includes"
+  }
+},
+{
+  "model": "ncbi_taxonomy.taxonomyname",
+  "pk": 77253,
+  "fields": {
+    "taxon": 39107,
+    "name": "Murinae",
+    "name_class": "scientific name"
+  }
+},
+{
+  "model": "ncbi_taxonomy.taxonomyname",
+  "pk": 77254,
+  "fields": {
+    "taxon": 39107,
+    "name": "Otomyinae",
+    "name_class": "includes"
+  }
+},
+{
+  "model": "ncbi_taxonomy.taxonomyname",
+  "pk": 79639,
+  "fields": {
+    "taxon": 40040,
+    "name": "Nymphalinae",
+    "name_class": "scientific name"
+  }
+},
+{
+  "model": "ncbi_taxonomy.taxonomyname",
+  "pk": 79640,
+  "fields": {
+    "taxon": 40040,
+    "name": "tortoiseshells, admirals &c.",
+    "name_class": "genbank common name"
+  }
+},
+{
+  "model": "ncbi_taxonomy.taxonomyname",
+  "pk": 81302,
+  "fields": {
+    "taxon": 40674,
+    "name": "Mammalia",
+    "name_class": "scientific name"
+  }
+},
+{
+  "model": "ncbi_taxonomy.taxonomyname",
+  "pk": 81303,
+  "fields": {
+    "taxon": 40674,
+    "name": "mammals",
+    "name_class": "blast name"
+  }
+},
+{
+  "model": "ncbi_taxonomy.taxonomyname",
+  "pk": 81304,
+  "fields": {
+    "taxon": 40674,
+    "name": "mammals",
+    "name_class": "genbank common name"
+  }
+},
+{
+  "model": "ncbi_taxonomy.taxonomyname",
+  "pk": 82602,
+  "fields": {
+    "taxon": 41191,
+    "name": "Glossata",
+    "name_class": "scientific name"
+  }
+},
+{
+  "model": "ncbi_taxonomy.taxonomyname",
+  "pk": 82608,
+  "fields": {
+    "taxon": 41196,
+    "name": "Neolepidoptera",
+    "name_class": "scientific name"
+  }
+},
+{
+  "model": "ncbi_taxonomy.taxonomyname",
+  "pk": 82609,
+  "fields": {
+    "taxon": 41197,
+    "name": "Heteroneura",
+    "name_class": "scientific name"
+  }
+},
+{
+  "model": "ncbi_taxonomy.taxonomyname",
+  "pk": 105778,
+  "fields": {
+    "taxon": 50557,
+    "name": "Insecta",
+    "name_class": "scientific name"
+  }
+},
+{
+  "model": "ncbi_taxonomy.taxonomyname",
+  "pk": 105779,
+  "fields": {
+    "taxon": 50557,
+    "name": "insects",
+    "name_class": "blast name"
+  }
+},
+{
+  "model": "ncbi_taxonomy.taxonomyname",
+  "pk": 105780,
+  "fields": {
+    "taxon": 50557,
+    "name": "true insects",
+    "name_class": "genbank common name"
+  }
+},
+{
+  "model": "ncbi_taxonomy.taxonomyname",
+  "pk": 119853,
+  "fields": {
+    "taxon": 56312,
+    "name": "Tyto",
+    "name_class": "scientific name"
+  }
+},
+{
+  "model": "ncbi_taxonomy.taxonomyname",
+  "pk": 119854,
+  "fields": {
+    "taxon": 56313,
+    "name": "Barn owl",
+    "name_class": "genbank common name"
+  }
+},
+{
+  "model": "ncbi_taxonomy.taxonomyname",
+  "pk": 119855,
+  "fields": {
+    "taxon": 56313,
+    "name": "Schleiereule",
+    "name_class": "common name"
+  }
+},
+{
+  "model": "ncbi_taxonomy.taxonomyname",
+  "pk": 119856,
+  "fields": {
+    "taxon": 56313,
+    "name": "Strix alba",
+    "name_class": "synonym"
+  }
+},
+{
+  "model": "ncbi_taxonomy.taxonomyname",
+  "pk": 119857,
+  "fields": {
+    "taxon": 56313,
+    "name": "Tyto alba",
+    "name_class": "scientific name"
+  }
+},
+{
+  "model": "ncbi_taxonomy.taxonomyname",
+  "pk": 119858,
+  "fields": {
+    "taxon": 56313,
+    "name": "Tyto alba (Scopoli, 1769)",
+    "name_class": "authority"
+  }
+},
+{
+  "model": "ncbi_taxonomy.taxonomyname",
+  "pk": 123562,
+  "fields": {
+    "taxon": 58023,
+    "name": "Tracheophyta",
+    "name_class": "scientific name"
+  }
+},
+{
+  "model": "ncbi_taxonomy.taxonomyname",
+  "pk": 123563,
+  "fields": {
+    "taxon": 58023,
+    "name": "Tracheophyta Sinnott ex Cavalier-Smith, 1998",
+    "name_class": "authority"
+  }
+},
+{
+  "model": "ncbi_taxonomy.taxonomyname",
+  "pk": 123564,
+  "fields": {
+    "taxon": 58023,
+    "name": "vascular plants",
+    "name_class": "blast name"
+  }
+},
+{
+  "model": "ncbi_taxonomy.taxonomyname",
+  "pk": 123565,
+  "fields": {
+    "taxon": 58023,
+    "name": "vascular plants",
+    "name_class": "common name"
+  }
+},
+{
+  "model": "ncbi_taxonomy.taxonomyname",
+  "pk": 123566,
+  "fields": {
+    "taxon": 58024,
+    "name": "seed plants",
+    "name_class": "blast name"
+  }
+},
+{
+  "model": "ncbi_taxonomy.taxonomyname",
+  "pk": 123567,
+  "fields": {
+    "taxon": 58024,
+    "name": "seed plants",
+    "name_class": "common name"
+  }
+},
+{
+  "model": "ncbi_taxonomy.taxonomyname",
+  "pk": 123568,
+  "fields": {
+    "taxon": 58024,
+    "name": "Spermatophyta",
+    "name_class": "scientific name"
+  }
+},
+{
+  "model": "ncbi_taxonomy.taxonomyname",
+  "pk": 140057,
+  "fields": {
+    "taxon": 66017,
+    "name": "Digitaria",
+    "name_class": "scientific name"
+  }
+},
+{
+  "model": "ncbi_taxonomy.taxonomyname",
+  "pk": 140058,
+  "fields": {
+    "taxon": 66017,
+    "name": "Digitaria Haller, 1768",
+    "name_class": "authority"
+  }
+},
+{
+  "model": "ncbi_taxonomy.taxonomyname",
+  "pk": 168826,
+  "fields": {
+    "taxon": 78536,
+    "name": "Euphyllophyta",
+    "name_class": "scientific name"
+  }
+},
+{
+  "model": "ncbi_taxonomy.taxonomyname",
+  "pk": 168827,
+  "fields": {
+    "taxon": 78536,
+    "name": "euphyllophytes",
+    "name_class": "equivalent name"
+  }
+},
+{
+  "model": "ncbi_taxonomy.taxonomyname",
+  "pk": 182707,
+  "fields": {
+    "taxon": 85512,
+    "name": "Dicondylia",
+    "name_class": "scientific name"
+  }
+},
+{
+  "model": "ncbi_taxonomy.taxonomyname",
+  "pk": 182909,
+  "fields": {
+    "taxon": 85604,
+    "name": "Amphiesmenoptera",
+    "name_class": "scientific name"
+  }
+},
+{
+  "model": "ncbi_taxonomy.taxonomyname",
+  "pk": 189154,
+  "fields": {
+    "taxon": 88770,
+    "name": "Panarthropoda",
+    "name_class": "scientific name"
+  }
+},
+{
+  "model": "ncbi_taxonomy.taxonomyname",
+  "pk": 190718,
+  "fields": {
+    "taxon": 89593,
+    "name": "Craniata",
+    "name_class": "scientific name"
+  }
+},
+{
+  "model": "ncbi_taxonomy.taxonomyname",
+  "pk": 194757,
+  "fields": {
+    "taxon": 91561,
+    "name": "Artiodactyla",
+    "name_class": "scientific name"
+  }
+},
+{
+  "model": "ncbi_taxonomy.taxonomyname",
+  "pk": 194758,
+  "fields": {
+    "taxon": 91561,
+    "name": "Cetartiodactyla",
+    "name_class": "synonym"
+  }
+},
+{
+  "model": "ncbi_taxonomy.taxonomyname",
+  "pk": 194759,
+  "fields": {
+    "taxon": 91561,
+    "name": "even-toed ungulates",
+    "name_class": "blast name"
+  }
+},
+{
+  "model": "ncbi_taxonomy.taxonomyname",
+  "pk": 194760,
+  "fields": {
+    "taxon": 91561,
+    "name": "whales, hippos, ruminants, pigs, camels etc.",
+    "name_class": "genbank common name"
+  }
+},
+{
+  "model": "ncbi_taxonomy.taxonomyname",
+  "pk": 216721,
+  "fields": {
+    "taxon": 104431,
+    "name": "Obtectomera",
+    "name_class": "scientific name"
+  }
+},
+{
+  "model": "ncbi_taxonomy.taxonomyname",
+  "pk": 216856,
+  "fields": {
+    "taxon": 104514,
+    "name": "Melitaea",
+    "name_class": "scientific name"
+  }
+},
+{
+  "model": "ncbi_taxonomy.taxonomyname",
+  "pk": 232475,
+  "fields": {
+    "taxon": 113334,
+    "name": "Glanville fritillary",
+    "name_class": "genbank common name"
+  }
+},
+{
+  "model": "ncbi_taxonomy.taxonomyname",
+  "pk": 232476,
+  "fields": {
+    "taxon": 113334,
+    "name": "Melitaea cinxia (Linnaeus, 1758)",
+    "name_class": "authority"
+  }
+},
+{
+  "model": "ncbi_taxonomy.taxonomyname",
+  "pk": 232477,
+  "fields": {
+    "taxon": 113334,
+    "name": "Melitaea cinxia",
+    "name_class": "scientific name"
+  }
+},
+{
+  "model": "ncbi_taxonomy.taxonomyname",
+  "pk": 232478,
+  "fields": {
+    "taxon": 113334,
+    "name": "Papilio cinxia",
+    "name_class": "synonym"
+  }
+},
+{
+  "model": "ncbi_taxonomy.taxonomyname",
+  "pk": 239050,
+  "fields": {
+    "taxon": 117570,
+    "name": "Teleostomi",
+    "name_class": "scientific name"
+  }
+},
+{
+  "model": "ncbi_taxonomy.taxonomyname",
+  "pk": 239051,
+  "fields": {
+    "taxon": 117571,
+    "name": "bony vertebrates",
+    "name_class": "genbank common name"
+  }
+},
+{
+  "model": "ncbi_taxonomy.taxonomyname",
+  "pk": 239052,
+  "fields": {
+    "taxon": 117571,
+    "name": "Euteleostomi",
+    "name_class": "scientific name"
+  }
+},
+{
+  "model": "ncbi_taxonomy.taxonomyname",
+  "pk": 262825,
+  "fields": {
+    "taxon": 131221,
+    "name": "Charophyta/Embryophyta group",
+    "name_class": "synonym"
+  }
+},
+{
+  "model": "ncbi_taxonomy.taxonomyname",
+  "pk": 262826,
+  "fields": {
+    "taxon": 131221,
+    "name": "charophyte/embryophyte group",
+    "name_class": "equivalent name"
+  }
+},
+{
+  "model": "ncbi_taxonomy.taxonomyname",
+  "pk": 262827,
+  "fields": {
+    "taxon": 131221,
+    "name": "Streptophytina",
+    "name_class": "scientific name"
+  }
+},
+{
+  "model": "ncbi_taxonomy.taxonomyname",
+  "pk": 263344,
+  "fields": {
+    "taxon": 131567,
+    "name": "biota",
+    "name_class": "synonym"
+  }
+},
+{
+  "model": "ncbi_taxonomy.taxonomyname",
+  "pk": 263345,
+  "fields": {
+    "taxon": 131567,
+    "name": "cellular organisms",
+    "name_class": "scientific name"
+  }
+},
+{
+  "model": "ncbi_taxonomy.taxonomyname",
+  "pk": 288815,
+  "fields": {
+    "taxon": 147369,
+    "name": "Centothecoideae",
+    "name_class": "synonym"
+  }
+},
+{
+  "model": "ncbi_taxonomy.taxonomyname",
+  "pk": 288816,
+  "fields": {
+    "taxon": 147369,
+    "name": "Panicoideae Link, 1827",
+    "name_class": "authority"
+  }
+},
+{
+  "model": "ncbi_taxonomy.taxonomyname",
+  "pk": 288817,
+  "fields": {
+    "taxon": 147369,
+    "name": "Panicoideae",
+    "name_class": "scientific name"
+  }
+},
+{
+  "model": "ncbi_taxonomy.taxonomyname",
+  "pk": 288818,
+  "fields": {
+    "taxon": 147370,
+    "name": "PACCAD clade",
+    "name_class": "includes"
+  }
+},
+{
+  "model": "ncbi_taxonomy.taxonomyname",
+  "pk": 288819,
+  "fields": {
+    "taxon": 147370,
+    "name": "PACC clade",
+    "name_class": "includes"
+  }
+},
+{
+  "model": "ncbi_taxonomy.taxonomyname",
+  "pk": 288820,
+  "fields": {
+    "taxon": 147370,
+    "name": "PACMAD clade",
+    "name_class": "scientific name"
+  }
+},
+{
+  "model": "ncbi_taxonomy.taxonomyname",
+  "pk": 288892,
+  "fields": {
+    "taxon": 147428,
+    "name": "Paniceae R.Br., 1814",
+    "name_class": "authority"
+  }
+},
+{
+  "model": "ncbi_taxonomy.taxonomyname",
+  "pk": 288893,
+  "fields": {
+    "taxon": 147428,
+    "name": "Paniceae",
+    "name_class": "scientific name"
+  }
+},
+{
+  "model": "ncbi_taxonomy.taxonomyname",
+  "pk": 330650,
+  "fields": {
+    "taxon": 171578,
+    "name": "Melitaeinae",
+    "name_class": "synonym"
+  }
+},
+{
+  "model": "ncbi_taxonomy.taxonomyname",
+  "pk": 330651,
+  "fields": {
+    "taxon": 171578,
+    "name": "Melitaeini",
+    "name_class": "scientific name"
+  }
+},
+{
+  "model": "ncbi_taxonomy.taxonomyname",
+  "pk": 330653,
+  "fields": {
+    "taxon": 171580,
+    "name": "Melitaeina",
+    "name_class": "scientific name"
+  }
+},
+{
+  "model": "ncbi_taxonomy.taxonomyname",
+  "pk": 376503,
+  "fields": {
+    "taxon": 197562,
+    "name": "Pancrustacea",
+    "name_class": "scientific name"
+  }
+},
+{
+  "model": "ncbi_taxonomy.taxonomyname",
+  "pk": 376504,
+  "fields": {
+    "taxon": 197563,
+    "name": "Mandibulata",
+    "name_class": "scientific name"
+  }
+},
+{
+  "model": "ncbi_taxonomy.taxonomyname",
+  "pk": 376505,
+  "fields": {
+    "taxon": 197563,
+    "name": "mandibulates",
+    "name_class": "common name"
+  }
+},
+{
+  "model": "ncbi_taxonomy.taxonomyname",
+  "pk": 465916,
+  "fields": {
+    "taxon": 252671,
+    "name": "Clytia hemisphaerica",
+    "name_class": "scientific name"
+  }
+},
+{
+  "model": "ncbi_taxonomy.taxonomyname",
+  "pk": 465917,
+  "fields": {
+    "taxon": 252671,
+    "name": "Clytia languida (Agassiz, 1862)",
+    "name_class": "authority"
+  }
+},
+{
+  "model": "ncbi_taxonomy.taxonomyname",
+  "pk": 465918,
+  "fields": {
+    "taxon": 252671,
+    "name": "Clytia languida",
+    "name_class": "synonym"
+  }
+},
+{
+  "model": "ncbi_taxonomy.taxonomyname",
+  "pk": 465919,
+  "fields": {
+    "taxon": 252671,
+    "name": "Clytia viridicans",
+    "name_class": "synonym"
+  }
+},
+{
+  "model": "ncbi_taxonomy.taxonomyname",
+  "pk": 465920,
+  "fields": {
+    "taxon": 252671,
+    "name": "Medusa hemisphaerica Linnaeus, 1767",
+    "name_class": "authority"
+  }
+},
+{
+  "model": "ncbi_taxonomy.taxonomyname",
+  "pk": 465921,
+  "fields": {
+    "taxon": 252671,
+    "name": "Medusa hemisphaerica",
+    "name_class": "synonym"
+  }
+},
+{
+  "model": "ncbi_taxonomy.taxonomyname",
+  "pk": 559036,
+  "fields": {
+    "taxon": 314145,
+    "name": "Laurasiatheria",
+    "name_class": "scientific name"
+  }
+},
+{
+  "model": "ncbi_taxonomy.taxonomyname",
+  "pk": 559037,
+  "fields": {
+    "taxon": 314146,
+    "name": "Euarchontoglires",
+    "name_class": "scientific name"
+  }
+},
+{
+  "model": "ncbi_taxonomy.taxonomyname",
+  "pk": 559038,
+  "fields": {
+    "taxon": 314147,
+    "name": "Glires",
+    "name_class": "scientific name"
+  }
+},
+{
+  "model": "ncbi_taxonomy.taxonomyname",
+  "pk": 559039,
+  "fields": {
+    "taxon": 314147,
+    "name": "Rodents and rabbits",
+    "name_class": "genbank common name"
+  }
+},
+{
+  "model": "ncbi_taxonomy.taxonomyname",
+  "pk": 597482,
+  "fields": {
+    "taxon": 337687,
+    "name": "Muroidea",
+    "name_class": "scientific name"
+  }
+},
+{
+  "model": "ncbi_taxonomy.taxonomyname",
+  "pk": 660031,
+  "fields": {
+    "taxon": 379584,
+    "name": "Caniformia",
+    "name_class": "scientific name"
+  }
+},
+{
+  "model": "ncbi_taxonomy.taxonomyname",
+  "pk": 742857,
+  "fields": {
+    "taxon": 436486,
+    "name": "dinosaur",
+    "name_class": "common name"
+  }
+},
+{
+  "model": "ncbi_taxonomy.taxonomyname",
+  "pk": 742858,
+  "fields": {
+    "taxon": 436486,
+    "name": "Dinosauria",
+    "name_class": "scientific name"
+  }
+},
+{
+  "model": "ncbi_taxonomy.taxonomyname",
+  "pk": 742859,
+  "fields": {
+    "taxon": 436486,
+    "name": "dinosaurs",
+    "name_class": "common name"
+  }
+},
+{
+  "model": "ncbi_taxonomy.taxonomyname",
+  "pk": 742863,
+  "fields": {
+    "taxon": 436489,
+    "name": "Saurischia",
+    "name_class": "scientific name"
+  }
+},
+{
+  "model": "ncbi_taxonomy.taxonomyname",
+  "pk": 742864,
+  "fields": {
+    "taxon": 436491,
+    "name": "Theropoda",
+    "name_class": "scientific name"
+  }
+},
+{
+  "model": "ncbi_taxonomy.taxonomyname",
+  "pk": 742865,
+  "fields": {
+    "taxon": 436492,
+    "name": "Coelurosauria",
+    "name_class": "scientific name"
+  }
+},
+{
+  "model": "ncbi_taxonomy.taxonomyname",
+  "pk": 836693,
+  "fields": {
+    "taxon": 500008,
+    "name": "Calyptoblastea",
+    "name_class": "synonym"
+  }
+},
+{
+  "model": "ncbi_taxonomy.taxonomyname",
+  "pk": 836694,
+  "fields": {
+    "taxon": 500008,
+    "name": "Leptomedusae",
+    "name_class": "synonym"
+  }
+},
+{
+  "model": "ncbi_taxonomy.taxonomyname",
+  "pk": 836695,
+  "fields": {
+    "taxon": 500008,
+    "name": "Leptothecatae",
+    "name_class": "synonym"
+  }
+},
+{
+  "model": "ncbi_taxonomy.taxonomyname",
+  "pk": 836696,
+  "fields": {
+    "taxon": 500008,
+    "name": "Leptothecata",
+    "name_class": "scientific name"
+  }
+},
+{
+  "model": "ncbi_taxonomy.taxonomyname",
+  "pk": 836697,
+  "fields": {
+    "taxon": 500008,
+    "name": "Thecata",
+    "name_class": "synonym"
+  }
+},
+{
+  "model": "ncbi_taxonomy.taxonomyname",
+  "pk": 847133,
+  "fields": {
+    "taxon": 507980,
+    "name": "Tyto alba alba",
+    "name_class": "scientific name"
+  }
+},
+{
+  "model": "ncbi_taxonomy.taxonomyname",
+  "pk": 1341951,
+  "fields": {
+    "taxon": 1010633,
+    "name": "Digitaria exilis (Kippist) Stapf",
+    "name_class": "authority"
+  }
+},
+{
+  "model": "ncbi_taxonomy.taxonomyname",
+  "pk": 1341952,
+  "fields": {
+    "taxon": 1010633,
+    "name": "Digitaria exilis",
+    "name_class": "scientific name"
+  }
+},
+{
+  "model": "ncbi_taxonomy.taxonomyname",
+  "pk": 1580366,
+  "fields": {
+    "taxon": 1206794,
+    "name": "Ecdysozoa",
+    "name_class": "scientific name"
+  }
+},
+{
+  "model": "ncbi_taxonomy.taxonomyname",
+  "pk": 1689447,
+  "fields": {
+    "taxon": 1293360,
+    "name": "Anthephorinae Benth., 1881",
+    "name_class": "authority"
+  }
+},
+{
+  "model": "ncbi_taxonomy.taxonomyname",
+  "pk": 1689448,
+  "fields": {
+    "taxon": 1293360,
+    "name": "Anthephorinae",
+    "name_class": "scientific name"
+  }
+},
+{
+  "model": "ncbi_taxonomy.taxonomyname",
+  "pk": 1732930,
+  "fields": {
+    "taxon": 1329799,
+    "name": "Archelosauria Crawfort et al. 2014",
+    "name_class": "authority"
+  }
+},
+{
+  "model": "ncbi_taxonomy.taxonomyname",
+  "pk": 1732931,
+  "fields": {
+    "taxon": 1329799,
+    "name": "Archelosauria",
+    "name_class": "scientific name"
+  }
+},
+{
+  "model": "ncbi_taxonomy.taxonomyname",
+  "pk": 1732932,
+  "fields": {
+    "taxon": 1329799,
+    "name": "Archosauria-Testudines",
+    "name_class": "synonym"
+  }
+},
+{
+  "model": "ncbi_taxonomy.taxonomyname",
+  "pk": 1732933,
+  "fields": {
+    "taxon": 1329799,
+    "name": "Testudines + Archosauria group",
+    "name_class": "synonym"
+  }
+},
+{
+  "model": "ncbi_taxonomy.taxonomyname",
+  "pk": 1744057,
+  "fields": {
+    "taxon": 1338369,
+    "name": "Dipnotetrapodomorpha",
+    "name_class": "scientific name"
+  }
+},
+{
+  "model": "ncbi_taxonomy.taxonomyname",
+  "pk": 1863414,
+  "fields": {
+    "taxon": 1437010,
+    "name": "Boreoeutheria",
+    "name_class": "scientific name"
+  }
+},
+{
+  "model": "ncbi_taxonomy.taxonomyname",
+  "pk": 1863415,
+  "fields": {
+    "taxon": 1437010,
+    "name": "Boreotheria",
+    "name_class": "synonym"
+  }
+},
+{
+  "model": "ncbi_taxonomy.taxonomyname",
+  "pk": 1863639,
+  "fields": {
+    "taxon": 1437183,
+    "name": "Mesangiospermae M.J.Donoghue, J.A.Doyle & P.D.Cantino, 2007",
+    "name_class": "authority"
+  }
+},
+{
+  "model": "ncbi_taxonomy.taxonomyname",
+  "pk": 1863640,
+  "fields": {
+    "taxon": 1437183,
+    "name": "Mesangiospermae",
+    "name_class": "scientific name"
+  }
+},
+{
+  "model": "ncbi_taxonomy.taxonomyname",
+  "pk": 1863667,
+  "fields": {
+    "taxon": 1437197,
+    "name": "Petrosaviidae",
+    "name_class": "scientific name"
+  }
+},
+{
+  "model": "ncbi_taxonomy.taxonomyname",
+  "pk": 1863668,
+  "fields": {
+    "taxon": 1437197,
+    "name": "Petrosaviidae S.W.Graham & W.S.Judd, 2007",
+    "name_class": "authority"
+  }
+},
+{
+  "model": "ncbi_taxonomy.taxonomyname",
+  "pk": 2128950,
+  "fields": {
+    "taxon": 1648036,
+    "name": "Panicodae L.Liou, 1980",
+    "name_class": "authority"
+  }
+},
+{
+  "model": "ncbi_taxonomy.taxonomyname",
+  "pk": 2128951,
+  "fields": {
+    "taxon": 1648036,
+    "name": "Panicodae",
+    "name_class": "scientific name"
+  }
+},
+{
+  "model": "ncbi_taxonomy.taxonomyname",
+  "pk": 2499819,
+  "fields": {
+    "taxon": 1963758,
+    "name": "mice and others",
+    "name_class": "genbank common name"
+  }
+},
+{
+  "model": "ncbi_taxonomy.taxonomyname",
+  "pk": 2499820,
+  "fields": {
+    "taxon": 1963758,
+    "name": "Myomorpha",
+    "name_class": "scientific name"
+  }
+},
+{
+  "model": "ncbi_taxonomy.taxonomyname",
+  "pk": 2499821,
+  "fields": {
+    "taxon": 1963758,
+    "name": "Sciurognathi",
+    "name_class": "in-part"
+  }
+},
+{
+  "model": "ncbi_taxonomy.taxonomyname",
+  "pk": 3234145,
+  "fields": {
+    "taxon": 2653789,
+    "name": "Whippomorpha",
+    "name_class": "scientific name"
+  }
+},
+{
+  "model": "ncbi_taxonomy.taxonomyname",
+  "pk": 3342289,
+  "fields": {
+    "taxon": 2750048,
+    "name": "Clytiidae",
+    "name_class": "scientific name"
+  }
+},
+{
+  "model": "ncbi_taxonomy.taxonomyname",
+  "pk": 3342290,
+  "fields": {
+    "taxon": 2750049,
+    "name": "Obeliida",
+    "name_class": "scientific name"
+  }
+},
+{
+  "model": "ncbi_taxonomy.taxonomyname",
+  "pk": 3416071,
+  "fields": {
+    "taxon": 38820,
+    "name": "4478",
+    "name_class": "merged_taxon_id"
+  }
+},
+{
+  "model": "ncbi_taxonomy.taxonomyname",
+  "pk": 3416090,
+  "fields": {
+    "taxon": 38820,
+    "name": "4727",
+    "name_class": "merged_taxon_id"
+  }
+},
+{
+  "model": "ncbi_taxonomy.taxonomyname",
+  "pk": 3416229,
+  "fields": {
+    "taxon": 500008,
+    "name": "6097",
+    "name_class": "merged_taxon_id"
+  }
+},
+{
+  "model": "ncbi_taxonomy.taxonomyname",
+  "pk": 3417760,
+  "fields": {
+    "taxon": 10116,
+    "name": "36465",
+    "name_class": "merged_taxon_id"
+  }
+},
+{
+  "model": "ncbi_taxonomy.taxonomyname",
+  "pk": 3417855,
+  "fields": {
+    "taxon": 41197,
+    "name": "37583",
+    "name_class": "merged_taxon_id"
+  }
+},
+{
+  "model": "ncbi_taxonomy.taxonomyname",
+  "pk": 3418027,
+  "fields": {
+    "taxon": 9821,
+    "name": "39423",
+    "name_class": "merged_taxon_id"
+  }
+},
+{
+  "model": "ncbi_taxonomy.taxonomyname",
+  "pk": 3418075,
+  "fields": {
+    "taxon": 40040,
+    "name": "40072",
+    "name_class": "merged_taxon_id"
+  }
+},
+{
+  "model": "ncbi_taxonomy.taxonomyname",
+  "pk": 3418076,
+  "fields": {
+    "taxon": 40040,
+    "name": "40073",
+    "name_class": "merged_taxon_id"
+  }
+},
+{
+  "model": "ncbi_taxonomy.taxonomyname",
+  "pk": 3418135,
+  "fields": {
+    "taxon": 117571,
+    "name": "40673",
+    "name_class": "merged_taxon_id"
+  }
+},
+{
+  "model": "ncbi_taxonomy.taxonomyname",
+  "pk": 3418240,
+  "fields": {
+    "taxon": 40040,
+    "name": "42268",
+    "name_class": "merged_taxon_id"
+  }
+},
+{
+  "model": "ncbi_taxonomy.taxonomyname",
+  "pk": 3418242,
+  "fields": {
+    "taxon": 40040,
+    "name": "42271",
+    "name_class": "merged_taxon_id"
+  }
+},
+{
+  "model": "ncbi_taxonomy.taxonomyname",
+  "pk": 3418243,
+  "fields": {
+    "taxon": 40040,
+    "name": "42276",
+    "name_class": "merged_taxon_id"
+  }
+},
+{
+  "model": "ncbi_taxonomy.taxonomyname",
+  "pk": 3418251,
+  "fields": {
+    "taxon": 40040,
+    "name": "42355",
+    "name_class": "merged_taxon_id"
+  }
+},
+{
+  "model": "ncbi_taxonomy.taxonomyname",
+  "pk": 3418252,
+  "fields": {
+    "taxon": 40040,
+    "name": "42359",
+    "name_class": "merged_taxon_id"
+  }
+},
+{
+  "model": "ncbi_taxonomy.taxonomyname",
+  "pk": 3419296,
+  "fields": {
+    "taxon": 9925,
+    "name": "57076",
+    "name_class": "merged_taxon_id"
+  }
+},
+{
+  "model": "ncbi_taxonomy.taxonomyname",
+  "pk": 3422539,
+  "fields": {
+    "taxon": 39107,
+    "name": "109679",
+    "name_class": "merged_taxon_id"
+  }
+},
+{
+  "model": "ncbi_taxonomy.taxonomyname",
+  "pk": 3427874,
+  "fields": {
+    "taxon": 147369,
+    "name": "219388",
+    "name_class": "merged_taxon_id"
+  }
+},
+{
+  "model": "ncbi_taxonomy.taxonomyname",
+  "pk": 3429497,
+  "fields": {
+    "taxon": 252671,
+    "name": "252670",
+    "name_class": "merged_taxon_id"
+  }
+},
+{
+  "model": "ncbi_taxonomy.taxonomyname",
+  "pk": 3445291,
+  "fields": {
+    "taxon": 252671,
+    "name": "645348",
+    "name_class": "merged_taxon_id"
+  }
+},
+{
+  "model": "ncbi_taxonomy.taxonomyname",
+  "pk": 3465782,
+  "fields": {
+    "taxon": 4479,
+    "name": "1661618",
+    "name_class": "merged_taxon_id"
+  }
+},
+{
+  "model": "ncbi_taxonomy.taxonomyname",
+  "pk": 3478714,
+  "fields": {
+    "taxon": 1,
+    "name": "2021-05-25 16:45:57",
+    "name_class": "import date"
+  }
+}
+]
