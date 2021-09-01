@@ -20,7 +20,7 @@ class AssemblySequence(models.Model):
     sequence_location = models.CharField(max_length=10, default='SO:0000738', null=True)
     length = models.IntegerField(null=False)
     chromosomal = models.BooleanField(default=False)
-    checksum = models.CharField(max_length=32, blank=True, null=True)
+    sequence_checksum = models.CharField(max_length=32, blank=True, null=True)
     ga4gh_identifier = models.CharField(max_length=32, blank=True, null=True)
 
     class Meta:
