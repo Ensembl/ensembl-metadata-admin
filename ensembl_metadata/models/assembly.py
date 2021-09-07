@@ -15,8 +15,8 @@ class Assembly(models.Model):
 class AssemblySequence(models.Model):
     assembly_sequence_id = models.AutoField(primary_key=True)
     assembly = models.ForeignKey(Assembly, on_delete=models.CASCADE, related_name='sequences')
-    name = models.CharField(max_length=128)
-    accession = models.CharField(max_length=32, blank=True, null=True)
+    accession = models.CharField(max_length=32)
+    name = models.CharField(max_length=128, blank=True, null=True)
     sequence_location = models.CharField(max_length=10, default='SO:0000738', null=True)
     length = models.IntegerField(null=False)
     chromosomal = models.BooleanField(default=False)
@@ -25,4 +25,4 @@ class AssemblySequence(models.Model):
 
     class Meta:
         db_table = 'assembly_sequence'
-        unique_together = (('assembly', 'name'),)
+        unique_together = (('assembly', 'accession'),)
