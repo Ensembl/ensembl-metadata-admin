@@ -1,0 +1,371 @@
+[
+{
+  "model": "ensembl_metadata.release",
+  "pk": 1,
+  "fields": {
+    "version": 1,
+    "release_date": "2020-06-04",
+    "label": null,
+    "is_current": false,
+    "site": 7
+  }
+},
+{
+  "model": "ensembl_metadata.release",
+  "pk": 2,
+  "fields": {
+    "version": 2,
+    "release_date": "2020-06-24",
+    "label": null,
+    "is_current": false,
+    "site": 7
+  }
+},
+{
+  "model": "ensembl_metadata.release",
+  "pk": 3,
+  "fields": {
+    "version": 3,
+    "release_date": "2020-07-10",
+    "label": null,
+    "is_current": false,
+    "site": 7
+  }
+},
+{
+  "model": "ensembl_metadata.release",
+  "pk": 4,
+  "fields": {
+    "version": 4,
+    "release_date": "2020-07-22",
+    "label": null,
+    "is_current": false,
+    "site": 7
+  }
+},
+{
+  "model": "ensembl_metadata.release",
+  "pk": 5,
+  "fields": {
+    "version": 5,
+    "release_date": "2020-08-05",
+    "label": null,
+    "is_current": false,
+    "site": 7
+  }
+},
+{
+  "model": "ensembl_metadata.release",
+  "pk": 6,
+  "fields": {
+    "version": 6,
+    "release_date": "2020-09-02",
+    "label": null,
+    "is_current": false,
+    "site": 7
+  }
+},
+{
+  "model": "ensembl_metadata.release",
+  "pk": 7,
+  "fields": {
+    "version": 7,
+    "release_date": "2020-09-17",
+    "label": null,
+    "is_current": false,
+    "site": 7
+  }
+},
+{
+  "model": "ensembl_metadata.release",
+  "pk": 8,
+  "fields": {
+    "version": 8,
+    "release_date": "2020-09-23",
+    "label": null,
+    "is_current": false,
+    "site": 7
+  }
+},
+{
+  "model": "ensembl_metadata.release",
+  "pk": 9,
+  "fields": {
+    "version": 9,
+    "release_date": "2020-10-14",
+    "label": null,
+    "is_current": false,
+    "site": 7
+  }
+},
+{
+  "model": "ensembl_metadata.release",
+  "pk": 10,
+  "fields": {
+    "version": 10,
+    "release_date": "2020-11-09",
+    "label": null,
+    "is_current": false,
+    "site": 7
+  }
+},
+{
+  "model": "ensembl_metadata.release",
+  "pk": 11,
+  "fields": {
+    "version": 11,
+    "release_date": "2020-11-25",
+    "label": null,
+    "is_current": false,
+    "site": 7
+  }
+},
+{
+  "model": "ensembl_metadata.release",
+  "pk": 12,
+  "fields": {
+    "version": 12,
+    "release_date": "2020-12-09",
+    "label": null,
+    "is_current": false,
+    "site": 7
+  }
+},
+{
+  "model": "ensembl_metadata.release",
+  "pk": 13,
+  "fields": {
+    "version": 13,
+    "release_date": "2021-01-06",
+    "label": null,
+    "is_current": false,
+    "site": 7
+  }
+},
+{
+  "model": "ensembl_metadata.release",
+  "pk": 14,
+  "fields": {
+    "version": 14,
+    "release_date": "2021-01-20",
+    "label": null,
+    "is_current": false,
+    "site": 7
+  }
+},
+{
+  "model": "ensembl_metadata.release",
+  "pk": 15,
+  "fields": {
+    "version": 15,
+    "release_date": "2021-02-03",
+    "label": null,
+    "is_current": false,
+    "site": 7
+  }
+},
+{
+  "model": "ensembl_metadata.release",
+  "pk": 16,
+  "fields": {
+    "version": 16,
+    "release_date": "2021-02-17",
+    "label": null,
+    "is_current": false,
+    "site": 7
+  }
+},
+{
+  "model": "ensembl_metadata.release",
+  "pk": 17,
+  "fields": {
+    "version": 17,
+    "release_date": "2021-03-10",
+    "label": null,
+    "is_current": false,
+    "site": 7
+  }
+},
+{
+  "model": "ensembl_metadata.release",
+  "pk": 18,
+  "fields": {
+    "version": 18,
+    "release_date": "2021-03-24",
+    "label": null,
+    "is_current": false,
+    "site": 7
+  }
+},
+{
+  "model": "ensembl_metadata.release",
+  "pk": 19,
+  "fields": {
+    "version": 19,
+    "release_date": "2021-04-07",
+    "label": null,
+    "is_current": false,
+    "site": 7
+  }
+},
+{
+  "model": "ensembl_metadata.release",
+  "pk": 20,
+  "fields": {
+    "version": 20,
+    "release_date": "2021-04-21",
+    "label": null,
+    "is_current": false,
+    "site": 7
+  }
+},
+{
+  "model": "ensembl_metadata.release",
+  "pk": 21,
+  "fields": {
+    "version": 21,
+    "release_date": "2021-05-05",
+    "label": null,
+    "is_current": false,
+    "site": 7
+  }
+},
+{
+  "model": "ensembl_metadata.release",
+  "pk": 22,
+  "fields": {
+    "version": 22,
+    "release_date": "2021-05-19",
+    "label": null,
+    "is_current": false,
+    "site": 7
+  }
+},
+{
+  "model": "ensembl_metadata.release",
+  "pk": 23,
+  "fields": {
+    "version": 23,
+    "release_date": "2021-06-17",
+    "label": null,
+    "is_current": false,
+    "site": 7
+  }
+},
+{
+  "model": "ensembl_metadata.release",
+  "pk": 24,
+  "fields": {
+    "version": 24,
+    "release_date": "2021-06-30",
+    "label": null,
+    "is_current": true,
+    "site": 7
+  }
+},
+{
+  "model": "ensembl_metadata.release",
+  "pk": 25,
+  "fields": {
+    "version": 25,
+    "release_date": "2021-08-04",
+    "label": null,
+    "is_current": false,
+    "site": 7
+  }
+},
+{
+  "model": "ensembl_metadata.release",
+  "pk": 32,
+  "fields": {
+    "version": 103,
+    "release_date": "2020-12-10",
+    "label": null,
+    "is_current": false,
+    "site": 6
+  }
+},
+{
+  "model": "ensembl_metadata.release",
+  "pk": 33,
+  "fields": {
+    "version": 104,
+    "release_date": "2021-03-25",
+    "label": null,
+    "is_current": true,
+    "site": 6
+  }
+},
+{
+  "model": "ensembl_metadata.site",
+  "pk": 1,
+  "fields": {
+    "name": "vertebrates",
+    "label": "Ensembl",
+    "uri": "https://ensembl.org/"
+  }
+},
+{
+  "model": "ensembl_metadata.site",
+  "pk": 2,
+  "fields": {
+    "name": "bacteria",
+    "label": "Ensembl Bacteria",
+    "uri": "https://bacteria.ensembl.org/"
+  }
+},
+{
+  "model": "ensembl_metadata.site",
+  "pk": 3,
+  "fields": {
+    "name": "fungi",
+    "label": "Ensembl Fungi",
+    "uri": "https://fungi.ensembl.org/"
+  }
+},
+{
+  "model": "ensembl_metadata.site",
+  "pk": 4,
+  "fields": {
+    "name": "metazoa",
+    "label": "Ensembl Metazoa",
+    "uri": "https://metazoa.ensembl.org/"
+  }
+},
+{
+  "model": "ensembl_metadata.site",
+  "pk": 5,
+  "fields": {
+    "name": "protists",
+    "label": "Ensembl Protists",
+    "uri": "https://protists.ensembl.org/"
+  }
+},
+{
+  "model": "ensembl_metadata.site",
+  "pk": 6,
+  "fields": {
+    "name": "plants",
+    "label": "Ensembl Plants",
+    "uri": "https://plants.ensembl.org/"
+  }
+},
+{
+  "model": "ensembl_metadata.site",
+  "pk": 7,
+  "fields": {
+    "name": "rapid",
+    "label": "Rapid Release",
+    "uri": "https://rapid.ensembl.org/"
+  }
+},
+{
+  "model": "ensembl_metadata.site",
+  "pk": 8,
+  "fields": {
+    "name": "covid-19",
+    "label": "COVID-19",
+    "uri": "https://covid-19.ensembl.org/"
+  }
+}
+]
