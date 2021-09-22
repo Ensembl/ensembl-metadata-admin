@@ -157,6 +157,7 @@ class GenomeDataset(models.Model):
                                 related_name='genomes')
     release = models.ForeignKey(Release, on_delete=models.CASCADE,
                                 related_name='genome_datasets')
+    is_current = models.BooleanField(default=False)
 
     class Meta:
         db_table = 'genome_dataset'
@@ -168,6 +169,7 @@ class GenomeRelease(models.Model):
                                related_name='releases')
     release = models.ForeignKey(Release, on_delete=models.CASCADE,
                                 related_name='releases')
+    is_current = models.BooleanField(default=False)
 
     class Meta:
         db_table = 'genome_release'
