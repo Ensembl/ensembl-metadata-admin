@@ -25259,6 +25259,136 @@
   }
 },
 {
+  "model": "ensembl_metadata.genomedataset",
+  "pk": 354,
+  "fields": {
+    "genome": 3800,
+    "dataset": 32347,
+    "release": 32,
+    "is_current": true
+  }
+},
+{
+  "model": "ensembl_metadata.genomedataset",
+  "pk": 355,
+  "fields": {
+    "genome": 3800,
+    "dataset": 33349,
+    "release": 32,
+    "is_current": true
+  }
+},
+{
+  "model": "ensembl_metadata.genomedataset",
+  "pk": 356,
+  "fields": {
+    "genome": 3800,
+    "dataset": 33719,
+    "release": 32,
+    "is_current": true
+  }
+},
+{
+  "model": "ensembl_metadata.genomedataset",
+  "pk": 357,
+  "fields": {
+    "genome": 3800,
+    "dataset": 34381,
+    "release": 32,
+    "is_current": true
+  }
+},
+{
+  "model": "ensembl_metadata.genomedataset",
+  "pk": 358,
+  "fields": {
+    "genome": 3800,
+    "dataset": 34847,
+    "release": 32,
+    "is_current": true
+  }
+},
+{
+  "model": "ensembl_metadata.genomedataset",
+  "pk": 359,
+  "fields": {
+    "genome": 3800,
+    "dataset": 34848,
+    "release": 32,
+    "is_current": true
+  }
+},
+{
+  "model": "ensembl_metadata.genomedataset",
+  "pk": 360,
+  "fields": {
+    "genome": 3800,
+    "dataset": 35483,
+    "release": 32,
+    "is_current": true
+  }
+},
+{
+  "model": "ensembl_metadata.genomedataset",
+  "pk": 361,
+  "fields": {
+    "genome": 3800,
+    "dataset": 35484,
+    "release": 32,
+    "is_current": true
+  }
+},
+{
+  "model": "ensembl_metadata.genomedataset",
+  "pk": 362,
+  "fields": {
+    "genome": 3800,
+    "dataset": 35485,
+    "release": 32,
+    "is_current": true
+  }
+},
+{
+  "model": "ensembl_metadata.genomedataset",
+  "pk": 363,
+  "fields": {
+    "genome": 3800,
+    "dataset": 35486,
+    "release": 32,
+    "is_current": true
+  }
+},
+{
+  "model": "ensembl_metadata.genomedataset",
+  "pk": 364,
+  "fields": {
+    "genome": 3800,
+    "dataset": 35487,
+    "release": 32,
+    "is_current": true
+  }
+},
+{
+  "model": "ensembl_metadata.genomedataset",
+  "pk": 365,
+  "fields": {
+    "genome": 3800,
+    "dataset": 35488,
+    "release": 32,
+    "is_current": true
+  }
+},
+{
+  "model": "ensembl_metadata.genomedataset",
+  "pk": 366,
+  "fields": {
+    "genome": 3800,
+    "dataset": 35489,
+    "release": 32,
+    "is_current": true
+  }
+},
+{
   "model": "ensembl_metadata.genomerelease",
   "pk": 1,
   "fields": {
@@ -25426,6 +25556,15 @@
   "fields": {
     "genome": 3833,
     "release": 24,
+    "is_current": true
+  }
+},
+{
+  "model": "ensembl_metadata.genomerelease",
+  "pk": 20,
+  "fields": {
+    "genome": 3800,
+    "release": 32,
     "is_current": true
   }
 }
