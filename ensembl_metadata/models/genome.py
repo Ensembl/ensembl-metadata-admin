@@ -118,7 +118,7 @@ class Dataset(models.Model):
     label = models.CharField(max_length=128)
     version = models.CharField(max_length=128, blank=True, null=True)
     created = models.DateTimeField(auto_now_add=True)
-    genome = models.ForeignKey(Genome, on_delete=models.CASCADE, related_name='genomes')
+    genome = models.ForeignKey(Genome, on_delete=models.CASCADE, related_name='genomes', null=True)
 
     def attributes(self):
         return DatasetAttribute.objects.filter(dataset_id=self.dataset_id)
