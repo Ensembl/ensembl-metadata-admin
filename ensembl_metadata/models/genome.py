@@ -14,6 +14,7 @@ class Organism(models.Model):
     display_name = models.CharField(max_length=128)
     scientific_name = models.CharField(max_length=128, blank=True, null=True)
     strain = models.CharField(max_length=128, blank=True, null=True)
+    scientific_parlance_name = models.CharField(max_length=128, blank=True, null=True)
 
     def taxon(self):
         return TaxonomyNode.objects.get(taxon_id=self.taxonomy_id)
@@ -117,6 +118,7 @@ class Dataset(models.Model):
     label = models.CharField(max_length=128)
     version = models.CharField(max_length=128, blank=True, null=True)
     created = models.DateTimeField(auto_now_add=True)
+    genome = models.ForeignKey(Genome, on_delete=models.CASCADE, related_name='genomes', null=True)
 
     def attributes(self):
         return DatasetAttribute.objects.filter(dataset_id=self.dataset_id)
