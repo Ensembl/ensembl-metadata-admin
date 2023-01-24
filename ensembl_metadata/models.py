@@ -6,6 +6,7 @@
 #   * Remove `managed = False` lines if you wish to allow Django to create, modify, and delete the table
 # Feel free to rename the models, but don't rename db_table values or field names.
 from django.db import models
+from django.contrib import admin
 
 
 class Assembly(models.Model):
@@ -229,6 +230,7 @@ class EnsemblRelease(models.Model):
     is_current = models.BooleanField()
     site = models.ForeignKey('EnsemblSite', models.DO_NOTHING, blank=True, null=True)
     release_type = models.CharField(max_length=16)
+    genomes = models.ManyToManyField('Genome',through='GenomeRelease')
 
     class Meta:
         db_table = 'ensembl_release'
@@ -276,6 +278,7 @@ class GenomeRelease(models.Model):
     release = models.ForeignKey(EnsemblRelease, models.DO_NOTHING)
     is_current = models.IntegerField()
 
+
     class Meta:
         db_table = 'genome_release'
     def __str__(self):
@@ -291,11 +294,27 @@ class Organism(models.Model):
     url_name = models.CharField(max_length=128)
     ensembl_name = models.CharField(unique=True, max_length=128)
     scientific_parlance_name = models.CharField(max_length=255, blank=True, null=True)
+    groups = models.ManyToManyField('OrganismGroup',through='OrganismGroupMember')
+    assemblies = models.ManyToManyField('Assembly',through='Genome')
 
+
+    def assembly_list(self):
+        return ",".join([str(p) for p in self.assemblies.all()])
+
+    # genome_releases = models.ManyToManyField('GenomeRelease', through='Genome')
+    # def release_list(self):
+    #     output = '';
+    #     for genome in self.genome_releases.all():
+    #         release = 'link out to the release here'
+    #         output += release
+    #
+    #     return output
+    #     return ",".join([str(p) for p in self.genome_releases.all()])
     class Meta:
         db_table = 'organism'
         ordering = ['ensembl_name', 'scientific_name']
-
+    def __str__(self):
+        return self.ensembl_name
 
 class OrganismGroup(models.Model):
     organism_group_id = models.AutoField(primary_key=True)
@@ -307,11 +326,11 @@ class OrganismGroup(models.Model):
         db_table = 'organism_group'
         unique_together = (('type', 'name'),)
     def __str__(self):
-        return self.type
+        return "Type:"+self.type+" Name:"+self.name
 
 class OrganismGroupMember(models.Model):
     organism_group_member_id = models.AutoField(primary_key=True)
-    is_reference = models.IntegerField()
+    is_reference = models.BooleanField()
     organism = models.ForeignKey(Organism, models.DO_NOTHING)
     organism_group = models.ForeignKey(OrganismGroup, models.DO_NOTHING)
 

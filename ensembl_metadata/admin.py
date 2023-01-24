@@ -11,6 +11,16 @@ class AssemblySequenceInline(admin.StackedInline):
     def has_change_permission(self, request, obj=None):
         return False
 
+class AssemblyInLine(admin.StackedInline):
+    model = Assembly
+    fields = ['accession','name','ucsc_name','accession_body','level','assembly_default']
+    can_delete = False
+    can_update = False
+    def has_add_permission(self, request, obj):
+        return False
+    def has_change_permission(self, request, obj=None):
+        return False
+
 class DatasetAttributeInline(admin.StackedInline):
     model = DatasetAttribute
     fields = ['type','value','attribute']
@@ -23,46 +33,33 @@ class DatasetAttributeInline(admin.StackedInline):
         return False
 
 
-class OrganismGroupInLine(nested_admin.NestedTabularInline):
+class OrganismGroupInLine(admin.TabularInline):
     model = OrganismGroup
     sortable_field_name = "name"
     fields = ['type', 'name', 'code']
-
-  #  inlines = [OrganismGroupMemberInLine]
-    can_delete = False
-    can_update = False
     def has_add_permission(self, request, obj):
         return False
     def has_change_permission(self, request, obj=None):
         return False
 
-class OrganismGroupMemberInLine(nested_admin.NestedTabularInline):
+class OrganismGroupMemberInLine(admin.TabularInline):
     model = OrganismGroupMember
- #   sortable_field_name = "organism_group_member_id"
-    can_delete = False
-    can_update = False
-    inlines = (OrganismGroupInLine,)
+
     def has_add_permission(self, request, obj):
         return False
     def has_change_permission(self, request, obj=None):
         return False
 
 
-class GenomeInLine(nested_admin.NestedTabularInline):
+class GenomeInLine(admin.TabularInline):
     model = Genome
-    fields = ['genome_id']
     can_delete = False
     can_update = False
-    def has_add_permission(self, request, obj):
-        return False
-    def has_change_permission(self, request, obj=None):
-        return False
+    # def has_add_permission(self, request, obj):
+    #     return False
+    # def has_change_permission(self, request, obj=None):
+    #     return False
 
-class AssemblyInLine(nested_admin.NestedTabularInline):
-    model = Assembly
-    fields = ['accesion_id']
-    can_delete = False
-    can_update = False
 
 class GenomeReleaseInLine(nested_admin.NestedTabularInline):
     model = GenomeRelease
@@ -90,11 +87,10 @@ class OrganismInLine(admin.StackedInline):
 @admin.register(Assembly)
 class AssemblyAdmin(admin.ModelAdmin):
     read_only_fields = ('created',)
-    list_display = ('accession','name','assembly_default')
+    fields = ['accession','name','ucsc_name','accession_body','level','assembly_default']
     list_filter = ('accession',)
     search_fields = ('accession',)
     order = ('accession',)
-    fields = ('accession','name','assembly_default')
     inlines = (AssemblySequenceInline,)
     def get_readonly_fields(self, request, obj=None):
         read_only_fields = super().get_readonly_fields(request, obj)
@@ -115,20 +111,23 @@ class ReleaseAdmin(admin.ModelAdmin):
             read_only_fields += ('version',)
         return read_only_fields
 
-class OrganismAdmin(nested_admin.NestedModelAdmin):
+class OrganismAdmin(admin.ModelAdmin):
     read_only_fields = ('version', 'release_date', 'site','release_type','is_current')
     search_fields = ('ensembl_name','species_taxonomy_id',)
-    list_display = ('display_name', 'strain', 'scientific_name','display_name','ensembl_name','scientific_parlance_name','taxonomy_id','species_taxonomy_id','url_name')
+    list_display = ('display_name', 'strain', 'scientific_name','display_name','ensembl_name','scientific_parlance_name','taxonomy_id','species_taxonomy_id','url_name','assembly_list')
     order = ('ensembl_name')
- #   inlines = (OrganismGroupMemberInLine,)
+    inlines = (OrganismGroupMemberInLine,GenomeInLine)
     def get_readonly_fields(self, request, obj=None):
         read_only_fields = super().get_readonly_fields(request, obj)
         if request.user.is_superuser:
             read_only_fields += ('scientific_parlance_name',)
         return read_only_fields
 
-
 admin.site.register(Organism, OrganismAdmin)
+
+class OrganismGroupAdmin(admin.ModelAdmin):
+    inlines = (OrganismGroupMemberInLine,)
+admin.site.register(OrganismGroup, OrganismGroupAdmin)
 
 
 class DatasetAdmin(admin.ModelAdmin):
