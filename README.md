@@ -13,15 +13,14 @@ Django ORM and admin layer for the Ensembl Metadata database.
 
 Clone the repository:
 ```
-git clone -b master https://github.com/Ensembl/ensembl-metadata-admin.git
+git clone -b main https://github.com/Ensembl/ensembl-metadata-admin.git
 ```
 
 Install the environment (with pyenv)
 
 ```
 cd ensembl-metadata-admin
-pyenv virtualenv 3.8 ensembl_metadata_admin
-pyenv local ensembl_metadata_admin
+pyenv local 3.8
 pip install --upgrade pip
 pip install -r requirements.txt
 ```
@@ -35,7 +34,7 @@ cp secrets_template.py secrets.py
 
 Create an environment variable for the settings
 ```
-export DJANGO_SETTINGS_MODULE=metadata_registry.settings.standard
+export DJANGO_SETTINGS_MODULE=metadata_admin.settings
 ```
 
 Run the migrate step, for a pre-existing database
@@ -45,10 +44,10 @@ Run the migrate step, for a pre-existing database
 
 Start the development server
 ```
- ./manage.py runserver 0:9000
+ ./manage.py runserver
 ```
 
 Check in the browser
 ```
-http://localhost:9000/
+http://localhost
 ```

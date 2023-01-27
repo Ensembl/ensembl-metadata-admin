@@ -1,10 +1,15 @@
-# This is an auto-generated Django model module.
-# You'll have to do the following manually to clean this up:
-#   * Rearrange models' order
-#   * Make sure each model has one field with primary_key=True
-#   * Make sure each ForeignKey and OneToOneField has `on_delete` set to the desired behavior
-#   * Remove `managed = False` lines if you wish to allow Django to create, modify, and delete the table
-# Feel free to rename the models, but don't rename db_table values or field names.
+#   See the NOTICE file distributed with this work for additional information
+#   regarding copyright ownership.
+#   Licensed under the Apache License, Version 2.0 (the "License");
+#   you may not use this file except in compliance with the License.
+#   You may obtain a copy of the License at
+#       http://www.apache.org/licenses/LICENSE-2.0
+#   Unless required by applicable law or agreed to in writing, software
+#   distributed under the License is distributed on an "AS IS" BASIS,
+#   WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+#   See the License for the specific language governing permissions and
+#   limitations under the License.from django.apps import AppConfig
+
 from django.db import models
 
 
@@ -57,75 +62,6 @@ class Attribute(models.Model):
     def __str__(self):
         return self.name
 
-class AuthGroup(models.Model):
-    name = models.CharField(unique=True, max_length=150)
-
-    class Meta:
-        managed = False
-        db_table = 'auth_group'
-
-
-class AuthGroupPermissions(models.Model):
-    id = models.BigAutoField(primary_key=True)
-    group = models.ForeignKey(AuthGroup, models.DO_NOTHING)
-    permission = models.ForeignKey('AuthPermission', models.DO_NOTHING)
-
-    class Meta:
-        managed = False
-        db_table = 'auth_group_permissions'
-        unique_together = (('group', 'permission'),)
-
-
-class AuthPermission(models.Model):
-    name = models.CharField(max_length=255)
-    content_type = models.ForeignKey('DjangoContentType', models.DO_NOTHING)
-    codename = models.CharField(max_length=100)
-
-    class Meta:
-        managed = False
-        db_table = 'auth_permission'
-        unique_together = (('content_type', 'codename'),)
-
-
-class AuthUser(models.Model):
-    password = models.CharField(max_length=128)
-    last_login = models.DateTimeField(blank=True, null=True)
-    is_superuser = models.IntegerField()
-    username = models.CharField(unique=True, max_length=150)
-    first_name = models.CharField(max_length=150)
-    last_name = models.CharField(max_length=150)
-    email = models.CharField(max_length=254)
-    is_staff = models.IntegerField()
-    is_active = models.IntegerField()
-    date_joined = models.DateTimeField()
-
-    class Meta:
-        managed = False
-        db_table = 'auth_user'
-
-
-class AuthUserGroups(models.Model):
-    id = models.BigAutoField(primary_key=True)
-    user = models.ForeignKey(AuthUser, models.DO_NOTHING)
-    group = models.ForeignKey(AuthGroup, models.DO_NOTHING)
-
-    class Meta:
-        managed = False
-        db_table = 'auth_user_groups'
-        unique_together = (('user', 'group'),)
-
-
-class AuthUserUserPermissions(models.Model):
-    id = models.BigAutoField(primary_key=True)
-    user = models.ForeignKey(AuthUser, models.DO_NOTHING)
-    permission = models.ForeignKey(AuthPermission, models.DO_NOTHING)
-
-    class Meta:
-        managed = False
-        db_table = 'auth_user_user_permissions'
-        unique_together = (('user', 'permission'),)
-
-
 class Dataset(models.Model):
     dataset_id = models.AutoField(primary_key=True)
     dataset_uuid = models.CharField(unique=True, max_length=128)
@@ -177,51 +113,6 @@ class DatasetType(models.Model):
     def __str__(self):
         return self.name
 
-class DjangoAdminLog(models.Model):
-    action_time = models.DateTimeField()
-    object_id = models.TextField(blank=True, null=True)
-    object_repr = models.CharField(max_length=200)
-    action_flag = models.PositiveSmallIntegerField()
-    change_message = models.TextField()
-    content_type = models.ForeignKey('DjangoContentType', models.DO_NOTHING, blank=True, null=True)
-    user = models.ForeignKey(AuthUser, models.DO_NOTHING)
-
-    class Meta:
-        managed = False
-        db_table = 'django_admin_log'
-
-
-class DjangoContentType(models.Model):
-    app_label = models.CharField(max_length=100)
-    model = models.CharField(max_length=100)
-
-    class Meta:
-        managed = False
-        db_table = 'django_content_type'
-        unique_together = (('app_label', 'model'),)
-
-
-class DjangoMigrations(models.Model):
-    id = models.BigAutoField(primary_key=True)
-    app = models.CharField(max_length=255)
-    name = models.CharField(max_length=255)
-    applied = models.DateTimeField()
-
-    class Meta:
-        managed = False
-        db_table = 'django_migrations'
-
-
-class DjangoSession(models.Model):
-    session_key = models.CharField(primary_key=True, max_length=40)
-    session_data = models.TextField()
-    expire_date = models.DateTimeField()
-
-    class Meta:
-        managed = False
-        db_table = 'django_session'
-
-
 class EnsemblRelease(models.Model):
     release_id = models.AutoField(primary_key=True)
     version = models.DecimalField(max_digits=10, decimal_places=1)
@@ -231,6 +122,8 @@ class EnsemblRelease(models.Model):
     site = models.ForeignKey('EnsemblSite', models.DO_NOTHING, blank=True, null=True)
     release_type = models.CharField(max_length=16)
     genomes = models.ManyToManyField('Genome',through='GenomeRelease')
+    datasets = models.ManyToManyField('Dataset', through='GenomeDataset')
+
 
     class Meta:
         db_table = 'ensembl_release'
@@ -255,7 +148,8 @@ class Genome(models.Model):
     assembly = models.ForeignKey(Assembly, models.DO_NOTHING)
     organism = models.ForeignKey('Organism', models.DO_NOTHING)
     created = models.DateTimeField()
-
+    datasets = models.ManyToManyField('Dataset',through='GenomeDataset')
+    releases = models.ManyToManyField('EnsemblRelease',through='GenomeRelease')
     class Meta:
         db_table = 'genome'
     def __str__(self):
@@ -297,19 +191,6 @@ class Organism(models.Model):
     groups = models.ManyToManyField('OrganismGroup',through='OrganismGroupMember')
     assemblies = models.ManyToManyField('Assembly',through='Genome')
 
-
-    def assembly_list(self):
-        return ",".join([str(p) for p in self.assemblies.all()])
-
-    # genome_releases = models.ManyToManyField('GenomeRelease', through='Genome')
-    # def release_list(self):
-    #     output = '';
-    #     for genome in self.genome_releases.all():
-    #         release = 'link out to the release here'
-    #         output += release
-    #
-    #     return output
-    #     return ",".join([str(p) for p in self.genome_releases.all()])
     class Meta:
         db_table = 'organism'
         ordering = ['ensembl_name', 'scientific_name']
