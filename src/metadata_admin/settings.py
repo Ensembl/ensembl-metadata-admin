@@ -1,3 +1,16 @@
+#   See the NOTICE file distributed with this work for additional information
+#   regarding copyright ownership.
+#   Licensed under the Apache License, Version 2.0 (the "License");
+#   you may not use this file except in compliance with the License.
+#   You may obtain a copy of the License at
+#       http://www.apache.org/licenses/LICENSE-2.0
+#   Unless required by applicable law or agreed to in writing, software
+#   distributed under the License is distributed on an "AS IS" BASIS,
+#   WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+#   See the License for the specific language governing permissions and
+#   limitations under the License.from django.apps import AppConfig
+
+
 """
 Django settings for metadata_admin project.
 
@@ -43,6 +56,7 @@ INSTALLED_APPS = [
     'rest_framework',
     'ensembl.production.metadata.admin.apps.EnsemblMetadataConfig',
     'ensembl.production.ncbi_taxonomy.apps.TaxonomyConfig',
+
 ]
 
 MIDDLEWARE = [
@@ -62,25 +76,25 @@ ROOT_URLCONF = 'metadata_admin.urls'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
-        'NAME': os.getenv("DBNAME", 'metadata_admin'),
-        'USER': os.getenv("DBUSER", 'ensembl'),
-        'PASSWORD': os.getenv("DBPASS", ''),
+        'NAME': os.getenv("DBNAME", 'metadata_registry'),
+        'USER': os.getenv("DBUSER", 'danielp'),
+        'PASSWORD': os.getenv("DBPASS", 'Killadam69!'),
         'HOST': os.getenv("DBHOST", 'localhost'),
         'PORT': os.getenv("DBPORT", 3306),
     },
     'ensembl_metadata': {
         'ENGINE': 'django.db.backends.mysql',
         'NAME': os.getenv("REGISTRY_DB", "ensembl_metadata_2020"),
-        'USER': os.getenv("DATABASE_USER", "ensembl"),
-        'PASSWORD': os.getenv("DATABASE_PASSWORD", ""),
+        'USER': os.getenv("DATABASE_USER", "danielp"),
+        'PASSWORD': os.getenv("DATABASE_PASSWORD", "Killadam69!"),
         'HOST': os.getenv("DATABASE_HOST", "localhost"),
         'PORT': os.getenv("DATABASE_PORT", 3306),
     },
     'ncbi_taxonomy': {
         'ENGINE': 'django.db.backends.mysql',
         'NAME': os.getenv("TAXONOMY_DB", "ncbi_taxonomy"),
-        'USER': os.getenv("DATABASE_USER", "ensembl"),
-        'PASSWORD': os.getenv("DATABASE_PASSWORD", ""),
+        'USER': os.getenv("DATABASE_USER", "danielp"),
+        'PASSWORD': os.getenv("DATABASE_PASSWORD", "Killadam69!"),
         'HOST': os.getenv("DATABASE_HOST", "localhost"),
         'PORT': os.getenv("DATABASE_PORT", 3306),
     }
