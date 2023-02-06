@@ -41,7 +41,7 @@ class AssemblyAdmin(admin.ModelAdmin):
 
     def get_readonly_fields(self, request, obj=None):
         read_only_fields = super().get_readonly_fields(request, obj)
-        if request.user.is_superuser:
+        if not request.user.is_superuser:
             read_only_fields += ('name',)
         return read_only_fields
 
@@ -50,23 +50,23 @@ class AssemblyAdmin(admin.ModelAdmin):
 
 class GenomeReleaseInLine(admin.TabularInline):
     model = GenomeRelease
-    fields = ['Assemblies', 'Organisms', 'Datasets']
-    readonly_fields = ["Assemblies", 'Organisms', 'Datasets']
+    fields = ['genome_assembly', 'genome_organism', 'genome_datasets']
+    readonly_fields = ["genome_assembly", 'genome_organism', 'genome_datasets']
     can_delete = False
     can_update = False
 
-    def Assemblies(self, obj):
+    def genome_assembly(self, obj):
         url_view = reverse('admin:ensembl_metadata_assembly_change',
                            args=(obj.genome.assembly.assembly_id,))
         return mark_safe(u"<a href='" + url_view + "'>" + obj.genome.assembly.accession + "</a>")
 
-    def Organisms(self, obj):
+    def genome_organism(self, obj):
         # return obj.genome.organism.ensembl_name
         url_view = reverse('admin:ensembl_metadata_organism_change',
                            args=(obj.genome.organism.organism_id,))
         return mark_safe(u"<a href='" + url_view + "'>" + obj.genome.organism.ensembl_name + "</a>")
 
-    def Datasets(self, obj):
+    def genome_datasets(self, obj):
         output = ''
         for i in obj.genome.datasets.all():
             output += i.name + ', '
@@ -88,13 +88,13 @@ class GenomeReleaseInLine(admin.TabularInline):
 
 
 class ReleaseAdmin(admin.ModelAdmin):
-    read_only_fields = ('version', 'release_date', 'site', 'release_type', 'is_current', 'assemblies')
+    read_only_fields = ('version', 'release_date', 'site', 'release_type', 'is_current', 'genome_assembly')
     search_fields = ('version',)
-    list_display = ('version', 'release_date', 'site', 'release_type', 'is_current', 'assemblies')
+    list_display = ('version', 'release_date', 'site', 'release_type', 'is_current', 'genome_assembly')
     order = ('is_current', 'release_date',)
     inlines = (GenomeReleaseInLine,)
 
-    def assemblies(self, obj):
+    def genome_assembly(self, obj):
         output = ''
         for genome in obj.genomes.all():
             output += str(genome.assembly) + ':' + str(genome.organism) + ', '
@@ -102,7 +102,7 @@ class ReleaseAdmin(admin.ModelAdmin):
 
     def get_readonly_fields(self, request, obj=None):
         read_only_fields = super().get_readonly_fields(request, obj)
-        if request.user.is_superuser:
+        if not request.user.is_superuser:
             read_only_fields += ('version',)
         return read_only_fields
 
@@ -140,7 +140,7 @@ class OrganismGroupMemberInLine(admin.StackedInline):
 class OrganismAdmin(admin.ModelAdmin):
     # assemblies
     list_display = (
-        'display_name', 'Releases', 'Assembly_List', 'strain', 'scientific_name', 'ensembl_name',
+        'display_name', 'genome_releases', 'organism_assemblies', 'strain', 'scientific_name', 'ensembl_name',
         'scientific_parlance_name',
         'url_name', 'display_name', 'taxonomy_id', 'species_taxonomy_id',)
     list_filter = (MetadataReleaseFilter,)
@@ -148,10 +148,10 @@ class OrganismAdmin(admin.ModelAdmin):
     order = ('')
     inlines = (OrganismGroupMemberInLine, GenomeInLine)
 
-    def Assembly_List(self, obj):
+    def organism_assemblies(self, obj):
         return ",".join([str(p) for p in obj.assemblies.all()])
 
-    def Releases(self, obj):
+    def genome_releases(self, obj):
         genomes = EnsemblRelease.objects.all().filter(genomes__organism=obj).distinct()
         output = ''
         for i in genomes:
@@ -160,7 +160,7 @@ class OrganismAdmin(admin.ModelAdmin):
 
     def get_readonly_fields(self, request, obj=None):
         read_only_fields = super().get_readonly_fields(request, obj)
-        if request.user.is_superuser:
+        if not request.user.is_superuser:
             read_only_fields += ('scientific_parlance_name',)
         return read_only_fields
 
@@ -197,12 +197,12 @@ admin.site.register(Dataset, DatasetAdmin)
 
 class OrganismGroupInLine(admin.StackedInline):
     model = OrganismGroupMember
-    fields = ('is_reference', 'Organisms')
-    readonly_fields = ("is_reference", 'Organisms',)
+    fields = ('is_reference', 'group_organisms')
+    readonly_fields = ("is_reference", 'group_organisms',)
     can_delete = False
     can_update = False
 
-    def Organisms(self, obj):
+    def group_organisms(self, obj):
         # return obj.genome.organism.ensembl_name
         # return obj.organism
         # print (obj)
