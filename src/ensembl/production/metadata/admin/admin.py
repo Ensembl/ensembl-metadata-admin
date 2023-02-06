@@ -51,7 +51,7 @@ class AssemblyAdmin(admin.ModelAdmin):
 class GenomeReleaseInLine(admin.TabularInline):
     model = GenomeRelease
     fields = ['genome_assembly', 'genome_organism', 'genome_datasets']
-    readonly_fields = ["genome_assembly", 'genome_organism', 'genome_datasets']
+    readonly_fields = ['genome_assembly', 'genome_organism', 'genome_datasets']
     can_delete = False
     can_update = False
 
