@@ -33,7 +33,7 @@ setup(
     package_dir={'': 'src'},
     url='https://github.com/Ensembl/ensembl-metadata-admin',
     license='APACHE 2.0',
-    author='Marc Chakiachvili,Daniel Poppleton, Vinay Kaikala',
+    author='Marc Chakiachvili,Daniel Poppleton,Vinay Kaikala',
     author_email='mchakiachvili@ebi.ac.uk, danielp@ebi.ac.uk, vkaikala@ebi.ac.uk',
     maintainer='Ensembl Production Team',
     maintainer_email='ensembl-production@ebi.ac.uk',
