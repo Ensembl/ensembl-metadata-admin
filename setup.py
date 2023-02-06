@@ -42,7 +42,7 @@ setup(
     include_package_data=True,
     install_requires=import_requirements(),
     classifiers=[
-        '[Development Status :: 3 - Alpha]',
+        'Development Status :: 3 - Alpha',
         'Intended Audience :: Developers',
         'Environment :: Console',
         'License :: OSI Approved :: APACHE 2.0 License',
