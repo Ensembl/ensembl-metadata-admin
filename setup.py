@@ -38,7 +38,7 @@ setup(
     maintainer='Ensembl Production Team',
     maintainer_email='ensembl-production@ebi.ac.uk',
     description='Ensembl Production metadata Django admin pages',
-    python_requires='>=3.7',
+    python_requires='>=3.8',
     include_package_data=True,
     install_requires=import_requirements(),
     classifiers=[
