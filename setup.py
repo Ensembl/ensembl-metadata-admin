@@ -26,7 +26,7 @@ def import_requirements():
 
 
 setup(
-    name='metadata_admin',
+    name='ensembl-metadata-admin',
     version=version,
     namespace_packages=['ensembl'],
     packages=find_namespace_packages(where='src', include=['ensembl.production.*']),
