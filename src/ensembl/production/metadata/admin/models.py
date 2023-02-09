@@ -48,8 +48,9 @@ class AssemblySequence(models.Model):
     class Meta:
         db_table = 'assembly_sequence'
         unique_together = (('assembly', 'accession'),)
+
     def __str__(self):
-        return self.name
+        return str(self.name)
 
 class Attribute(models.Model):
     attribute_id = models.AutoField(primary_key=True)

@@ -1,6 +1,6 @@
-Django
+Django~=3.2
 django-filter
-djangorestframework
+djangorestframework~=3.12.4
 drf-spectacular
 Markdown
 mysqlclient
