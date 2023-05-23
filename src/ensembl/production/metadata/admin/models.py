@@ -21,7 +21,7 @@ class Assembly(models.Model):
     name = models.CharField(max_length=128)
     accession_body = models.CharField(max_length=32, blank=True, null=True)
     assembly_default = models.CharField(max_length=32, blank=True, null=True)
-    #TODO move to tol_id instead
+    # TODO move to tol_id instead
     tolid = models.CharField(unique=True, max_length=32, blank=True, null=True)
     created = models.DateTimeField(blank=True, null=True)
     ensembl_name = models.CharField(unique=True, max_length=255, blank=True, null=True)
@@ -52,6 +52,7 @@ class AssemblySequence(models.Model):
     def __str__(self):
         return str(self.name)
 
+
 class Attribute(models.Model):
     attribute_id = models.AutoField(primary_key=True)
     name = models.CharField(max_length=128)
@@ -60,8 +61,25 @@ class Attribute(models.Model):
 
     class Meta:
         db_table = 'attribute'
+
     def __str__(self):
         return self.name
+
+
+class DatasetAttribute(models.Model):
+    dataset_attribute_id = models.AutoField(primary_key=True)
+    type = models.CharField(max_length=32)
+    value = models.CharField(max_length=128)
+    attribute = models.ForeignKey('Attribute', models.DO_NOTHING, related_name='datasets_set')
+    dataset = models.ForeignKey('Dataset', models.DO_NOTHING, related_name='attributes')
+
+    class Meta:
+        db_table = 'dataset_attribute'
+        unique_together = (('dataset', 'attribute', 'type', 'value'),)
+
+    def __str__(self):
+        return self.type
+
 
 class Dataset(models.Model):
     dataset_id = models.AutoField(primary_key=True)
@@ -72,24 +90,14 @@ class Dataset(models.Model):
     created = models.DateTimeField()
     dataset_source = models.ForeignKey('DatasetSource', models.DO_NOTHING)
     label = models.CharField(max_length=128)
+    # attributes = models.ManyToManyField('Attribute', through=DatasetAttribute)
 
     class Meta:
         db_table = 'dataset'
+
     def __str__(self):
         return self.name
 
-class DatasetAttribute(models.Model):
-    dataset_attribute_id = models.AutoField(primary_key=True)
-    type = models.CharField(max_length=32)
-    value = models.CharField(max_length=128)
-    attribute = models.ForeignKey(Attribute, models.DO_NOTHING)
-    dataset = models.ForeignKey(Dataset, models.DO_NOTHING)
-
-    class Meta:
-        db_table = 'dataset_attribute'
-        unique_together = (('dataset', 'attribute', 'type', 'value'),)
-    def __str__(self):
-        return self.type
 
 class DatasetSource(models.Model):
     dataset_source_id = models.AutoField(primary_key=True)
@@ -98,8 +106,10 @@ class DatasetSource(models.Model):
 
     class Meta:
         db_table = 'dataset_source'
+
     def __str__(self):
         return self.name
+
 
 class DatasetType(models.Model):
     dataset_type_id = models.AutoField(primary_key=True)
@@ -111,8 +121,10 @@ class DatasetType(models.Model):
 
     class Meta:
         db_table = 'dataset_type'
+
     def __str__(self):
         return self.name
+
 
 class EnsemblRelease(models.Model):
     release_id = models.AutoField(primary_key=True)
@@ -122,15 +134,16 @@ class EnsemblRelease(models.Model):
     is_current = models.BooleanField()
     site = models.ForeignKey('EnsemblSite', models.DO_NOTHING, blank=True, null=True)
     release_type = models.CharField(max_length=16)
-    genomes = models.ManyToManyField('Genome',through='GenomeRelease')
+    genomes = models.ManyToManyField('Genome', through='GenomeRelease')
     datasets = models.ManyToManyField('Dataset', through='GenomeDataset')
-
 
     class Meta:
         db_table = 'ensembl_release'
         unique_together = (('version', 'site'),)
+
     def __str__(self):
         return str(self.version)
+
 
 class EnsemblSite(models.Model):
     site_id = models.AutoField(primary_key=True)
@@ -140,8 +153,10 @@ class EnsemblSite(models.Model):
 
     class Meta:
         db_table = 'ensembl_site'
+
     def __str__(self):
         return self.name
+
 
 class Genome(models.Model):
     genome_id = models.AutoField(primary_key=True)
@@ -149,12 +164,15 @@ class Genome(models.Model):
     assembly = models.ForeignKey(Assembly, models.DO_NOTHING)
     organism = models.ForeignKey('Organism', models.DO_NOTHING)
     created = models.DateTimeField()
-    datasets = models.ManyToManyField('Dataset',through='GenomeDataset')
-    releases = models.ManyToManyField('EnsemblRelease',through='GenomeRelease')
+    datasets = models.ManyToManyField('Dataset', through='GenomeDataset')
+    releases = models.ManyToManyField('EnsemblRelease', through='GenomeRelease')
+
     class Meta:
         db_table = 'genome'
+
     def __str__(self):
         return self.genome_uuid
+
 
 class GenomeDataset(models.Model):
     genome_dataset_id = models.AutoField(primary_key=True)
@@ -173,11 +191,12 @@ class GenomeRelease(models.Model):
     release = models.ForeignKey(EnsemblRelease, models.DO_NOTHING)
     is_current = models.IntegerField()
 
-
     class Meta:
         db_table = 'genome_release'
+
     def __str__(self):
         return str(self.genome_release_id)
+
 
 class Organism(models.Model):
     organism_id = models.AutoField(primary_key=True)
@@ -189,14 +208,16 @@ class Organism(models.Model):
     url_name = models.CharField(max_length=128)
     ensembl_name = models.CharField(unique=True, max_length=128)
     scientific_parlance_name = models.CharField(max_length=255, blank=True, null=True)
-    groups = models.ManyToManyField('OrganismGroup',through='OrganismGroupMember')
-    assemblies = models.ManyToManyField('Assembly',through='Genome')
+    groups = models.ManyToManyField('OrganismGroup', through='OrganismGroupMember')
+    assemblies = models.ManyToManyField('Assembly', through='Genome')
 
     class Meta:
         db_table = 'organism'
         ordering = ['ensembl_name', 'scientific_name']
+
     def __str__(self):
         return self.ensembl_name
+
 
 class OrganismGroup(models.Model):
     organism_group_id = models.AutoField(primary_key=True)
@@ -207,8 +228,10 @@ class OrganismGroup(models.Model):
     class Meta:
         db_table = 'organism_group'
         unique_together = (('type', 'name'),)
+
     def __str__(self):
-        return "Type:"+self.type+" Name:"+self.name
+        return "Type:" + self.type + " Name:" + self.name
+
 
 class OrganismGroupMember(models.Model):
     organism_group_member_id = models.AutoField(primary_key=True)
@@ -219,5 +242,6 @@ class OrganismGroupMember(models.Model):
     class Meta:
         db_table = 'organism_group_member'
         unique_together = (('organism', 'organism_group'),)
+
     def __str__(self):
         return str(self.organism_group_member_id)

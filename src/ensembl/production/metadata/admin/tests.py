@@ -9,22 +9,25 @@
 #   WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 #   See the License for the specific language governing permissions and
 #   limitations under the License.from django.apps import AppConfig
+from rest_framework import status
+from rest_framework.reverse import reverse
+from rest_framework.test import APITestCase
 
 
-from django.contrib import admin
-from django.urls import path, include
-from drf_spectacular.views import SpectacularSwaggerView
+class DatasetApiTest(APITestCase):
 
-urlpatterns = [
-    path(f'api/metadata/', include('ensembl.production.metadata.admin.api.urls')),
-    path('', admin.site.urls),
-    path(
-        'api/docs/',
-        SpectacularSwaggerView.as_view(
-            template_name='../../templates/swagger-ui.html',
-            url_name='schema',
-        ),
-        name='swagger-ui',
-    )
-]
+    def test_list(self):
+        response = self.client.get(reverse('ensembl_metadata:dataset-list'))
+        self.assertEqual(response.status_code, status.HTTP_200_OK)
+        print(response.data)
 
+
+    def test_create(self):
+        self.client.post(reverse('ensembl_metadata:genome-list'))
+
+
+class GenomeApiTest(APITestCase):
+
+    def test_list(self):
+        response = self.client.get(reverse('ensembl_metadata:genome-list'))
+        self.assertEqual(response.status_code, status.HTTP_200_OK)

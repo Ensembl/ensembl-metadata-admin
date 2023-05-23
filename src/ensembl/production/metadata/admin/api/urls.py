@@ -10,21 +10,17 @@
 #   See the License for the specific language governing permissions and
 #   limitations under the License.from django.apps import AppConfig
 
+from django.urls import include, path
+from rest_framework import routers
 
-from django.contrib import admin
-from django.urls import path, include
-from drf_spectacular.views import SpectacularSwaggerView
+from ensembl.production.metadata.admin.api.viewsets import GenomeViewSet, UserViewSet, DatasetViewSet
+
+router = routers.DefaultRouter()
+router.register(r'users', UserViewSet)
+router.register(r'genomes', GenomeViewSet)
+router.register(r'datasets', DatasetViewSet)
 
 urlpatterns = [
-    path(f'api/metadata/', include('ensembl.production.metadata.admin.api.urls')),
-    path('', admin.site.urls),
-    path(
-        'api/docs/',
-        SpectacularSwaggerView.as_view(
-            template_name='../../templates/swagger-ui.html',
-            url_name='schema',
-        ),
-        name='swagger-ui',
-    )
+    path(f'', include((router.urls, 'ensembl_metadata'))),
+    path(f'api-auth/', include('rest_framework.urls', namespace='rest_framework'))
 ]
-

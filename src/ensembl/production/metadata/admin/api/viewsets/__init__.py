@@ -10,21 +10,6 @@
 #   See the License for the specific language governing permissions and
 #   limitations under the License.from django.apps import AppConfig
 
-
-from django.contrib import admin
-from django.urls import path, include
-from drf_spectacular.views import SpectacularSwaggerView
-
-urlpatterns = [
-    path(f'api/metadata/', include('ensembl.production.metadata.admin.api.urls')),
-    path('', admin.site.urls),
-    path(
-        'api/docs/',
-        SpectacularSwaggerView.as_view(
-            template_name='../../templates/swagger-ui.html',
-            url_name='schema',
-        ),
-        name='swagger-ui',
-    )
-]
-
+from .genome import GenomeViewSet
+from .user import UserViewSet
+from .dataset import DatasetViewSet
