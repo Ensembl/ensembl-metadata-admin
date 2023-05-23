@@ -16,7 +16,7 @@ django==3.2.17
     #   drf-spectacular
 django-filter==22.1
     # via -r requirements.in
-djangorestframework==3.12.4
+djangorestframework==3.14.0
     # via
     #   -r requirements.in
     #   drf-spectacular
@@ -33,10 +33,14 @@ mysqlclient==2.1.1
 pyrsistent==0.19.3
     # via jsonschema
 pytz==2022.7.1
-    # via django
+    # via
+    #   django
+    #   djangorestframework
 pyyaml==6.0
     # via drf-spectacular
-sqlparse==0.4.3
-    # via django
+sqlparse==0.4.4
+    # via
+    #   -r requirements.in
+    #   django
 uritemplate==4.1.1
     # via drf-spectacular
