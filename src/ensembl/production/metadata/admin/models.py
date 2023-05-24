@@ -22,7 +22,7 @@ class Assembly(models.Model):
     accession_body = models.CharField(max_length=32, blank=True, null=True)
     assembly_default = models.CharField(max_length=32, blank=True, null=True)
     # TODO move to tol_id instead
-    tolid = models.CharField(unique=True, max_length=32, blank=True, null=True)
+    tol_id = models.CharField(unique=True, max_length=32, blank=True, null=True)
     created = models.DateTimeField(blank=True, null=True)
     ensembl_name = models.CharField(unique=True, max_length=255, blank=True, null=True)
 
@@ -54,10 +54,19 @@ class AssemblySequence(models.Model):
 
 
 class Attribute(models.Model):
+
+    ATTRIBUTE_TYPES = [
+        ('integer', 'Integer'),
+        ('float', 'Float'),
+        ('percent', 'Percent'),
+        ('string', 'String'),
+        ('bp', 'BP'),
+    ]
     attribute_id = models.AutoField(primary_key=True)
-    name = models.CharField(max_length=128)
+    name = models.CharField(unique=True, max_length=128)
     label = models.CharField(max_length=128)
     description = models.CharField(max_length=255, blank=True, null=True)
+    type = models.CharField(max_length=8, choices=ATTRIBUTE_TYPES, default='string')
 
     class Meta:
         db_table = 'attribute'
@@ -68,14 +77,13 @@ class Attribute(models.Model):
 
 class DatasetAttribute(models.Model):
     dataset_attribute_id = models.AutoField(primary_key=True)
-    type = models.CharField(max_length=32)
     value = models.CharField(max_length=128)
     attribute = models.ForeignKey('Attribute', models.DO_NOTHING, related_name='datasets_set')
     dataset = models.ForeignKey('Dataset', models.DO_NOTHING, related_name='attributes')
 
     class Meta:
         db_table = 'dataset_attribute'
-        unique_together = (('dataset', 'attribute', 'type', 'value'),)
+        unique_together = (('dataset', 'attribute','value'),)
 
     def __str__(self):
         return self.type
@@ -91,6 +99,13 @@ class Dataset(models.Model):
     dataset_source = models.ForeignKey('DatasetSource', models.DO_NOTHING)
     label = models.CharField(max_length=128)
     # attributes = models.ManyToManyField('Attribute', through=DatasetAttribute)
+    statuses = [
+        ('submitted', 'Submitted'),
+        ('progressing', 'Progressing'),
+        ('processed', 'Processed'),
+    ]
+
+    status = models.CharField(max_length=12, choices=statuses, default='string')
 
     class Meta:
         db_table = 'dataset'

@@ -77,16 +77,16 @@ DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
         'NAME': os.getenv("REGISTRY_DB", "ensembl_genome_metadata"),
-        'USER': os.getenv("DATABASE_USER", "ensembl"),
-        'PASSWORD': os.getenv("DATABASE_PASSWORD", ""),
+        'USER': os.getenv("DATABASE_USER", "danielp"),
+        'PASSWORD': os.getenv("DATABASE_PASSWORD", "Killadam69"),
         'HOST': os.getenv("DATABASE_HOST", "localhost"),
         'PORT': os.getenv("DATABASE_PORT", 3306),
     },
     'ncbi_taxonomy': {
         'ENGINE': 'django.db.backends.mysql',
         'NAME': os.getenv("TAXONOMY_DB", "ncbi_taxonomy"),
-        'USER': os.getenv("DATABASE_USER", "ensembl"),
-        'PASSWORD': os.getenv("DATABASE_PASSWORD", ""),
+        'USER': os.getenv("DATABASE_USER", "danielp"),
+        'PASSWORD': os.getenv("DATABASE_PASSWORD", "Killadam69"),
         'HOST': os.getenv("DATABASE_HOST", "localhost"),
         'PORT': os.getenv("DATABASE_PORT", 3306),
     }
