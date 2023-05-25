@@ -13,15 +13,19 @@
 from rest_framework import serializers
 
 from ensembl.production.metadata.admin.models import Genome, Assembly, Organism, Dataset, EnsemblRelease
-
+from django.urls import reverse
 class AssemblySerializer(serializers.ModelSerializer):
     class Meta:
         model = Assembly
         fields = ["accession"]
-class DatasetSerializer(serializers.ModelSerializer):
+class DatasetSerializer(serializers.HyperlinkedModelSerializer):
+    # url = serializers.HyperlinkedIdentityField(view_name="ensembl_metadata:datasets-detail",lookup_field="dataset_uuid")
     class Meta:
         model = Dataset
-        fields = ["name"]
+        # fields = ['url', 'name']
+        fields = ['name']
+#        print(reverse('ensembl-metadata:api:datasets-detail', kwargs={'dataset_uuid': '559d7660-d92d-47e1-924e-e741151c2cef'}))
+
 class OrganismSerializer(serializers.ModelSerializer):
     class Meta:
         model = Organism
@@ -39,5 +43,8 @@ class GenomeSerializer(serializers.ModelSerializer):
 
     assembly = AssemblySerializer(read_only=True, many=False)
     organism = OrganismSerializer(many=False, read_only=True)
-    datasets = DatasetSerializer(many=True, read_only=True)
+    datasets = serializers.HyperlinkedRelatedField(
+        view_name='ensembl_metadata:dataset-detail',
+        lookup_field='dataset_uuid',
+        many=True, read_only=True)
     releases = ReleaseSerializer(many=True, read_only=True)

@@ -21,7 +21,6 @@ class Assembly(models.Model):
     name = models.CharField(max_length=128)
     accession_body = models.CharField(max_length=32, blank=True, null=True)
     assembly_default = models.CharField(max_length=32, blank=True, null=True)
-    # TODO move to tol_id instead
     tol_id = models.CharField(unique=True, max_length=32, blank=True, null=True)
     created = models.DateTimeField(blank=True, null=True)
     ensembl_name = models.CharField(unique=True, max_length=255, blank=True, null=True)
@@ -106,7 +105,8 @@ class Dataset(models.Model):
     ]
 
     status = models.CharField(max_length=12, choices=statuses, default='string')
-
+    genomes = models.ManyToManyField('Genome', through='GenomeDataset')
+    # genome_datasets = models.ForeignKey('GenomeDataset', on_delete=models.CASCADE)
     class Meta:
         db_table = 'dataset'
 
@@ -191,7 +191,7 @@ class Genome(models.Model):
 
 class GenomeDataset(models.Model):
     genome_dataset_id = models.AutoField(primary_key=True)
-    dataset = models.ForeignKey(Dataset, models.DO_NOTHING)
+    dataset = models.ForeignKey(Dataset, models.DO_NOTHING, related_name='genome_datasets')
     genome = models.ForeignKey(Genome, models.DO_NOTHING)
     release = models.ForeignKey(EnsemblRelease, models.DO_NOTHING)
     is_current = models.IntegerField()

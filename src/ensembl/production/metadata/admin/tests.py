@@ -14,16 +14,14 @@ from rest_framework.reverse import reverse
 from rest_framework.test import APITestCase
 
 
-class DatasetApiTest(APITestCase):
+# class to define a test case of login
+class UserLoginTestCase(APITestCase):
 
+class DatasetApiTest(APITestCase):
+    fixtures = ['fixtures/nine_assemblies_May_2023.json']
     def test_list(self):
         response = self.client.get(reverse('ensembl_metadata:dataset-list'))
         self.assertEqual(response.status_code, status.HTTP_200_OK)
-        print(response.data)
-
-
-    def test_create(self):
-        self.client.post(reverse('ensembl_metadata:genome-list'))
 
 
 class GenomeApiTest(APITestCase):
