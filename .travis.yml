@@ -15,4 +15,4 @@ install:
 
 script:
   - export DJANGO_SETTINGS_MODULE=metadata_admin.settings
-  - python src/manage.py test
+  - python src/manage.py test ./src/ensembl/production/*

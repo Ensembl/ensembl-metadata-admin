@@ -16,9 +16,10 @@ from rest_framework.test import APITestCase
 
 # class to define a test case of login
 class UserLoginTestCase(APITestCase):
+    pass
 
 class DatasetApiTest(APITestCase):
-    fixtures = ['fixtures/nine_assemblies_May_2023.json']
+    fixtures = ['nine_assemblies.json']
     def test_list(self):
         response = self.client.get(reverse('ensembl_metadata:dataset-list'))
         self.assertEqual(response.status_code, status.HTTP_200_OK)
