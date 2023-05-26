@@ -9,24 +9,43 @@
 #   WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 #   See the License for the specific language governing permissions and
 #   limitations under the License.from django.apps import AppConfig
-from rest_framework import status
+from rest_framework.test import APIClient, APITestCase
 from rest_framework.reverse import reverse
-from rest_framework.test import APITestCase
+from rest_framework import status
+from django.contrib.auth.models import User
 
 
-# class to define a test case of login
-class UserLoginTestCase(APITestCase):
-    pass
+class GenomeViewSetTestCase(APITestCase):
+    fixtures = ['fixtures/nine_assemblies.json']  # Assuming you have a fixture named 'your_fixture.json'
 
-class DatasetApiTest(APITestCase):
-    fixtures = ['nine_assemblies.json']
-    def test_list(self):
-        response = self.client.get(reverse('ensembl_metadata:dataset-list'))
-        self.assertEqual(response.status_code, status.HTTP_200_OK)
+    def setUp(self):
+        self.client = APIClient()
 
-
-class GenomeApiTest(APITestCase):
-
-    def test_list(self):
+    def test_genome_viewset_get(self):
         response = self.client.get(reverse('ensembl_metadata:genome-list'))
         self.assertEqual(response.status_code, status.HTTP_200_OK)
+        self.assertIsNotNone(response.data)
+
+    def test_genome_viewset_get_individual(self):
+        genome_uuid = 'a7335667-93e7-11ec-a39d-005056b38ce3'
+        response = self.client.get(reverse('genome-detail', args=[genome_uuid]))
+        self.assertEqual(response.status_code, status.HTTP_200_OK)
+        self.assertIsNotNone(response.data)
+
+
+class DatasetViewSetTestCase(APITestCase):
+    fixtures = ['fixtures/nine_assemblies.json']
+
+    def setUp(self):
+        self.client = APIClient()
+
+    def test_dataset_viewset_get(self):
+        response = self.client.get(reverse('dataset-list'))
+        self.assertEqual(response.status_code, status.HTTP_200_OK)
+        self.assertIsNotNone(response.data)
+
+    def test_dataset_viewset_get_individual(self):
+        dataset_uuid = '559d7660-d92d-47e1-924e-e741151c2cef'
+        response = self.client.get(reverse('dataset-detail', args=[dataset_uuid]))
+        self.assertEqual(response.status_code, status.HTTP_200_OK)
+        self.assertIsNotNone(response.data)
