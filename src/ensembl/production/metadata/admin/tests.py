@@ -16,7 +16,7 @@ from django.contrib.auth.models import User
 
 
 class GenomeViewSetTestCase(APITestCase):
-    fixtures = ['fixtures/nine_assemblies.json']  # Assuming you have a fixture named 'your_fixture.json'
+    fixtures = ['nine_assemblies.json']  # Assuming you have a fixture named 'your_fixture.json'
 
     def setUp(self):
         self.client = APIClient()
@@ -34,7 +34,7 @@ class GenomeViewSetTestCase(APITestCase):
 
 
 class DatasetViewSetTestCase(APITestCase):
-    fixtures = ['fixtures/nine_assemblies.json']
+    fixtures = ['nine_assemblies.json']
 
     def setUp(self):
         self.client = APIClient()
