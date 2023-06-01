@@ -28,7 +28,7 @@ class GenomeViewSetTestCase(APITestCase):
 
     def test_genome_viewset_get_individual(self):
         genome_uuid = 'a7335667-93e7-11ec-a39d-005056b38ce3'
-        response = self.client.get(reverse('genome-detail', args=[genome_uuid]))
+        response = self.client.get(reverse('ensembl_metadata:genome-detail', args=[genome_uuid]))
         self.assertEqual(response.status_code, status.HTTP_200_OK)
         self.assertIsNotNone(response.data)
 
@@ -40,12 +40,12 @@ class DatasetViewSetTestCase(APITestCase):
         self.client = APIClient()
 
     def test_dataset_viewset_get(self):
-        response = self.client.get(reverse('dataset-list'))
+        response = self.client.get(reverse('ensembl_metadata:dataset-list'))
         self.assertEqual(response.status_code, status.HTTP_200_OK)
         self.assertIsNotNone(response.data)
 
     def test_dataset_viewset_get_individual(self):
         dataset_uuid = '559d7660-d92d-47e1-924e-e741151c2cef'
-        response = self.client.get(reverse('dataset-detail', args=[dataset_uuid]))
+        response = self.client.get(reverse('ensembl_metadata:dataset-detail', args=[dataset_uuid]))
         self.assertEqual(response.status_code, status.HTTP_200_OK)
         self.assertIsNotNone(response.data)

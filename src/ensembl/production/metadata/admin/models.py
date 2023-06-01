@@ -193,7 +193,7 @@ class GenomeDataset(models.Model):
     genome_dataset_id = models.AutoField(primary_key=True)
     dataset = models.ForeignKey(Dataset, models.DO_NOTHING, related_name='genome_datasets')
     genome = models.ForeignKey(Genome, models.DO_NOTHING)
-    release = models.ForeignKey(EnsemblRelease, models.DO_NOTHING)
+    release = models.ForeignKey(EnsemblRelease, models.DO_NOTHING, blank=True, null=True)
     is_current = models.IntegerField()
 
     class Meta:
