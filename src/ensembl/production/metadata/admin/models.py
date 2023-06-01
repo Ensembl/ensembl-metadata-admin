@@ -37,7 +37,7 @@ class AssemblySequence(models.Model):
     assembly_sequence_id = models.AutoField(primary_key=True)
     name = models.CharField(max_length=128, blank=True, null=True)
     assembly = models.ForeignKey(Assembly, models.DO_NOTHING)
-    accession = models.CharField(max_length=32)
+    accession = models.CharField(max_length=128)
     chromosomal = models.IntegerField()
     length = models.IntegerField()
     sequence_location = models.CharField(max_length=10, blank=True, null=True)
