@@ -76,25 +76,17 @@ ROOT_URLCONF = 'metadata_admin.urls'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
-        'NAME': os.getenv("DBNAME", 'metadata_registry'),
-        'USER': os.getenv("DBUSER", 'danielp'),
-        'PASSWORD': os.getenv("DBPASS", 'Killadam69!'),
-        'HOST': os.getenv("DBHOST", 'localhost'),
-        'PORT': os.getenv("DBPORT", 3306),
-    },
-    'ensembl_metadata': {
-        'ENGINE': 'django.db.backends.mysql',
-        'NAME': os.getenv("REGISTRY_DB", "ensembl_metadata_2020"),
-        'USER': os.getenv("DATABASE_USER", "danielp"),
-        'PASSWORD': os.getenv("DATABASE_PASSWORD", "Killadam69!"),
+        'NAME': os.getenv("REGISTRY_DB", "ensembl_genome_metadata"),
+        'USER': os.getenv("DATABASE_USER", "ensembl"),
+        'PASSWORD': os.getenv("DATABASE_PASSWORD", ""),
         'HOST': os.getenv("DATABASE_HOST", "localhost"),
         'PORT': os.getenv("DATABASE_PORT", 3306),
     },
     'ncbi_taxonomy': {
         'ENGINE': 'django.db.backends.mysql',
         'NAME': os.getenv("TAXONOMY_DB", "ncbi_taxonomy"),
-        'USER': os.getenv("DATABASE_USER", "danielp"),
-        'PASSWORD': os.getenv("DATABASE_PASSWORD", "Killadam69!"),
+        'USER': os.getenv("DATABASE_USER", "ensembl"),
+        'PASSWORD': os.getenv("DATABASE_PASSWORD", ""),
         'HOST': os.getenv("DATABASE_HOST", "localhost"),
         'PORT': os.getenv("DATABASE_PORT", 3306),
     }

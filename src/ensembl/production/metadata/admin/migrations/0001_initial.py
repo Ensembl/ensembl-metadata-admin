@@ -258,7 +258,7 @@ class Migration(migrations.Migration):
             fields=[
                 ('assembly_sequence_id', models.AutoField(primary_key=True, serialize=False)),
                 ('name', models.CharField(blank=True, max_length=128, null=True)),
-                ('accession', models.CharField(max_length=32)),
+                ('accession', models.CharField(max_length=128)),
                 ('chromosomal', models.IntegerField()),
                 ('length', models.IntegerField()),
                 ('sequence_location', models.CharField(blank=True, max_length=10, null=True)),

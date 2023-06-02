@@ -21,14 +21,14 @@ class MetaDataRegistryRouter(object):
         if model._meta.app_label == 'ncbi_taxonomy':
             return 'ncbi_taxonomy'
         if model._meta.app_label == 'ensembl_metadata':
-            return 'ensembl_metadata'
+            return 'default'
         return None
 
     def db_for_write(self, model, **hints):
         if model._meta.app_label == 'ncbi_taxonomy':
             return 'ncbi_taxonomy'
         if model._meta.app_label == 'ensembl_metadata':
-            return 'ensembl_metadata'
+            return 'default'
         return None
 
     def allow_relation(self, obj1, obj2, **hints):
@@ -48,5 +48,5 @@ class MetaDataRegistryRouter(object):
         if app_label == 'ncbi_taxonomy':
             return db == 'ncbi_taxonomy'
         if app_label == 'ensembl_metadata':
-            return db == 'ensembl_metadata'
+            return db == 'default'
         return None
