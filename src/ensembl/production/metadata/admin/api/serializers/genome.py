@@ -19,12 +19,9 @@ class AssemblySerializer(serializers.ModelSerializer):
         model = Assembly
         fields = ["accession"]
 class DatasetSerializer(serializers.HyperlinkedModelSerializer):
-    # url = serializers.HyperlinkedIdentityField(view_name="ensembl_metadata:datasets-detail",lookup_field="dataset_uuid")
     class Meta:
         model = Dataset
-        # fields = ['url', 'name']
         fields = ['name']
-#        print(reverse('ensembl-metadata:api:datasets-detail', kwargs={'dataset_uuid': '559d7660-d92d-47e1-924e-e741151c2cef'}))
 
 class OrganismSerializer(serializers.ModelSerializer):
     class Meta:
