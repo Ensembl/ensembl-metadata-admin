@@ -16,6 +16,7 @@ from django.utils.safestring import mark_safe
 
 from ensembl.production.metadata.admin.filters import *
 
+
 # Temporary class to allow access only to turn everything readonly
 class AdminMetadata(admin.ModelAdmin):
 
@@ -184,23 +185,29 @@ admin.site.register(Organism, OrganismAdmin)
 class DatasetAttributeInline(admin.StackedInline):
     model = DatasetAttribute
     fields = ['value', 'attribute']
-    can_delete = False
-    can_update = False
-
-    def has_add_permission(self, request, obj):
-        return False
-
-    def has_change_permission(self, request, obj=None):
-        return False
+    extra = 1
 
 
 class DatasetAdmin(AdminMetadata, admin.ModelAdmin):
-    read_only_fields = ('name', 'version', 'created', 'dataset_source', 'label','status')
-    search_fields = ('name', 'dataset_source','status')
-    list_display = ('name', 'version', 'created', 'dataset_source', 'label','status')
-    order = ('ensembl_name')
-    list_filter = (MetadataReleaseFilter, MetadataOrganismFilter,)
+    fields = ('name', 'version', 'dataset_type', 'created', 'dataset_source', 'label', 'status')
+    search_fields = ('genomes__genome_uuid', 'genomes__organism__display_name',
+                     'genomes__organism__ensembl_name', 'genomes__organism__scientific_name',
+                     'genomes__assembly__accession', 'genomes__assembly__name',
+                     'genomes__assembly__tol_id', 'genomes__assembly__ensembl_name')
+    list_display = ('name', 'label', 'version',)
+    ordering = ('-genomes__releases__version', 'genomes__organism__name')
+    list_filter = (MetadataOrganismFilter,)
     inlines = (DatasetAttributeInline,)
+
+    def has_add_permission(self, request):
+        return True
+
+    def has_change_permission(self, request, obj=None):
+        return True
+
+    def get_queryset(self, request):
+        qs = super().get_queryset(request)
+        return qs.prefetch_related('genomes__organism', 'genomes__assembly', 'genomes__releases')
 
 
 admin.site.register(Dataset, DatasetAdmin)
@@ -248,7 +255,7 @@ admin.site.register(OrganismGroup, OrganismGroupAdmin)
 
 
 class AttributeAdmin(AdminMetadata, admin.ModelAdmin):
-    list_display = ('name', 'label', 'description','type')
+    list_display = ('name', 'label', 'description', 'type')
     order = ('name')
 
 
