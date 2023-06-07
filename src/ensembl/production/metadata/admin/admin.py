@@ -184,7 +184,6 @@ admin.site.register(Organism, OrganismAdmin)
 class DatasetAttributeInline(admin.StackedInline):
     model = DatasetAttribute
     fields = ['value', 'attribute']
-    # sortable_field_name = 'type'
     can_delete = False
     can_update = False
 
@@ -200,7 +199,7 @@ class DatasetAdmin(AdminMetadata, admin.ModelAdmin):
     search_fields = ('name', 'dataset_source','status')
     list_display = ('name', 'version', 'created', 'dataset_source', 'label','status')
     order = ('ensembl_name')
-    list_filter = (MetadataReleaseFilter, 'dataset_type', MetadataOrganismFilter,)
+    list_filter = (MetadataReleaseFilter, MetadataOrganismFilter,)
     inlines = (DatasetAttributeInline,)
 
 
@@ -249,7 +248,6 @@ admin.site.register(OrganismGroup, OrganismGroupAdmin)
 
 
 class AttributeAdmin(AdminMetadata, admin.ModelAdmin):
-    search_fields = ('ensembl_name', 'species_taxonomy_id',)
     list_display = ('name', 'label', 'description','type')
     order = ('name')
 
