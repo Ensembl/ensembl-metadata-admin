@@ -185,7 +185,8 @@ admin.site.register(Organism, OrganismAdmin)
 class DatasetAttributeInline(admin.StackedInline):
     model = DatasetAttribute
     fields = ['value', 'attribute']
-    extra = 1
+    can_delete = False
+    can_update = False
 
 
 class DatasetAdmin(AdminMetadata, admin.ModelAdmin):
