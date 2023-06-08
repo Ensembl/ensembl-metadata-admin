@@ -11,6 +11,7 @@
 #   limitations under the License.from django.apps import AppConfig
 
 from django.db import models
+from django.core.exceptions import ValidationError
 
 
 class Assembly(models.Model):
@@ -24,6 +25,17 @@ class Assembly(models.Model):
     tol_id = models.CharField(unique=True, max_length=32, blank=True, null=True)
     created = models.DateTimeField(blank=True, null=True)
     ensembl_name = models.CharField(unique=True, max_length=255, blank=True, null=True)
+
+    def save(self, *args, **kwargs):
+        if self.pk is not None:
+            if self.genome_set.filter(releases__isnull=False).exists():
+                raise ValidationError('Released data cannot be modified')
+        super().save(*args, **kwargs)
+
+    def delete(self, *args, **kwargs):
+        if self.genome_set.filter(releases__isnull=False).exists():  # check if it's associated with an EnsemblRelease
+            raise ValidationError('Released data cannot be deleted')
+        super().delete(*args, **kwargs)
 
     class Meta:
         db_table = 'assembly'
@@ -44,6 +56,17 @@ class AssemblySequence(models.Model):
     sequence_checksum = models.CharField(max_length=32, blank=True, null=True)
     ga4gh_identifier = models.CharField(max_length=32, blank=True, null=True)
 
+    def save(self, *args, **kwargs):
+        if self.pk is not None:
+            if self.assembly.genome_set.filter(releases__isnull=False).exists():
+                raise ValidationError('Released data cannot be modified')
+        super().save(*args, **kwargs)
+
+    def delete(self, *args, **kwargs):
+        if self.assembly.genome_set.filter(releases__isnull=False).exists():
+            raise ValidationError('Released data cannot be deleted')
+        super().delete(*args, **kwargs)
+
     class Meta:
         db_table = 'assembly_sequence'
         unique_together = (('assembly', 'accession'),)
@@ -53,7 +76,6 @@ class AssemblySequence(models.Model):
 
 
 class Attribute(models.Model):
-
     ATTRIBUTE_TYPES = [
         ('integer', 'Integer'),
         ('float', 'Float'),
@@ -80,12 +102,23 @@ class DatasetAttribute(models.Model):
     attribute = models.ForeignKey('Attribute', models.DO_NOTHING, related_name='datasets_set')
     dataset = models.ForeignKey('Dataset', models.DO_NOTHING, related_name='attributes')
 
+    def save(self, *args, **kwargs):
+        if self.pk is not None:
+            if self.dataset.genomes.filter(releases__isnull=False).exists():
+                raise ValidationError('Released data cannot be modified')
+        super().save(*args, **kwargs)
+
+    def delete(self, *args, **kwargs):
+        if self.dataset.genomes.filter(releases__isnull=False).exists():
+            raise ValidationError('Released data cannot be deleted')
+        super().delete(*args, **kwargs)
+
     class Meta:
         db_table = 'dataset_attribute'
-        unique_together = (('dataset', 'attribute','value'),)
+        unique_together = (('dataset', 'attribute', 'value'),)
 
     def __str__(self):
-        return self.type
+        return self.value
 
 
 class Dataset(models.Model):
@@ -106,7 +139,19 @@ class Dataset(models.Model):
 
     status = models.CharField(max_length=12, choices=statuses, default='string')
     genomes = models.ManyToManyField('Genome', through='GenomeDataset')
+
     # genome_datasets = models.ForeignKey('GenomeDataset', on_delete=models.CASCADE)
+    def save(self, *args, **kwargs):
+        if self.pk is not None:
+            if self.genomes.filter(releases__isnull=False).exists():
+                raise ValidationError('Released data cannot be modified')
+        super().save(*args, **kwargs)
+
+    def delete(self, *args, **kwargs):
+        if self.genomes.filter(releases__isnull=False).exists():
+            raise ValidationError('Released data cannot be deleted')
+        super().delete(*args, **kwargs)
+
     class Meta:
         db_table = 'dataset'
 
@@ -182,6 +227,16 @@ class Genome(models.Model):
     datasets = models.ManyToManyField('Dataset', through='GenomeDataset')
     releases = models.ManyToManyField('EnsemblRelease', through='GenomeRelease')
 
+    def save(self, *args, **kwargs):
+        if self.pk is not None and self.releases.exists():
+            raise ValidationError('Released data cannot be modified')
+        super().save(*args, **kwargs)
+
+    def delete(self, *args, **kwargs):
+        if self.releases.exists():
+            raise ValidationError('Released data cannot be deleted')
+        super().delete(*args, **kwargs)
+
     class Meta:
         db_table = 'genome'
 
@@ -196,6 +251,16 @@ class GenomeDataset(models.Model):
     release = models.ForeignKey(EnsemblRelease, models.DO_NOTHING, blank=True, null=True)
     is_current = models.IntegerField()
 
+    def save(self, *args, **kwargs):
+        if self.pk is not None and self.genome.releases.exists():
+            raise ValidationError('Released data cannot be modified')
+        super().save(*args, **kwargs)
+
+    def delete(self, *args, **kwargs):
+        if self.genome.releases.exists():
+            raise ValidationError('Released data cannot be deleted')
+        super().delete(*args, **kwargs)
+
     class Meta:
         db_table = 'genome_dataset'
 
@@ -205,6 +270,11 @@ class GenomeRelease(models.Model):
     genome = models.ForeignKey(Genome, models.DO_NOTHING)
     release = models.ForeignKey(EnsemblRelease, models.DO_NOTHING)
     is_current = models.IntegerField()
+
+    def delete(self, *args, **kwargs):
+        if self.genome.releases.exists():
+            raise ValidationError('Released data cannot be deleted')
+        super().delete(*args, **kwargs)
 
     class Meta:
         db_table = 'genome_release'
@@ -225,6 +295,17 @@ class Organism(models.Model):
     scientific_parlance_name = models.CharField(max_length=255, blank=True, null=True)
     groups = models.ManyToManyField('OrganismGroup', through='OrganismGroupMember')
     assemblies = models.ManyToManyField('Assembly', through='Genome')
+
+    def save(self, *args, **kwargs):
+        if self.pk is not None:
+            if self.genome_set.filter(releases__isnull=False).exists():
+                raise ValidationError('Released data cannot be modified')
+        super().save(*args, **kwargs)
+
+    def delete(self, *args, **kwargs):
+        if self.genome_set.filter(releases__isnull=False).exists():
+            raise ValidationError('Released data cannot be deleted')
+        super().delete(*args, **kwargs)
 
     class Meta:
         db_table = 'organism'

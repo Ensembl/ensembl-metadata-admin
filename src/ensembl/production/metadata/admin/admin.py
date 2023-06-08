@@ -161,19 +161,32 @@ class OrganismAdmin(AdminMetadata, admin.ModelAdmin):
 class DatasetAttributeInline(MetadataInline, admin.StackedInline):
     model = DatasetAttribute
     fields = ['value', 'attribute']
-    # sortable_field_name = 'type'
     can_delete = False
     can_update = False
 
 
 @admin.register(Dataset)
 class DatasetAdmin(AdminMetadata, admin.ModelAdmin):
-    read_only_fields = ('name', 'version', 'created', 'dataset_source', 'label', 'status')
-    search_fields = ('name', 'dataset_source', 'status')
-    list_display = ('name', 'version', 'created', 'dataset_source', 'label', 'status')
-    order = ('ensembl_name')
+    fields = ('name', 'version', 'dataset_type', 'created', 'dataset_source', 'label', 'status')
+    search_fields = ('genomes__genome_uuid', 'genomes__organism__display_name',
+                     'genomes__organism__ensembl_name', 'genomes__organism__scientific_name',
+                     'genomes__assembly__accession', 'genomes__assembly__name',
+                     'genomes__assembly__tol_id', 'genomes__assembly__ensembl_name')
+    list_display = ('name', 'label', 'version',)
+    ordering = ('-genomes__releases__version', 'genomes__organism__name')
     list_filter = (MetadataReleaseFilter, 'dataset_type', MetadataOrganismFilter,)
+
     inlines = (DatasetAttributeInline,)
+
+    def has_add_permission(self, request):
+        return True
+
+    def has_change_permission(self, request, obj=None):
+        return True
+
+    def get_queryset(self, request):
+        qs = super().get_queryset(request)
+        return qs.prefetch_related('genomes__organism', 'genomes__assembly', 'genomes__releases')
 
 
 class OrganismGroupInLine(MetadataInline, admin.StackedInline):
