@@ -88,16 +88,25 @@ class AssemblyAdmin(AdminMetadata, admin.ModelAdmin):
 #####RELEASE ADMIN PAGE#####
 class GenomeReleaseInLine(MetadataInline, admin.TabularInline):
     model = GenomeRelease
-    fields = ['genome_assembly', 'genome_organism', 'genome_datasets']
-    readonly_fields = ['genome_assembly', 'genome_organism', 'genome_datasets']
+    fields = ['genome_genome', 'genome_assembly', 'genome_organism', 'genome_datasets']
+    readonly_fields = ['genome_genome', 'genome_assembly', 'genome_organism', 'genome_datasets']
     can_delete = False
     can_update = False
     extra = 0
+
+    def genome_genome(self, obj):
+        url_view = reverse('admin:ensembl_metadata_genome_change',
+                           args=(obj.genome.genome_id,))
+        return mark_safe(u"<a href='" + url_view + "'>" + obj.genome.genome_uuid + "</a>")
+
+    genome_genome.short_description = "Genome"
 
     def genome_assembly(self, obj):
         url_view = reverse('admin:ensembl_metadata_assembly_change',
                            args=(obj.genome.assembly.assembly_id,))
         return mark_safe(u"<a href='" + url_view + "'>" + obj.genome.assembly.accession + "</a>")
+
+    genome_assembly.short_description = "Assembly"
 
     def genome_organism(self, obj):
         # return obj.genome.organism.ensembl_name
@@ -105,19 +114,12 @@ class GenomeReleaseInLine(MetadataInline, admin.TabularInline):
                            args=(obj.genome.organism.organism_id,))
         return mark_safe(f"<a href='{url_view}'>{obj.genome.organism.display_name}</a>")
 
-    def genome_datasets(self, obj):
-        output = ''
-        for i in obj.genome.datasets.all():
-            output += i.name + ', '
-        return output
+    genome_organism.short_description = "Organism"
 
-        # output = []
-        # for i in obj.genome.datasets.all():
-        #     # output += i.name + ', '
-        #     url_view = reverse('admin:ensembl_metadata_dataset_change',
-        #                        args=(i.dataset_id,))
-        #     output.append(mark_safe(u"<a href='" + url_view + "'>" + i.name + "</a>"))
-        # return output
+    def genome_datasets(self, obj):
+        return ', '.join([d['dataset_type__name'] for d in obj.genome.datasets.values('dataset_type__name')])
+
+    genome_datasets.short_description = "Datasets"
 
 
 @admin.register(EnsemblRelease)
@@ -247,7 +249,26 @@ class AttributeAdmin(AdminMetadata, admin.ModelAdmin):
     search_fields = ('ensembl_name', 'species_taxonomy_id',)
     list_display = ('name', 'label', 'description', 'type')
     list_per_page = 30
-    ordering = ('name', )
+    ordering = ('name',)
+
+    def has_add_permission(self, request):
+        return request.user.is_superuser or super().has_add_permission(request)
+
+    def has_delete_permission(self, request, obj=None):
+        return request.user.is_superuser
+
+
+class GenomeDatasetInline(MetadataInline, admin.TabularInline):
+    model = GenomeDataset
+
+
+@admin.register(Genome)
+class GenomeAdmin(AdminMetadata, admin.ModelAdmin):
+    list_display = ['genome_uuid', 'assembly', 'organism']
+    list_filter = ['releases']
+    search_fields = ['assembly', 'organism', 'genome_uuid']
+    readonly_fields = ['genome_uuid', 'assembly', 'organism', 'created']
+    inlines = [GenomeDatasetInline]
 
     def has_add_permission(self, request):
         return request.user.is_superuser or super().has_add_permission(request)
