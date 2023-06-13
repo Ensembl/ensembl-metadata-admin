@@ -25,6 +25,9 @@ class AdminMetadata(admin.ModelAdmin):
 
 
 class MetadataInline(InlineModelAdmin):
+    can_delete = False
+    can_update = False
+    extra = 0
 
     def has_view_permission(self, request, obj=None):
         return True
@@ -32,76 +35,99 @@ class MetadataInline(InlineModelAdmin):
 
 class GenomeInLine(MetadataInline, admin.TabularInline):
     model = Genome
-    can_delete = False
-    can_update = False
 
-    def has_view_permission(self, request, obj=None):
-        return True
+    def has_change_permission(self, request, obj=None):
+        return False
 
 
-class AssemblySequenceInline(MetadataInline, admin.TabularInline):
+@admin.register(AssemblySequence)
+class AssemblySequenceAdmin(AdminMetadata, admin.ModelAdmin):
     model = AssemblySequence
-    fields = ['name', 'length']
-    can_delete = False
-    can_update = False
+    fields = ['name', 'accession', 'length']
+    list_display = ['name', 'accession', 'length']
+    search_fields = ['assembly__accession']
+    # NOTE: the list filter might grow a lot, we'd like to find a better way
+    list_filter = ['assembly']
+    list_display_links = None
+    list_per_page = 30
+
+    def has_add_permission(self, request):
+        return False
+
+    def has_change_permission(self, request, obj=None):
+        return False
+
+    def has_delete_permission(self, request, obj=None):
+        return False
 
 
 @admin.register(Assembly)
 class AssemblyAdmin(AdminMetadata, admin.ModelAdmin):
-    read_only_fields = ('created',)
-    fields = ['accession', 'name', 'ucsc_name', 'accession_body', 'level', 'assembly_default']
+    fields = ['accession', 'name', 'ucsc_name', 'accession_body', 'level', 'assembly_default', 'assembly_sequence']
+    readonly_fields = ['accession', 'ucsc_name', 'accession_body', 'level', 'assembly_default', 'created',
+                       'assembly_sequence']
     list_filter = ('accession',)
     search_fields = ('accession',)
-    order = ('accession',)
-    inlines = (AssemblySequenceInline, GenomeInLine)
+    ordering = ('accession',)
+    list_display = ['accession', 'name', 'ucsc_name', 'level', 'assembly_sequence']
+    inlines = (GenomeInLine,)
+
+    def assembly_sequence(self, obj):
+        url_view = reverse('admin:ensembl_metadata_assemblysequence_changelist')
+        return mark_safe(f"<a href='{url_view}?assembly__assembly_id__exact={obj.assembly_id}'>View</a>")
+
+    assembly_sequence.short_description = "Sequences"
 
     def get_readonly_fields(self, request, obj=None):
-        read_only_fields = super().get_readonly_fields(request, obj)
+        readonly_fields = super().get_readonly_fields(request, obj)
         if not request.user.is_superuser:
-            read_only_fields += ('name',)
-        return read_only_fields
+            readonly_fields += ('name',)
+        return readonly_fields
 
 
 #####RELEASE ADMIN PAGE#####
 class GenomeReleaseInLine(MetadataInline, admin.TabularInline):
     model = GenomeRelease
-    fields = ['genome_assembly', 'genome_organism', 'genome_datasets']
-    readonly_fields = ['genome_assembly', 'genome_organism', 'genome_datasets']
+    fields = ['genome_genome', 'genome_assembly', 'genome_organism', 'genome_datasets']
+    readonly_fields = ['genome_genome', 'genome_assembly', 'genome_organism', 'genome_datasets']
     can_delete = False
     can_update = False
+    extra = 0
+
+    def genome_genome(self, obj):
+        url_view = reverse('admin:ensembl_metadata_genome_change',
+                           args=(obj.genome.genome_id,))
+        return mark_safe(u"<a href='" + url_view + "'>" + obj.genome.genome_uuid + "</a>")
+
+    genome_genome.short_description = "Genome"
 
     def genome_assembly(self, obj):
         url_view = reverse('admin:ensembl_metadata_assembly_change',
                            args=(obj.genome.assembly.assembly_id,))
         return mark_safe(u"<a href='" + url_view + "'>" + obj.genome.assembly.accession + "</a>")
 
+    genome_assembly.short_description = "Assembly"
+
     def genome_organism(self, obj):
         # return obj.genome.organism.ensembl_name
         url_view = reverse('admin:ensembl_metadata_organism_change',
                            args=(obj.genome.organism.organism_id,))
-        return mark_safe(u"<a href='" + url_view + "'>" + obj.genome.organism.ensembl_name + "</a>")
+        return mark_safe(f"<a href='{url_view}'>{obj.genome.organism.display_name}</a>")
+
+    genome_organism.short_description = "Organism"
 
     def genome_datasets(self, obj):
-        output = ''
-        for i in obj.genome.datasets.all():
-            output += i.name + ', '
-        return output
+        return ', '.join([d['dataset_type__name'] for d in obj.genome.datasets.values('dataset_type__name')])
 
-        # output = []
-        # for i in obj.genome.datasets.all():
-        #     # output += i.name + ', '
-        #     url_view = reverse('admin:ensembl_metadata_dataset_change',
-        #                        args=(i.dataset_id,))
-        #     output.append(mark_safe(u"<a href='" + url_view + "'>" + i.name + "</a>"))
-        # return output
+    genome_datasets.short_description = "Datasets"
 
 
 @admin.register(EnsemblRelease)
 class ReleaseAdmin(AdminMetadata, admin.ModelAdmin):
-    read_only_fields = ('version', 'release_date', 'site', 'release_type', 'is_current')
+    readonly_fields = ('release_date', 'site', 'release_type', 'is_current')
     search_fields = ('version',)
     list_display = ('version', 'release_date', 'site', 'release_type', 'is_current')
-    order = ('is_current', 'release_date',)
+    ordering = ('-is_current', '-release_date',)
     inlines = (GenomeReleaseInLine,)
 
     def genome_assembly(self, obj):
@@ -111,10 +137,10 @@ class ReleaseAdmin(AdminMetadata, admin.ModelAdmin):
         return output
 
     def get_readonly_fields(self, request, obj=None):
-        read_only_fields = super().get_readonly_fields(request, obj)
+        readonly_fields = super().get_readonly_fields(request, obj)
         if not request.user.is_superuser:
-            read_only_fields += ('version',)
-        return read_only_fields
+            readonly_fields += ('version', 'label')
+        return readonly_fields
 
 
 #####ORGANISM ADMIN PAGE#####
@@ -137,7 +163,6 @@ class OrganismAdmin(AdminMetadata, admin.ModelAdmin):
         'url_name', 'display_name', 'taxonomy_id', 'species_taxonomy_id',)
     list_filter = (MetadataReleaseFilter,)
     search_fields = ('ensembl_name', 'assemblies__accession')
-    order = ('')
     inlines = (OrganismGroupMemberInLine, GenomeInLine)
 
     def organism_assemblies(self, obj):
@@ -151,10 +176,10 @@ class OrganismAdmin(AdminMetadata, admin.ModelAdmin):
         return output
 
     def get_readonly_fields(self, request, obj=None):
-        read_only_fields = super().get_readonly_fields(request, obj)
+        readonly_fields = super().get_readonly_fields(request, obj)
         if not request.user.is_superuser:
-            read_only_fields += ('scientific_parlance_name',)
-        return read_only_fields
+            readonly_fields += ('scientific_parlance_name',)
+        return readonly_fields
 
 
 #####Dataset ADMIN PAGE#####
@@ -172,17 +197,16 @@ class DatasetAdmin(AdminMetadata, admin.ModelAdmin):
                      'genomes__organism__ensembl_name', 'genomes__organism__scientific_name',
                      'genomes__assembly__accession', 'genomes__assembly__name',
                      'genomes__assembly__tol_id', 'genomes__assembly__ensembl_name')
-    list_display = ('name', 'label', 'version',)
+    list_display = ('name', 'label', 'version')
     ordering = ('-genomes__releases__version', 'genomes__organism__name')
     list_filter = (MetadataReleaseFilter, 'dataset_type', MetadataOrganismFilter,)
-
     inlines = (DatasetAttributeInline,)
 
     def has_add_permission(self, request):
-        return True
+        return request.user.is_superuser or super().has_add_permission(request)
 
-    def has_change_permission(self, request, obj=None):
-        return True
+    def has_delete_permission(self, request, obj=None):
+        return request.user.is_superuser
 
     def get_queryset(self, request):
         qs = super().get_queryset(request)
@@ -215,10 +239,8 @@ class OrganismGroupAdmin(AdminMetadata, admin.ModelAdmin):
         return qs
 
     fields = ('name', 'type', 'code')
-    list_display = ('type', 'name', 'code')
-
+    list_display = ('name', 'type', 'code')
     list_filter = ('name',)
-
     inlines = (OrganismGroupInLine,)
 
 
@@ -226,4 +248,30 @@ class OrganismGroupAdmin(AdminMetadata, admin.ModelAdmin):
 class AttributeAdmin(AdminMetadata, admin.ModelAdmin):
     search_fields = ('ensembl_name', 'species_taxonomy_id',)
     list_display = ('name', 'label', 'description', 'type')
-    order = ('name')
+    list_per_page = 30
+    ordering = ('name',)
+
+    def has_add_permission(self, request):
+        return request.user.is_superuser or super().has_add_permission(request)
+
+    def has_delete_permission(self, request, obj=None):
+        return request.user.is_superuser
+
+
+class GenomeDatasetInline(MetadataInline, admin.TabularInline):
+    model = GenomeDataset
+
+
+@admin.register(Genome)
+class GenomeAdmin(AdminMetadata, admin.ModelAdmin):
+    list_display = ['genome_uuid', 'assembly', 'organism']
+    list_filter = ['releases']
+    search_fields = ['assembly', 'organism', 'genome_uuid']
+    readonly_fields = ['genome_uuid', 'assembly', 'organism', 'created']
+    inlines = [GenomeDatasetInline]
+
+    def has_add_permission(self, request):
+        return request.user.is_superuser or super().has_add_permission(request)
+
+    def has_delete_permission(self, request, obj=None):
+        return request.user.is_superuser
