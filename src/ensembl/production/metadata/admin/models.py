@@ -191,7 +191,7 @@ class EnsemblRelease(models.Model):
     version = models.DecimalField(max_digits=10, decimal_places=1)
     release_date = models.DateField()
     label = models.CharField(max_length=64, blank=True, null=True)
-    is_current = models.BooleanField()
+    is_current = models.BooleanField(default=False)
     site = models.ForeignKey('EnsemblSite', models.DO_NOTHING, blank=True, null=True)
     release_type = models.CharField(max_length=16)
     genomes = models.ManyToManyField('Genome', through='GenomeRelease')
@@ -249,7 +249,7 @@ class GenomeDataset(models.Model):
     dataset = models.ForeignKey(Dataset, models.DO_NOTHING, related_name='genome_datasets')
     genome = models.ForeignKey(Genome, models.DO_NOTHING)
     release = models.ForeignKey(EnsemblRelease, models.DO_NOTHING, blank=True, null=True)
-    is_current = models.IntegerField()
+    is_current = models.BooleanField(default=False)
 
     def save(self, *args, **kwargs):
         if self.pk is not None and self.genome.releases.exists():
@@ -269,7 +269,7 @@ class GenomeRelease(models.Model):
     genome_release_id = models.AutoField(primary_key=True)
     genome = models.ForeignKey(Genome, models.DO_NOTHING)
     release = models.ForeignKey(EnsemblRelease, models.DO_NOTHING)
-    is_current = models.IntegerField()
+    is_current = models.BooleanField(default=False)
 
     def delete(self, *args, **kwargs):
         if self.genome.releases.exists():
