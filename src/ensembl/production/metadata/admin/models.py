@@ -241,7 +241,7 @@ class Genome(models.Model):
         db_table = 'genome'
 
     def __str__(self):
-        return self.genome_uuid
+        return str(self.genome_uuid)
 
 
 class GenomeDataset(models.Model):

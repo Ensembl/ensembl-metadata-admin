@@ -243,21 +243,6 @@ class OrganismGroupAdmin(AdminMetadata, admin.ModelAdmin):
     list_filter = ('name',)
     inlines = (OrganismGroupInLine,)
 
-
-@admin.register(Attribute)
-class AttributeAdmin(AdminMetadata, admin.ModelAdmin):
-    search_fields = ('ensembl_name', 'species_taxonomy_id',)
-    list_display = ('name', 'label', 'description', 'type')
-    list_per_page = 30
-    ordering = ('name',)
-
-    def has_add_permission(self, request):
-        return request.user.is_superuser or super().has_add_permission(request)
-
-    def has_delete_permission(self, request, obj=None):
-        return request.user.is_superuser
-
-
 class GenomeDatasetInline(MetadataInline, admin.TabularInline):
     model = GenomeDataset
 
@@ -269,6 +254,20 @@ class GenomeAdmin(AdminMetadata, admin.ModelAdmin):
     search_fields = ['assembly', 'organism', 'genome_uuid']
     readonly_fields = ['genome_uuid', 'assembly', 'organism', 'created']
     inlines = [GenomeDatasetInline]
+
+    def has_add_permission(self, request):
+        return request.user.is_superuser or super().has_add_permission(request)
+
+    def has_delete_permission(self, request, obj=None):
+        return request.user.is_superuser
+
+
+@admin.register(Attribute)
+class AttributeAdmin(AdminMetadata, admin.ModelAdmin):
+    search_fields = ('name', 'type',)
+    list_display = ('name', 'label', 'description', 'type')
+    list_per_page = 30
+    ordering = ('name',)
 
     def has_add_permission(self, request):
         return request.user.is_superuser or super().has_add_permission(request)

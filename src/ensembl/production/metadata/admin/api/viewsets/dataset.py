@@ -58,14 +58,15 @@ class DatasetViewSet(viewsets.ModelViewSet):
 
         #Require Genome_uuid, dataset_type_name, dataset_source
         genome_uuid = request.data.get('genome_uuid')
-        genome_uuid = UUID(genome_uuid)
-        print
         dataset_type_name = request.data.get('dataset_type')
         dataset_source_name = request.data.get('dataset_source')
 
         if not all([genome_uuid, dataset_type_name, dataset_source_name]):
             return Response({'error': 'Required fields not provided'}, status=status.HTTP_400_BAD_REQUEST)
         # Check if  Genome_uuid, dataset_type_name, dataset_source are present in the database:
+        if not DatasetSource.objects.filter(name=dataset_source_name).exists():
+            return Response({'error': 'The provided dataset_source_name does not exist in the database'},
+                            status=status.HTTP_400_BAD_REQUEST)
         try:
             Genome.objects.get(genome_uuid=genome_uuid)
         except Genome.DoesNotExist:
@@ -76,9 +77,7 @@ class DatasetViewSet(viewsets.ModelViewSet):
             return Response({'error': 'The provided dataset_type_name does not exist in the database'},
                             status=status.HTTP_400_BAD_REQUEST)
 
-        if not DatasetSource.objects.filter(name=dataset_source_name).exists():
-            return Response({'error': 'The provided dataset_source_name does not exist in the database'},
-                            status=status.HTTP_400_BAD_REQUEST)
+
 
         #Check if a dateset is already present and not release:
         existing_datasets = Dataset.objects.filter(
@@ -97,20 +96,3 @@ class DatasetViewSet(viewsets.ModelViewSet):
         headers = self.get_success_headers(serializer.data)
         return Response(serializer.data, status=status.HTTP_201_CREATED, headers=headers)
 
-        # Check username and return
-
-#
-# #PUT
-#     def update(self, request, *args, **kwargs):
-#         partial = kwargs.pop('partial', False)
-#         instance = self.get_object()
-#         serializer = self.get_serializer(instance, data=request.data, partial=partial)
-#         serializer.is_valid(raise_exception=True)
-#         self.perform_update(serializer)
-#         return Response(serializer.data)
-#
-# #DELETE
-#     def destroy(self, request, *args, **kwargs):
-#         instance = self.get_object()
-#         self.perform_destroy(instance)
-#         return Response(status=status.HTTP_204_NO_CONTENT)

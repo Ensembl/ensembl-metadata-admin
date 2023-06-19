@@ -54,32 +54,28 @@ class DatasetViewSetTestCase(APITestCase):
 
     def test_dataset_create_no_genome(self):
         payload = {
+            'user': 'testuser',
             'genome_uuid': 'a7335667-9999-11ec-a39d-005056b38ce3',
             "name": "Test Dataset",
             "description": "This is a test dataset.",
             "label": "This is a test.",
-            "dataset_type": {
-                "name": "assembly"
-            },
-            "dataset_source": {
-                "name": "homo_sapiens_core_108_38"
-            }}
+            "dataset_type": "variation",
+            "dataset_source": "homo_sapiens_core_108_38"
+        }
 
         response = self.client.post(reverse('ensembl_metadata:dataset-list'), payload, format='json')
-        self.assertEqual(response.status_code, status.HTTP_404_NOT_FOUND)
+        self.assertEqual(response.status_code, status.HTTP_400_BAD_REQUEST)
 
     def test_dataset_create_success(self):
         payload = {
-            'genome_uuid': 'a73351f7-93e7-11ec-a39d-005056b38ce3',
+            'user': 'testuser',
+            'genome_uuid': 'a7335667-93e7-11ec-a39d-005056b38ce3',
             "name": "Test Dataset",
             "description": "This is a test dataset.",
             "label": "This is a test.",
-            "dataset_type": {
-                "name": "assembly"
-            },
-            "dataset_source": {
-                "name": "homo_sapiens_core_108_38"
-            }}
+            "dataset_type": "variation",
+            "dataset_source": "homo_sapiens_core_108_38"
+        }
 
         response = self.client.post(reverse('ensembl_metadata:dataset-list'), payload, format='json')
         self.assertEqual(response.status_code, status.HTTP_201_CREATED)
