@@ -16,7 +16,7 @@ from django.urls import path, include
 from drf_spectacular.views import SpectacularSwaggerView
 
 urlpatterns = [
-    path(f'api/metadata/', include('ensembl.production.metadata.admin.api.urls')),
+    path(f'api/ensembl_metadata/', include('ensembl.production.metadata.admin.api.urls')),
     path('', admin.site.urls),
     path(
         'api/docs/',

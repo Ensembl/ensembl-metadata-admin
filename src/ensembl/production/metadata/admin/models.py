@@ -9,7 +9,7 @@
 #   WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 #   See the License for the specific language governing permissions and
 #   limitations under the License.from django.apps import AppConfig
-
+import uuid
 from django.db import models
 from django.core.exceptions import ValidationError
 
@@ -23,7 +23,7 @@ class Assembly(models.Model):
     accession_body = models.CharField(max_length=32, blank=True, null=True)
     assembly_default = models.CharField(max_length=32, blank=True, null=True)
     tol_id = models.CharField(unique=True, max_length=32, blank=True, null=True)
-    created = models.DateTimeField(blank=True, null=True)
+    created = models.DateTimeField(blank=True, null=True, auto_now_add=True)
     ensembl_name = models.CharField(unique=True, max_length=255, blank=True, null=True)
 
     def save(self, *args, **kwargs):
@@ -123,11 +123,11 @@ class DatasetAttribute(models.Model):
 
 class Dataset(models.Model):
     dataset_id = models.AutoField(primary_key=True)
-    dataset_uuid = models.CharField(unique=True, max_length=128)
+    dataset_uuid = models.UUIDField(default=uuid.uuid4, editable=False)
     dataset_type = models.ForeignKey('DatasetType', models.DO_NOTHING)
     name = models.CharField(max_length=128)
     version = models.CharField(max_length=128, blank=True, null=True)
-    created = models.DateTimeField()
+    created = models.DateTimeField(auto_now_add=True)
     dataset_source = models.ForeignKey('DatasetSource', models.DO_NOTHING)
     label = models.CharField(max_length=128)
     # attributes = models.ManyToManyField('Attribute', through=DatasetAttribute)
@@ -220,10 +220,10 @@ class EnsemblSite(models.Model):
 
 class Genome(models.Model):
     genome_id = models.AutoField(primary_key=True)
-    genome_uuid = models.CharField(unique=True, max_length=128)
+    genome_uuid = models.UUIDField(default=uuid.uuid4, editable=False)
     assembly = models.ForeignKey(Assembly, models.DO_NOTHING)
     organism = models.ForeignKey('Organism', models.DO_NOTHING)
-    created = models.DateTimeField()
+    created = models.DateTimeField(auto_now_add=True)
     datasets = models.ManyToManyField('Dataset', through='GenomeDataset')
     releases = models.ManyToManyField('EnsemblRelease', through='GenomeRelease')
 

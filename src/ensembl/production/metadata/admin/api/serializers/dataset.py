@@ -10,8 +10,11 @@
 #   See the License for the specific language governing permissions and
 #   limitations under the License.from django.apps import AppConfig
 from rest_framework import serializers
+from django.db import transaction
+from ensembl.production.metadata.admin.models import Dataset, Attribute, DatasetAttribute, DatasetSource, DatasetType, \
+    Genome, GenomeDataset
+from django.core.exceptions import ObjectDoesNotExist, ValidationError
 
-from ensembl.production.metadata.admin.models import Dataset, Attribute, DatasetAttribute, DatasetSource, DatasetType
 
 class AttributeSerializer(serializers.ModelSerializer):
     class Meta:
@@ -26,26 +29,21 @@ class DatasetAttributeSerializer(serializers.ModelSerializer):
 
     name = serializers.StringRelatedField(many=False, read_only=True, source='attribute')
 
-class DatasetSourceSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = DatasetSource
-        fields = ['name','type']
-
-class DatasetTypeSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = DatasetType
-        fields = ['name','topic']
-
 class DatasetSerializer(serializers.ModelSerializer):
-
-    attributes = DatasetAttributeSerializer(many=True)
+    attributes = DatasetAttributeSerializer(many=True,required=False)
+    genome_uuid = serializers.UUIDField(write_only=True)
     genome_datasets = serializers.SerializerMethodField()
-    dataset_source = DatasetSourceSerializer()
-    dataset_type = DatasetTypeSerializer()
-
+    dataset_source = serializers.SlugRelatedField(
+        slug_field='name',
+        queryset=DatasetSource.objects.all()
+    )
+    dataset_type = serializers.SlugRelatedField(
+        slug_field='name',
+        queryset=DatasetType.objects.all()
+    )
     class Meta:
         model = Dataset
-        fields = ["dataset_uuid", "genome_datasets", "name", "label", "attributes","dataset_source","dataset_type"]
+        fields = ["dataset_uuid", "genome_datasets", "name", "label", "attributes", "dataset_source", "dataset_type", 'genome_uuid']
 
     def get_genome_datasets(self, obj):
         genome_datasets = obj.genome_datasets.all()
@@ -62,4 +60,36 @@ class DatasetSerializer(serializers.ModelSerializer):
             })
         return serialized_data
 
+    def create(self, validated_data):
 
+        # Ensure that it is the data is commited in a single transaction
+        with transaction.atomic():
+            genome_uuid = validated_data.pop('genome_uuid')
+            genome = Genome.objects.get(genome_uuid=genome_uuid)
+
+            dataset_attributes_data = validated_data.get('dataset_attribute',[])
+
+
+            # Create Dataset
+            new_dataset = Dataset.objects.create(**validated_data)
+            # Link new dataset to the genome
+            GenomeDataset.objects.create(genome=genome, dataset=new_dataset)
+            # Create DatasetAttributes if provided
+            for attr_data in dataset_attributes_data:
+                attr_value = attr_data.get('value')
+                attr_name = attr_data.get('name')
+                attr_id = attr_data.get('attribute_id')
+
+                try:
+                    if attr_name:
+                        attribute = Attribute.objects.get(name=attr_name)
+                    elif attr_id:
+                        attribute = Attribute.objects.get(attribute_id=attr_id)
+                    else:
+                        raise serializers.ValidationError("Attribute identifier (name or attribute_id) is required.")
+                except ObjectDoesNotExist:
+                    raise serializers.ValidationError("Attribute not found.")
+
+                DatasetAttribute.objects.create(dataset=new_dataset, attribute=attribute, value=attr_value)
+
+        return new_dataset
