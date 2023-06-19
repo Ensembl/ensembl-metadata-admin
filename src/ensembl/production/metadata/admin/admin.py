@@ -13,7 +13,7 @@ from django.contrib.admin.options import InlineModelAdmin
 from django.urls import reverse
 from django.utils.safestring import mark_safe
 from ensembl.production.metadata.admin.filters import *
-
+from .models import Attribute, AssemblySequence, Assembly, EnsemblRelease, Organism, Dataset, OrganismGroup, Genome
 
 # Temporary class to allow access only to turn everything readonly
 class AdminMetadata(admin.ModelAdmin):
@@ -40,6 +40,20 @@ class GenomeInLine(MetadataInline, admin.TabularInline):
         return False
 
 
+@admin.register(Attribute)
+class AttributeAdmin(AdminMetadata, admin.ModelAdmin):
+    search_fields = ('name', 'type',)
+    list_display = ('name', 'label', 'description', 'type')
+    list_per_page = 30
+    ordering = ('name',)
+
+    def has_add_permission(self, request):
+        return request.user.is_superuser or super().has_add_permission(request)
+
+    def has_delete_permission(self, request, obj=None):
+        return request.user.is_superuser
+
+#
 @admin.register(AssemblySequence)
 class AssemblySequenceAdmin(AdminMetadata, admin.ModelAdmin):
     model = AssemblySequence
@@ -59,8 +73,8 @@ class AssemblySequenceAdmin(AdminMetadata, admin.ModelAdmin):
 
     def has_delete_permission(self, request, obj=None):
         return False
-
-
+#
+#
 @admin.register(Assembly)
 class AssemblyAdmin(AdminMetadata, admin.ModelAdmin):
     fields = ['accession', 'name', 'ucsc_name', 'accession_body', 'level', 'assembly_default', 'assembly_sequence']
@@ -83,9 +97,9 @@ class AssemblyAdmin(AdminMetadata, admin.ModelAdmin):
         if not request.user.is_superuser:
             readonly_fields += ('name',)
         return readonly_fields
-
-
-#####RELEASE ADMIN PAGE#####
+#
+#
+# #####RELEASE ADMIN PAGE#####
 class GenomeReleaseInLine(MetadataInline, admin.TabularInline):
     model = GenomeRelease
     fields = ['genome_genome', 'genome_assembly', 'genome_organism', 'genome_datasets']
@@ -141,11 +155,11 @@ class ReleaseAdmin(AdminMetadata, admin.ModelAdmin):
         if not request.user.is_superuser:
             readonly_fields += ('version', 'label')
         return readonly_fields
-
-
-#####ORGANISM ADMIN PAGE#####
-
-
+#
+#
+# #####ORGANISM ADMIN PAGE#####
+#
+#
 class OrganismGroupMemberInLine(MetadataInline, admin.StackedInline):
     model = OrganismGroupMember
     fields = ['is_reference', 'organism_group']
@@ -180,16 +194,16 @@ class OrganismAdmin(AdminMetadata, admin.ModelAdmin):
         if not request.user.is_superuser:
             readonly_fields += ('scientific_parlance_name',)
         return readonly_fields
-
-
-#####Dataset ADMIN PAGE#####
+#
+#
+# #####Dataset ADMIN PAGE#####
 class DatasetAttributeInline(MetadataInline, admin.StackedInline):
     model = DatasetAttribute
     fields = ['value', 'attribute']
     can_delete = False
     can_update = False
-
-
+#
+#
 @admin.register(Dataset)
 class DatasetAdmin(AdminMetadata, admin.ModelAdmin):
     fields = ('name', 'version', 'dataset_type', 'created', 'dataset_source', 'label', 'status')
@@ -211,8 +225,8 @@ class DatasetAdmin(AdminMetadata, admin.ModelAdmin):
     def get_queryset(self, request):
         qs = super().get_queryset(request)
         return qs.prefetch_related('genomes__organism', 'genomes__assembly', 'genomes__releases')
-
-
+#
+#
 class OrganismGroupInLine(MetadataInline, admin.StackedInline):
     model = OrganismGroupMember
     fields = ('is_reference', 'group_organisms')
@@ -227,9 +241,9 @@ class OrganismGroupInLine(MetadataInline, admin.StackedInline):
         url_view = reverse('admin:ensembl_metadata_organism_change',
                            args=(obj.organism.organism_id,))
         return mark_safe(u"<a href='" + url_view + "'>" + obj.organism.ensembl_name + "</a>")
-
-
-# Groups Admin Section
+#
+#
+# # Groups Admin Section
 @admin.register(OrganismGroup)
 class OrganismGroupAdmin(AdminMetadata, admin.ModelAdmin):
     def get_queryset(self, request):
@@ -242,7 +256,7 @@ class OrganismGroupAdmin(AdminMetadata, admin.ModelAdmin):
     list_display = ('name', 'type', 'code')
     list_filter = ('name',)
     inlines = (OrganismGroupInLine,)
-
+#
 class GenomeDatasetInline(MetadataInline, admin.TabularInline):
     model = GenomeDataset
 
@@ -260,17 +274,5 @@ class GenomeAdmin(AdminMetadata, admin.ModelAdmin):
 
     def has_delete_permission(self, request, obj=None):
         return request.user.is_superuser
-
-
-@admin.register(Attribute)
-class AttributeAdmin(AdminMetadata, admin.ModelAdmin):
-    search_fields = ('name', 'type',)
-    list_display = ('name', 'label', 'description', 'type')
-    list_per_page = 30
-    ordering = ('name',)
-
-    def has_add_permission(self, request):
-        return request.user.is_superuser or super().has_add_permission(request)
-
-    def has_delete_permission(self, request, obj=None):
-        return request.user.is_superuser
+#
+#
