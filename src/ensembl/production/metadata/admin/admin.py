@@ -305,3 +305,14 @@ class GenomeAdmin(AdminMetadata, admin.ModelAdmin):
 
     def has_delete_permission(self, request, obj=None):
         return request.user.is_superuser
+
+@admin.register(DatasetType)
+class GenomeAdmin(AdminMetadata, admin.ModelAdmin):
+    list_display = ['name', 'label', 'topic', 'description', 'details_uri']
+    search_fields = ['type', 'topic']
+
+    def has_add_permission(self, request):
+        return request.user.is_superuser or super().has_add_permission(request)
+
+    def has_delete_permission(self, request, obj=None):
+        return request.user.is_superuser
