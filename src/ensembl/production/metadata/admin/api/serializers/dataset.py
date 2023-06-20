@@ -29,8 +29,9 @@ class DatasetAttributeSerializer(serializers.ModelSerializer):
 
     name = serializers.StringRelatedField(many=False, read_only=True, source='attribute')
 
+
 class DatasetSerializer(serializers.ModelSerializer):
-    attributes = DatasetAttributeSerializer(many=True,required=False)
+    attributes = DatasetAttributeSerializer(many=True, required=False)
     genome_uuid = serializers.UUIDField(write_only=True)
     genome_datasets = serializers.SerializerMethodField()
     dataset_source = serializers.SlugRelatedField(
@@ -41,9 +42,11 @@ class DatasetSerializer(serializers.ModelSerializer):
         slug_field='name',
         queryset=DatasetType.objects.all()
     )
+
     class Meta:
         model = Dataset
-        fields = ["dataset_uuid", "genome_datasets", "name", "label", "attributes", "dataset_source", "dataset_type", 'genome_uuid']
+        fields = ["dataset_uuid", "genome_datasets", "name", "label", "attributes", "dataset_source", "dataset_type",
+                  'genome_uuid']
 
     def get_genome_datasets(self, obj):
         genome_datasets = obj.genome_datasets.all()
@@ -67,8 +70,7 @@ class DatasetSerializer(serializers.ModelSerializer):
             genome_uuid = validated_data.pop('genome_uuid')
             genome = Genome.objects.get(genome_uuid=genome_uuid)
 
-            dataset_attributes_data = validated_data.get('dataset_attribute',[])
-
+            dataset_attributes_data = validated_data.get('dataset_attribute', [])
 
             # Create Dataset
             new_dataset = Dataset.objects.create(**validated_data)

@@ -11,10 +11,11 @@
 #   limitations under the License.from django.apps import AppConfig
 import uuid
 from builtins import super
-
 from django.shortcuts import get_object_or_404
 from django.contrib.auth import get_user_model
 from rest_framework import viewsets, status
+from rest_framework.exceptions import ValidationError
+
 from ensembl.production.metadata.admin.api.serializers import DatasetSerializer, GenomeSerializer
 from ensembl.production.metadata.admin.models import Dataset, DatasetType, DatasetSource, GenomeDataset, \
     DatasetAttribute
@@ -102,6 +103,17 @@ class DatasetViewSet(viewsets.ModelViewSet):
 
     # DELETE:
     def destroy(self, request, *args, **kwargs):
-        instance = self.get_object()
-        self.perform_destroy(instance)
-        return Response(status=status.HTTP_204_NO_CONTENT)
+        try:
+            instance = self.get_object()
+        except Dataset.DoesNotExist:
+            return Response({'error': 'Dataset not found'}, status=status.HTTP_404_NOT_FOUND)
+
+        try:
+            GenomeDataset.objects.filter(dataset=instance).delete()
+            DatasetAttribute.objects.filter(dataset=instance).delete()
+            if Dataset.objects.filter(dataset_source=instance.dataset_source).count() == 1:
+                instance.dataset_source.delete()
+            self.perform_destroy(instance)
+            return Response(status=status.HTTP_204_NO_CONTENT)
+        except ValidationError:
+            return Response({'error': 'Released data cannot be deleted'}, status=status.HTTP_400_BAD_REQUEST)

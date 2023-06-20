@@ -80,7 +80,24 @@ class DatasetViewSetTestCase(APITestCase):
         response = self.client.post(reverse('ensembl_metadata:dataset-list'), payload, format='json')
         self.assertEqual(response.status_code, status.HTTP_201_CREATED)
 
-    def test_dataset_viewset_delete(self):
-        dataset_uuid = 'c98064f7-9861-4797-9999-30ad1567d816'
-        response = self.client.delete(reverse('ensembl_metadata:dataset-detail', args=[dataset_uuid]))
-        self.assertEqual(response.status_code, status.HTTP_204_NO_CONTENT)
+    def test_dataset_delete_success(self):
+        # first create a dataset to delete
+        payload = {
+            'user': 'testuser',
+            'genome_uuid': 'a7335667-93e7-11ec-a39d-005056b38ce3',
+            "name": "Test Dataset for deletion",
+            "description": "This is a test dataset for deletion.",
+            "label": "This is a test for deletion.",
+            "dataset_type": "variation",
+            "dataset_source": "homo_sapiens_core_108_38"
+        }
+
+        create_response = self.client.post(reverse('ensembl_metadata:dataset-list'), payload, format='json')
+        self.assertEqual(create_response.status_code, status.HTTP_201_CREATED)
+
+        dataset_uuid = create_response.data['dataset_uuid']
+        delete_response = self.client.delete(reverse('ensembl_metadata:dataset-detail', args=[dataset_uuid]))
+        self.assertEqual(delete_response.status_code, status.HTTP_204_NO_CONTENT)
+
+        get_response = self.client.get(reverse('ensembl_metadata:dataset-detail', args=[dataset_uuid]))
+        self.assertEqual(get_response.status_code, status.HTTP_404_NOT_FOUND)
