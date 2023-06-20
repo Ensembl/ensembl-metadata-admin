@@ -259,7 +259,6 @@ class OrganismGroupAdmin(AdminMetadata, admin.ModelAdmin):
     inlines = (OrganismGroupInLine,)
 
 
-#
 class GenomeDatasetInline(MetadataInline, admin.TabularInline):
     model = GenomeDataset
 
