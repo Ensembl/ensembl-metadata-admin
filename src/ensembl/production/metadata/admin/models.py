@@ -118,7 +118,7 @@ class DatasetAttribute(models.Model):
         unique_together = (('dataset', 'attribute', 'value'),)
 
     def __str__(self):
-        return self.value
+        return ""
 
 
 class Dataset(models.Model):
@@ -151,6 +151,10 @@ class Dataset(models.Model):
         if self.genomes.filter(releases__isnull=False).exists():
             raise ValidationError('Released data cannot be deleted')
         super().delete(*args, **kwargs)
+
+    def status_value(self):
+        return ("%s" % (self.status))
+
 
     class Meta:
         db_table = 'dataset'
