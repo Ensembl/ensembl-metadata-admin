@@ -14,29 +14,36 @@ from rest_framework import serializers
 
 from ensembl.production.metadata.admin.models import Genome, Assembly, Organism, Dataset, EnsemblRelease
 from django.urls import reverse
+
+
 class AssemblySerializer(serializers.ModelSerializer):
     class Meta:
         model = Assembly
         fields = ["accession"]
+
+
 class DatasetSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
         model = Dataset
         fields = ['name']
+
 
 class OrganismSerializer(serializers.ModelSerializer):
     class Meta:
         model = Organism
         fields = ["scientific_name", "ensembl_name"]
 
+
 class ReleaseSerializer(serializers.ModelSerializer):
     class Meta:
         model = EnsemblRelease
         fields = ["version"]
 
+
 class GenomeSerializer(serializers.ModelSerializer):
     class Meta:
         model = Genome
-        fields = ["genome_uuid","created","releases","datasets", "assembly", "organism"]
+        fields = ["genome_uuid", "created", "releases", "datasets", "assembly", "organism"]
 
     assembly = AssemblySerializer(read_only=True, many=False)
     organism = OrganismSerializer(many=False, read_only=True)

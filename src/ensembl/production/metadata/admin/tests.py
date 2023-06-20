@@ -37,7 +37,9 @@ class DatasetViewSetTestCase(APITestCase):
     fixtures = ['nine_assemblies.json']
 
     def setUp(self):
-        self.client = APIClient()
+        # self.client = APIClient()
+        self.user = User.objects.create_user(username='test_user', password='test', is_superuser=True, is_staff=True)
+        self.client.login(username='test_user', password='test')
 
     def test_dataset_viewset_get(self):
         response = self.client.get(reverse('ensembl_metadata:dataset-list'))
@@ -49,3 +51,53 @@ class DatasetViewSetTestCase(APITestCase):
         response = self.client.get(reverse('ensembl_metadata:dataset-detail', args=[dataset_uuid]))
         self.assertEqual(response.status_code, status.HTTP_200_OK)
         self.assertIsNotNone(response.data)
+
+    def test_dataset_create_no_genome(self):
+        payload = {
+            'user': 'testuser',
+            'genome_uuid': 'a7335667-9999-11ec-a39d-005056b38ce3',
+            "name": "Test Dataset",
+            "description": "This is a test dataset.",
+            "label": "This is a test.",
+            "dataset_type": "variation",
+            "dataset_source": "homo_sapiens_core_108_38"
+        }
+
+        response = self.client.post(reverse('ensembl_metadata:dataset-list'), payload, format='json')
+        self.assertEqual(response.status_code, status.HTTP_400_BAD_REQUEST)
+
+    def test_dataset_create_success(self):
+        payload = {
+            'user': 'testuser',
+            'genome_uuid': 'a7335667-93e7-11ec-a39d-005056b38ce3',
+            "name": "Test Dataset",
+            "description": "This is a test dataset.",
+            "label": "This is a test.",
+            "dataset_type": "variation",
+            "dataset_source": "homo_sapiens_core_108_38"
+        }
+
+        response = self.client.post(reverse('ensembl_metadata:dataset-list'), payload, format='json')
+        self.assertEqual(response.status_code, status.HTTP_201_CREATED)
+
+    def test_dataset_delete_success(self):
+        # first create a dataset to delete
+        payload = {
+            'user': 'testuser',
+            'genome_uuid': 'a7335667-93e7-11ec-a39d-005056b38ce3',
+            "name": "Test Dataset for deletion",
+            "description": "This is a test dataset for deletion.",
+            "label": "This is a test for deletion.",
+            "dataset_type": "variation",
+            "dataset_source": "homo_sapiens_core_108_38"
+        }
+
+        create_response = self.client.post(reverse('ensembl_metadata:dataset-list'), payload, format='json')
+        self.assertEqual(create_response.status_code, status.HTTP_201_CREATED)
+
+        dataset_uuid = create_response.data['dataset_uuid']
+        delete_response = self.client.delete(reverse('ensembl_metadata:dataset-detail', args=[dataset_uuid]))
+        self.assertEqual(delete_response.status_code, status.HTTP_204_NO_CONTENT)
+
+        get_response = self.client.get(reverse('ensembl_metadata:dataset-detail', args=[dataset_uuid]))
+        self.assertEqual(get_response.status_code, status.HTTP_404_NOT_FOUND)
