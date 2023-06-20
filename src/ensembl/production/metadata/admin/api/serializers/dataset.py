@@ -80,15 +80,12 @@ class DatasetSerializer(serializers.ModelSerializer):
             for attr_data in dataset_attributes_data:
                 attr_value = attr_data.get('value')
                 attr_name = attr_data.get('name')
-                attr_id = attr_data.get('attribute_id')
 
                 try:
                     if attr_name:
                         attribute = Attribute.objects.get(name=attr_name)
-                    elif attr_id:
-                        attribute = Attribute.objects.get(attribute_id=attr_id)
                     else:
-                        raise serializers.ValidationError("Attribute identifier (name or attribute_id) is required.")
+                        raise serializers.ValidationError("Attribute identifier name is required.")
                 except ObjectDoesNotExist:
                     raise serializers.ValidationError("Attribute not found.")
 

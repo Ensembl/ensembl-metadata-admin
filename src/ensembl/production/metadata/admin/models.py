@@ -118,7 +118,7 @@ class DatasetAttribute(models.Model):
         unique_together = (('dataset', 'attribute', 'value'),)
 
     def __str__(self):
-        return ""
+        return self.attribute.name+':'+self.value
 
 
 class Dataset(models.Model):

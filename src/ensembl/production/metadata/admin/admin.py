@@ -24,6 +24,15 @@ class AdminMetadata(admin.ModelAdmin):
     def has_module_permission(self, request):
         return True
 
+    def has_add_permission(self, request):
+        return request.user.is_superuser or super().has_add_permission(request)
+
+    def has_delete_permission(self, request, obj=None):
+        return request.user.is_superuser
+
+    def has_change_permission(self, request, obj=None):
+        return request.user.is_superuser or super().has_add_permission(request)
+
 
 class MetadataInline(InlineModelAdmin):
     can_delete = False
@@ -48,12 +57,6 @@ class AttributeAdmin(AdminMetadata, admin.ModelAdmin):
     list_per_page = 30
     ordering = ('name',)
 
-    def has_add_permission(self, request):
-        return request.user.is_superuser or super().has_add_permission(request)
-
-    def has_delete_permission(self, request, obj=None):
-        return request.user.is_superuser
-
 
 @admin.register(AssemblySequence)
 class AssemblySequenceAdmin(AdminMetadata, admin.ModelAdmin):
@@ -65,15 +68,6 @@ class AssemblySequenceAdmin(AdminMetadata, admin.ModelAdmin):
     list_filter = ['assembly']
     list_display_links = None
     list_per_page = 30
-
-    def has_add_permission(self, request):
-        return False
-
-    def has_change_permission(self, request, obj=None):
-        return False
-
-    def has_delete_permission(self, request, obj=None):
-        return False
 
 
 @admin.register(Assembly)
@@ -142,7 +136,7 @@ class ReleaseAdmin(AdminMetadata, admin.ModelAdmin):
     fields = ('release_date', 'site', 'release_type', 'is_current', 'label')
     readonly_fields = ('release_date', 'site', 'release_type', 'is_current')
     search_fields = ('version',)
-    list_display = ('version', 'release_date','label', 'site', 'release_type', 'is_current')
+    list_display = ('version', 'release_date', 'label', 'site', 'release_type', 'is_current')
     ordering = ('-is_current', '-release_date',)
     inlines = (GenomeReleaseInLine,)
 
@@ -217,12 +211,6 @@ class DatasetAdmin(AdminMetadata, admin.ModelAdmin):
     list_filter = (MetadataReleaseFilter, 'dataset_type', MetadataOrganismFilter, 'status')
     inlines = (DatasetAttributeInline,)
 
-    def has_add_permission(self, request):
-        return request.user.is_superuser or super().has_add_permission(request)
-
-    def has_delete_permission(self, request, obj=None):
-        return request.user.is_superuser
-
     def get_queryset(self, request):
         qs = super().get_queryset(request)
         return qs.prefetch_related('genomes__organism', 'genomes__assembly', 'genomes__releases')
@@ -289,43 +277,20 @@ class GenomeAdmin(AdminMetadata, admin.ModelAdmin):
     readonly_fields = ['genome_uuid', 'assembly', 'organism', 'created']
     inlines = [GenomeDatasetInline]
 
-    def has_add_permission(self, request):
-        return request.user.is_superuser or super().has_add_permission(request)
-
-    def has_delete_permission(self, request, obj=None):
-        return request.user.is_superuser
-
 
 @admin.register(DatasetSource)
 class GenomeAdmin(AdminMetadata, admin.ModelAdmin):
     list_display = ['name', 'type']
     search_fields = ['type', 'name']
 
-    def has_add_permission(self, request):
-        return request.user.is_superuser or super().has_add_permission(request)
-
-    def has_delete_permission(self, request, obj=None):
-        return request.user.is_superuser
 
 @admin.register(DatasetType)
 class GenomeAdmin(AdminMetadata, admin.ModelAdmin):
     list_display = ['name', 'label', 'topic', 'description', 'details_uri']
     search_fields = ['type', 'topic']
 
-    def has_add_permission(self, request):
-        return request.user.is_superuser or super().has_add_permission(request)
-
-    def has_delete_permission(self, request, obj=None):
-        return request.user.is_superuser
-
 
 @admin.register(EnsemblSite)
 class GenomeAdmin(AdminMetadata, admin.ModelAdmin):
     list_display = ['name', 'label', 'uri']
     search_fields = ['name', 'label', 'uri']
-
-    def has_add_permission(self, request):
-        return request.user.is_superuser or super().has_add_permission(request)
-
-    def has_delete_permission(self, request, obj=None):
-        return request.user.is_superuser
