@@ -112,7 +112,7 @@ class GenomeReleaseInLine(MetadataInline, admin.TabularInline):
     def genome_genome(self, obj):
         url_view = reverse('admin:ensembl_metadata_genome_change',
                            args=(obj.genome.genome_id,))
-        return mark_safe(u"<a href='" + url_view + "'>" + obj.genome.genome_uuid + "</a>")
+        return mark_safe(u"<a href='" + url_view + "'>" + str(obj.genome.genome_uuid) + "</a>")
 
     genome_genome.short_description = "Genome"
 
@@ -139,9 +139,10 @@ class GenomeReleaseInLine(MetadataInline, admin.TabularInline):
 
 @admin.register(EnsemblRelease)
 class ReleaseAdmin(AdminMetadata, admin.ModelAdmin):
+    fields = ('release_date', 'site', 'release_type', 'is_current', 'label')
     readonly_fields = ('release_date', 'site', 'release_type', 'is_current')
     search_fields = ('version',)
-    list_display = ('version', 'release_date', 'site', 'release_type', 'is_current')
+    list_display = ('version', 'release_date','label', 'site', 'release_type', 'is_current')
     ordering = ('-is_current', '-release_date',)
     inlines = (GenomeReleaseInLine,)
 
