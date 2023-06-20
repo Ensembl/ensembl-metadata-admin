@@ -29592,6 +29592,20 @@
       "status": "Submitted"
     }
   },
+    {
+    "model": "ensembl_metadata.dataset",
+    "pk": 89,
+    "fields": {
+      "dataset_uuid": "c98064f7-9861-4797-9999-30ad1567d816",
+      "dataset_type": 1,
+      "name": "funkytown",
+      "version": null,
+      "created": "2023-05-12T13:32:14Z",
+      "dataset_source": 3,
+      "label": "lippsinc",
+      "status": "Submitted"
+    }
+  },
   {
     "model": "ensembl_metadata.dataset",
     "pk": 6,

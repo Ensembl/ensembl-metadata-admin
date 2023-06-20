@@ -264,11 +264,11 @@ class OrganismGroupInLine(MetadataInline, admin.StackedInline):
 # # Groups Admin Section
 @admin.register(OrganismGroup)
 class OrganismGroupAdmin(AdminMetadata, admin.ModelAdmin):
-    def get_queryset(self, request):
-        qs = super().get_queryset(request)
-        if not request.user.is_superuser:
-            qs = qs.none()
-        return qs
+    # def get_queryset(self, request):
+    #     qs = super().get_queryset(request)
+    #     if not request.user.is_superuser:
+    #         qs = qs.none()
+    #     return qs
 
     fields = ('name', 'type', 'code')
     list_display = ('name', 'type', 'code')

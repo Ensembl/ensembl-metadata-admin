@@ -79,3 +79,8 @@ class DatasetViewSetTestCase(APITestCase):
 
         response = self.client.post(reverse('ensembl_metadata:dataset-list'), payload, format='json')
         self.assertEqual(response.status_code, status.HTTP_201_CREATED)
+
+    def test_dataset_viewset_delete(self):
+        dataset_uuid = 'c98064f7-9861-4797-9999-30ad1567d816'
+        response = self.client.delete(reverse('ensembl_metadata:dataset-detail', args=[dataset_uuid]))
+        self.assertEqual(response.status_code, status.HTTP_204_NO_CONTENT)
