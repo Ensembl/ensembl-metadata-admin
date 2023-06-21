@@ -111,7 +111,7 @@ class DatasetViewSet(viewsets.ModelViewSet):
         try:
             GenomeDataset.objects.filter(dataset=instance).delete()
             DatasetAttribute.objects.filter(dataset=instance).delete()
-if DatasetSource.objects.filter(name=instance.dataset_source.name).count() == 1:
+            if DatasetSource.objects.filter(name=instance.dataset_source.name).count() == 1:
                 instance.dataset_source.delete()
             self.perform_destroy(instance)
             return Response(status=status.HTTP_204_NO_CONTENT)
