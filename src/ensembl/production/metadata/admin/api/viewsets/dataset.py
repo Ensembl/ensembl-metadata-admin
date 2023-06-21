@@ -11,7 +11,7 @@
 #   limitations under the License.from django.apps import AppConfig
 import uuid
 from builtins import super
-from django.shortcuts import get_object_or_404
+from django.db import transaction
 from django.contrib.auth import get_user_model
 from rest_framework import viewsets, status
 from rest_framework.exceptions import ValidationError
@@ -109,11 +109,12 @@ class DatasetViewSet(viewsets.ModelViewSet):
             return Response({'error': 'Dataset not found'}, status=status.HTTP_404_NOT_FOUND)
 
         try:
-            GenomeDataset.objects.filter(dataset=instance).delete()
-            DatasetAttribute.objects.filter(dataset=instance).delete()
-            if DatasetSource.objects.filter(name=instance.dataset_source.name).count() == 1:
-                instance.dataset_source.delete()
-            self.perform_destroy(instance)
+            with transaction.atomic():
+                dataset_source = instance.dataset_source
+                if DatasetSource.objects.filter(name=dataset_source.name).count() == 1:
+                    dataset_source.delete()
+                else:
+                    instance.delete()
             return Response(status=status.HTTP_204_NO_CONTENT)
         except ValidationError:
             return Response({'error': 'Released data cannot be deleted'}, status=status.HTTP_400_BAD_REQUEST)

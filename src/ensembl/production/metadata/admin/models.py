@@ -12,6 +12,7 @@
 import uuid
 from django.db import models
 from django.core.exceptions import ValidationError
+from django.db.models import SET_NULL
 
 
 class Assembly(models.Model):
@@ -100,7 +101,7 @@ class DatasetAttribute(models.Model):
     dataset_attribute_id = models.AutoField(primary_key=True)
     value = models.CharField(max_length=128)
     attribute = models.ForeignKey('Attribute', models.DO_NOTHING, related_name='datasets_set')
-    dataset = models.ForeignKey('Dataset', models.DO_NOTHING, related_name='attributes')
+    dataset = models.ForeignKey('Dataset', on_delete=models.CASCADE, related_name='attributes')
 
     def save(self, *args, **kwargs):
         if self.pk is not None:
@@ -128,7 +129,7 @@ class Dataset(models.Model):
     name = models.CharField(max_length=128)
     version = models.CharField(max_length=128, blank=True, null=True)
     created = models.DateTimeField(auto_now_add=True)
-    dataset_source = models.ForeignKey('DatasetSource', models.DO_NOTHING)
+    dataset_source = models.ForeignKey('DatasetSource', on_delete=models.CASCADE)
     label = models.CharField(max_length=128)
     # attributes = models.ManyToManyField('Attribute', through=DatasetAttribute)
     statuses = [
@@ -250,8 +251,8 @@ class Genome(models.Model):
 
 class GenomeDataset(models.Model):
     genome_dataset_id = models.AutoField(primary_key=True)
-    dataset = models.ForeignKey(Dataset, models.DO_NOTHING, related_name='genome_datasets')
-    genome = models.ForeignKey(Genome, models.DO_NOTHING)
+    dataset = models.ForeignKey(Dataset, models.CASCADE, related_name='genome_datasets')
+    genome = models.ForeignKey(Genome, on_delete=models.CASCADE)
     release = models.ForeignKey(EnsemblRelease, models.DO_NOTHING, blank=True, null=True)
     is_current = models.BooleanField(default=False)
 
