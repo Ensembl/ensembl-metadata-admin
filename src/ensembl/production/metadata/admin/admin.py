@@ -72,13 +72,13 @@ class AssemblySequenceAdmin(AdminMetadata, admin.ModelAdmin):
 
 @admin.register(Assembly)
 class AssemblyAdmin(AdminMetadata, admin.ModelAdmin):
-    fields = ['accession', 'name', 'ucsc_name', 'accession_body', 'level', 'assembly_default', 'assembly_sequence']
+    fields = ['accession', 'assembly_uuid', 'name', 'ucsc_name', 'accession_body', 'level', 'assembly_default', 'assembly_sequence', 'alt_accession']
     readonly_fields = ['accession', 'ucsc_name', 'accession_body', 'level', 'assembly_default', 'created',
                        'assembly_sequence']
     list_filter = ('accession',)
-    search_fields = ('accession',)
+    search_fields = ('accession','assembly_uuid')
     ordering = ('accession',)
-    list_display = ['accession', 'name', 'ucsc_name', 'level', 'assembly_sequence']
+    list_display = ['accession', 'assembly_uuid', 'name', 'ucsc_name', 'level', 'assembly_sequence', 'alt_accession']
     inlines = (GenomeInLine,)
 
     def assembly_sequence(self, obj):
@@ -166,12 +166,16 @@ class OrganismGroupMemberInLine(MetadataInline, admin.StackedInline):
 @admin.register(Organism)
 class OrganismAdmin(AdminMetadata, admin.ModelAdmin):
     # assemblies
-    list_display = (
-        'display_name', 'genome_releases', 'organism_assemblies', 'strain', 'scientific_name', 'ensembl_name',
+    fields = (
+        'display_name', 'organism_uuid', 'genome_releases', 'organism_assemblies', 'strain', 'scientific_name', 'ensembl_name',
         'scientific_parlance_name',
-        'url_name', 'display_name', 'taxonomy_id', 'species_taxonomy_id',)
+        'url_name', 'taxonomy_id', 'species_taxonomy_id',)
+    list_display = (
+        'display_name', 'organism_uuid', 'genome_releases', 'organism_assemblies', 'strain', 'scientific_name', 'ensembl_name',
+        'scientific_parlance_name',
+        'url_name', 'taxonomy_id', 'species_taxonomy_id',)
     list_filter = (MetadataReleaseFilter,)
-    search_fields = ('ensembl_name', 'assemblies__accession')
+    search_fields = ('ensembl_name', 'assemblies__accession', 'organism_uuid')
     inlines = (OrganismGroupMemberInLine, GenomeInLine)
 
     def organism_assemblies(self, obj):

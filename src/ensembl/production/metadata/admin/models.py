@@ -19,6 +19,7 @@ class Assembly(models.Model):
     assembly_id = models.AutoField(primary_key=True)
     ucsc_name = models.CharField(max_length=16, blank=True, null=True)
     accession = models.CharField(unique=True, max_length=16)
+    alt_accession = models.CharField(unique=True, max_length=16, null=True)
     level = models.CharField(max_length=32)
     name = models.CharField(max_length=128)
     accession_body = models.CharField(max_length=32, blank=True, null=True)
@@ -26,6 +27,7 @@ class Assembly(models.Model):
     tol_id = models.CharField(unique=True, max_length=32, blank=True, null=True)
     created = models.DateTimeField(blank=True, null=True, auto_now_add=True)
     ensembl_name = models.CharField(unique=True, max_length=255, blank=True, null=True)
+    assembly_uuid = models.UUIDField(default=uuid.uuid4, editable=False, unique=True)
 
     def save(self, *args, **kwargs):
         if self.pk is not None:
@@ -300,6 +302,7 @@ class Organism(models.Model):
     scientific_parlance_name = models.CharField(max_length=255, blank=True, null=True)
     groups = models.ManyToManyField('OrganismGroup', through='OrganismGroupMember')
     assemblies = models.ManyToManyField('Assembly', through='Genome')
+    organism_uuid = models.UUIDField(default=uuid.uuid4, editable=False, unique=True)
 
     def save(self, *args, **kwargs):
         if self.pk is not None:
