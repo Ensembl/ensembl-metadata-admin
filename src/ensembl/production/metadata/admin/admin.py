@@ -73,7 +73,7 @@ class AssemblySequenceAdmin(AdminMetadata, admin.ModelAdmin):
 @admin.register(Assembly)
 class AssemblyAdmin(AdminMetadata, admin.ModelAdmin):
     fields = ['accession', 'assembly_uuid', 'name', 'ucsc_name', 'accession_body', 'level', 'assembly_default', 'assembly_sequence', 'alt_accession']
-    readonly_fields = ['accession', 'ucsc_name', 'accession_body', 'level', 'assembly_default', 'created',
+    readonly_fields = ['accession', 'ucsc_name', 'accession_body', 'level', 'assembly_default', 'created', 'assembly_uuid',
                        'assembly_sequence']
     list_filter = ('accession',)
     search_fields = ('accession','assembly_uuid')
@@ -167,13 +167,13 @@ class OrganismGroupMemberInLine(MetadataInline, admin.StackedInline):
 class OrganismAdmin(AdminMetadata, admin.ModelAdmin):
     # assemblies
     fields = (
-        'display_name', 'organism_uuid', 'genome_releases', 'organism_assemblies', 'strain', 'scientific_name', 'ensembl_name',
+        'display_name', 'organism_uuid', 'strain', 'scientific_name', 'ensembl_name',
         'scientific_parlance_name',
         'url_name', 'taxonomy_id', 'species_taxonomy_id',)
     list_display = (
         'display_name', 'organism_uuid', 'genome_releases', 'organism_assemblies', 'strain', 'scientific_name', 'ensembl_name',
-        'scientific_parlance_name',
-        'url_name', 'taxonomy_id', 'species_taxonomy_id',)
+        'scientific_parlance_name', 'url_name', 'taxonomy_id', 'species_taxonomy_id',)
+    readonly_fields = ('organism_uuid', 'ensembl_name', 'scientific_parlance_name')
     list_filter = (MetadataReleaseFilter,)
     search_fields = ('ensembl_name', 'assemblies__accession', 'organism_uuid')
     inlines = (OrganismGroupMemberInLine, GenomeInLine)

@@ -15,7 +15,7 @@ class Migration(migrations.Migration):
         migrations.AddField(
             model_name='assembly',
             name='alt_accession',
-            field=models.CharField(max_length=16, null=True, unique=True),
+            field=models.CharField(max_length=16, null=True),
         ),
         migrations.AddField(
             model_name='assembly',
