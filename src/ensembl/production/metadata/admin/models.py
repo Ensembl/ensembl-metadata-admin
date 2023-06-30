@@ -227,7 +227,7 @@ class EnsemblSite(models.Model):
 
 class Genome(models.Model):
     genome_id = models.AutoField(primary_key=True)
-    genome_uuid = models.UUIDField(default=uuid.uuid4, editable=False)
+    genome_uuid = models.UUIDField(default=uuid.uuid4, editable=False, unique=True)
     assembly = models.ForeignKey(Assembly, models.DO_NOTHING)
     organism = models.ForeignKey('Organism', models.DO_NOTHING)
     created = models.DateTimeField(auto_now_add=True)

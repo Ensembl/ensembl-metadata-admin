@@ -10,13 +10,31 @@
 #   See the License for the specific language governing permissions and
 #   limitations under the License.from django.apps import AppConfig
 from rest_framework import viewsets
-
 from ensembl.production.metadata.admin.api.serializers import GenomeSerializer
 from ensembl.production.metadata.admin.models import Genome
+from rest_framework.response import Response
+import uuid
+from django.http import Http404
 
 
 class GenomeViewSet(viewsets.ReadOnlyModelViewSet):
+    lookup_field = 'genome_uuid'
+    http_method_names = ['get']
     queryset = Genome.objects.all()
     serializer_class = GenomeSerializer
-    lookup_field = 'genome_uuid'
 
+    # This should not be necessary. Django has an error with this.
+    def retrieve(self, request, *args, **kwargs):
+        test = uuid.UUID(kwargs.get(self.lookup_field))  # convert the string to a UUID object
+        genomes = Genome.objects.all()
+        found_genome = None
+        for i in genomes:
+            if i.genome_uuid == test:
+                found_genome = i
+                break
+        if found_genome is None:
+            raise Http404
+
+        # Manually serialize and respond
+        serializer = self.get_serializer(found_genome)
+        return Response(serializer.data)

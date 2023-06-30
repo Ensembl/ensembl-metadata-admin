@@ -23,13 +23,14 @@ from django.db.models import Q
 from rest_framework.response import Response
 from rest_framework.permissions import AllowAny
 from ensembl.production.metadata.admin.models import Genome
-from uuid import UUID
+import uuid
+from django.http import Http404
 
 
 class DatasetViewSet(viewsets.ModelViewSet):
+    lookup_field = 'dataset_uuid'
     queryset = Dataset.objects.all()
     serializer_class = DatasetSerializer
-    lookup_field = 'dataset_uuid'
 
     def get_permissions(self):
         if self.action == 'create':
@@ -118,3 +119,19 @@ class DatasetViewSet(viewsets.ModelViewSet):
             return Response(status=status.HTTP_204_NO_CONTENT)
         except ValidationError:
             return Response({'error': 'Released data cannot be deleted'}, status=status.HTTP_400_BAD_REQUEST)
+
+    # This should not be necessary. Django has an error with this.
+    def retrieve(self, request, *args, **kwargs):
+        test = uuid.UUID(kwargs.get(self.lookup_field))  # convert the string to a UUID object
+        datasets = Dataset.objects.all()
+        found_dataset = None
+        for i in datasets:
+            if i.dataset_uuid == test:
+                found_dataset = i
+                break
+        if found_dataset is None:
+            raise Http404
+
+        # Manually serialize and respond
+        serializer = self.get_serializer(found_dataset)
+        return Response(serializer.data)
