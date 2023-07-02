@@ -19,6 +19,7 @@ class UUIDField(models.UUIDField):
   
     def __init__(self, verbose_name=None, **kwargs):
         super().__init__(verbose_name, **kwargs)
+        self.max_length=40
 
     def get_internal_type(self):
         return "CharField"
