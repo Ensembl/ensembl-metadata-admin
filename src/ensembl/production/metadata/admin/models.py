@@ -13,7 +13,33 @@ import uuid
 from django.db import models
 from django.core.exceptions import ValidationError
 from django.db.models import SET_NULL
+from django.db.models.lookups import IContains
 
+class UUIDField(models.UUIDField):
+  
+    def __init__(self, verbose_name=None, **kwargs):
+        super().__init__(verbose_name, **kwargs)
+        self.max_length=40
+
+    def get_internal_type(self):
+        return "CharField"
+    
+    def get_db_prep_value(self, value, connection, prepared=False):
+        if value is None:
+            return None
+        if not isinstance(value, uuid.UUID):
+            try:
+                value = uuid.UUID(value)
+            except AttributeError:
+                raise TypeError(self.error_messages['invalid'] % {'value': value})
+
+        if connection.features.has_native_uuid_field:
+            return value
+        return str(value)
+    
+@UUIDField.register_lookup
+class UUIDIContains(IContains):
+    pass
 
 class Assembly(models.Model):
     assembly_id = models.AutoField(primary_key=True)
@@ -126,7 +152,7 @@ class DatasetAttribute(models.Model):
 
 class Dataset(models.Model):
     dataset_id = models.AutoField(primary_key=True)
-    dataset_uuid = models.UUIDField(default=uuid.uuid4, editable=False)
+    dataset_uuid = UUIDField(default=uuid.uuid4, editable=False)
     dataset_type = models.ForeignKey('DatasetType', models.DO_NOTHING)
     name = models.CharField(max_length=128)
     version = models.CharField(max_length=128, blank=True, null=True)
@@ -227,7 +253,7 @@ class EnsemblSite(models.Model):
 
 class Genome(models.Model):
     genome_id = models.AutoField(primary_key=True)
-    genome_uuid = models.UUIDField(default=uuid.uuid4, editable=False)
+    genome_uuid = UUIDField(default=uuid.uuid4, editable=False, unique=True)
     assembly = models.ForeignKey(Assembly, models.DO_NOTHING)
     organism = models.ForeignKey('Organism', models.DO_NOTHING)
     created = models.DateTimeField(auto_now_add=True)

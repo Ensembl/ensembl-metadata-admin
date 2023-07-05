@@ -9,11 +9,10 @@
 #   WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 #   See the License for the specific language governing permissions and
 #   limitations under the License.from django.apps import AppConfig
-from rest_framework import viewsets
 
+from rest_framework import viewsets
 from ensembl.production.metadata.admin.api.serializers import GenomeSerializer
 from ensembl.production.metadata.admin.models import Genome
-
 
 class GenomeViewSet(viewsets.ReadOnlyModelViewSet):
     queryset = Genome.objects.all()

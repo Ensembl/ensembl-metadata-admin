@@ -16,20 +16,18 @@ from django.contrib.auth import get_user_model
 from rest_framework import viewsets, status
 from rest_framework.exceptions import ValidationError
 
-from ensembl.production.metadata.admin.api.serializers import DatasetSerializer, GenomeSerializer
-from ensembl.production.metadata.admin.models import Dataset, DatasetType, DatasetSource, GenomeDataset, \
-    DatasetAttribute
+from ensembl.production.metadata.admin.api.serializers import DatasetSerializer
+from ensembl.production.metadata.admin.models import Dataset, DatasetType, DatasetSource
 from django.db.models import Q
 from rest_framework.response import Response
 from rest_framework.permissions import AllowAny
 from ensembl.production.metadata.admin.models import Genome
-from uuid import UUID
 
 
 class DatasetViewSet(viewsets.ModelViewSet):
+    lookup_field = 'dataset_uuid'
     queryset = Dataset.objects.all()
     serializer_class = DatasetSerializer
-    lookup_field = 'dataset_uuid'
 
     def get_permissions(self):
         if self.action == 'create':

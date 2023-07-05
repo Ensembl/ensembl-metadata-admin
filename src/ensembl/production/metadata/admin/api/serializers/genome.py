@@ -44,7 +44,6 @@ class GenomeSerializer(serializers.ModelSerializer):
     class Meta:
         model = Genome
         fields = ["genome_uuid", "created", "releases", "datasets", "assembly", "organism"]
-
     assembly = AssemblySerializer(read_only=True, many=False)
     organism = OrganismSerializer(many=False, read_only=True)
     datasets = serializers.HyperlinkedRelatedField(
