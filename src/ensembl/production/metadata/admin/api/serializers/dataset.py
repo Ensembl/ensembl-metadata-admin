@@ -13,7 +13,7 @@ from rest_framework import serializers
 from django.db import transaction
 from ensembl.production.metadata.admin.models import Dataset, Attribute, DatasetAttribute, DatasetSource, DatasetType, \
     Genome, GenomeDataset
-from django.core.exceptions import ObjectDoesNotExist, ValidationError
+from django.core.exceptions import ObjectDoesNotExist
 
 
 class AttributeSerializer(serializers.ModelSerializer):

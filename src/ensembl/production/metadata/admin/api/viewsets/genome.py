@@ -13,10 +13,6 @@
 from rest_framework import viewsets
 from ensembl.production.metadata.admin.api.serializers import GenomeSerializer
 from ensembl.production.metadata.admin.models import Genome
-from rest_framework.response import Response
-import uuid
-from django.http import Http404
-
 
 class GenomeViewSet(viewsets.ReadOnlyModelViewSet):
     queryset = Genome.objects.all()
