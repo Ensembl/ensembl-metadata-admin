@@ -161,9 +161,9 @@ class Dataset(models.Model):
     label = models.CharField(max_length=128)
     # attributes = models.ManyToManyField('Attribute', through=DatasetAttribute)
     statuses = [
-        ('submitted', 'Submitted'),
-        ('progressing', 'Progressing'),
-        ('processed', 'Processed'),
+        ('Submitted', 'Submitted'),
+        ('Progressing', 'Progressing'),
+        ('Processed', 'Processed'),
     ]
 
     status = models.CharField(max_length=12, choices=statuses, default='string')
