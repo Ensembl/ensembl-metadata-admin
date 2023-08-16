@@ -54,6 +54,8 @@ class Assembly(models.Model):
     created = models.DateTimeField(blank=True, null=True, auto_now_add=True)
     ensembl_name = models.CharField(unique=True, max_length=255, blank=True, null=True)
     assembly_uuid = models.UUIDField(default=uuid.uuid4, editable=False, unique=True)
+    is_reference = models.BooleanField(default=False, null=False)
+    url_name = models.CharField(max_length=128, null=True)
 
     def save(self, *args, **kwargs):
         if self.pk is not None:
@@ -79,11 +81,12 @@ class AssemblySequence(models.Model):
     name = models.CharField(max_length=128, blank=True, null=True)
     assembly = models.ForeignKey(Assembly, models.DO_NOTHING)
     accession = models.CharField(max_length=128)
-    chromosomal = models.IntegerField()
+    chromosomal = models.BooleanField()
+    chromosome_rank = models.IntegerField(blank=True, null=True)
     length = models.IntegerField()
     sequence_location = models.CharField(max_length=10, blank=True, null=True)
-    sequence_checksum = models.CharField(max_length=32, blank=True, null=True)
-    ga4gh_identifier = models.CharField(max_length=32, blank=True, null=True)
+    md5 = models.CharField(max_length=32, blank=True, null=True)
+    sha512t4u = models.CharField(max_length=128, blank=True, null=True)
 
     def save(self, *args, **kwargs):
         if self.pk is not None:
@@ -303,6 +306,8 @@ class GenomeRelease(models.Model):
     genome = models.ForeignKey(Genome, models.DO_NOTHING)
     release = models.ForeignKey(EnsemblRelease, models.DO_NOTHING)
     is_current = models.BooleanField(default=False)
+    is_best = models.BooleanField(default=False)
+
 
     def delete(self, *args, **kwargs):
         if self.genome.releases.exists():
@@ -320,16 +325,15 @@ class Organism(models.Model):
     organism_id = models.AutoField(primary_key=True)
     taxonomy_id = models.IntegerField()
     species_taxonomy_id = models.IntegerField(blank=True, null=True)
-    display_name = models.CharField(max_length=128)
+    common_name = models.CharField(max_length=128)
     strain = models.CharField(max_length=128, blank=True, null=True)
     scientific_name = models.CharField(max_length=128, blank=True, null=True)
-    url_name = models.CharField(max_length=128)
     ensembl_name = models.CharField(unique=True, max_length=128)
     scientific_parlance_name = models.CharField(max_length=255, blank=True, null=True)
     groups = models.ManyToManyField('OrganismGroup', through='OrganismGroupMember')
     assemblies = models.ManyToManyField('Assembly', through='Genome')
     organism_uuid = models.UUIDField(default=uuid.uuid4, editable=False, unique=True)
-
+    strain_type = models.CharField(max_length=128, blank=True, null=True)
     def save(self, *args, **kwargs):
         if self.pk is not None:
             if self.genome_set.filter(releases__isnull=False).exists():
@@ -365,7 +369,8 @@ class OrganismGroup(models.Model):
 
 class OrganismGroupMember(models.Model):
     organism_group_member_id = models.AutoField(primary_key=True)
-    is_reference = models.BooleanField()
+    is_reference = models.BooleanField(null=True)
+    order = models.IntegerField(null=True, unique=False)
     organism = models.ForeignKey(Organism, models.DO_NOTHING)
     organism_group = models.ForeignKey(OrganismGroup, models.DO_NOTHING)
 
