@@ -49,7 +49,7 @@ class Assembly(models.Model):
     level = models.CharField(max_length=32)
     name = models.CharField(max_length=128)
     accession_body = models.CharField(max_length=32, blank=True, null=True)
-    assembly_default = models.CharField(max_length=32, blank=True, null=True)
+    assembly_default = models.CharField(max_length=128, blank=True, null=True)
     tol_id = models.CharField(unique=True, max_length=32, blank=True, null=True)
     created = models.DateTimeField(blank=True, null=True, auto_now_add=True)
     ensembl_name = models.CharField(unique=True, max_length=255, blank=True, null=True)
