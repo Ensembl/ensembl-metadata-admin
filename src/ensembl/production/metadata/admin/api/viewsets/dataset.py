@@ -60,28 +60,10 @@ class DatasetViewSet(viewsets.ModelViewSet):
         if not username or not User.objects.filter(username=username).exists():
             return Response({'detail': 'User not registered'}, status=status.HTTP_401_UNAUTHORIZED)
 
-        # Require Genome_uuid, dataset_type_name, dataset_source
+        # Check if a dataset is already present and not released
         genome_uuid = request.data.get('genome_uuid')
         dataset_type_name = request.data.get('dataset_type')
-        dataset_source_name = request.data.get('dataset_source')
-
-        if not all([genome_uuid, dataset_type_name, dataset_source_name]):
-            return Response({'error': 'Required fields not provided'}, status=status.HTTP_400_BAD_REQUEST)
-        # Check if  Genome_uuid, dataset_type_name, dataset_source are present in the database:
-        if not DatasetSource.objects.filter(name=dataset_source_name).exists():
-            return Response({'error': 'The provided dataset_source_name does not exist in the database'},
-                            status=status.HTTP_400_BAD_REQUEST)
-        try:
-            Genome.objects.get(genome_uuid=uuid.UUID(genome_uuid))
-        except Genome.DoesNotExist:
-            return Response({'error': 'The provided genome_uuid does not exist in the database'},
-                            status=status.HTTP_400_BAD_REQUEST)
-
-        if not DatasetType.objects.filter(name=dataset_type_name).exists():
-            return Response({'error': 'The provided dataset_type_name does not exist in the database'},
-                            status=status.HTTP_400_BAD_REQUEST)
-
-        # Check if a dateset is already present and not release:
+        dataset_source_name = request.data.get('dataset_source', {}).get('name')
         existing_datasets = Dataset.objects.filter(
             dataset_type__name=dataset_type_name,
             dataset_source__name=dataset_source_name,
@@ -109,7 +91,7 @@ class DatasetViewSet(viewsets.ModelViewSet):
         try:
             with transaction.atomic():
                 dataset_source = instance.dataset_source
-                if DatasetSource.objects.filter(name=dataset_source.name).count() == 1:
+                if DatasetSource.objects.filter(name=dataset_source[name]).count() == 1:
                     dataset_source.delete()
                 else:
                     instance.delete()

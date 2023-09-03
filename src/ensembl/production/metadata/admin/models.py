@@ -169,7 +169,7 @@ class Dataset(models.Model):
         ('processed', 'Processed'),
     ]
 
-    status = models.CharField(max_length=12, choices=statuses, default='string')
+    status = models.CharField(max_length=12, choices=statuses, default='Submitted')
     genomes = models.ManyToManyField('Genome', through='GenomeDataset')
 
     # genome_datasets = models.ForeignKey('GenomeDataset', on_delete=models.CASCADE)
