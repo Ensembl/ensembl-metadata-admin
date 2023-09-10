@@ -27,8 +27,7 @@ class DatasetAttributeSerializer(serializers.ModelSerializer):
         model = DatasetAttribute
         fields = ['name', 'value']
 
-    name = serializers.StringRelatedField(many=False, read_only=True, source='attribute')
-
+    name = serializers.CharField(source='attribute.name')
 class DatasetSourceSerializer(serializers.ModelSerializer):
     class Meta:
         model = DatasetSource
@@ -51,7 +50,7 @@ class DatasetSourceSerializer(serializers.ModelSerializer):
 
 
 class DatasetSerializer(serializers.ModelSerializer):
-    attributes = DatasetAttributeSerializer(many=True, required=False)
+    dataset_attribute = DatasetAttributeSerializer(many=True, required=False)
     genome_uuid = serializers.UUIDField(write_only=True)
     genome_datasets = serializers.SerializerMethodField()
     dataset_source = DatasetSourceSerializer()
@@ -62,7 +61,7 @@ class DatasetSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Dataset
-        fields = ["dataset_uuid", "genome_datasets", "name", "label", "attributes", "dataset_source", "dataset_type",
+        fields = ["dataset_uuid", "genome_datasets", "name", "label", "dataset_attribute", "dataset_source", "dataset_type",
                   'genome_uuid']
 
     def get_genome_datasets(self, obj):
@@ -85,7 +84,7 @@ class DatasetSerializer(serializers.ModelSerializer):
         dataset_source_name = dataset_source_data.get('name')
         dataset_source_type = dataset_source_data.get('type')
 
-        # Ensure that it is the data is committed in a single transaction
+        # Ensure that the data is committed in a single transaction
         with transaction.atomic():
             genome_uuid = validated_data.pop('genome_uuid')
             genome = Genome.objects.get(genome_uuid=genome_uuid)
@@ -104,23 +103,27 @@ class DatasetSerializer(serializers.ModelSerializer):
                 except Exception as e:
                     raise serializers.ValidationError({"dataset_source": str(e)})
 
+            # Separate out the dataset_attribute data
+            dataset_attributes_data = validated_data.pop('dataset_attribute', [])
+
+            # Create Dataset instance
             validated_data['dataset_source'] = dataset_source
             new_dataset = Dataset.objects.create(**validated_data)
             GenomeDataset.objects.create(genome=genome, dataset=new_dataset)
-
-            # Create DatasetAttributes if provided
-            dataset_attributes_data = validated_data.get('dataset_attribute', [])
             for attr_data in dataset_attributes_data:
                 attr_value = attr_data.get('value')
-                attr_name = attr_data.get('name')
-                try:
-                    if attr_name:
-                        attribute = Attribute.objects.get(name=attr_name)
-                    else:
-                        raise serializers.ValidationError("Attribute identifier name is required.")
-                except ObjectDoesNotExist:
-                    raise serializers.ValidationError("Attribute not found.")
-
+                attr_name = attr_data['attribute']['name']
+                if not attr_name:
+                    raise serializers.ValidationError("Attribute identifier name is required.")
+                attribute, created = Attribute.objects.get_or_create(
+                    name=attr_name,
+                    defaults={
+                        'label': attr_name,
+                        'description': attr_name,
+                        'type': "string"
+                    }
+                )
                 DatasetAttribute.objects.create(dataset=new_dataset, attribute=attribute, value=attr_value)
 
         return new_dataset
+
