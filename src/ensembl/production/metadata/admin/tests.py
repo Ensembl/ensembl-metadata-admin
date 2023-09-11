@@ -63,9 +63,9 @@ class DatasetViewSetTestCase(APITestCase):
             "label": "This is a test.",
             "dataset_type": "variation",
             "dataset_source": {
-                                "name": "homo_sapiens_core_108_38",
-                                "type": "core"
-                               },
+                "name": "homo_sapiens_core_108_38",
+                "type": "core"
+            },
             "dataset_attribute": [
                 {
                     "value": "Test Value 1",
@@ -89,9 +89,9 @@ class DatasetViewSetTestCase(APITestCase):
             "label": "This is a test.",
             "dataset_type": "variation",
             "dataset_source": {
-                                "name": "homo_sapiens_core_108_38",
-                                "type": "core"
-                               },
+                "name": "homo_sapiens_core_108_38",
+                "type": "core"
+            },
             "dataset_attribute": [
                 {
                     "value": "Test Value 1",
@@ -122,9 +122,7 @@ class DatasetViewSetTestCase(APITestCase):
         except DatasetSource.DoesNotExist:
             self.fail("DatasetSource was not created or retrieved correctly")
 
-
     def test_dataset_delete_success(self):
-        # first create a dataset to delete
         payload = {
             'user': 'test_user',
             'genome_uuid': 'eeb537c0-0e6d-4970-972f-c840989e0ef6',
@@ -133,9 +131,9 @@ class DatasetViewSetTestCase(APITestCase):
             "label": "This is a test.",
             "dataset_type": "variation",
             "dataset_source": {
-                                "name": "homo_sapiens_core_108_38",
-                                "type": "core"
-                               },
+                "name": "homo_sapiens_core_108_38",
+                "type": "core"
+            },
             "dataset_attribute": [
                 {
                     "value": "Test Value 1",

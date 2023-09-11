@@ -14,30 +14,23 @@ from builtins import super
 from django.db import transaction
 from django.contrib.auth import get_user_model
 from rest_framework import viewsets, status
-from rest_framework.decorators import api_view
 from rest_framework.exceptions import ValidationError
-from django.views.decorators.csrf import csrf_exempt
-from django.utils.decorators import method_decorator
 from ensembl.production.metadata.admin.api.serializers import DatasetSerializer
 from ensembl.production.metadata.admin.models import Dataset, DatasetType, DatasetSource, DatasetAttribute, Attribute
 from django.db.models import Q
 from rest_framework.response import Response
 from rest_framework.permissions import AllowAny
 from ensembl.production.metadata.admin.models import Genome
+from django.views.decorators.csrf import csrf_exempt
 
-# @method_decorator(csrf_exempt, name='update')
+
 class DatasetViewSet(viewsets.ModelViewSet):
     lookup_field = 'dataset_uuid'
     queryset = Dataset.objects.all()
     serializer_class = DatasetSerializer
 
-    # def get_permissions(self):
-    #     if self.action in ['create', 'update', 'delete']:
-    #         self.permission_classes = [AllowAny, ]
-    #     return super(DatasetViewSet, self).get_permissions()
-
+    @csrf_exempt
     def get_queryset(self):
-        # Filters for queryset fields
         self.permission_classes = [AllowAny, ]
         queryset = Dataset.objects.all()
         topic = self.request.query_params.get('topic')
@@ -53,17 +46,15 @@ class DatasetViewSet(viewsets.ModelViewSet):
             queryset = queryset.exclude(release_filter)
         return queryset
 
-    # #POST:
+    @csrf_exempt
     def create(self, request, *args, **kwargs):
         serializer = self.get_serializer(data=request.data)
         User = get_user_model()
         self.permission_classes = [AllowAny, ]
-        # Check if the user exists in the payload
         username = request.data.get('user', None)
         if not username or not User.objects.filter(username=username).exists():
             return Response({'detail': 'User not registered'}, status=status.HTTP_401_UNAUTHORIZED)
 
-        # Check if a dataset is already present and not released
         genome_uuid = request.data.get('genome_uuid')
         dataset_type_name = request.data.get('dataset_type')
         dataset_source_name = request.data.get('dataset_source', {}).get('name')
@@ -89,9 +80,8 @@ class DatasetViewSet(viewsets.ModelViewSet):
         headers = self.get_success_headers(serializer.data)
         return Response(serializer.data, status=status.HTTP_201_CREATED, headers=headers)
 
-
-    #PUT
-    @method_decorator(csrf_exempt, name='dispatch')
+    # PUT
+    @csrf_exempt
     def update(self, request, dataset_uuid=None, *args, **kwargs):
         User = get_user_model()
         self.permission_classes = [AllowAny, ]
@@ -123,7 +113,7 @@ class DatasetViewSet(viewsets.ModelViewSet):
                     'description': name,
                     'type': "string"
                 }
-                )
+            )
             DatasetAttribute.objects.update_or_create(
                 dataset=dataset,
                 attribute=attribute,
@@ -133,7 +123,7 @@ class DatasetViewSet(viewsets.ModelViewSet):
         serializer = self.get_serializer(dataset)
         return Response(serializer.data, status=status.HTTP_200_OK)
 
-    # DELETE:
+    @csrf_exempt
     def destroy(self, request, *args, **kwargs):
         self.permission_classes = [AllowAny, ]
         try:

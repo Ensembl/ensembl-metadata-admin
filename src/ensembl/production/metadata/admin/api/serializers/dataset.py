@@ -28,6 +28,8 @@ class DatasetAttributeSerializer(serializers.ModelSerializer):
         fields = ['name', 'value']
 
     name = serializers.CharField(source='attribute.name')
+
+
 class DatasetSourceSerializer(serializers.ModelSerializer):
     class Meta:
         model = DatasetSource
@@ -48,7 +50,6 @@ class DatasetSourceSerializer(serializers.ModelSerializer):
         return data
 
 
-
 class DatasetSerializer(serializers.ModelSerializer):
     dataset_attribute = DatasetAttributeSerializer(many=True, required=False)
     genome_uuid = serializers.UUIDField(write_only=True)
@@ -61,7 +62,8 @@ class DatasetSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Dataset
-        fields = ["dataset_uuid", "genome_datasets", "name", "label", "dataset_attribute", "dataset_source", "dataset_type",
+        fields = ["dataset_uuid", "genome_datasets", "name", "label", "dataset_attribute", "dataset_source",
+                  "dataset_type",
                   'genome_uuid']
 
     def get_genome_datasets(self, obj):
@@ -102,11 +104,7 @@ class DatasetSerializer(serializers.ModelSerializer):
                     dataset_source = DatasetSource.objects.create(name=dataset_source_name, type=dataset_source_type)
                 except Exception as e:
                     raise serializers.ValidationError({"dataset_source": str(e)})
-
-            # Separate out the dataset_attribute data
             dataset_attributes_data = validated_data.pop('dataset_attribute', [])
-
-            # Create Dataset instance
             validated_data['dataset_source'] = dataset_source
             new_dataset = Dataset.objects.create(**validated_data)
             GenomeDataset.objects.create(genome=genome, dataset=new_dataset)
@@ -126,4 +124,3 @@ class DatasetSerializer(serializers.ModelSerializer):
                 DatasetAttribute.objects.create(dataset=new_dataset, attribute=attribute, value=attr_value)
 
         return new_dataset
-
