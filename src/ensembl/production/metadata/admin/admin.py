@@ -97,8 +97,8 @@ class AssemblyAdmin(AdminMetadata, admin.ModelAdmin):
 # #####RELEASE ADMIN PAGE#####
 class GenomeReleaseInLine(MetadataInline, admin.TabularInline):
     model = GenomeRelease
-    fields = ['genome_genome', 'genome_assembly', 'genome_organism', 'genome_datasets', 'is_best', 'is_current']
-    readonly_fields = ['genome_genome', 'genome_assembly', 'genome_organism', 'genome_datasets', 'is_best', 'is_current']
+    fields = ['genome_genome', 'genome_assembly', 'genome_organism', 'genome_datasets', 'is_current']
+    readonly_fields = ['genome_genome', 'genome_assembly', 'genome_organism', 'genome_datasets', 'is_current']
     can_delete = False
     can_update = False
     extra = 0
