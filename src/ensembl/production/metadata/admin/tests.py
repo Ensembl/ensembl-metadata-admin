@@ -29,7 +29,7 @@ class GenomeViewSetTestCase(APITestCase):
         self.assertIsNotNone(response.data)
 
     def test_genome_viewset_get_individual(self):
-        genome_uuid = '553ff910-39db-40de-9f82-91b72ad577ea'
+        genome_uuid = 'bacf0d6d-9de0-4467-865b-e5099cb45e88'
         response = self.client.get(reverse('ensembl_metadata:genome-detail', args=[genome_uuid]))
         self.assertEqual(response.status_code, status.HTTP_200_OK)
         self.assertIsNotNone(response.data)
@@ -49,7 +49,7 @@ class DatasetViewSetTestCase(APITestCase):
         self.assertIsNotNone(response.data)
 
     def test_dataset_viewset_get_individual(self):
-        dataset_uuid = '2b2469a3-94f8-4c68-9211-7677126d9579'
+        dataset_uuid = '8ce01799-dabe-4d0f-b0ad-1bbd95d59f8e'
         response = self.client.get(reverse('ensembl_metadata:dataset-detail', args=[dataset_uuid]))
         self.assertEqual(response.status_code, status.HTTP_200_OK)
         self.assertIsNotNone(response.data)
@@ -83,7 +83,7 @@ class DatasetViewSetTestCase(APITestCase):
     def test_dataset_create_success(self):
         payload = {
             'user': 'test_user',
-            'genome_uuid': 'eeb537c0-0e6d-4970-972f-c840989e0ef6',
+            'genome_uuid': 'bacf0d6d-9de0-4467-865b-e5099cb45e88',
             "name": "Test Dataset",
             "description": "This is a test dataset.",
             "label": "This is a test.",
@@ -125,7 +125,7 @@ class DatasetViewSetTestCase(APITestCase):
     def test_dataset_delete_success(self):
         payload = {
             'user': 'test_user',
-            'genome_uuid': 'eeb537c0-0e6d-4970-972f-c840989e0ef6',
+            'genome_uuid': 'bacf0d6d-9de0-4467-865b-e5099cb45e88',
             "name": "Test Dataset",
             "description": "This is a test dataset.",
             "label": "This is a test.",
@@ -179,7 +179,7 @@ class DatasetViewSetTestCase(APITestCase):
     def test_dataset_update_success(self):
         payload = {
             "user": "danielp",
-            "dataset_uuid": "a729ec3d-7924-4624-9af8-feddcc63f676",
+            "dataset_uuid": "8ce01799-dabe-4d0f-b0ad-1bbd95d59f8e",
             "dataset_attribute": [
                 {
                     "value": "Test Value 1",

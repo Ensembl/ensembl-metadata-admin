@@ -260,6 +260,7 @@ class Genome(models.Model):
     assembly = models.ForeignKey(Assembly, models.DO_NOTHING)
     organism = models.ForeignKey('Organism', models.DO_NOTHING)
     created = models.DateTimeField(auto_now_add=True)
+    is_best = models.BooleanField(default=False)
     datasets = models.ManyToManyField('Dataset', through='GenomeDataset')
     releases = models.ManyToManyField('EnsemblRelease', through='GenomeRelease')
 
@@ -306,7 +307,6 @@ class GenomeRelease(models.Model):
     genome = models.ForeignKey(Genome, models.DO_NOTHING)
     release = models.ForeignKey(EnsemblRelease, models.DO_NOTHING)
     is_current = models.BooleanField(default=False)
-    is_best = models.BooleanField(default=False)
 
 
     def delete(self, *args, **kwargs):
