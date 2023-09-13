@@ -61,8 +61,8 @@ class AttributeAdmin(AdminMetadata, admin.ModelAdmin):
 @admin.register(AssemblySequence)
 class AssemblySequenceAdmin(AdminMetadata, admin.ModelAdmin):
     model = AssemblySequence
-    fields = ['name', 'accession', 'length']
-    list_display = ['name', 'accession', 'length']
+    fields = ['name', 'accession', 'length','chromosome_rank']
+    list_display = ['name', 'accession', 'length','chromosome_rank']
     search_fields = ['assembly__accession']
     # NOTE: the list filter might grow a lot, we'd like to find a better way
     list_filter = ['assembly']
@@ -72,13 +72,13 @@ class AssemblySequenceAdmin(AdminMetadata, admin.ModelAdmin):
 
 @admin.register(Assembly)
 class AssemblyAdmin(AdminMetadata, admin.ModelAdmin):
-    fields = ['accession', 'assembly_uuid', 'name', 'ucsc_name', 'accession_body', 'level', 'assembly_default', 'assembly_sequence', 'alt_accession']
+    fields = ['accession', 'assembly_uuid', 'name', 'ucsc_name', 'accession_body', 'level', 'assembly_default', 'assembly_sequence', 'alt_accession', 'is_reference']
     readonly_fields = ['accession', 'ucsc_name', 'accession_body', 'level', 'assembly_default', 'created', 'assembly_uuid',
-                       'assembly_sequence']
-    list_filter = ('accession',)
+                       'assembly_sequence', 'is_reference']
+    list_filter = ('accession','is_reference')
     search_fields = ('accession','assembly_uuid')
     ordering = ('accession',)
-    list_display = ['accession', 'assembly_uuid', 'name', 'ucsc_name', 'level', 'assembly_sequence', 'alt_accession']
+    list_display = ['accession', 'assembly_uuid', 'name', 'ucsc_name', 'level', 'assembly_sequence', 'alt_accession', 'is_reference']
     inlines = (GenomeInLine,)
 
     def assembly_sequence(self, obj):
@@ -97,8 +97,8 @@ class AssemblyAdmin(AdminMetadata, admin.ModelAdmin):
 # #####RELEASE ADMIN PAGE#####
 class GenomeReleaseInLine(MetadataInline, admin.TabularInline):
     model = GenomeRelease
-    fields = ['genome_genome', 'genome_assembly', 'genome_organism', 'genome_datasets']
-    readonly_fields = ['genome_genome', 'genome_assembly', 'genome_organism', 'genome_datasets']
+    fields = ['genome_genome', 'genome_assembly', 'genome_organism', 'genome_datasets', 'is_best', 'is_current']
+    readonly_fields = ['genome_genome', 'genome_assembly', 'genome_organism', 'genome_datasets', 'is_best', 'is_current']
     can_delete = False
     can_update = False
     extra = 0
@@ -167,15 +167,14 @@ class OrganismGroupMemberInLine(MetadataInline, admin.StackedInline):
 class OrganismAdmin(AdminMetadata, admin.ModelAdmin):
     # assemblies
     fields = (
-        'display_name', 'organism_uuid', 'strain', 'scientific_name', 'ensembl_name',
-        'scientific_parlance_name',
-        'url_name', 'taxonomy_id', 'species_taxonomy_id',)
+        'common_name', 'organism_uuid', 'strain', 'scientific_name', 'ensembl_name',
+        'scientific_parlance_name', 'taxonomy_id', 'species_taxonomy_id',)
     list_display = (
-        'display_name', 'organism_uuid', 'genome_releases', 'organism_assemblies', 'strain', 'scientific_name', 'ensembl_name',
-        'scientific_parlance_name', 'url_name', 'taxonomy_id', 'species_taxonomy_id',)
+        'common_name', 'organism_uuid', 'genome_releases', 'organism_assemblies', 'strain', 'scientific_name', 'ensembl_name',
+        'scientific_parlance_name', 'taxonomy_id', 'species_taxonomy_id',)
     readonly_fields = ('organism_uuid', 'ensembl_name', 'scientific_parlance_name')
     list_filter = (MetadataReleaseFilter,)
-    search_fields = ('ensembl_name', 'assemblies__accession', 'organism_uuid')
+    search_fields = ('ensembl_name', 'assemblies__accession', 'organism_uuid', 'common_name')
     inlines = (OrganismGroupMemberInLine, GenomeInLine)
 
     def organism_assemblies(self, obj):

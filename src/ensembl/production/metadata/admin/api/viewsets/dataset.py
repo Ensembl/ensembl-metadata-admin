@@ -15,13 +15,13 @@ from django.db import transaction
 from django.contrib.auth import get_user_model
 from rest_framework import viewsets, status
 from rest_framework.exceptions import ValidationError
-
 from ensembl.production.metadata.admin.api.serializers import DatasetSerializer
-from ensembl.production.metadata.admin.models import Dataset, DatasetType, DatasetSource
+from ensembl.production.metadata.admin.models import Dataset, DatasetType, DatasetSource, DatasetAttribute, Attribute
 from django.db.models import Q
 from rest_framework.response import Response
 from rest_framework.permissions import AllowAny
 from ensembl.production.metadata.admin.models import Genome
+from django.views.decorators.csrf import csrf_exempt
 
 
 class DatasetViewSet(viewsets.ModelViewSet):
@@ -29,13 +29,9 @@ class DatasetViewSet(viewsets.ModelViewSet):
     queryset = Dataset.objects.all()
     serializer_class = DatasetSerializer
 
-    def get_permissions(self):
-        if self.action == 'create':
-            self.permission_classes = [AllowAny, ]
-        return super(DatasetViewSet, self).get_permissions()
-
+    @csrf_exempt
     def get_queryset(self):
-        # Filters for queryset fields
+        self.permission_classes = [AllowAny, ]
         queryset = Dataset.objects.all()
         topic = self.request.query_params.get('topic')
         released = self.request.query_params.get('released')
@@ -50,48 +46,33 @@ class DatasetViewSet(viewsets.ModelViewSet):
             queryset = queryset.exclude(release_filter)
         return queryset
 
-    # #POST:
+    @csrf_exempt
     def create(self, request, *args, **kwargs):
         serializer = self.get_serializer(data=request.data)
         User = get_user_model()
-
-        # Check if the user exists in the payload
+        self.permission_classes = [AllowAny, ]
         username = request.data.get('user', None)
         if not username or not User.objects.filter(username=username).exists():
             return Response({'detail': 'User not registered'}, status=status.HTTP_401_UNAUTHORIZED)
 
-        # Require Genome_uuid, dataset_type_name, dataset_source
         genome_uuid = request.data.get('genome_uuid')
         dataset_type_name = request.data.get('dataset_type')
-        dataset_source_name = request.data.get('dataset_source')
-
-        if not all([genome_uuid, dataset_type_name, dataset_source_name]):
-            return Response({'error': 'Required fields not provided'}, status=status.HTTP_400_BAD_REQUEST)
-        # Check if  Genome_uuid, dataset_type_name, dataset_source are present in the database:
-        if not DatasetSource.objects.filter(name=dataset_source_name).exists():
-            return Response({'error': 'The provided dataset_source_name does not exist in the database'},
-                            status=status.HTTP_400_BAD_REQUEST)
-        try:
-            Genome.objects.get(genome_uuid=uuid.UUID(genome_uuid))
-        except Genome.DoesNotExist:
-            return Response({'error': 'The provided genome_uuid does not exist in the database'},
-                            status=status.HTTP_400_BAD_REQUEST)
-
-        if not DatasetType.objects.filter(name=dataset_type_name).exists():
-            return Response({'error': 'The provided dataset_type_name does not exist in the database'},
-                            status=status.HTTP_400_BAD_REQUEST)
-
-        # Check if a dateset is already present and not release:
+        dataset_source_name = request.data.get('dataset_source', {}).get('name')
         existing_datasets = Dataset.objects.filter(
             dataset_type__name=dataset_type_name,
             dataset_source__name=dataset_source_name,
             genome_datasets__genome__genome_uuid=genome_uuid,
             genome_datasets__release__isnull=True,
         )
+        if not Genome.objects.filter(genome_uuid=genome_uuid).exists():
+            return Response({
+                'error': 'No Genome found with the provided UUID.'
+            }, status=status.HTTP_400_BAD_REQUEST)
+
         if existing_datasets.exists():
             return Response({
                 'error': 'Dataset with the provided genome_uuid, dataset_type.name and dataset_source.name '
-                         'already exists and is not attached to a release. Please use PUT to update instead of POST.'
+                         'already exists. Please DELETE dataset and resubmit or PUT additional dataset_attributes.'
             }, status=status.HTTP_400_BAD_REQUEST)
 
         serializer.is_valid(raise_exception=True)
@@ -99,8 +80,52 @@ class DatasetViewSet(viewsets.ModelViewSet):
         headers = self.get_success_headers(serializer.data)
         return Response(serializer.data, status=status.HTTP_201_CREATED, headers=headers)
 
-    # DELETE:
+    # PUT
+    @csrf_exempt
+    def update(self, request, dataset_uuid=None, *args, **kwargs):
+        User = get_user_model()
+        self.permission_classes = [AllowAny, ]
+        username = request.data.get('user', None)
+        if not username or not User.objects.filter(username=username).exists():
+            return Response({'detail': 'User not registered'}, status=status.HTTP_401_UNAUTHORIZED)
+        try:
+            dataset = Dataset.objects.get(dataset_uuid=dataset_uuid)
+        except Dataset.DoesNotExist:
+            return Response({'error': 'Please POST this data with type, genome, and dataset_source'},
+                            status=status.HTTP_400_BAD_REQUEST)
+        attrs_data = request.data.get('dataset_attribute', [])
+
+        for attr_data in attrs_data:
+            name = attr_data.get('name')
+            value = attr_data.get('value')
+
+            # Check if the attribute value already exists for the dataset
+            if DatasetAttribute.objects.filter(dataset=dataset, attribute__name=name).exists():
+                return Response(
+                    {'error': f'Error, {name} is already populated. Please use the admin pages to modify it.'},
+                    status=status.HTTP_400_BAD_REQUEST)
+
+            # If not, update or create the dataset attribute
+            attribute, created = Attribute.objects.get_or_create(
+                name=name,
+                defaults={
+                    'label': name,
+                    'description': name,
+                    'type': "string"
+                }
+            )
+            DatasetAttribute.objects.update_or_create(
+                dataset=dataset,
+                attribute=attribute,
+                defaults={'value': value}
+            )
+
+        serializer = self.get_serializer(dataset)
+        return Response(serializer.data, status=status.HTTP_200_OK)
+
+    @csrf_exempt
     def destroy(self, request, *args, **kwargs):
+        self.permission_classes = [AllowAny, ]
         try:
             instance = self.get_object()
         except Dataset.DoesNotExist:

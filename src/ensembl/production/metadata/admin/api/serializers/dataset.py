@@ -27,17 +27,34 @@ class DatasetAttributeSerializer(serializers.ModelSerializer):
         model = DatasetAttribute
         fields = ['name', 'value']
 
-    name = serializers.StringRelatedField(many=False, read_only=True, source='attribute')
+    name = serializers.CharField(source='attribute.name')
+
+
+class DatasetSourceSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = DatasetSource
+        fields = ['name', 'type']
+
+    def validate(self, data):
+        name = data.get('name')
+        type_ = data.get('type')
+
+        try:
+            existing_source = DatasetSource.objects.get(name=name)
+            if existing_source.type != type_:
+                raise serializers.ValidationError({
+                    "type": "Type mismatch for existing dataset source with the same name."
+                })
+        except DatasetSource.DoesNotExist:
+            pass
+        return data
 
 
 class DatasetSerializer(serializers.ModelSerializer):
-    attributes = DatasetAttributeSerializer(many=True, required=False)
+    dataset_attribute = DatasetAttributeSerializer(many=True, required=False)
     genome_uuid = serializers.UUIDField(write_only=True)
     genome_datasets = serializers.SerializerMethodField()
-    dataset_source = serializers.SlugRelatedField(
-        slug_field='name',
-        queryset=DatasetSource.objects.all()
-    )
+    dataset_source = DatasetSourceSerializer()
     dataset_type = serializers.SlugRelatedField(
         slug_field='name',
         queryset=DatasetType.objects.all()
@@ -45,7 +62,8 @@ class DatasetSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Dataset
-        fields = ["dataset_uuid", "genome_datasets", "name", "label", "attributes", "dataset_source", "dataset_type",
+        fields = ["dataset_uuid", "genome_datasets", "name", "label", "dataset_attribute", "dataset_source",
+                  "dataset_type",
                   'genome_uuid']
 
     def get_genome_datasets(self, obj):
@@ -64,31 +82,45 @@ class DatasetSerializer(serializers.ModelSerializer):
         return serialized_data
 
     def create(self, validated_data):
+        dataset_source_data = validated_data.pop('dataset_source', {})
+        dataset_source_name = dataset_source_data.get('name')
+        dataset_source_type = dataset_source_data.get('type')
 
-        # Ensure that it is the data is commited in a single transaction
+        # Ensure that the data is committed in a single transaction
         with transaction.atomic():
             genome_uuid = validated_data.pop('genome_uuid')
             genome = Genome.objects.get(genome_uuid=genome_uuid)
 
-            dataset_attributes_data = validated_data.get('dataset_attribute', [])
-
-            # Create Dataset
+            try:
+                dataset_source = DatasetSource.objects.get(name=dataset_source_name)
+                if dataset_source.type != dataset_source_type:
+                    raise serializers.ValidationError({
+                        "dataset_source": {
+                            "name": ["dataset source with this name already exists with a different type."]
+                        }
+                    })
+            except DatasetSource.DoesNotExist:
+                try:
+                    dataset_source = DatasetSource.objects.create(name=dataset_source_name, type=dataset_source_type)
+                except Exception as e:
+                    raise serializers.ValidationError({"dataset_source": str(e)})
+            dataset_attributes_data = validated_data.pop('dataset_attribute', [])
+            validated_data['dataset_source'] = dataset_source
             new_dataset = Dataset.objects.create(**validated_data)
-            # Link new dataset to the genome
             GenomeDataset.objects.create(genome=genome, dataset=new_dataset)
-            # Create DatasetAttributes if provided
             for attr_data in dataset_attributes_data:
                 attr_value = attr_data.get('value')
-                attr_name = attr_data.get('name')
-
-                try:
-                    if attr_name:
-                        attribute = Attribute.objects.get(name=attr_name)
-                    else:
-                        raise serializers.ValidationError("Attribute identifier name is required.")
-                except ObjectDoesNotExist:
-                    raise serializers.ValidationError("Attribute not found.")
-
+                attr_name = attr_data['attribute']['name']
+                if not attr_name:
+                    raise serializers.ValidationError("Attribute identifier name is required.")
+                attribute, created = Attribute.objects.get_or_create(
+                    name=attr_name,
+                    defaults={
+                        'label': attr_name,
+                        'description': attr_name,
+                        'type': "string"
+                    }
+                )
                 DatasetAttribute.objects.create(dataset=new_dataset, attribute=attribute, value=attr_value)
 
         return new_dataset

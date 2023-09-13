@@ -14,9 +14,11 @@ from rest_framework.reverse import reverse
 from rest_framework import status
 from django.contrib.auth.models import User
 
+from ensembl.production.metadata.admin.models import Dataset, Attribute, DatasetAttribute, DatasetSource
+
 
 class GenomeViewSetTestCase(APITestCase):
-    fixtures = ['nine_assemblies.json']  # Assuming you have a fixture named 'your_fixture.json'
+    fixtures = ['three_assemblies.json']
 
     def setUp(self):
         self.client = APIClient()
@@ -27,14 +29,14 @@ class GenomeViewSetTestCase(APITestCase):
         self.assertIsNotNone(response.data)
 
     def test_genome_viewset_get_individual(self):
-        genome_uuid = 'a7335667-93e7-11ec-a39d-005056b38ce3'
+        genome_uuid = '553ff910-39db-40de-9f82-91b72ad577ea'
         response = self.client.get(reverse('ensembl_metadata:genome-detail', args=[genome_uuid]))
         self.assertEqual(response.status_code, status.HTTP_200_OK)
         self.assertIsNotNone(response.data)
 
 
 class DatasetViewSetTestCase(APITestCase):
-    fixtures = ['nine_assemblies.json']
+    fixtures = ['three_assemblies.json']
 
     def setUp(self):
         # self.client = APIClient()
@@ -47,20 +49,32 @@ class DatasetViewSetTestCase(APITestCase):
         self.assertIsNotNone(response.data)
 
     def test_dataset_viewset_get_individual(self):
-        dataset_uuid = '559d7660-d92d-47e1-924e-e741151c2cef'
+        dataset_uuid = '2b2469a3-94f8-4c68-9211-7677126d9579'
         response = self.client.get(reverse('ensembl_metadata:dataset-detail', args=[dataset_uuid]))
         self.assertEqual(response.status_code, status.HTTP_200_OK)
         self.assertIsNotNone(response.data)
 
     def test_dataset_create_no_genome(self):
         payload = {
-            'user': 'testuser',
-            'genome_uuid': 'a7335667-9999-11ec-a39d-005056b38ce3',
+            'user': 'test_user',
+            'genome_uuid': 'eeb53722-0e6d-4970-972f-c840989e0ef6',
             "name": "Test Dataset",
             "description": "This is a test dataset.",
             "label": "This is a test.",
             "dataset_type": "variation",
-            "dataset_source": "homo_sapiens_core_108_38"
+            "dataset_source": {
+                "name": "homo_sapiens_core_108_38",
+                "type": "core"
+            },
+            "dataset_attribute": [
+                {
+                    "value": "Test Value 1",
+                    "name": "total_exons"
+                },
+                {
+                    "value": "Test Value 2",
+                    "name": "total_genes"
+                }]
         }
 
         response = self.client.post(reverse('ensembl_metadata:dataset-list'), payload, format='json')
@@ -68,28 +82,67 @@ class DatasetViewSetTestCase(APITestCase):
 
     def test_dataset_create_success(self):
         payload = {
-            'user': 'testuser',
-            'genome_uuid': 'a7335667-93e7-11ec-a39d-005056b38ce3',
+            'user': 'test_user',
+            'genome_uuid': 'eeb537c0-0e6d-4970-972f-c840989e0ef6',
             "name": "Test Dataset",
             "description": "This is a test dataset.",
             "label": "This is a test.",
             "dataset_type": "variation",
-            "dataset_source": "homo_sapiens_core_108_38"
+            "dataset_source": {
+                "name": "homo_sapiens_core_108_38",
+                "type": "core"
+            },
+            "dataset_attribute": [
+                {
+                    "value": "Test Value 1",
+                    "name": "total_exons"
+                },
+                {
+                    "value": "Test Value 2",
+                    "name": "New_Attribute"
+                }]
         }
-
         response = self.client.post(reverse('ensembl_metadata:dataset-list'), payload, format='json')
         self.assertEqual(response.status_code, status.HTTP_201_CREATED)
+        # Check that the data has been properly added.
+        dataset = Dataset.objects.get(name=payload['name'])
+        self.assertEqual(dataset.name, payload['name'])
+        self.assertEqual(dataset.label, payload['label'])
+        for attribute_data in payload['dataset_attribute']:
+            attribute_obj = Attribute.objects.get(name=attribute_data['name'])
+            dataset_attribute = DatasetAttribute.objects.get(
+                dataset=dataset,
+                attribute=attribute_obj,
+                value=attribute_data['value']
+            )
+            self.assertIsNotNone(dataset_attribute)
+
+        try:
+            dataset_source = DatasetSource.objects.get(name=payload['dataset_source']['name'])
+        except DatasetSource.DoesNotExist:
+            self.fail("DatasetSource was not created or retrieved correctly")
 
     def test_dataset_delete_success(self):
-        # first create a dataset to delete
         payload = {
-            'user': 'testuser',
-            'genome_uuid': 'a7335667-93e7-11ec-a39d-005056b38ce3',
-            "name": "Test Dataset for deletion",
-            "description": "This is a test dataset for deletion.",
-            "label": "This is a test for deletion.",
+            'user': 'test_user',
+            'genome_uuid': 'eeb537c0-0e6d-4970-972f-c840989e0ef6',
+            "name": "Test Dataset",
+            "description": "This is a test dataset.",
+            "label": "This is a test.",
             "dataset_type": "variation",
-            "dataset_source": "homo_sapiens_core_108_38"
+            "dataset_source": {
+                "name": "homo_sapiens_core_108_38",
+                "type": "core"
+            },
+            "dataset_attribute": [
+                {
+                    "value": "Test Value 1",
+                    "name": "total_exons"
+                },
+                {
+                    "value": "Test Value 2",
+                    "name": "New_Attribute"
+                }]
         }
 
         create_response = self.client.post(reverse('ensembl_metadata:dataset-list'), payload, format='json')
@@ -101,3 +154,54 @@ class DatasetViewSetTestCase(APITestCase):
 
         get_response = self.client.get(reverse('ensembl_metadata:dataset-detail', args=[dataset_uuid]))
         self.assertEqual(get_response.status_code, status.HTTP_404_NOT_FOUND)
+
+    def test_dataset_update_no_dataset(self):
+        payload = {
+            "user": "danielp",
+            "dataset_uuid": "553ff922-39db-40de-9f82-91b72ad577ea",
+            "dataset_attribute": [
+                {
+                    "value": "Test Value 1",
+                    "name": "total_exons"
+                },
+                {
+                    "value": "Test Value 2",
+                    "name": "total_genes"
+                }
+            ]
+        }
+
+        response = self.client.put(
+            reverse('ensembl_metadata:dataset-detail', kwargs={'dataset_uuid': payload['dataset_uuid']}), payload,
+            format='json')
+        self.assertEqual(response.status_code, status.HTTP_400_BAD_REQUEST)
+
+    def test_dataset_update_success(self):
+        payload = {
+            "user": "danielp",
+            "dataset_uuid": "a729ec3d-7924-4624-9af8-feddcc63f676",
+            "dataset_attribute": [
+                {
+                    "value": "Test Value 1",
+                    "name": "total_exons"
+                },
+                {
+                    "value": "Test Value 2",
+                    "name": "total_genes"
+                }
+            ]
+        }
+        response = self.client.put(
+            reverse('ensembl_metadata:dataset-detail', kwargs={'dataset_uuid': payload['dataset_uuid']}), payload,
+            format='json')
+        self.assertEqual(response.status_code, status.HTTP_200_OK)
+
+        dataset = Dataset.objects.get(dataset_uuid=payload['dataset_uuid'])
+        for attribute_data in payload['dataset_attribute']:
+            attribute_obj = Attribute.objects.get(name=attribute_data['name'])
+            dataset_attribute = DatasetAttribute.objects.get(
+                dataset=dataset,
+                attribute=attribute_obj,
+                value=attribute_data['value']
+            )
+            self.assertIsNotNone(dataset_attribute)
