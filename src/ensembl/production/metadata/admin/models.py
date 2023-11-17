@@ -79,14 +79,14 @@ class Assembly(models.Model):
 class AssemblySequence(models.Model):
     assembly_sequence_id = models.AutoField(primary_key=True)
     name = models.CharField(max_length=128, blank=True, null=True)
-    assembly = models.ForeignKey(Assembly, models.DO_NOTHING)
+    assembly = models.ForeignKey(Assembly, on_delete=models.CASCADE)
     accession = models.CharField(max_length=128)
     chromosomal = models.BooleanField()
     chromosome_rank = models.IntegerField(blank=True, null=True)
     length = models.IntegerField()
     sequence_location = models.CharField(max_length=10, blank=True, null=True)
     md5 = models.CharField(max_length=32, blank=True, null=True)
-    sha512t4u = models.CharField(max_length=128, blank=True, null=True)
+    sha512t24u = models.CharField(max_length=128, blank=True, null=True)
 
     def save(self, *args, **kwargs):
         if self.pk is not None:
@@ -126,31 +126,6 @@ class Attribute(models.Model):
 
     def __str__(self):
         return self.name
-
-
-class DatasetAttribute(models.Model):
-    dataset_attribute_id = models.AutoField(primary_key=True)
-    value = models.CharField(max_length=128)
-    attribute = models.ForeignKey('Attribute', models.DO_NOTHING, related_name='datasets_set')
-    dataset = models.ForeignKey('Dataset', on_delete=models.CASCADE, related_name='attributes')
-
-    def save(self, *args, **kwargs):
-        if self.pk is not None:
-            if self.dataset.genomes.filter(releases__isnull=False).exists():
-                raise ValidationError('Released data cannot be modified')
-        super().save(*args, **kwargs)
-
-    def delete(self, *args, **kwargs):
-        if self.dataset.genomes.filter(releases__isnull=False).exists():
-            raise ValidationError('Released data cannot be deleted')
-        super().delete(*args, **kwargs)
-
-    class Meta:
-        db_table = 'dataset_attribute'
-        unique_together = (('dataset', 'attribute', 'value'),)
-
-    def __str__(self):
-        return self.attribute.name+':'+self.value
 
 
 class Dataset(models.Model):
@@ -195,6 +170,32 @@ class Dataset(models.Model):
         return self.name
 
 
+class DatasetAttribute(models.Model):
+    dataset_attribute_id = models.AutoField(primary_key=True)
+    value = models.CharField(max_length=128)
+    attribute = models.ForeignKey('Attribute', on_delete=models.CASCADE, related_name='datasets_set')
+    dataset = models.ForeignKey('Dataset', on_delete=models.CASCADE, related_name='attributes')
+
+    def save(self, *args, **kwargs):
+        if self.pk is not None:
+            if self.dataset.genomes.filter(releases__isnull=False).exists():
+                raise ValidationError('Released data cannot be modified')
+        super().save(*args, **kwargs)
+
+    def delete(self, *args, **kwargs):
+        if self.dataset.genomes.filter(releases__isnull=False).exists():
+            raise ValidationError('Released data cannot be deleted')
+        super().delete(*args, **kwargs)
+
+    class Meta:
+        db_table = 'dataset_attribute'
+        unique_together = (('dataset', 'attribute', 'value'),)
+
+    def __str__(self):
+        return self.attribute.name+':'+self.value
+
+
+
 class DatasetSource(models.Model):
     dataset_source_id = models.AutoField(primary_key=True)
     type = models.CharField(max_length=32)
@@ -228,7 +229,7 @@ class EnsemblRelease(models.Model):
     release_date = models.DateField()
     label = models.CharField(max_length=64, blank=True, null=True)
     is_current = models.BooleanField(default=False)
-    site = models.ForeignKey('EnsemblSite', models.DO_NOTHING, blank=True, null=True)
+    site = models.ForeignKey('EnsemblSite', on_delete=models.SET_NULL, blank=True, null=True)
     release_type = models.CharField(max_length=16)
     genomes = models.ManyToManyField('Genome', through='GenomeRelease')
     datasets = models.ManyToManyField('Dataset', through='GenomeDataset')
@@ -257,12 +258,13 @@ class EnsemblSite(models.Model):
 class Genome(models.Model):
     genome_id = models.AutoField(primary_key=True)
     genome_uuid = UUIDField(default=uuid.uuid4, editable=False, unique=True)
-    assembly = models.ForeignKey(Assembly, models.DO_NOTHING)
-    organism = models.ForeignKey('Organism', models.DO_NOTHING)
+    assembly = models.ForeignKey(Assembly, on_delete=models.CASCADE)
+    organism = models.ForeignKey('Organism', on_delete=models.CASCADE)
     created = models.DateTimeField(auto_now_add=True)
     is_best = models.BooleanField(default=False)
     datasets = models.ManyToManyField('Dataset', through='GenomeDataset')
     releases = models.ManyToManyField('EnsemblRelease', through='GenomeRelease')
+    production_name = models.CharField(max_length=255)
 
     def save(self, *args, **kwargs):
         if self.pk is not None and self.releases.exists():
@@ -283,9 +285,9 @@ class Genome(models.Model):
 
 class GenomeDataset(models.Model):
     genome_dataset_id = models.AutoField(primary_key=True)
-    dataset = models.ForeignKey(Dataset, models.CASCADE, related_name='genome_datasets')
+    dataset = models.ForeignKey(Dataset, on_delete=models.CASCADE, related_name='genome_datasets')
     genome = models.ForeignKey(Genome, on_delete=models.CASCADE)
-    release = models.ForeignKey(EnsemblRelease, models.DO_NOTHING, blank=True, null=True)
+    release = models.ForeignKey(EnsemblRelease, on_delete=models.SET_NULL, blank=True, null=True)
     is_current = models.BooleanField(default=False)
 
     def save(self, *args, **kwargs):
@@ -304,8 +306,8 @@ class GenomeDataset(models.Model):
 
 class GenomeRelease(models.Model):
     genome_release_id = models.AutoField(primary_key=True)
-    genome = models.ForeignKey(Genome, models.DO_NOTHING)
-    release = models.ForeignKey(EnsemblRelease, models.DO_NOTHING)
+    genome = models.ForeignKey(Genome, on_delete=models.CASCADE)
+    release = models.ForeignKey(EnsemblRelease, on_delete=models.CASCADE)
     is_current = models.BooleanField(default=False)
 
 
@@ -334,6 +336,8 @@ class Organism(models.Model):
     assemblies = models.ManyToManyField('Assembly', through='Genome')
     organism_uuid = models.UUIDField(default=uuid.uuid4, editable=False, unique=True)
     strain_type = models.CharField(max_length=128, blank=True, null=True)
+    rank = models.IntegerField(blank=True, null=True)
+
     def save(self, *args, **kwargs):
         if self.pk is not None:
             if self.genome_set.filter(releases__isnull=False).exists():
@@ -371,8 +375,8 @@ class OrganismGroupMember(models.Model):
     organism_group_member_id = models.AutoField(primary_key=True)
     is_reference = models.BooleanField(null=True)
     order = models.IntegerField(null=True, unique=False)
-    organism = models.ForeignKey(Organism, models.DO_NOTHING)
-    organism_group = models.ForeignKey(OrganismGroup, models.DO_NOTHING)
+    organism = models.ForeignKey(Organism, on_delete=models.CASCADE)
+    organism_group = models.ForeignKey(OrganismGroup, on_delete=models.CASCADE)
 
     class Meta:
         db_table = 'organism_group_member'

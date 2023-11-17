@@ -26,6 +26,7 @@ class GenomeViewSetTestCase(APITestCase):
     def test_genome_viewset_get(self):
         response = self.client.get(reverse('ensembl_metadata:genome-list'))
         self.assertEqual(response.status_code, status.HTTP_200_OK)
+        print(reverse('ensembl_metadata:genome-list'))
         self.assertIsNotNone(response.data)
 
     def test_genome_viewset_get_individual(self):
