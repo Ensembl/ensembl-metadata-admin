@@ -40,44 +40,34 @@ class GenomeViewSetTestCase(APITestCase):
 
 class CascadeDeleteTestCase(TestCase):
     def setUp(self):
-        # Create an Organism instance
         self.organism = Organism.objects.create(
             taxonomy_id=12345,
             common_name='Test Organism',
             ensembl_name='test_organism',
             scientific_name='Testus organismus',
-            # Add other necessary fields
         )
 
-        # Create an Assembly instance
         self.assembly = Assembly.objects.create(
             accession='Test Accession',
             level='Test Level',
             name='Test Name',
-            # Add other necessary fields
         )
 
-        # Create a Genome instance linked to both Organism and Assembly
         self.genome = Genome.objects.create(
             organism=self.organism,
             assembly=self.assembly,
             production_name='Test Production Name',
-            # Add other necessary fields
         )
 
     def test_cascade_delete_organism(self):
-        # Perform the delete operation on the Organism
         self.organism.delete()
 
-        # Assert that the related Genome instance is also deleted
         with self.assertRaises(Genome.DoesNotExist):
             Genome.objects.get(pk=self.genome.pk)
 
     def test_cascade_delete_assembly(self):
-        # Perform the delete operation on the Assembly
         self.assembly.delete()
 
-        # Assert that the related Genome instance is also deleted
         with self.assertRaises(Genome.DoesNotExist):
             Genome.objects.get(pk=self.genome.pk)
 
