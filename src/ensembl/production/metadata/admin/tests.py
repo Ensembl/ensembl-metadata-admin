@@ -9,12 +9,14 @@
 #   WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 #   See the License for the specific language governing permissions and
 #   limitations under the License.from django.apps import AppConfig
+from django.test import TestCase
 from rest_framework.test import APIClient, APITestCase
 from rest_framework.reverse import reverse
 from rest_framework import status
 from django.contrib.auth.models import User
 
-from ensembl.production.metadata.admin.models import Dataset, Attribute, DatasetAttribute, DatasetSource
+from ensembl.production.metadata.admin.models import Dataset, Attribute, DatasetAttribute, DatasetSource, Organism, \
+    Assembly, Genome
 
 
 class GenomeViewSetTestCase(APITestCase):
@@ -26,6 +28,7 @@ class GenomeViewSetTestCase(APITestCase):
     def test_genome_viewset_get(self):
         response = self.client.get(reverse('ensembl_metadata:genome-list'))
         self.assertEqual(response.status_code, status.HTTP_200_OK)
+        print(reverse('ensembl_metadata:genome-list'))
         self.assertIsNotNone(response.data)
 
     def test_genome_viewset_get_individual(self):
@@ -33,6 +36,40 @@ class GenomeViewSetTestCase(APITestCase):
         response = self.client.get(reverse('ensembl_metadata:genome-detail', args=[genome_uuid]))
         self.assertEqual(response.status_code, status.HTTP_200_OK)
         self.assertIsNotNone(response.data)
+
+
+class CascadeDeleteTestCase(TestCase):
+    def setUp(self):
+        self.organism = Organism.objects.create(
+            taxonomy_id=12345,
+            common_name='Test Organism',
+            ensembl_name='test_organism',
+            scientific_name='Testus organismus',
+        )
+
+        self.assembly = Assembly.objects.create(
+            accession='Test Accession',
+            level='Test Level',
+            name='Test Name',
+        )
+
+        self.genome = Genome.objects.create(
+            organism=self.organism,
+            assembly=self.assembly,
+            production_name='Test Production Name',
+        )
+
+    def test_cascade_delete_organism(self):
+        self.organism.delete()
+
+        with self.assertRaises(Genome.DoesNotExist):
+            Genome.objects.get(pk=self.genome.pk)
+
+    def test_cascade_delete_assembly(self):
+        self.assembly.delete()
+
+        with self.assertRaises(Genome.DoesNotExist):
+            Genome.objects.get(pk=self.genome.pk)
 
 
 class DatasetViewSetTestCase(APITestCase):
