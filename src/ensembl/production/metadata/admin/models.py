@@ -279,7 +279,7 @@ class Genome(models.Model):
     class Meta:
         db_table = 'genome'
 
-    def __str__(self):
+    def __repr__(self):
         return str(self.genome_uuid)
 
 
