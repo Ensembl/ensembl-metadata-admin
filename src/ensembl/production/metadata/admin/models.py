@@ -362,6 +362,15 @@ class Organism(models.Model):
         db_table = 'organism'
         ordering = ['biosample_id', 'scientific_name']
 
+
+    @property
+    def ensembl_name(self):
+        return self.biosample_id
+
+    @ensembl_name.setter
+    def ensembl_name(self, ensembl_name):
+        self.biosample_id = ensembl_name
+
     def __str__(self):
         return f"{self.scientific_name} ({self.biosample_id})"
 
