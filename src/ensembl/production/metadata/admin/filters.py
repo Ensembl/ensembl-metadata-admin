@@ -10,12 +10,11 @@
 #   See the License for the specific language governing permissions and
 #   limitations under the License.from django.apps import AppConfig
 
-from django.contrib.admin import SimpleListFilter
-from ensembl.production.metadata.admin.models import *
-
-
 from django.contrib import admin
 from django.utils.translation import gettext_lazy as _
+
+from ensembl.production.metadata.admin.models import *
+
 
 class MetadataReleaseFilter(admin.SimpleListFilter):
     title = _('Ensembl Release')
@@ -37,7 +36,7 @@ class MetadataOrganismFilter(admin.SimpleListFilter):
 
     def lookups(self, request, model_admin):
         organisms = Organism.objects.all()
-        return [(r.organism_id, r.ensembl_name) for r in organisms]
+        return [(r.organism_id, r.biosample_id) for r in organisms]
 
     def queryset(self, request, queryset):
         if self.value():

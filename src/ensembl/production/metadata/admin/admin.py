@@ -168,7 +168,7 @@ class GenomeReleaseInLine(MetadataInline, admin.TabularInline):
     genome_assembly.short_description = "Assembly"
 
     def genome_organism(self, obj):
-        # return obj.genome.organism.ensembl_name
+        # return obj.genome.organism.biosample_id
         url_view = reverse('admin:ensembl_metadata_organism_change',
                            args=(obj.genome.organism.organism_id,))
         return mark_safe(f"<a href='{url_view}'>{obj.genome.organism.display_name}</a>")
@@ -232,14 +232,14 @@ class OrganismAdmin(AdminMetadata, admin.ModelAdmin):
     # assemblies
     # TODO: integrate Releases / Assemblies in detailed view as Inlines
     fields = (
-        'common_name', 'organism_uuid', 'strain', 'scientific_name', 'ensembl_name',
+        'common_name', 'organism_uuid', 'strain', 'scientific_name', 'biosample_id',
         'scientific_parlance_name', 'taxonomy_id', 'species_taxonomy_id',)
     list_display = ('organism_uuid',
-                    'common_name', 'strain', 'scientific_name', 'ensembl_name',
+                    'common_name', 'strain', 'scientific_name', 'biosample_id',
                     'scientific_parlance_name', 'taxonomy_id', 'species_taxonomy_id')
-    readonly_fields = ('organism_uuid', 'ensembl_name', 'scientific_parlance_name')
+    readonly_fields = ('organism_uuid', 'biosample_id', 'scientific_parlance_name')
     list_filter = (MetadataReleaseFilter,)
-    search_fields = ('ensembl_name', 'assemblies__accession', 'organism_uuid', 'common_name')
+    search_fields = ('biosample_id', 'assemblies__accession', 'organism_uuid', 'common_name')
     inlines = (OrganismGroupMemberInLine, GenomeInLine)
 
     def organism_assemblies(self, obj):
@@ -284,7 +284,7 @@ class DatasetAttributeInline(MetadataInline, admin.TabularInline):
 class DatasetAdmin(AdminMetadata, admin.ModelAdmin):
     fields = ('name', 'version', 'dataset_type', 'dataset_source', 'label', 'status', 'dataset_uuid')
     search_fields = ('genomes__genome_uuid', 'genomes__organism__common_name',
-                     'genomes__organism__ensembl_name', 'genomes__organism__scientific_name',
+                     'genomes__organism__biosample_id', 'genomes__organism__scientific_name',
                      'genomes__assembly__accession', 'genomes__assembly__name',
                      'genomes__assembly__tol_id', 'genomes__assembly__ensembl_name')
     list_display = ('dataset_uuid', 'name', 'label', 'version', 'status_display', 'dataset_source', 'dataset_type')
@@ -323,7 +323,7 @@ class OrganismGroupInLine(MetadataInline, admin.TabularInline):
     def group_organisms(self, obj):
         url_view = reverse('admin:ensembl_metadata_organism_change',
                            args=(obj.organism.organism_id,))
-        return mark_safe(u"<a href='" + url_view + "'>" + obj.organism.ensembl_name + "</a>")
+        return mark_safe(u"<a href='" + url_view + "'>" + obj.organism.biosample_id + "</a>")
 
     group_organisms.short_description = 'Organisms'
 

@@ -10,20 +10,21 @@
 #   See the License for the specific language governing permissions and
 #   limitations under the License.from django.apps import AppConfig
 import uuid
-from django.db import models
+
 from django.core.exceptions import ValidationError
-from django.db.models import SET_NULL
+from django.db import models
 from django.db.models.lookups import IContains
 
+
 class UUIDField(models.UUIDField):
-  
+
     def __init__(self, verbose_name=None, **kwargs):
         super().__init__(verbose_name, **kwargs)
-        self.max_length=40
+        self.max_length = 40
 
     def get_internal_type(self):
         return "CharField"
-    
+
     def get_db_prep_value(self, value, connection, prepared=False):
         if value is None:
             return None
@@ -36,10 +37,12 @@ class UUIDField(models.UUIDField):
         if connection.features.has_native_uuid_field:
             return value
         return str(value)
-    
+
+
 @UUIDField.register_lookup
 class UUIDIContains(IContains):
     pass
+
 
 class Assembly(models.Model):
     assembly_id = models.AutoField(primary_key=True)
@@ -77,6 +80,15 @@ class Assembly(models.Model):
 
 
 class AssemblySequence(models.Model):
+    class SequenceType(models.TextChoices):
+        CHROM_GROUP = 'chromosome_group', 'Chromosome Group'
+        PLASMID = 'plasmid', 'Plasmid'
+        PRIMARY = 'primary_assembly', 'Primary assembly'
+        CONTIG = 'contig', 'Contig'
+        CHROMOSOME = 'chromosome', 'Chromosome'
+        SCAFFOLD = 'scaffold', 'Scaffold'
+        SUPERCONTIG = 'supercontig', 'Supercontig'
+
     assembly_sequence_id = models.AutoField(primary_key=True)
     name = models.CharField(max_length=128, blank=True, null=True)
     assembly = models.ForeignKey(Assembly, on_delete=models.CASCADE)
@@ -87,6 +99,8 @@ class AssemblySequence(models.Model):
     sequence_location = models.CharField(max_length=10, blank=True, null=True)
     md5 = models.CharField(max_length=32, blank=True, null=True)
     sha512t24u = models.CharField(max_length=128, blank=True, null=True)
+    type = models.CharField(max_length=26, blank=True, null=False, default=SequenceType.PRIMARY)
+    is_circular = models.BooleanField(null=False, default=False)
 
     def save(self, *args, **kwargs):
         if self.pk is not None:
@@ -130,8 +144,6 @@ class Attribute(models.Model):
 
 class Dataset(models.Model):
     dataset_id = models.AutoField(primary_key=True)
-    dataset_uuid = UUIDField(default=uuid.uuid4, editable=False)
-    dataset_type = models.ForeignKey('DatasetType', models.DO_NOTHING)
     name = models.CharField(max_length=128)
     version = models.CharField(max_length=128, blank=True, null=True)
     created = models.DateTimeField(auto_now_add=True)
@@ -143,11 +155,14 @@ class Dataset(models.Model):
         ('progressing', 'Progressing'),
         ('processed', 'Processed'),
     ]
-
     status = models.CharField(max_length=12, choices=statuses, default='Submitted')
     genomes = models.ManyToManyField('Genome', through='GenomeDataset')
+    dataset_type = models.ForeignKey('DatasetType', models.DO_NOTHING)
+    dataset_uuid = UUIDField(default=uuid.uuid4, editable=False)
 
-    # genome_datasets = models.ForeignKey('GenomeDataset', on_delete=models.CASCADE)
+    class Meta:
+        db_table = 'dataset'
+
     def save(self, *args, **kwargs):
         if self.pk is not None:
             if self.genomes.filter(releases__isnull=False).exists():
@@ -160,11 +175,7 @@ class Dataset(models.Model):
         super().delete(*args, **kwargs)
 
     def status_value(self):
-        return ("%s" % (self.status))
-
-
-    class Meta:
-        db_table = 'dataset'
+        return f"{self.status}"
 
     def __str__(self):
         return self.name
@@ -175,6 +186,10 @@ class DatasetAttribute(models.Model):
     value = models.CharField(max_length=128)
     attribute = models.ForeignKey('Attribute', on_delete=models.CASCADE, related_name='datasets_set')
     dataset = models.ForeignKey('Dataset', on_delete=models.CASCADE, related_name='attributes')
+
+    class Meta:
+        db_table = 'dataset_attribute'
+        unique_together = (('dataset', 'attribute', 'value'),)
 
     def save(self, *args, **kwargs):
         if self.pk is not None:
@@ -187,13 +202,8 @@ class DatasetAttribute(models.Model):
             raise ValidationError('Released data cannot be deleted')
         super().delete(*args, **kwargs)
 
-    class Meta:
-        db_table = 'dataset_attribute'
-        unique_together = (('dataset', 'attribute', 'value'),)
-
     def __str__(self):
-        return self.attribute.name+':'+self.value
-
+        return self.attribute.name + ':' + self.value
 
 
 class DatasetSource(models.Model):
@@ -310,7 +320,6 @@ class GenomeRelease(models.Model):
     release = models.ForeignKey(EnsemblRelease, on_delete=models.CASCADE)
     is_current = models.BooleanField(default=False)
 
-
     def delete(self, *args, **kwargs):
         if self.genome.releases.exists():
             raise ValidationError('Released data cannot be deleted')
@@ -330,7 +339,7 @@ class Organism(models.Model):
     common_name = models.CharField(max_length=128)
     strain = models.CharField(max_length=128, blank=True, null=True)
     scientific_name = models.CharField(max_length=128, blank=True, null=True)
-    ensembl_name = models.CharField(unique=True, max_length=128)
+    biosample_id = models.CharField(unique=True, null=False, max_length=128)
     scientific_parlance_name = models.CharField(max_length=255, blank=True, null=True)
     groups = models.ManyToManyField('OrganismGroup', through='OrganismGroupMember')
     assemblies = models.ManyToManyField('Assembly', through='Genome')
@@ -351,10 +360,10 @@ class Organism(models.Model):
 
     class Meta:
         db_table = 'organism'
-        ordering = ['ensembl_name', 'scientific_name']
+        ordering = ['biosample_id', 'scientific_name']
 
     def __str__(self):
-        return self.ensembl_name
+        return f"{self.scientific_name}({self.biosample_id})"
 
 
 class OrganismGroup(models.Model):

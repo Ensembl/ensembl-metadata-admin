@@ -31,7 +31,7 @@ class DatasetSerializer(serializers.HyperlinkedModelSerializer):
 class OrganismSerializer(serializers.ModelSerializer):
     class Meta:
         model = Organism
-        fields = ["scientific_name", "ensembl_name"]
+        fields = ["scientific_name", "biosample_id"]
 
 
 class ReleaseSerializer(serializers.ModelSerializer):
