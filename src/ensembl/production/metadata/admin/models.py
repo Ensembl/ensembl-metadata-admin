@@ -99,7 +99,7 @@ class AssemblySequence(models.Model):
     sequence_location = models.CharField(max_length=10, blank=True, null=True)
     md5 = models.CharField(max_length=32, blank=True, null=True)
     sha512t24u = models.CharField(max_length=128, blank=True, null=True)
-    type = models.CharField(max_length=26, blank=True, null=False, default=SequenceType.PRIMARY)
+    type = models.CharField(choices=SequenceType.choices, max_length=26, blank=True, null=False, default=SequenceType.PRIMARY)
     is_circular = models.BooleanField(null=False, default=False)
 
     def save(self, *args, **kwargs):
@@ -122,18 +122,18 @@ class AssemblySequence(models.Model):
 
 
 class Attribute(models.Model):
-    ATTRIBUTE_TYPES = [
-        ('integer', 'Integer'),
-        ('float', 'Float'),
-        ('percent', 'Percent'),
-        ('string', 'String'),
-        ('bp', 'BP'),
-    ]
+    class AttributeType(models.TextChoices):
+        integer = 'integer', 'Integer'
+        float = 'float', 'Float'
+        percent = 'percent', 'Percent'
+        string = 'string', 'String'
+        bp = 'bp', 'BP'
+
     attribute_id = models.AutoField(primary_key=True)
     name = models.CharField(unique=True, max_length=128)
     label = models.CharField(max_length=128)
     description = models.CharField(max_length=255, blank=True, null=True)
-    type = models.CharField(max_length=8, choices=ATTRIBUTE_TYPES, default='string')
+    type = models.CharField(max_length=8, choices=AttributeType.choices, default='string')
 
     class Meta:
         db_table = 'attribute'
@@ -363,12 +363,18 @@ class Organism(models.Model):
         ordering = ['biosample_id', 'scientific_name']
 
     def __str__(self):
-        return f"{self.scientific_name}({self.biosample_id})"
+        return f"{self.scientific_name} ({self.biosample_id})"
 
 
 class OrganismGroup(models.Model):
+    class OrganismGroupType(models.TextChoices):
+        DIVISION = 'Division', 'Ensembl GB Division'
+        INTERNAL = 'Internal', 'Internal Grouping'
+        POPULATION = 'Population', 'Organisms population'
+        SPECIES = 'Species', 'Organisms species'
+        COMPARA = 'Compara', 'Organisms Comparative Genomics group'
     organism_group_id = models.AutoField(primary_key=True)
-    type = models.CharField(max_length=32)
+    type = models.CharField(max_length=32, choices=OrganismGroupType.choices, null=True, blank=False)
     name = models.CharField(max_length=255)
     code = models.CharField(unique=True, max_length=48, blank=True, null=True)
 

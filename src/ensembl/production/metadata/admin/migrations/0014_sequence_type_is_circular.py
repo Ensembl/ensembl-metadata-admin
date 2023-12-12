@@ -18,6 +18,10 @@ class Migration(migrations.Migration):
         migrations.AddField(
             model_name='assemblysequence',
             name='type',
-            field=models.CharField(blank=True, default='primary_assembly', max_length=26),
+            field=models.CharField(blank=True,
+                                   choices=[('chromosome_group', 'Chromosome Group'), ('plasmid', 'Plasmid'),
+                                            ('primary_assembly', 'Primary assembly'), ('contig', 'Contig'),
+                                            ('chromosome', 'Chromosome'), ('scaffold', 'Scaffold'),
+                                            ('supercontig', 'Supercontig')], default='primary_assembly', max_length=26),
         ),
     ]

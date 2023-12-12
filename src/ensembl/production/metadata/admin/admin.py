@@ -16,6 +16,7 @@ from ensembl.production.metadata.admin.filters import *
 from .models import Attribute, AssemblySequence, Assembly, EnsemblRelease, Organism, Dataset, OrganismGroup, Genome, \
     DatasetAttribute
 from django.utils.html import format_html, format_html_join
+from django.contrib import admin, messages
 
 
 # Class to allow access only to turn everything readonly
@@ -68,6 +69,8 @@ class GenomeInLine(MetadataInline, admin.TabularInline):
 
 
 class DAttributeInLine(MetadataInline, admin.TabularInline):
+    # TODO We might nee to remove some linking, too many request generated. Page already takes around 1s to load with
+    #  only 241 genomes
     model = DatasetAttribute
     fields = ['display_dataset_uuid', 'display_dataset_source_name', 'value']  # Updated fields list
     readonly_fields = ['display_dataset_uuid', 'display_dataset_source_name']  # Updated readonly fields
@@ -103,12 +106,27 @@ class AttributeAdmin(AdminMetadata, admin.ModelAdmin):
 class AssemblySequenceAdmin(AdminMetadata, admin.ModelAdmin):
     model = AssemblySequence
 
-    fields = ['name', 'assembly', 'accession', 'chromosomal', 'chromosome_rank', 'length', 'sequence_location',
-              'sha512t24u', 'md5']
+    fields = ['name', 'assembly', 'accession', 'type', 'chromosomal', 'chromosome_rank', 'length', 'sequence_location',
+              'is_circular', 'sha512t24u', 'md5', ]
     readonly_fields = fields  # ALL READONLY
-    list_display = ['name', 'accession', 'length', 'chromosomal', 'md5']
-    search_fields = ['name', 'md5', 'sha512t24u']
+    list_display = ['name', 'accession', 'length', 'chromosomal', 'md5', 'sha512t24u']
+    search_fields = ['name', 'accession', 'md5', 'sha512t24u']
     list_per_page = 30
+    object_id = None
+
+    def has_delete_permission(self, request, obj=None):
+        return request.user.is_superuser
+
+    def change_view(self, request, object_id, form_url='', extra_context=None):
+        self.object_id = object_id
+        return super().change_view(request, object_id, form_url, extra_context)
+
+    def get_queryset(self, request):
+        if not (request.GET.get('assembly__assembly_id__exact') or self.object_id):
+            messages.warning(request, "Please Filter per Assembly first.")
+            return AssemblySequence.objects.none()
+        else:
+            return super().get_queryset(request)
 
 
 @admin.register(Assembly)
@@ -133,7 +151,8 @@ class AssemblyAdmin(AdminMetadata, admin.ModelAdmin):
 
     def assembly_sequence(self, obj):
         url_view = reverse('admin:ensembl_metadata_assemblysequence_changelist')
-        return mark_safe(f"<a href='{url_view}?assembly__assembly_id__exact={obj.assembly_id}'>View</a>")
+        return mark_safe(
+            f"<a href='{url_view}?assembly__assembly_id__exact={obj.assembly_id}'>View Assembly sequences</a>")
 
     assembly_sequence.short_description = "Sequences"
 
@@ -276,8 +295,14 @@ class OrganismAdmin(AdminMetadata, admin.ModelAdmin):
 class DatasetAttributeInline(MetadataInline, admin.TabularInline):
     model = DatasetAttribute
     fields = ['attribute', 'value']
-    can_delete = False
-    can_update = False
+    readonly_fields = ['attribute', ]
+    ordering = ['attribute']
+
+    def has_change_permission(self, request, obj=None):
+        return super().has_delete_permission(request, obj) or request.user.is_superuser
+
+    def has_delete_permission(self, request, obj=None):
+        return super().has_delete_permission(request, obj) or request.user.is_superuser
 
 
 @admin.register(Dataset)
