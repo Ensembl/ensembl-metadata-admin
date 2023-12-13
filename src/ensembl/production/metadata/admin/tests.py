@@ -43,7 +43,7 @@ class CascadeDeleteTestCase(TestCase):
         self.organism = Organism.objects.create(
             taxonomy_id=12345,
             common_name='Test Organism',
-            ensembl_name='test_organism',
+            biosample_id='test_organism',
             scientific_name='Testus organismus',
         )
 

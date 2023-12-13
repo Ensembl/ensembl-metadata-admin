@@ -11453,7 +11453,7 @@
       "common_name": "chicken",
       "strain": "Cross of Broiler mother + white leghorn layer father",
       "scientific_name": "Gallus gallus",
-      "ensembl_name": "gallus_gallus",
+      "biosample_id": "gallus_gallus",
       "scientific_parlance_name": null,
       "organism_uuid": "0823f582-83e4-4e06-b400-649d7116a892",
       "strain_type": "breed"
@@ -11468,7 +11468,7 @@
       "common_name": "human",
       "strain": null,
       "scientific_name": "Homo sapiens",
-      "ensembl_name": "homo_sapiens_37",
+      "biosample_id": "homo_sapiens_37",
       "scientific_parlance_name": null,
       "organism_uuid": "6055c3e6-105c-4f87-ae49-b377a6a335a4",
       "strain_type": null
