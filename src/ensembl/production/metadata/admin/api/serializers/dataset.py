@@ -82,12 +82,10 @@ class DatasetSerializer(serializers.ModelSerializer):
         return serialized_data
 
     def create(self, validated_data):
-        dataset_source_data = validated_data.pop('dataset_source', {})
-        dataset_source_name = dataset_source_data.get('name')
-        dataset_source_type = dataset_source_data.get('type')
-
-        # Ensure that the data is committed in a single transaction
         with transaction.atomic():
+            dataset_source_data = validated_data.pop('dataset_source', {})
+            dataset_source_name = dataset_source_data.get('name')
+            dataset_source_type = dataset_source_data.get('type')
             genome_uuid = validated_data.pop('genome_uuid')
             genome = Genome.objects.get(genome_uuid=genome_uuid)
 
