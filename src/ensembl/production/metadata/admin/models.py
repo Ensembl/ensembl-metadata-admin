@@ -14,7 +14,6 @@ import uuid
 from django.core.exceptions import ValidationError
 from django.db import models
 from django.db.models.lookups import IContains
-from django.contrib.postgres.fields import JSONField
 
 class UUIDField(models.UUIDField):
 
@@ -225,9 +224,9 @@ class DatasetType(models.Model):
     topic = models.CharField(max_length=32)
     description = models.CharField(max_length=255, blank=True, null=True)
     details_uri = models.CharField(max_length=255, blank=True, null=True)
-    parent = models.CharField(max_length=128, blank=True, null=True)
-    depends_on = models.CharField(max_length=128, blank=True, null=True)
-    filter_on = JSONField(blank=True, null=True)  # JSON field
+    # parent = models.CharField(max_length=128, blank=True, null=True)
+    # depends_on = models.CharField(max_length=128, blank=True, null=True)
+    # filter_on = JSONField(blank=True, null=True)  # JSON field
 
     class Meta:
         db_table = 'dataset_type'
