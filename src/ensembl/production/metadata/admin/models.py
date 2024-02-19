@@ -14,8 +14,7 @@ import uuid
 from django.core.exceptions import ValidationError
 from django.db import models
 from django.db.models.lookups import IContains
-from django_mysql.models import JSONField
-
+from django.db.models.fields.json import JSONField
 
 class UUIDField(models.UUIDField):
 
