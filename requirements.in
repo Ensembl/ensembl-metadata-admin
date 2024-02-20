@@ -4,3 +4,4 @@ djangorestframework~=3.12.4
 drf-spectacular
 Markdown
 mysqlclient
+django-jsonfield~=1.4.1

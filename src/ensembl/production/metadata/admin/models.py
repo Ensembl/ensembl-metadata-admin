@@ -14,7 +14,8 @@ import uuid
 from django.core.exceptions import ValidationError
 from django.db import models
 from django.db.models.lookups import IContains
-from django.db.models.fields.json import JSONField
+import jsonfield.fields
+
 
 class UUIDField(models.UUIDField):
 
@@ -99,7 +100,8 @@ class AssemblySequence(models.Model):
     sequence_location = models.CharField(max_length=10, blank=True, null=True)
     md5 = models.CharField(max_length=32, blank=True, null=True)
     sha512t24u = models.CharField(max_length=128, blank=True, null=True)
-    type = models.CharField(choices=SequenceType.choices, max_length=26, blank=True, null=False, default=SequenceType.PRIMARY)
+    type = models.CharField(choices=SequenceType.choices, max_length=26, blank=True, null=False,
+                            default=SequenceType.PRIMARY)
     is_circular = models.BooleanField(null=False, default=False)
 
     def save(self, *args, **kwargs):
@@ -227,7 +229,7 @@ class DatasetType(models.Model):
     details_uri = models.CharField(max_length=255, blank=True, null=True)
     parent = models.CharField(max_length=128, blank=True, null=True)
     depends_on = models.CharField(max_length=128, blank=True, null=True)
-    filter_on = JSONField(blank=True, null=True)  # JSON field
+    filter_on = jsonfield.JSONField(blank=True, null=True)  # JSON field
 
     class Meta:
         db_table = 'dataset_type'
@@ -365,7 +367,6 @@ class Organism(models.Model):
         db_table = 'organism'
         ordering = ['biosample_id', 'scientific_name']
 
-
     @property
     def ensembl_name(self):
         return self.biosample_id
@@ -385,6 +386,7 @@ class OrganismGroup(models.Model):
         POPULATION = 'Population', 'Organisms population'
         SPECIES = 'Species', 'Organisms species'
         COMPARA = 'Compara', 'Organisms Comparative Genomics group'
+
     organism_group_id = models.AutoField(primary_key=True)
     type = models.CharField(max_length=32, choices=OrganismGroupType.choices, null=True, blank=False)
     name = models.CharField(max_length=255)

@@ -3,9 +3,10 @@
 from django.db import migrations, models
 import django_mysql.models
 
+import jsonfield.fields
+
 
 class Migration(migrations.Migration):
-
     dependencies = [
         ('ensembl_metadata', '0015_organism_group_type_enum'),
     ]
@@ -19,7 +20,7 @@ class Migration(migrations.Migration):
         migrations.AddField(
             model_name='datasettype',
             name='filter_on',
-            field=django_mysql.models.JSONField(blank=True, default=dict, null=True),
+            field=jsonfield.fields.JSONField(blank=True, default=dict, null=True),
         ),
         migrations.AddField(
             model_name='datasettype',
