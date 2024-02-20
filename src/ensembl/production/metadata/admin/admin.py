@@ -45,6 +45,11 @@ class MetadataInline(InlineModelAdmin):
     def has_view_permission(self, request, obj=None):
         return True
 
+    def get_readonly_fields(self, request, obj=None):
+        if not request.user.is_superuser:
+            return self.fields
+        return super().get_readonly_fields(request, obj)
+
 
 class GenomeInLine(MetadataInline, admin.TabularInline):
     model = Genome
@@ -295,7 +300,6 @@ class OrganismAdmin(AdminMetadata, admin.ModelAdmin):
 class DatasetAttributeInline(MetadataInline, admin.TabularInline):
     model = DatasetAttribute
     fields = ['attribute', 'value']
-    # readonly_fields = ['attribute', ]
     ordering = ['attribute']
 
     def has_change_permission(self, request, obj=None):
@@ -303,6 +307,9 @@ class DatasetAttributeInline(MetadataInline, admin.TabularInline):
 
     def has_delete_permission(self, request, obj=None):
         return super().has_delete_permission(request, obj) or request.user.is_superuser
+
+    def has_add_permission(self, request, obj):
+        return request.user.is_superuser
 
     def get_field_queryset(self, db, db_field, request):
         return super().get_field_queryset(db, db_field, request).filter(name__startswith=self.filter)
@@ -361,17 +368,20 @@ class OrganismGroupInLine(MetadataInline, admin.TabularInline):
     fields = ('group_organisms', 'is_reference')
     readonly_fields = ('group_organisms',)
     can_delete = False
+    ordering = ('organism__scientific_name',)
 
     def group_organisms(self, obj):
         url_view = reverse('admin:ensembl_metadata_organism_change',
                            args=(obj.organism.organism_id,))
-        return mark_safe(u"<a href='" + url_view + "'>" + obj.organism.biosample_id + "</a>")
+        return mark_safe(u"<a href='" + url_view + "'>" + str(obj.organism) + "</a>")
+
+    def is_reference(self, obj):
+        return obj.is_reference
 
     group_organisms.short_description = 'Organisms'
+    is_reference.short_description = 'Is Reference for group'
 
 
-#
-#
 # # Groups Admin Section
 @admin.register(OrganismGroup)
 class OrganismGroupAdmin(AdminMetadata, admin.ModelAdmin):
