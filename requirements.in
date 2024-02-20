@@ -5,3 +5,4 @@ drf-spectacular
 Markdown
 mysqlclient
 django-jsonfield~=1.4.1
+ensembl-metadata-api@git+https://github.com/Ensembl/ensembl-metadata-api.git@feature/dataset_factory

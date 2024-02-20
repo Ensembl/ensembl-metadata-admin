@@ -16,6 +16,8 @@ from django.db import models
 from django.db.models.lookups import IContains
 import jsonfield.fields
 
+from ensembl.production.metadata.api.models.dataset import DatasetStatus
+
 
 class UUIDField(models.UUIDField):
 
@@ -153,9 +155,10 @@ class Dataset(models.Model):
     label = models.CharField(max_length=128)
     # attributes = models.ManyToManyField('Attribute', through=DatasetAttribute)
     statuses = [
-        ('submitted', 'Submitted'),
-        ('progressing', 'Progressing'),
-        ('processed', 'Processed'),
+        (DatasetStatus.SUBMITTED.value, DatasetStatus.SUBMITTED.value),
+        (DatasetStatus.PROCESSING.value, DatasetStatus.PROCESSING.value),
+        (DatasetStatus.PROCESSED.value, DatasetStatus.PROCESSED.value),
+        (DatasetStatus.RELEASED.value, DatasetStatus.RELEASED.value),
     ]
     status = models.CharField(max_length=12, choices=statuses, default='Submitted')
     genomes = models.ManyToManyField('Genome', through='GenomeDataset')
@@ -318,6 +321,18 @@ class GenomeDataset(models.Model):
     class Meta:
         db_table = 'genome_dataset'
 
+    @property
+    def name(self):
+        return self.dataset.name
+
+    @property
+    def type(self):
+        return self.dataset.dataset_type.name if self.dataset.dataset_type else 'n/a'
+
+    def release_version(self):
+        print("Release!!!!", self.release)
+        return self.release.version if self.release else 'Unreleased'
+
 
 class GenomeRelease(models.Model):
     genome_release_id = models.AutoField(primary_key=True)
@@ -335,6 +350,14 @@ class GenomeRelease(models.Model):
 
     def __str__(self):
         return str(self.genome_release_id)
+
+    @property
+    def release_version(self):
+        return self.release.version
+
+    @property
+    def release_info(self):
+        return f"{self.release.version} --- {self.release.label} ({self.release.site.name})"
 
 
 class Organism(models.Model):
