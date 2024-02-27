@@ -39,7 +39,7 @@ ensembl-hive @ git+https://github.com/Ensembl/ensembl-hive.git
     # via
     #   ensembl-metadata-api
     #   ensembl-py
-ensembl-metadata-api @ git+https://github.com/Ensembl/ensembl-metadata-api.git@2.0.1.dev1
+ensembl-metadata-api @ git+https://github.com/Ensembl/ensembl-metadata-api.git@2.0.1.dev2
     # via -r requirements.in
 ensembl-py @ git+https://github.com/Ensembl/ensembl-py.git@1.2.2
     # via ensembl-metadata-api
@@ -63,7 +63,7 @@ idna==3.6
     #   requests
 importlib-metadata==7.0.1
     # via markdown
-importlib-resources==6.1.1
+importlib-resources==6.1.2
     # via
     #   jsonschema
     #   jsonschema-specifications
@@ -149,14 +149,15 @@ tomli==2.0.1
     #   pytest
 types-pymysql==1.1.0.1
     # via ensembl-metadata-api
-typing-extensions==4.9.0
+typing-extensions==4.10.0
     # via
     #   asgiref
     #   drf-spectacular
 uritemplate==4.1.1
     # via drf-spectacular
-urllib3==2.1.0
+urllib3==1.26.18
     # via
+    #   -r requirements.in
     #   ensembl-metadata-api
     #   requests
 zipp==3.17.0
