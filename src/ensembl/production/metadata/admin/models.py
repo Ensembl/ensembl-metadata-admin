@@ -155,10 +155,10 @@ class Dataset(models.Model):
     label = models.CharField(max_length=128)
     # attributes = models.ManyToManyField('Attribute', through=DatasetAttribute)
     statuses = [
-        (DatasetStatus.SUBMITTED.value, DatasetStatus.SUBMITTED.value),
-        (DatasetStatus.PROCESSING.value, DatasetStatus.PROCESSING.value),
-        (DatasetStatus.PROCESSED.value, DatasetStatus.PROCESSED.value),
-        (DatasetStatus.RELEASED.value, DatasetStatus.RELEASED.value),
+        (DatasetStatus.Submitted.value, DatasetStatus.Submitted.value),
+        (DatasetStatus.Processing.value, DatasetStatus.Processing.value),
+        (DatasetStatus.Processed.value, DatasetStatus.Processed.value),
+        (DatasetStatus.Released.value, DatasetStatus.Released.value),
     ]
     status = models.CharField(max_length=12, choices=statuses, default='Submitted')
     genomes = models.ManyToManyField('Genome', through='GenomeDataset')
