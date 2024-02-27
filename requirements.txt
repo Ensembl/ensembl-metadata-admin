@@ -39,7 +39,7 @@ ensembl-hive @ git+https://github.com/Ensembl/ensembl-hive.git
     # via
     #   ensembl-metadata-api
     #   ensembl-py
-ensembl-metadata-api @ git+https://github.com/Ensembl/ensembl-metadata-api.git@feature/dataset_factory
+ensembl-metadata-api @ git+https://github.com/Ensembl/ensembl-metadata-api.git@2.0.1.dev1
     # via -r requirements.in
 ensembl-py @ git+https://github.com/Ensembl/ensembl-py.git@1.2.2
     # via ensembl-metadata-api
