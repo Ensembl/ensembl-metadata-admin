@@ -230,7 +230,7 @@ class DatasetType(models.Model):
     topic = models.CharField(max_length=32)
     description = models.CharField(max_length=255, blank=True, null=True)
     details_uri = models.CharField(max_length=255, blank=True, null=True)
-    parent = models.CharField(max_length=128, blank=True, null=True)
+    parent = models.ForeignKey("DatasetType", db_column='parent_id', blank=True, null=True, on_delete=models.SET_NULL)
     depends_on = models.CharField(max_length=128, blank=True, null=True)
     filter_on = jsonfield.JSONField(blank=True, null=True)  # JSON field
 
