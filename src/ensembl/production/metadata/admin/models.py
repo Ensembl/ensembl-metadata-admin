@@ -14,6 +14,9 @@ import uuid
 from django.core.exceptions import ValidationError
 from django.db import models
 from django.db.models.lookups import IContains
+import jsonfield.fields
+
+from ensembl.production.metadata.api.models.dataset import DatasetStatus
 
 
 class UUIDField(models.UUIDField):
@@ -99,7 +102,8 @@ class AssemblySequence(models.Model):
     sequence_location = models.CharField(max_length=10, blank=True, null=True)
     md5 = models.CharField(max_length=32, blank=True, null=True)
     sha512t24u = models.CharField(max_length=128, blank=True, null=True)
-    type = models.CharField(choices=SequenceType.choices, max_length=26, blank=True, null=False, default=SequenceType.PRIMARY)
+    type = models.CharField(choices=SequenceType.choices, max_length=26, blank=True, null=False,
+                            default=SequenceType.PRIMARY)
     is_circular = models.BooleanField(null=False, default=False)
 
     def save(self, *args, **kwargs):
@@ -151,9 +155,10 @@ class Dataset(models.Model):
     label = models.CharField(max_length=128)
     # attributes = models.ManyToManyField('Attribute', through=DatasetAttribute)
     statuses = [
-        ('submitted', 'Submitted'),
-        ('progressing', 'Progressing'),
-        ('processed', 'Processed'),
+        (DatasetStatus.Submitted.value, DatasetStatus.Submitted.value),
+        (DatasetStatus.Processing.value, DatasetStatus.Processing.value),
+        (DatasetStatus.Processed.value, DatasetStatus.Processed.value),
+        (DatasetStatus.Released.value, DatasetStatus.Released.value),
     ]
     status = models.CharField(max_length=12, choices=statuses, default='Submitted')
     genomes = models.ManyToManyField('Genome', through='GenomeDataset')
@@ -225,6 +230,9 @@ class DatasetType(models.Model):
     topic = models.CharField(max_length=32)
     description = models.CharField(max_length=255, blank=True, null=True)
     details_uri = models.CharField(max_length=255, blank=True, null=True)
+    parent = models.ForeignKey("DatasetType", db_column='parent_id', blank=True, null=True, on_delete=models.SET_NULL)
+    depends_on = models.CharField(max_length=128, blank=True, null=True)
+    filter_on = jsonfield.JSONField(blank=True, null=True)  # JSON field
 
     class Meta:
         db_table = 'dataset_type'
@@ -313,6 +321,18 @@ class GenomeDataset(models.Model):
     class Meta:
         db_table = 'genome_dataset'
 
+    @property
+    def name(self):
+        return self.dataset.name
+
+    @property
+    def type(self):
+        return self.dataset.dataset_type.name if self.dataset.dataset_type else 'n/a'
+
+    def release_version(self):
+        print("Release!!!!", self.release)
+        return self.release.version if self.release else 'Unreleased'
+
 
 class GenomeRelease(models.Model):
     genome_release_id = models.AutoField(primary_key=True)
@@ -330,6 +350,14 @@ class GenomeRelease(models.Model):
 
     def __str__(self):
         return str(self.genome_release_id)
+
+    @property
+    def release_version(self):
+        return self.release.version
+
+    @property
+    def release_info(self):
+        return f"{self.release.version} --- {self.release.label} ({self.release.site.name})"
 
 
 class Organism(models.Model):
@@ -362,7 +390,6 @@ class Organism(models.Model):
         db_table = 'organism'
         ordering = ['biosample_id', 'scientific_name']
 
-
     @property
     def ensembl_name(self):
         return self.biosample_id
@@ -382,6 +409,7 @@ class OrganismGroup(models.Model):
         POPULATION = 'Population', 'Organisms population'
         SPECIES = 'Species', 'Organisms species'
         COMPARA = 'Compara', 'Organisms Comparative Genomics group'
+
     organism_group_id = models.AutoField(primary_key=True)
     type = models.CharField(max_length=32, choices=OrganismGroupType.choices, null=True, blank=False)
     name = models.CharField(max_length=255)
