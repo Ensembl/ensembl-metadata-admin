@@ -3,6 +3,8 @@
 from django.db import migrations, models
 import django.db.models.deletion
 import uuid
+from ensembl.production.metadata.admin.models import UUIDField
+
 
 
 class Migration(migrations.Migration):
@@ -20,12 +22,12 @@ class Migration(migrations.Migration):
         migrations.AddField(
             model_name='assembly',
             name='assembly_uuid',
-            field=models.UUIDField(default=uuid.uuid4, editable=False, unique=True),
+            field=UUIDField(default=uuid.uuid4, editable=False, unique=True),
         ),
         migrations.AddField(
             model_name='organism',
             name='organism_uuid',
-            field=models.UUIDField(default=uuid.uuid4, editable=False, unique=True),
+            field=UUIDField(default=uuid.uuid4, editable=False, unique=True),
         ),
         migrations.AlterField(
             model_name='dataset',

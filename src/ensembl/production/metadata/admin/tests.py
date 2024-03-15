@@ -8,19 +8,19 @@
 #   distributed under the License is distributed on an "AS IS" BASIS,
 #   WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 #   See the License for the specific language governing permissions and
-#   limitations under the License.from django.apps import AppConfig
-from django.test import TestCase
-from rest_framework.test import APIClient, APITestCase
-from rest_framework.reverse import reverse
-from rest_framework import status
+#   limitations under the License.
 from django.contrib.auth.models import User
+from django.test import TestCase
+from rest_framework import status
+from rest_framework.reverse import reverse
+from rest_framework.test import APIClient, APITestCase
 
 from ensembl.production.metadata.admin.models import Dataset, Attribute, DatasetAttribute, DatasetSource, Organism, \
     Assembly, Genome
 
 
 class GenomeViewSetTestCase(APITestCase):
-    fixtures = ['three_assemblies.json']
+    fixtures = ['django.json', 'ensembl_genome_data.json']
 
     def setUp(self):
         self.client = APIClient()
@@ -32,7 +32,7 @@ class GenomeViewSetTestCase(APITestCase):
         self.assertIsNotNone(response.data)
 
     def test_genome_viewset_get_individual(self):
-        genome_uuid = 'bacf0d6d-9de0-4467-865b-e5099cb45e88'
+        genome_uuid = 'a73351f7-93e7-11ec-a39d-005056b38ce3'
         response = self.client.get(reverse('ensembl_metadata:genome-detail', args=[genome_uuid]))
         self.assertEqual(response.status_code, status.HTTP_200_OK)
         self.assertIsNotNone(response.data)
@@ -73,7 +73,7 @@ class CascadeDeleteTestCase(TestCase):
 
 
 class DatasetViewSetTestCase(APITestCase):
-    fixtures = ['three_assemblies.json']
+    fixtures = ['django.json', 'ensembl_genome_data.json']
 
     def setUp(self):
         # self.client = APIClient()
@@ -84,9 +84,10 @@ class DatasetViewSetTestCase(APITestCase):
         response = self.client.get(reverse('ensembl_metadata:dataset-list'))
         self.assertEqual(response.status_code, status.HTTP_200_OK)
         self.assertIsNotNone(response.data)
+        self.assertEqual(response.data['count'], 22)
 
     def test_dataset_viewset_get_individual(self):
-        dataset_uuid = '8ce01799-dabe-4d0f-b0ad-1bbd95d59f8e'
+        dataset_uuid = '02104faf-3fee-4f28-b53c-605843dac941'
         response = self.client.get(reverse('ensembl_metadata:dataset-detail', args=[dataset_uuid]))
         self.assertEqual(response.status_code, status.HTTP_200_OK)
         self.assertIsNotNone(response.data)
@@ -120,7 +121,7 @@ class DatasetViewSetTestCase(APITestCase):
     def test_dataset_create_success(self):
         payload = {
             'user': 'test_user',
-            'genome_uuid': 'bacf0d6d-9de0-4467-865b-e5099cb45e88',
+            'genome_uuid': '980ccf6b-9841-46fa-b313-b068eb9b668a',
             "name": "Test Dataset",
             "description": "This is a test dataset.",
             "label": "This is a test.",
@@ -141,6 +142,9 @@ class DatasetViewSetTestCase(APITestCase):
         }
         response = self.client.post(reverse('ensembl_metadata:dataset-list'), payload, format='json')
         self.assertEqual(response.status_code, status.HTTP_201_CREATED)
+        sub_datasets = Dataset.objects.filter(genomes__genome_uuid='980ccf6b-9841-46fa-b313-b068eb9b668a').all()
+        # Expected sub datasets to be automatically created
+        self.assertEqual(len(sub_datasets), 11)
         # Check that the data has been properly added.
         dataset = Dataset.objects.get(name=payload['name'])
         self.assertEqual(dataset.name, payload['name'])
@@ -156,13 +160,14 @@ class DatasetViewSetTestCase(APITestCase):
 
         try:
             dataset_source = DatasetSource.objects.get(name=payload['dataset_source']['name'])
+            self.assertEqual(dataset_source.name, payload['dataset_source']['name'])
         except DatasetSource.DoesNotExist:
             self.fail("DatasetSource was not created or retrieved correctly")
 
     def test_dataset_delete_success(self):
         payload = {
             'user': 'test_user',
-            'genome_uuid': 'bacf0d6d-9de0-4467-865b-e5099cb45e88',
+            'genome_uuid': '2afef36f-3660-4b8c-819b-d1e5a77c9918',
             "name": "Test Dataset",
             "description": "This is a test dataset.",
             "label": "This is a test.",
@@ -195,7 +200,7 @@ class DatasetViewSetTestCase(APITestCase):
     def test_dataset_update_no_dataset(self):
         payload = {
             "user": "danielp",
-            "dataset_uuid": "553ff922-39db-40de-9f82-91b72ad577ea",
+            "dataset_uuid": "55555aa1-3fee-4f28-b53c-605843dac941",
             "dataset_attribute": [
                 {
                     "value": "Test Value 1",
@@ -216,7 +221,7 @@ class DatasetViewSetTestCase(APITestCase):
     def test_dataset_update_success(self):
         payload = {
             "user": "danielp",
-            "dataset_uuid": "8ce01799-dabe-4d0f-b0ad-1bbd95d59f8e",
+            "dataset_uuid": "cc3c7f95-b5dc-4cc1-aa15-2817c89bd1e2",
             "dataset_attribute": [
                 {
                     "value": "Test Value 1",

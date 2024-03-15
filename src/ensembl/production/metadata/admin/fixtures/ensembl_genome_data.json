@@ -1,0 +1,6255 @@
+[
+  {
+    "model": "ensembl_metadata.assembly",
+    "pk": 1,
+    "fields": {
+      "ucsc_name": null,
+      "accession": "GCA_000005845.2",
+      "alt_accession": null,
+      "level": "chromosome",
+      "name": "ASM584v2",
+      "accession_body": null,
+      "assembly_default": "ASM584v2",
+      "tol_id": null,
+      "created": "2023-09-22T15:01:43Z",
+      "ensembl_name": "ASM584v2",
+      "assembly_uuid": "532aa68f-6500-404e-a470-8afb718a770a",
+      "is_reference": true,
+      "url_name": "asm584v2"
+    }
+  },
+  {
+    "model": "ensembl_metadata.assembly",
+    "pk": 2,
+    "fields": {
+      "ucsc_name": null,
+      "accession": "GCA_001624475.1",
+      "alt_accession": null,
+      "level": "chromosome",
+      "name": "CBA_J_v1",
+      "accession_body": null,
+      "assembly_default": "CBA_J_v1",
+      "tol_id": null,
+      "created": "2023-09-22T15:01:55Z",
+      "ensembl_name": "CBA_J_v1",
+      "assembly_uuid": "70414edd-d0d1-4346-93b8-baa8bb6ddb99",
+      "is_reference": false,
+      "url_name": null
+    }
+  },
+  {
+    "model": "ensembl_metadata.assembly",
+    "pk": 3,
+    "fields": {
+      "ucsc_name": null,
+      "accession": "GCA_931346935.2",
+      "alt_accession": null,
+      "level": "primary_assembly",
+      "name": "Ssal_ALTA",
+      "accession_body": null,
+      "assembly_default": "Ssal_ALTA",
+      "tol_id": null,
+      "created": "2023-09-22T15:01:58Z",
+      "ensembl_name": "Ssal_ALTA",
+      "assembly_uuid": "4a457161-9eb1-459d-b1d6-3c6d62e48c79",
+      "is_reference": false,
+      "url_name": null
+    }
+  },
+  {
+    "model": "ensembl_metadata.assembly",
+    "pk": 4,
+    "fields": {
+      "ucsc_name": null,
+      "accession": "GCA_018473315.1",
+      "alt_accession": null,
+      "level": "primary_assembly",
+      "name": "HG03540.alt.pat.f1_v2",
+      "accession_body": null,
+      "assembly_default": "HG03540.alt.pat.f1_v2",
+      "tol_id": null,
+      "created": "2023-09-22T15:02:00Z",
+      "ensembl_name": "HG03540.alt.pat.f1_v2",
+      "assembly_uuid": "9d2dc346-358a-4c70-8fd8-3ff194246a76",
+      "is_reference": false,
+      "url_name": null
+    }
+  },
+  {
+    "model": "ensembl_metadata.assembly",
+    "pk": 5,
+    "fields": {
+      "ucsc_name": null,
+      "accession": "GCA_018469415.1",
+      "alt_accession": null,
+      "level": "primary_assembly",
+      "name": "HG03516.alt.pat.f1_v2",
+      "accession_body": null,
+      "assembly_default": "HG03516.alt.pat.f1_v2",
+      "tol_id": null,
+      "created": "2023-09-22T15:02:01Z",
+      "ensembl_name": "HG03516.alt.pat.f1_v2",
+      "assembly_uuid": "1551e511-bde7-40cf-95cd-de4059678c6f",
+      "is_reference": false,
+      "url_name": null
+    }
+  },
+  {
+    "model": "ensembl_metadata.attribute",
+    "pk": 1,
+    "fields": {
+      "name": "assembly.accession",
+      "label": "assembly.accession",
+      "description": "assembly.accession",
+      "type": "string"
+    }
+  },
+  {
+    "model": "ensembl_metadata.attribute",
+    "pk": 2,
+    "fields": {
+      "name": "assembly.chromosomes",
+      "label": "Chromosomes or plasmids",
+      "description": "Number of structures in cells containing DNA",
+      "type": "integer"
+    }
+  },
+  {
+    "model": "ensembl_metadata.attribute",
+    "pk": 3,
+    "fields": {
+      "name": "assembly.component_sequences",
+      "label": "Component sequences",
+      "description": "Part of the primary sequences in assembly",
+      "type": "integer"
+    }
+  },
+  {
+    "model": "ensembl_metadata.attribute",
+    "pk": 4,
+    "fields": {
+      "name": "assembly.contig_n50",
+      "label": "Contig N50",
+      "description": "Median size of contigs in a genome assembly",
+      "type": "bp"
+    }
+  },
+  {
+    "model": "ensembl_metadata.attribute",
+    "pk": 5,
+    "fields": {
+      "name": "assembly.date",
+      "label": "assembly.date",
+      "description": "assembly.date",
+      "type": "string"
+    }
+  },
+  {
+    "model": "ensembl_metadata.attribute",
+    "pk": 6,
+    "fields": {
+      "name": "assembly.default",
+      "label": "assembly.default",
+      "description": "assembly.default",
+      "type": "string"
+    }
+  },
+  {
+    "model": "ensembl_metadata.attribute",
+    "pk": 7,
+    "fields": {
+      "name": "assembly.gc_percentage",
+      "label": "Average GC content",
+      "description": "Percentage of nucleotides in DNA that are G or C",
+      "type": "percent"
+    }
+  },
+  {
+    "model": "ensembl_metadata.attribute",
+    "pk": 8,
+    "fields": {
+      "name": "assembly.is_reference",
+      "label": "assembly.is_reference",
+      "description": "assembly.is_reference",
+      "type": "string"
+    }
+  },
+  {
+    "model": "ensembl_metadata.attribute",
+    "pk": 9,
+    "fields": {
+      "name": "assembly.level",
+      "label": "assembly.level",
+      "description": "assembly.level",
+      "type": "string"
+    }
+  },
+  {
+    "model": "ensembl_metadata.attribute",
+    "pk": 10,
+    "fields": {
+      "name": "assembly.mapping",
+      "label": "assembly.mapping",
+      "description": "assembly.mapping",
+      "type": "string"
+    }
+  },
+  {
+    "model": "ensembl_metadata.attribute",
+    "pk": 11,
+    "fields": {
+      "name": "assembly.name",
+      "label": "assembly.name",
+      "description": "assembly.name",
+      "type": "string"
+    }
+  },
+  {
+    "model": "ensembl_metadata.attribute",
+    "pk": 12,
+    "fields": {
+      "name": "assembly.provider_name",
+      "label": "assembly.provider_name",
+      "description": "assembly.provider_name",
+      "type": "string"
+    }
+  },
+  {
+    "model": "ensembl_metadata.attribute",
+    "pk": 13,
+    "fields": {
+      "name": "assembly.provider_url",
+      "label": "assembly.provider_url",
+      "description": "assembly.provider_url",
+      "type": "string"
+    }
+  },
+  {
+    "model": "ensembl_metadata.attribute",
+    "pk": 14,
+    "fields": {
+      "name": "assembly.spanned_gaps",
+      "label": "Spanned gaps",
+      "description": "Number of gaps covered by sequencing reads",
+      "type": "integer"
+    }
+  },
+  {
+    "model": "ensembl_metadata.attribute",
+    "pk": 15,
+    "fields": {
+      "name": "assembly.tolid",
+      "label": "assembly.tolid",
+      "description": "assembly.tolid",
+      "type": "string"
+    }
+  },
+  {
+    "model": "ensembl_metadata.attribute",
+    "pk": 16,
+    "fields": {
+      "name": "assembly.toplevel_sequences",
+      "label": "Top level sequences",
+      "description": "Primary sequences in a genome assembly",
+      "type": "integer"
+    }
+  },
+  {
+    "model": "ensembl_metadata.attribute",
+    "pk": 17,
+    "fields": {
+      "name": "assembly.total_coding_sequence_length",
+      "label": "Total coding sequence length",
+      "description": "Total length of all coding sequences",
+      "type": "bp"
+    }
+  },
+  {
+    "model": "ensembl_metadata.attribute",
+    "pk": 18,
+    "fields": {
+      "name": "assembly.total_gap_length",
+      "label": "Total gap length",
+      "description": "Total length of all gaps in a genome assembly",
+      "type": "bp"
+    }
+  },
+  {
+    "model": "ensembl_metadata.attribute",
+    "pk": 19,
+    "fields": {
+      "name": "assembly.total_genome_length",
+      "label": "Total genome length",
+      "description": "Total length of all genomic sequences",
+      "type": "bp"
+    }
+  },
+  {
+    "model": "ensembl_metadata.attribute",
+    "pk": 20,
+    "fields": {
+      "name": "assembly.ucsc_alias",
+      "label": "assembly.ucsc_alias",
+      "description": "assembly.ucsc_alias",
+      "type": "string"
+    }
+  },
+  {
+    "model": "ensembl_metadata.attribute",
+    "pk": 21,
+    "fields": {
+      "name": "genebuild.average_cds_length",
+      "label": "Average CDS length",
+      "description": "Average length of coding sequences",
+      "type": "float"
+    }
+  },
+  {
+    "model": "ensembl_metadata.attribute",
+    "pk": 22,
+    "fields": {
+      "name": "genebuild.average_coding_exons_per_coding_gene",
+      "label": "Average coding exons per coding gene",
+      "description": "Average coding exons per coding gene",
+      "type": "string"
+    }
+  },
+  {
+    "model": "ensembl_metadata.attribute",
+    "pk": 23,
+    "fields": {
+      "name": "genebuild.average_coding_exons_per_transcript",
+      "label": "Average coding exons per transcript",
+      "description": "Average coding exons per coding transcript",
+      "type": "float"
+    }
+  },
+  {
+    "model": "ensembl_metadata.attribute",
+    "pk": 24,
+    "fields": {
+      "name": "genebuild.average_coding_exon_length",
+      "label": "Average exon length per coding gene",
+      "description": "Average length of coding exons",
+      "type": "bp"
+    }
+  },
+  {
+    "model": "ensembl_metadata.attribute",
+    "pk": 25,
+    "fields": {
+      "name": "genebuild.average_exon_length",
+      "label": "Average exon length",
+      "description": "Average length of exons",
+      "type": "bp"
+    }
+  },
+  {
+    "model": "ensembl_metadata.attribute",
+    "pk": 26,
+    "fields": {
+      "name": "genebuild.average_genomic_span",
+      "label": "Average coding genomic span",
+      "description": "Average length of all genomic regions",
+      "type": "bp"
+    }
+  },
+  {
+    "model": "ensembl_metadata.attribute",
+    "pk": 27,
+    "fields": {
+      "name": "genebuild.average_intron_length",
+      "label": "Average intron length",
+      "description": "Average intron length per coding gene",
+      "type": "bp"
+    }
+  },
+  {
+    "model": "ensembl_metadata.attribute",
+    "pk": 28,
+    "fields": {
+      "name": "genebuild.average_sequence_legth",
+      "label": "Average coding sequence length",
+      "description": "Average length of sequences in genome",
+      "type": "bp"
+    }
+  },
+  {
+    "model": "ensembl_metadata.attribute",
+    "pk": 29,
+    "fields": {
+      "name": "genebuild.coding_genes",
+      "label": "Coding genes",
+      "description": "Genes that code for proteins",
+      "type": "integer"
+    }
+  },
+  {
+    "model": "ensembl_metadata.attribute",
+    "pk": 30,
+    "fields": {
+      "name": "genebuild.coding_transcripts",
+      "label": "Coding transcripts",
+      "description": "Transcripts that code for proteins",
+      "type": "integer"
+    }
+  },
+  {
+    "model": "ensembl_metadata.attribute",
+    "pk": 31,
+    "fields": {
+      "name": "genebuild.coding_transcripts_per_gene",
+      "label": "Average coding transcripts per gene",
+      "description": "Average coding transcripts per gene",
+      "type": "float"
+    }
+  },
+  {
+    "model": "ensembl_metadata.attribute",
+    "pk": 32,
+    "fields": {
+      "name": "genebuild.hash",
+      "label": "genebuild.hash",
+      "description": "genebuild.hash",
+      "type": "string"
+    }
+  },
+  {
+    "model": "ensembl_metadata.attribute",
+    "pk": 33,
+    "fields": {
+      "name": "genebuild.initial_release_date",
+      "label": "genebuild.initial_release_date",
+      "description": "genebuild.initial_release_date",
+      "type": "string"
+    }
+  },
+  {
+    "model": "ensembl_metadata.attribute",
+    "pk": 34,
+    "fields": {
+      "name": "genebuild.last_geneset_update",
+      "label": "genebuild.last_geneset_update",
+      "description": "genebuild.last_geneset_update",
+      "type": "string"
+    }
+  },
+  {
+    "model": "ensembl_metadata.attribute",
+    "pk": 35,
+    "fields": {
+      "name": "genebuild.level",
+      "label": "genebuild.level",
+      "description": "genebuild.level",
+      "type": "string"
+    }
+  },
+  {
+    "model": "ensembl_metadata.attribute",
+    "pk": 36,
+    "fields": {
+      "name": "genebuild.longest_gene_length",
+      "label": "Longest coding gene",
+      "description": "Length of longest gene",
+      "type": "bp"
+    }
+  },
+  {
+    "model": "ensembl_metadata.attribute",
+    "pk": 37,
+    "fields": {
+      "name": "genebuild.method",
+      "label": "genebuild.method",
+      "description": "genebuild.method",
+      "type": "string"
+    }
+  },
+  {
+    "model": "ensembl_metadata.attribute",
+    "pk": 38,
+    "fields": {
+      "name": "genebuild.method_display",
+      "label": "genebuild.method_display",
+      "description": "genebuild.method_display",
+      "type": "string"
+    }
+  },
+  {
+    "model": "ensembl_metadata.attribute",
+    "pk": 39,
+    "fields": {
+      "name": "genebuild.nc_average_exons_per_transcript",
+      "label": "Average exons per non-coding transcript",
+      "description": "Mean exon count per transcript",
+      "type": "float"
+    }
+  },
+  {
+    "model": "ensembl_metadata.attribute",
+    "pk": 40,
+    "fields": {
+      "name": "genebuild.nc_average_exon_length",
+      "label": "Average exon length per non-coding transcript",
+      "description": "Mean exon length",
+      "type": "bp"
+    }
+  },
+  {
+    "model": "ensembl_metadata.attribute",
+    "pk": 41,
+    "fields": {
+      "name": "genebuild.nc_average_genomic_span",
+      "label": "Average non-coding genomic span",
+      "description": "Mean length of all genomic regions",
+      "type": "bp"
+    }
+  },
+  {
+    "model": "ensembl_metadata.attribute",
+    "pk": 42,
+    "fields": {
+      "name": "genebuild.nc_average_sequence_length",
+      "label": "Average non-coding sequence length",
+      "description": "Mean length of all sequences",
+      "type": "bp"
+    }
+  },
+  {
+    "model": "ensembl_metadata.attribute",
+    "pk": 43,
+    "fields": {
+      "name": "genebuild.nc_longest_gene_length",
+      "label": "Longest non-coding gene",
+      "description": "Length of longest non-coding gene",
+      "type": "bp"
+    }
+  },
+  {
+    "model": "ensembl_metadata.attribute",
+    "pk": 44,
+    "fields": {
+      "name": "genebuild.nc_long_non_coding_genes",
+      "label": "Long non-coding genes",
+      "description": "Long genes not coding for proteins",
+      "type": "integer"
+    }
+  },
+  {
+    "model": "ensembl_metadata.attribute",
+    "pk": 45,
+    "fields": {
+      "name": "genebuild.nc_misc_non_coding_genes",
+      "label": "Misc. non-coding genes",
+      "description": "Miscellaneous non-coding genes",
+      "type": "integer"
+    }
+  },
+  {
+    "model": "ensembl_metadata.attribute",
+    "pk": 46,
+    "fields": {
+      "name": "genebuild.nc_non_coding_genes",
+      "label": "Non-coding genes",
+      "description": "Genes that don't code for proteins",
+      "type": "integer"
+    }
+  },
+  {
+    "model": "ensembl_metadata.attribute",
+    "pk": 47,
+    "fields": {
+      "name": "genebuild.nc_shortest_gene_length",
+      "label": "Shortest non-coding gene",
+      "description": "Length of shortest gene",
+      "type": "bp"
+    }
+  },
+  {
+    "model": "ensembl_metadata.attribute",
+    "pk": 48,
+    "fields": {
+      "name": "genebuild.nc_small_non_coding_genes",
+      "label": "Small non-coding genes",
+      "description": "Small genes not coding for proteins",
+      "type": "integer"
+    }
+  },
+  {
+    "model": "ensembl_metadata.attribute",
+    "pk": 49,
+    "fields": {
+      "name": "genebuild.nc_total_introns",
+      "label": "Introns in non-coding genes",
+      "description": "Total intron count",
+      "type": "integer"
+    }
+  },
+  {
+    "model": "ensembl_metadata.attribute",
+    "pk": 50,
+    "fields": {
+      "name": "genebuild.nc_total_transcripts",
+      "label": "Non-coding transcripts",
+      "description": "Total RNA transcript count",
+      "type": "integer"
+    }
+  },
+  {
+    "model": "ensembl_metadata.attribute",
+    "pk": 51,
+    "fields": {
+      "name": "genebuild.nc_transcripts_per_gene",
+      "label": "Average transcripts per non-coding gene",
+      "description": "Mean transcripts count per gene",
+      "type": "float"
+    }
+  },
+  {
+    "model": "ensembl_metadata.attribute",
+    "pk": 52,
+    "fields": {
+      "name": "genebuild.ps_average_exons_per_transcript",
+      "label": "Average intron length per pseudogene",
+      "description": "Mean exon count per pseudogene transcript",
+      "type": "float"
+    }
+  },
+  {
+    "model": "ensembl_metadata.attribute",
+    "pk": 53,
+    "fields": {
+      "name": "genebuild.ps_average_exon_length",
+      "label": "Average exon length per pseudogene",
+      "description": "Mean pseudogene exon length",
+      "type": "bp"
+    }
+  },
+  {
+    "model": "ensembl_metadata.attribute",
+    "pk": 54,
+    "fields": {
+      "name": "genebuild.ps_average_genomic_span",
+      "label": "Average pseudogene genomic span",
+      "description": "Mean length of pseudogene regions",
+      "type": "bp"
+    }
+  },
+  {
+    "model": "ensembl_metadata.attribute",
+    "pk": 55,
+    "fields": {
+      "name": "genebuild.ps_average_intron_length",
+      "label": "Average intron length per pseudogene",
+      "description": "Mean pseudogene intron length",
+      "type": "bp"
+    }
+  },
+  {
+    "model": "ensembl_metadata.attribute",
+    "pk": 56,
+    "fields": {
+      "name": "genebuild.ps_average_sequence_length",
+      "label": "Average pseudogene sequence length",
+      "description": "Mean length of pseudogene sequences",
+      "type": "bp"
+    }
+  },
+  {
+    "model": "ensembl_metadata.attribute",
+    "pk": 57,
+    "fields": {
+      "name": "genebuild.ps_longest_gene_length",
+      "label": "Longest pseudogene",
+      "description": "Length of longest pseudogene",
+      "type": "bp"
+    }
+  },
+  {
+    "model": "ensembl_metadata.attribute",
+    "pk": 58,
+    "fields": {
+      "name": "genebuild.ps_pseudogenes",
+      "label": "Pseudogenes",
+      "description": "Genes which don't code functional protiens",
+      "type": "integer"
+    }
+  },
+  {
+    "model": "ensembl_metadata.attribute",
+    "pk": 59,
+    "fields": {
+      "name": "genebuild.ps_shortest_gene_length",
+      "label": "Shortest pseudogene",
+      "description": "Length of shortest pseudogene",
+      "type": "bp"
+    }
+  },
+  {
+    "model": "ensembl_metadata.attribute",
+    "pk": 60,
+    "fields": {
+      "name": "genebuild.ps_total_exons",
+      "label": "Exons in pseudogenes",
+      "description": "Total exon count in pseudogenes",
+      "type": "integer"
+    }
+  },
+  {
+    "model": "ensembl_metadata.attribute",
+    "pk": 61,
+    "fields": {
+      "name": "genebuild.ps_total_introns",
+      "label": "Introns in pseudogenes",
+      "description": "Total intron count in pseudogenes",
+      "type": "integer"
+    }
+  },
+  {
+    "model": "ensembl_metadata.attribute",
+    "pk": 62,
+    "fields": {
+      "name": "genebuild.ps_total_transcripts",
+      "label": "Transcripts in pseudogenes",
+      "description": "Total pseudogene RNA transcript count",
+      "type": "integer"
+    }
+  },
+  {
+    "model": "ensembl_metadata.attribute",
+    "pk": 63,
+    "fields": {
+      "name": "genebuild.ps_transcripts_per_gene",
+      "label": "Average transcripts per pseudogene",
+      "description": "Mean pseudogene transcripts count per pseudogene",
+      "type": "float"
+    }
+  },
+  {
+    "model": "ensembl_metadata.attribute",
+    "pk": 64,
+    "fields": {
+      "name": "genebuild.shortest_gene_length",
+      "label": "Shortest coding gene",
+      "description": "Length of shortest gene",
+      "type": "bp"
+    }
+  },
+  {
+    "model": "ensembl_metadata.attribute",
+    "pk": 65,
+    "fields": {
+      "name": "genebuild.start_date",
+      "label": "genebuild.start_date",
+      "description": "genebuild.start_date",
+      "type": "string"
+    }
+  },
+  {
+    "model": "ensembl_metadata.attribute",
+    "pk": 66,
+    "fields": {
+      "name": "genebuild.total_coding_exons",
+      "label": "Exons in coding genes",
+      "description": "Total number of coding exons",
+      "type": "integer"
+    }
+  },
+  {
+    "model": "ensembl_metadata.attribute",
+    "pk": 67,
+    "fields": {
+      "name": "genebuild.total_exons",
+      "label": "Exons in genes",
+      "description": "Total number of exons",
+      "type": "integer"
+    }
+  },
+  {
+    "model": "ensembl_metadata.attribute",
+    "pk": 68,
+    "fields": {
+      "name": "genebuild.total_introns",
+      "label": "Introns in coding genes",
+      "description": "Total number of introns",
+      "type": "integer"
+    }
+  },
+  {
+    "model": "ensembl_metadata.attribute",
+    "pk": 69,
+    "fields": {
+      "name": "genebuild.total_transcripts",
+      "label": "Transcripts in coding genes",
+      "description": "Total number of RNA transcripts",
+      "type": "integer"
+    }
+  },
+  {
+    "model": "ensembl_metadata.attribute",
+    "pk": 70,
+    "fields": {
+      "name": "genebuild.transcripts_per_gene",
+      "label": "Average transcripts per coding gene",
+      "description": "Average number of transcripts per gene",
+      "type": "float"
+    }
+  },
+  {
+    "model": "ensembl_metadata.attribute",
+    "pk": 71,
+    "fields": {
+      "name": "genebuild.version",
+      "label": "genebuild.version",
+      "description": "genebuild.version",
+      "type": "string"
+    }
+  },
+  {
+    "model": "ensembl_metadata.attribute",
+    "pk": 72,
+    "fields": {
+      "name": "genebuild.sample_gene",
+      "label": "genebuild.sample_gene",
+      "description": "Sample Gene Data",
+      "type": "string"
+    }
+  },
+  {
+    "model": "ensembl_metadata.attribute",
+    "pk": 73,
+    "fields": {
+      "name": "genebuild.sample_location",
+      "label": "genebuild.sample_location",
+      "description": "Sample Location Data",
+      "type": "string"
+    }
+  },
+  {
+    "model": "ensembl_metadata.attribute",
+    "pk": 74,
+    "fields": {
+      "name": "assembly.coverage_depth",
+      "label": "assembly.coverage_depth",
+      "description": "assembly.coverage_depth",
+      "type": "string"
+    }
+  },
+  {
+    "model": "ensembl_metadata.attribute",
+    "pk": 75,
+    "fields": {
+      "name": "assembly.web_accession_source",
+      "label": "assembly.web_accession_source",
+      "description": "assembly.web_accession_source",
+      "type": "string"
+    }
+  },
+  {
+    "model": "ensembl_metadata.attribute",
+    "pk": 76,
+    "fields": {
+      "name": "assembly.web_accession_type",
+      "label": "assembly.web_accession_type",
+      "description": "assembly.web_accession_type",
+      "type": "string"
+    }
+  },
+  {
+    "model": "ensembl_metadata.attribute",
+    "pk": 77,
+    "fields": {
+      "name": "genebuild.id",
+      "label": "genebuild.id",
+      "description": "genebuild.id",
+      "type": "string"
+    }
+  },
+  {
+    "model": "ensembl_metadata.attribute",
+    "pk": 78,
+    "fields": {
+      "name": "genebuild.nc_average_intron_length",
+      "label": "Average intron length per non-coding transcript",
+      "description": "Mean intron length",
+      "type": "bp"
+    }
+  },
+  {
+    "model": "ensembl_metadata.attribute",
+    "pk": 79,
+    "fields": {
+      "name": "genebuild.projection_source_db",
+      "label": "genebuild.projection_source_db",
+      "description": "genebuild.projection_source_db",
+      "type": "string"
+    }
+  },
+  {
+    "model": "ensembl_metadata.attribute",
+    "pk": 80,
+    "fields": {
+      "name": "assembly.long_name",
+      "label": "assembly.long_name",
+      "description": "assembly.long_name",
+      "type": "string"
+    }
+  },
+  {
+    "model": "ensembl_metadata.attribute",
+    "pk": 81,
+    "fields": {
+      "name": "assembly.url_name",
+      "label": "assembly.url_name",
+      "description": "assembly.url_name",
+      "type": "string"
+    }
+  },
+  {
+    "model": "ensembl_metadata.attribute",
+    "pk": 82,
+    "fields": {
+      "name": "genebuild.havana_datafreeze_date",
+      "label": "genebuild.havana_datafreeze_date",
+      "description": "genebuild.havana_datafreeze_date",
+      "type": "string"
+    }
+  },
+  {
+    "model": "ensembl_metadata.attribute",
+    "pk": 83,
+    "fields": {
+      "name": "assembly.version",
+      "label": "assembly.version",
+      "description": "assembly.version",
+      "type": "string"
+    }
+  },
+  {
+    "model": "ensembl_metadata.attribute",
+    "pk": 84,
+    "fields": {
+      "name": "genebuild.provider_name",
+      "label": "genebuild.provider_name",
+      "description": "genebuild.provider_name",
+      "type": "string"
+    }
+  },
+  {
+    "model": "ensembl_metadata.attribute",
+    "pk": 85,
+    "fields": {
+      "name": "genebuild.provider_url",
+      "label": "genebuild.provider_url",
+      "description": "genebuild.provider_url",
+      "type": "string"
+    }
+  },
+  {
+    "model": "ensembl_metadata.attribute",
+    "pk": 118,
+    "fields": {
+      "name": "production.production_name",
+      "label": "Internal Production Name",
+      "description": "Backward compatibility for registry production Name",
+      "type": "string"
+    }
+  },
+  {
+    "model": "ensembl_metadata.attribute",
+    "pk": 119,
+    "fields": {
+      "name": "variation.short_variants",
+      "label": "Short variants",
+      "description": "Small-scale genetic variations",
+      "type": "integer"
+    }
+  },
+  {
+    "model": "ensembl_metadata.attribute",
+    "pk": 120,
+    "fields": {
+      "name": "variation.sample_variant",
+      "label": "variation.sample_variant",
+      "description": "variation.sample_variant",
+      "type": "string"
+    }
+  },
+  {
+    "model": "ensembl_metadata.attribute",
+    "pk": 123,
+    "fields": {
+      "name": "variation.short_variants_with_phenotype_assertions",
+      "label": "Short variants",
+      "description": null,
+      "type": ""
+    }
+  },
+  {
+    "model": "ensembl_metadata.attribute",
+    "pk": 124,
+    "fields": {
+      "name": "Short variants with phenotypic evidence",
+      "label": "integer",
+      "description": null,
+      "type": ""
+    }
+  },
+  {
+    "model": "ensembl_metadata.attribute",
+    "pk": 125,
+    "fields": {
+      "name": "Short variants studied for frequency",
+      "label": "integer",
+      "description": null,
+      "type": ""
+    }
+  },
+  {
+    "model": "ensembl_metadata.attribute",
+    "pk": 161,
+    "fields": {
+      "name": "compara.homology_coverage",
+      "label": "compara.homology_coverage",
+      "description": "compara.homology_coverage",
+      "type": "float"
+    }
+  },
+  {
+    "model": "ensembl_metadata.attribute",
+    "pk": 162,
+    "fields": {
+      "name": "compara.homology_reference_species",
+      "label": "compara.homology_reference_species",
+      "description": "compara.homology_reference_species",
+      "type": "string"
+    }
+  },
+  {
+    "model": "ensembl_metadata.attribute",
+    "pk": 163,
+    "fields": {
+      "name": "regulation.open_chromatin_count",
+      "label": "regulation.open_chromatin_count",
+      "description": "Number of open chromatin regions",
+      "type": "integer"
+    }
+  },
+  {
+    "model": "ensembl_metadata.attribute",
+    "pk": 164,
+    "fields": {
+      "name": "regulation.promoter_count",
+      "label": "regulation.promoter_count",
+      "description": "Number of promoters",
+      "type": "integer"
+    }
+  },
+  {
+    "model": "ensembl_metadata.attribute",
+    "pk": 165,
+    "fields": {
+      "name": "regulation.enhancer_count",
+      "label": "regulation.enhancer_count",
+      "description": "Number of enhancers",
+      "type": "integer"
+    }
+  },
+  {
+    "model": "ensembl_metadata.attribute",
+    "pk": 166,
+    "fields": {
+      "name": "regulation.ctcf_count",
+      "label": "regulation.ctcf_count",
+      "description": "Number of CTCF binding sites",
+      "type": "integer"
+    }
+  },
+  {
+    "model": "ensembl_metadata.attribute",
+    "pk": 167,
+    "fields": {
+      "name": "regulation.tfbs_count",
+      "label": "regulation.tfbs_count",
+      "description": "Number of regions enriched for transcription factor binding",
+      "type": "integer"
+    }
+  },
+  {
+    "model": "ensembl_metadata.attribute",
+    "pk": 168,
+    "fields": {
+      "name": "assembly.tol_id",
+      "label": "assembly.tol_id",
+      "description": "assembly.tol_id",
+      "type": "string"
+    }
+  },
+  {
+    "model": "ensembl_metadata.attribute",
+    "pk": 169,
+    "fields": {
+      "name": "genebuild.annotation_source",
+      "label": "genebuild.annotation_source",
+      "description": "genebuild.annotation_source",
+      "type": "string"
+    }
+  },
+  {
+    "model": "ensembl_metadata.attribute",
+    "pk": 170,
+    "fields": {
+      "name": "genebuild.nc_total_exons",
+      "label": "Exons in non-coding genes",
+      "description": "Total exon count",
+      "type": "integer"
+    }
+  },
+  {
+    "model": "ensembl_metadata.attribute",
+    "pk": 171,
+    "fields": {
+      "name": "sample.gene_param",
+      "label": "sample.gene_param",
+      "description": "Sample Gene Data",
+      "type": "string"
+    }
+  },
+  {
+    "model": "ensembl_metadata.attribute",
+    "pk": 172,
+    "fields": {
+      "name": "sample.location_param",
+      "label": "sample.location_param",
+      "description": "Sample Location Data",
+      "type": "string"
+    }
+  },
+  {
+    "model": "ensembl_metadata.attribute",
+    "pk": 179,
+    "fields": {
+      "name": "assembly.description",
+      "label": "assembly.description",
+      "description": "assembly.description",
+      "type": "string"
+    }
+  },
+  {
+    "model": "ensembl_metadata.attribute",
+    "pk": 180,
+    "fields": {
+      "name": "assembly.master_accession",
+      "label": "assembly.master_accession",
+      "description": "assembly.master_accession",
+      "type": "string"
+    }
+  },
+  {
+    "model": "ensembl_metadata.attribute",
+    "pk": 181,
+    "fields": {
+      "name": "assembly.alt_accession",
+      "label": "assembly.alt_accession",
+      "description": "assembly.alt_accession",
+      "type": "string"
+    }
+  },
+  {
+    "model": "ensembl_metadata.dataset",
+    "pk": 1,
+    "fields": {
+      "name": "assembly",
+      "version": null,
+      "created": "2023-09-22T15:01:44Z",
+      "dataset_source": 1,
+      "label": "GCA_000005845.2",
+      "status": "Submitted",
+      "dataset_type": 1,
+      "dataset_uuid": "02104faf-3fee-4f28-b53c-605843dac941"
+    }
+  },
+  {
+    "model": "ensembl_metadata.dataset",
+    "pk": 2,
+    "fields": {
+      "name": "genebuild",
+      "version": "EXT01",
+      "created": "2023-09-22T15:01:44Z",
+      "dataset_source": 1,
+      "label": "GCA_000005845.2_EXT01",
+      "status": "Submitted",
+      "dataset_type": 2,
+      "dataset_uuid": "cc3c7f95-b5dc-4cc1-aa15-2817c89bd1e2"
+    }
+  },
+  {
+    "model": "ensembl_metadata.dataset",
+    "pk": 3,
+    "fields": {
+      "name": "assembly",
+      "version": null,
+      "created": "2023-09-22T15:01:56Z",
+      "dataset_source": 2,
+      "label": "GCA_001624475.1",
+      "status": "Submitted",
+      "dataset_type": 1,
+      "dataset_uuid": "d0c0ea59-3ee4-4f4b-9b63-b5178b51f093"
+    }
+  },
+  {
+    "model": "ensembl_metadata.dataset",
+    "pk": 4,
+    "fields": {
+      "name": "genebuild",
+      "version": "EXT01",
+      "created": "2023-09-22T15:01:56Z",
+      "dataset_source": 2,
+      "label": "GCA_001624475.1_EXT01",
+      "status": "Submitted",
+      "dataset_type": 2,
+      "dataset_uuid": "9a3fc0ba-58da-4919-b33f-7da46aa046a8"
+    }
+  },
+  {
+    "model": "ensembl_metadata.dataset",
+    "pk": 5,
+    "fields": {
+      "name": "assembly",
+      "version": null,
+      "created": "2023-09-22T15:01:59Z",
+      "dataset_source": 3,
+      "label": "GCA_931346935.2",
+      "status": "Submitted",
+      "dataset_type": 1,
+      "dataset_uuid": "6bfee16e-83cf-4130-baed-f1b196c0765a"
+    }
+  },
+  {
+    "model": "ensembl_metadata.dataset",
+    "pk": 7,
+    "fields": {
+      "name": "assembly",
+      "version": null,
+      "created": "2023-09-22T15:02:00Z",
+      "dataset_source": 4,
+      "label": "GCA_018473315.1",
+      "status": "Submitted",
+      "dataset_type": 1,
+      "dataset_uuid": "dc1b508e-f148-4a6f-b051-1a0c53142cf5"
+    }
+  },
+  {
+    "model": "ensembl_metadata.dataset",
+    "pk": 9,
+    "fields": {
+      "name": "assembly",
+      "version": null,
+      "created": "2023-09-22T15:02:01Z",
+      "dataset_source": 5,
+      "label": "GCA_018469415.1",
+      "status": "Submitted",
+      "dataset_type": 1,
+      "dataset_uuid": "45aec801-4fe7-4ac2-9afa-19aea2a8409e"
+    }
+  },
+  {
+    "model": "ensembl_metadata.dataset",
+    "pk": 886,
+    "fields": {
+      "name": "genebuild",
+      "version": "ENS01",
+      "created": "2023-11-07T11:18:51Z",
+      "dataset_source": 3,
+      "label": "GCA_931346935.2_ENS01",
+      "status": "Submitted",
+      "dataset_type": 2,
+      "dataset_uuid": "20c07f0d-4024-4151-b739-4f7806a5ee20"
+    }
+  },
+  {
+    "model": "ensembl_metadata.dataset",
+    "pk": 888,
+    "fields": {
+      "name": "genebuild",
+      "version": "ENS01",
+      "created": "2023-11-07T11:18:55Z",
+      "dataset_source": 4,
+      "label": "GCA_018473315.1_ENS01",
+      "status": "Submitted",
+      "dataset_type": 2,
+      "dataset_uuid": "9d717ead-ffe0-4fc1-b58c-3c057b754021"
+    }
+  },
+  {
+    "model": "ensembl_metadata.dataset",
+    "pk": 890,
+    "fields": {
+      "name": "genebuild",
+      "version": "ENS01",
+      "created": "2023-11-07T11:18:57Z",
+      "dataset_source": 5,
+      "label": "GCA_018469415.1_ENS01",
+      "status": "Submitted",
+      "dataset_type": 2,
+      "dataset_uuid": "1c759aca-63a1-4eea-abe8-ef5f298fe6e2"
+    }
+  },
+  {
+    "model": "ensembl_metadata.dataset",
+    "pk": 1475,
+    "fields": {
+      "name": "variation",
+      "version": "1.0",
+      "created": "2023-11-09T12:50:04.431Z",
+      "dataset_source": 576,
+      "label": "HG03540.alt.pat.f1_v2",
+      "status": "Submitted",
+      "dataset_type": 3,
+      "dataset_uuid": "08543d8d-2110-46f3-a9b6-ac58c4af8202"
+    }
+  },
+  {
+    "model": "ensembl_metadata.dataset",
+    "pk": 1507,
+    "fields": {
+      "name": "variation",
+      "version": "1.0",
+      "created": "2023-11-09T12:50:20.833Z",
+      "dataset_source": 608,
+      "label": "HG03516.alt.pat.f1_v2",
+      "status": "Submitted",
+      "dataset_type": 3,
+      "dataset_uuid": "dd28ea84-6890-4af8-bd2b-2caa9917f221"
+    }
+  },
+  {
+    "model": "ensembl_metadata.dataset",
+    "pk": 2276,
+    "fields": {
+      "name": "compara_homologies",
+      "version": "1.0",
+      "created": "2023-11-14T16:49:59.780Z",
+      "dataset_source": 251,
+      "label": "Compara homologies",
+      "status": "Submitted",
+      "dataset_type": 6,
+      "dataset_uuid": "0bdc7428-6f81-4c96-a8d3-f5d5bff5a9b8"
+    }
+  },
+  {
+    "model": "ensembl_metadata.dataset",
+    "pk": 2342,
+    "fields": {
+      "name": "compara_homologies",
+      "version": "1.0",
+      "created": "2023-11-14T16:50:58.353Z",
+      "dataset_source": 317,
+      "label": "Compara homologies",
+      "status": "Submitted",
+      "dataset_type": 6,
+      "dataset_uuid": "6956ef73-577a-402f-9804-353cd4ae12e6"
+    }
+  },
+  {
+    "model": "ensembl_metadata.dataset",
+    "pk": 2355,
+    "fields": {
+      "name": "compara_homologies",
+      "version": "1.0",
+      "created": "2023-11-14T16:51:09.494Z",
+      "dataset_source": 330,
+      "label": "Compara homologies",
+      "status": "Submitted",
+      "dataset_type": 6,
+      "dataset_uuid": "3f3c7d08-5aa3-4400-b916-b009188d14a1"
+    }
+  },
+  {
+    "model": "ensembl_metadata.dataset",
+    "pk": 2408,
+    "fields": {
+      "name": "compara_homologies",
+      "version": "1.0",
+      "created": "2023-11-14T16:51:54.939Z",
+      "dataset_source": 383,
+      "label": "Compara homologies",
+      "status": "Submitted",
+      "dataset_type": 6,
+      "dataset_uuid": "0571d77c-5cc6-4819-80bf-34a42acfc3f6"
+    }
+  },
+  {
+    "model": "ensembl_metadata.dataset",
+    "pk": 2458,
+    "fields": {
+      "name": "compara_homologies",
+      "version": "1.0",
+      "created": "2023-11-14T16:52:38.647Z",
+      "dataset_source": 433,
+      "label": "Compara homologies",
+      "status": "Submitted",
+      "dataset_type": 6,
+      "dataset_uuid": "58df568e-48c1-4a3b-838b-448540392f9c"
+    }
+  },
+  {
+    "model": "ensembl_metadata.dataset",
+    "pk": 2521,
+    "fields": {
+      "name": "core_compute",
+      "version": "1.0",
+      "created": "2023-11-15T15:07:13.825Z",
+      "dataset_source": 1,
+      "label": "Core Compute",
+      "status": "Processed",
+      "dataset_type": 8,
+      "dataset_uuid": "fe5d3e13-350c-4e2a-9f49-256fc319331e"
+    }
+  },
+  {
+    "model": "ensembl_metadata.dataset",
+    "pk": 2522,
+    "fields": {
+      "name": "core_compute",
+      "version": "1.0",
+      "created": "2023-11-15T15:07:13.825Z",
+      "dataset_source": 1,
+      "label": "Core Compute",
+      "status": "Submitted",
+      "dataset_type": 8,
+      "dataset_uuid": "fd5d3e13-350c-4e2a-9f49-256fc319331e"
+    }
+  },
+  {
+    "model": "ensembl_metadata.dataset",
+    "pk": 2523,
+    "fields": {
+      "name": "xrefs",
+      "version": null,
+      "created": "2024-03-12T09:44:26Z",
+      "dataset_source": 1,
+      "label": "Child of genebuild",
+      "status": "Processed",
+      "dataset_type": 13,
+      "dataset_uuid": "747e14d7-4b82-4190-9899-d196e489ee18"
+    }
+  },
+  {
+    "model": "ensembl_metadata.dataset",
+    "pk": 2524,
+    "fields": {
+      "name": "protein_features",
+      "version": null,
+      "created": "2024-03-12T09:44:26Z",
+      "dataset_source": 1,
+      "label": "Child of genebuild",
+      "status": "Submitted",
+      "dataset_type": 14,
+      "dataset_uuid": "fd45b1cf-a948-4556-9ce6-40c65371e4ad"
+    }
+  },
+  {
+    "model": "ensembl_metadata.dataset",
+    "pk": 2525,
+    "fields": {
+      "name": "xrefs",
+      "version": null,
+      "created": "2024-03-12T09:44:26Z",
+      "dataset_source": 1,
+      "label": "Child of genebuild",
+      "status": "Submitted",
+      "dataset_type": 13,
+      "dataset_uuid": "747e14d7-4b82-4190-9899-d196e489ee20"
+    }
+  },
+  {
+    "model": "ensembl_metadata.datasetattribute",
+    "pk": 1,
+    "fields": {
+      "value": "GCA_000005845.2",
+      "attribute": 1,
+      "dataset": 1
+    }
+  },
+  {
+    "model": "ensembl_metadata.datasetattribute",
+    "pk": 2,
+    "fields": {
+      "value": "1",
+      "attribute": 2,
+      "dataset": 1
+    }
+  },
+  {
+    "model": "ensembl_metadata.datasetattribute",
+    "pk": 3,
+    "fields": {
+      "value": "1",
+      "attribute": 3,
+      "dataset": 1
+    }
+  },
+  {
+    "model": "ensembl_metadata.datasetattribute",
+    "pk": 5,
+    "fields": {
+      "value": "2013-11",
+      "attribute": 5,
+      "dataset": 1
+    }
+  },
+  {
+    "model": "ensembl_metadata.datasetattribute",
+    "pk": 6,
+    "fields": {
+      "value": "ASM584v2",
+      "attribute": 6,
+      "dataset": 1
+    }
+  },
+  {
+    "model": "ensembl_metadata.datasetattribute",
+    "pk": 7,
+    "fields": {
+      "value": "50.79",
+      "attribute": 7,
+      "dataset": 1
+    }
+  },
+  {
+    "model": "ensembl_metadata.datasetattribute",
+    "pk": 8,
+    "fields": {
+      "value": "1",
+      "attribute": 8,
+      "dataset": 1
+    }
+  },
+  {
+    "model": "ensembl_metadata.datasetattribute",
+    "pk": 9,
+    "fields": {
+      "value": "complete genome",
+      "attribute": 9,
+      "dataset": 1
+    }
+  },
+  {
+    "model": "ensembl_metadata.datasetattribute",
+    "pk": 10,
+    "fields": {
+      "value": "chromosome:ASM584v2#contig",
+      "attribute": 10,
+      "dataset": 1
+    }
+  },
+  {
+    "model": "ensembl_metadata.datasetattribute",
+    "pk": 11,
+    "fields": {
+      "value": "ASM584v2",
+      "attribute": 11,
+      "dataset": 1
+    }
+  },
+  {
+    "model": "ensembl_metadata.datasetattribute",
+    "pk": 12,
+    "fields": {
+      "value": "Univ. Wisconsin",
+      "attribute": 12,
+      "dataset": 1
+    }
+  },
+  {
+    "model": "ensembl_metadata.datasetattribute",
+    "pk": 13,
+    "fields": {
+      "value": "http://www.ebi.ac.uk/ena/data/view/GCA_000005845",
+      "attribute": 13,
+      "dataset": 1
+    }
+  },
+  {
+    "model": "ensembl_metadata.datasetattribute",
+    "pk": 14,
+    "fields": {
+      "value": "0",
+      "attribute": 14,
+      "dataset": 1
+    }
+  },
+  {
+    "model": "ensembl_metadata.datasetattribute",
+    "pk": 15,
+    "fields": {
+      "value": "",
+      "attribute": 15,
+      "dataset": 1
+    }
+  },
+  {
+    "model": "ensembl_metadata.datasetattribute",
+    "pk": 16,
+    "fields": {
+      "value": "1",
+      "attribute": 16,
+      "dataset": 1
+    }
+  },
+  {
+    "model": "ensembl_metadata.datasetattribute",
+    "pk": 17,
+    "fields": {
+      "value": "3977025",
+      "attribute": 17,
+      "dataset": 1
+    }
+  },
+  {
+    "model": "ensembl_metadata.datasetattribute",
+    "pk": 18,
+    "fields": {
+      "value": "0",
+      "attribute": 18,
+      "dataset": 1
+    }
+  },
+  {
+    "model": "ensembl_metadata.datasetattribute",
+    "pk": 19,
+    "fields": {
+      "value": "4641652",
+      "attribute": 19,
+      "dataset": 1
+    }
+  },
+  {
+    "model": "ensembl_metadata.datasetattribute",
+    "pk": 20,
+    "fields": {
+      "value": "",
+      "attribute": 20,
+      "dataset": 1
+    }
+  },
+  {
+    "model": "ensembl_metadata.datasetattribute",
+    "pk": 21,
+    "fields": {
+      "value": "938.55",
+      "attribute": 21,
+      "dataset": 2
+    }
+  },
+  {
+    "model": "ensembl_metadata.datasetattribute",
+    "pk": 22,
+    "fields": {
+      "value": "1.00",
+      "attribute": 22,
+      "dataset": 2
+    }
+  },
+  {
+    "model": "ensembl_metadata.datasetattribute",
+    "pk": 23,
+    "fields": {
+      "value": "1.00",
+      "attribute": 23,
+      "dataset": 2
+    }
+  },
+  {
+    "model": "ensembl_metadata.datasetattribute",
+    "pk": 24,
+    "fields": {
+      "value": "937.89",
+      "attribute": 24,
+      "dataset": 2
+    }
+  },
+  {
+    "model": "ensembl_metadata.datasetattribute",
+    "pk": 25,
+    "fields": {
+      "value": "939.17",
+      "attribute": 25,
+      "dataset": 2
+    }
+  },
+  {
+    "model": "ensembl_metadata.datasetattribute",
+    "pk": 26,
+    "fields": {
+      "value": "939.92",
+      "attribute": 26,
+      "dataset": 2
+    }
+  },
+  {
+    "model": "ensembl_metadata.datasetattribute",
+    "pk": 27,
+    "fields": {
+      "value": "1.67",
+      "attribute": 27,
+      "dataset": 2
+    }
+  },
+  {
+    "model": "ensembl_metadata.datasetattribute",
+    "pk": 28,
+    "fields": {
+      "value": "939.92",
+      "attribute": 28,
+      "dataset": 2
+    }
+  },
+  {
+    "model": "ensembl_metadata.datasetattribute",
+    "pk": 29,
+    "fields": {
+      "value": "4240",
+      "attribute": 29,
+      "dataset": 2
+    }
+  },
+  {
+    "model": "ensembl_metadata.datasetattribute",
+    "pk": 30,
+    "fields": {
+      "value": "4239",
+      "attribute": 30,
+      "dataset": 2
+    }
+  },
+  {
+    "model": "ensembl_metadata.datasetattribute",
+    "pk": 31,
+    "fields": {
+      "value": "1.00",
+      "attribute": 31,
+      "dataset": 2
+    }
+  },
+  {
+    "model": "ensembl_metadata.datasetattribute",
+    "pk": 32,
+    "fields": {
+      "value": "d41d8cd98f00b204e9800998ecf8427e",
+      "attribute": 32,
+      "dataset": 2
+    }
+  },
+  {
+    "model": "ensembl_metadata.datasetattribute",
+    "pk": 33,
+    "fields": {
+      "value": "2006-02",
+      "attribute": 33,
+      "dataset": 2
+    }
+  },
+  {
+    "model": "ensembl_metadata.datasetattribute",
+    "pk": 34,
+    "fields": {
+      "value": "2018-09",
+      "attribute": 34,
+      "dataset": 2
+    }
+  },
+  {
+    "model": "ensembl_metadata.datasetattribute",
+    "pk": 35,
+    "fields": {
+      "value": "toplevel",
+      "attribute": 35,
+      "dataset": 2
+    }
+  },
+  {
+    "model": "ensembl_metadata.datasetattribute",
+    "pk": 36,
+    "fields": {
+      "value": "7077",
+      "attribute": 36,
+      "dataset": 2
+    }
+  },
+  {
+    "model": "ensembl_metadata.datasetattribute",
+    "pk": 37,
+    "fields": {
+      "value": "import",
+      "attribute": 37,
+      "dataset": 2
+    }
+  },
+  {
+    "model": "ensembl_metadata.datasetattribute",
+    "pk": 38,
+    "fields": {
+      "value": "Import",
+      "attribute": 38,
+      "dataset": 2
+    }
+  },
+  {
+    "model": "ensembl_metadata.datasetattribute",
+    "pk": 39,
+    "fields": {
+      "value": "1.00",
+      "attribute": 39,
+      "dataset": 2
+    }
+  },
+  {
+    "model": "ensembl_metadata.datasetattribute",
+    "pk": 40,
+    "fields": {
+      "value": "269.83",
+      "attribute": 40,
+      "dataset": 2
+    }
+  },
+  {
+    "model": "ensembl_metadata.datasetattribute",
+    "pk": 41,
+    "fields": {
+      "value": "269.83",
+      "attribute": 41,
+      "dataset": 2
+    }
+  },
+  {
+    "model": "ensembl_metadata.datasetattribute",
+    "pk": 42,
+    "fields": {
+      "value": "269.83",
+      "attribute": 42,
+      "dataset": 2
+    }
+  },
+  {
+    "model": "ensembl_metadata.datasetattribute",
+    "pk": 43,
+    "fields": {
+      "value": "2905",
+      "attribute": 43,
+      "dataset": 2
+    }
+  },
+  {
+    "model": "ensembl_metadata.datasetattribute",
+    "pk": 44,
+    "fields": {
+      "value": "0",
+      "attribute": 44,
+      "dataset": 2
+    }
+  },
+  {
+    "model": "ensembl_metadata.datasetattribute",
+    "pk": 45,
+    "fields": {
+      "value": "0",
+      "attribute": 45,
+      "dataset": 2
+    }
+  },
+  {
+    "model": "ensembl_metadata.datasetattribute",
+    "pk": 46,
+    "fields": {
+      "value": "179",
+      "attribute": 46,
+      "dataset": 2
+    }
+  },
+  {
+    "model": "ensembl_metadata.datasetattribute",
+    "pk": 47,
+    "fields": {
+      "value": "53",
+      "attribute": 47,
+      "dataset": 2
+    }
+  },
+  {
+    "model": "ensembl_metadata.datasetattribute",
+    "pk": 48,
+    "fields": {
+      "value": "179",
+      "attribute": 48,
+      "dataset": 2
+    }
+  },
+  {
+    "model": "ensembl_metadata.datasetattribute",
+    "pk": 49,
+    "fields": {
+      "value": "0",
+      "attribute": 49,
+      "dataset": 2
+    }
+  },
+  {
+    "model": "ensembl_metadata.datasetattribute",
+    "pk": 50,
+    "fields": {
+      "value": "179",
+      "attribute": 50,
+      "dataset": 2
+    }
+  },
+  {
+    "model": "ensembl_metadata.datasetattribute",
+    "pk": 51,
+    "fields": {
+      "value": "1.00",
+      "attribute": 51,
+      "dataset": 2
+    }
+  },
+  {
+    "model": "ensembl_metadata.datasetattribute",
+    "pk": 52,
+    "fields": {
+      "value": "1.17",
+      "attribute": 52,
+      "dataset": 2
+    }
+  },
+  {
+    "model": "ensembl_metadata.datasetattribute",
+    "pk": 53,
+    "fields": {
+      "value": "783.57",
+      "attribute": 53,
+      "dataset": 2
+    }
+  },
+  {
+    "model": "ensembl_metadata.datasetattribute",
+    "pk": 54,
+    "fields": {
+      "value": "1103.18",
+      "attribute": 54,
+      "dataset": 2
+    }
+  },
+  {
+    "model": "ensembl_metadata.datasetattribute",
+    "pk": 55,
+    "fields": {
+      "value": "1150.95",
+      "attribute": 55,
+      "dataset": 2
+    }
+  },
+  {
+    "model": "ensembl_metadata.datasetattribute",
+    "pk": 56,
+    "fields": {
+      "value": "913.03",
+      "attribute": 56,
+      "dataset": 2
+    }
+  },
+  {
+    "model": "ensembl_metadata.datasetattribute",
+    "pk": 57,
+    "fields": {
+      "value": "8622",
+      "attribute": 57,
+      "dataset": 2
+    }
+  },
+  {
+    "model": "ensembl_metadata.datasetattribute",
+    "pk": 58,
+    "fields": {
+      "value": "115",
+      "attribute": 58,
+      "dataset": 2
+    }
+  },
+  {
+    "model": "ensembl_metadata.datasetattribute",
+    "pk": 59,
+    "fields": {
+      "value": "51",
+      "attribute": 59,
+      "dataset": 2
+    }
+  },
+  {
+    "model": "ensembl_metadata.datasetattribute",
+    "pk": 60,
+    "fields": {
+      "value": "134",
+      "attribute": 60,
+      "dataset": 2
+    }
+  },
+  {
+    "model": "ensembl_metadata.datasetattribute",
+    "pk": 61,
+    "fields": {
+      "value": "19",
+      "attribute": 61,
+      "dataset": 2
+    }
+  },
+  {
+    "model": "ensembl_metadata.datasetattribute",
+    "pk": 62,
+    "fields": {
+      "value": "115",
+      "attribute": 62,
+      "dataset": 2
+    }
+  },
+  {
+    "model": "ensembl_metadata.datasetattribute",
+    "pk": 63,
+    "fields": {
+      "value": "1.00",
+      "attribute": 63,
+      "dataset": 2
+    }
+  },
+  {
+    "model": "ensembl_metadata.datasetattribute",
+    "pk": 64,
+    "fields": {
+      "value": "42",
+      "attribute": 64,
+      "dataset": 2
+    }
+  },
+  {
+    "model": "ensembl_metadata.datasetattribute",
+    "pk": 65,
+    "fields": {
+      "value": "2018-09-UnivWisconsin",
+      "attribute": 65,
+      "dataset": 2
+    }
+  },
+  {
+    "model": "ensembl_metadata.datasetattribute",
+    "pk": 66,
+    "fields": {
+      "value": "4242",
+      "attribute": 66,
+      "dataset": 2
+    }
+  },
+  {
+    "model": "ensembl_metadata.datasetattribute",
+    "pk": 67,
+    "fields": {
+      "value": "4245",
+      "attribute": 67,
+      "dataset": 2
+    }
+  },
+  {
+    "model": "ensembl_metadata.datasetattribute",
+    "pk": 68,
+    "fields": {
+      "value": "3",
+      "attribute": 68,
+      "dataset": 2
+    }
+  },
+  {
+    "model": "ensembl_metadata.datasetattribute",
+    "pk": 69,
+    "fields": {
+      "value": "4242",
+      "attribute": 69,
+      "dataset": 2
+    }
+  },
+  {
+    "model": "ensembl_metadata.datasetattribute",
+    "pk": 70,
+    "fields": {
+      "value": "1.00",
+      "attribute": 70,
+      "dataset": 2
+    }
+  },
+  {
+    "model": "ensembl_metadata.datasetattribute",
+    "pk": 71,
+    "fields": {
+      "value": "EXT01",
+      "attribute": 71,
+      "dataset": 2
+    }
+  },
+  {
+    "model": "ensembl_metadata.datasetattribute",
+    "pk": 72,
+    "fields": {
+      "value": "b2992",
+      "attribute": 72,
+      "dataset": 2
+    }
+  },
+  {
+    "model": "ensembl_metadata.datasetattribute",
+    "pk": 73,
+    "fields": {
+      "value": "Chromosome:3140311-3140799",
+      "attribute": 73,
+      "dataset": 2
+    }
+  },
+  {
+    "model": "ensembl_metadata.datasetattribute",
+    "pk": 74,
+    "fields": {
+      "value": "GCA_001624475.1",
+      "attribute": 1,
+      "dataset": 3
+    }
+  },
+  {
+    "model": "ensembl_metadata.datasetattribute",
+    "pk": 75,
+    "fields": {
+      "value": "21",
+      "attribute": 2,
+      "dataset": 3
+    }
+  },
+  {
+    "model": "ensembl_metadata.datasetattribute",
+    "pk": 76,
+    "fields": {
+      "value": "42242",
+      "attribute": 3,
+      "dataset": 3
+    }
+  },
+  {
+    "model": "ensembl_metadata.datasetattribute",
+    "pk": 77,
+    "fields": {
+      "value": "13074",
+      "attribute": 4,
+      "dataset": 3
+    }
+  },
+  {
+    "model": "ensembl_metadata.datasetattribute",
+    "pk": 78,
+    "fields": {
+      "value": "high",
+      "attribute": 74,
+      "dataset": 3
+    }
+  },
+  {
+    "model": "ensembl_metadata.datasetattribute",
+    "pk": 79,
+    "fields": {
+      "value": "2016-04",
+      "attribute": 5,
+      "dataset": 3
+    }
+  },
+  {
+    "model": "ensembl_metadata.datasetattribute",
+    "pk": 80,
+    "fields": {
+      "value": "CBA_J_v1",
+      "attribute": 6,
+      "dataset": 3
+    }
+  },
+  {
+    "model": "ensembl_metadata.datasetattribute",
+    "pk": 81,
+    "fields": {
+      "value": "33.16",
+      "attribute": 7,
+      "dataset": 3
+    }
+  },
+  {
+    "model": "ensembl_metadata.datasetattribute",
+    "pk": 82,
+    "fields": {
+      "value": "chromosome",
+      "attribute": 9,
+      "dataset": 3
+    }
+  },
+  {
+    "model": "ensembl_metadata.datasetattribute",
+    "pk": 83,
+    "fields": {
+      "value": "scaffold:CBA_J_v1|contig",
+      "attribute": 10,
+      "dataset": 3
+    }
+  },
+  {
+    "model": "ensembl_metadata.datasetattribute",
+    "pk": 84,
+    "fields": {
+      "value": "CBA_J_v1",
+      "attribute": 11,
+      "dataset": 3
+    }
+  },
+  {
+    "model": "ensembl_metadata.datasetattribute",
+    "pk": 85,
+    "fields": {
+      "value": "",
+      "attribute": 12,
+      "dataset": 3
+    }
+  },
+  {
+    "model": "ensembl_metadata.datasetattribute",
+    "pk": 86,
+    "fields": {
+      "value": "",
+      "attribute": 13,
+      "dataset": 3
+    }
+  },
+  {
+    "model": "ensembl_metadata.datasetattribute",
+    "pk": 87,
+    "fields": {
+      "value": "364997",
+      "attribute": 14,
+      "dataset": 3
+    }
+  },
+  {
+    "model": "ensembl_metadata.datasetattribute",
+    "pk": 89,
+    "fields": {
+      "value": "5466",
+      "attribute": 16,
+      "dataset": 3
+    }
+  },
+  {
+    "model": "ensembl_metadata.datasetattribute",
+    "pk": 90,
+    "fields": {
+      "value": "32945934",
+      "attribute": 17,
+      "dataset": 3
+    }
+  },
+  {
+    "model": "ensembl_metadata.datasetattribute",
+    "pk": 91,
+    "fields": {
+      "value": "602555299",
+      "attribute": 18,
+      "dataset": 3
+    }
+  },
+  {
+    "model": "ensembl_metadata.datasetattribute",
+    "pk": 92,
+    "fields": {
+      "value": "2921727955",
+      "attribute": 19,
+      "dataset": 3
+    }
+  },
+  {
+    "model": "ensembl_metadata.datasetattribute",
+    "pk": 93,
+    "fields": {
+      "value": "NCBI",
+      "attribute": 75,
+      "dataset": 3
+    }
+  },
+  {
+    "model": "ensembl_metadata.datasetattribute",
+    "pk": 94,
+    "fields": {
+      "value": "GenBank Assembly ID",
+      "attribute": 76,
+      "dataset": 3
+    }
+  },
+  {
+    "model": "ensembl_metadata.datasetattribute",
+    "pk": 95,
+    "fields": {
+      "value": "1.03",
+      "attribute": 63,
+      "dataset": 4
+    }
+  },
+  {
+    "model": "ensembl_metadata.datasetattribute",
+    "pk": 96,
+    "fields": {
+      "value": "1.25",
+      "attribute": 51,
+      "dataset": 4
+    }
+  },
+  {
+    "model": "ensembl_metadata.datasetattribute",
+    "pk": 97,
+    "fields": {
+      "value": "1.55",
+      "attribute": 52,
+      "dataset": 4
+    }
+  },
+  {
+    "model": "ensembl_metadata.datasetattribute",
+    "pk": 98,
+    "fields": {
+      "value": "10",
+      "attribute": 59,
+      "dataset": 4
+    }
+  },
+  {
+    "model": "ensembl_metadata.datasetattribute",
+    "pk": 99,
+    "fields": {
+      "value": "10071",
+      "attribute": 60,
+      "dataset": 4
+    }
+  },
+  {
+    "model": "ensembl_metadata.datasetattribute",
+    "pk": 100,
+    "fields": {
+      "value": "11",
+      "attribute": 64,
+      "dataset": 4
+    }
+  },
+  {
+    "model": "ensembl_metadata.datasetattribute",
+    "pk": 101,
+    "fields": {
+      "value": "11037",
+      "attribute": 46,
+      "dataset": 4
+    }
+  },
+  {
+    "model": "ensembl_metadata.datasetattribute",
+    "pk": 102,
+    "fields": {
+      "value": "11412.74",
+      "attribute": 41,
+      "dataset": 4
+    }
+  },
+  {
+    "model": "ensembl_metadata.datasetattribute",
+    "pk": 103,
+    "fields": {
+      "value": "1374.34",
+      "attribute": 21,
+      "dataset": 4
+    }
+  },
+  {
+    "model": "ensembl_metadata.datasetattribute",
+    "pk": 104,
+    "fields": {
+      "value": "13774",
+      "attribute": 50,
+      "dataset": 4
+    }
+  },
+  {
+    "model": "ensembl_metadata.datasetattribute",
+    "pk": 105,
+    "fields": {
+      "value": "157.92",
+      "attribute": 24,
+      "dataset": 4
+    }
+  },
+  {
+    "model": "ensembl_metadata.datasetattribute",
+    "pk": 106,
+    "fields": {
+      "value": "17521",
+      "attribute": 49,
+      "dataset": 4
+    }
+  },
+  {
+    "model": "ensembl_metadata.datasetattribute",
+    "pk": 107,
+    "fields": {
+      "value": "1948071",
+      "attribute": 57,
+      "dataset": 4
+    }
+  },
+  {
+    "model": "ensembl_metadata.datasetattribute",
+    "pk": 108,
+    "fields": {
+      "value": "2.27",
+      "attribute": 39,
+      "dataset": 4
+    }
+  },
+  {
+    "model": "ensembl_metadata.datasetattribute",
+    "pk": 109,
+    "fields": {
+      "value": "2.52",
+      "attribute": 31,
+      "dataset": 4
+    }
+  },
+  {
+    "model": "ensembl_metadata.datasetattribute",
+    "pk": 110,
+    "fields": {
+      "value": "2016-07-External",
+      "attribute": 65,
+      "dataset": 4
+    }
+  },
+  {
+    "model": "ensembl_metadata.datasetattribute",
+    "pk": 111,
+    "fields": {
+      "value": "2016-10",
+      "attribute": 33,
+      "dataset": 4
+    }
+  },
+  {
+    "model": "ensembl_metadata.datasetattribute",
+    "pk": 112,
+    "fields": {
+      "value": "2018-01",
+      "attribute": 34,
+      "dataset": 4
+    }
+  },
+  {
+    "model": "ensembl_metadata.datasetattribute",
+    "pk": 113,
+    "fields": {
+      "value": "20589",
+      "attribute": 29,
+      "dataset": 4
+    }
+  },
+  {
+    "model": "ensembl_metadata.datasetattribute",
+    "pk": 114,
+    "fields": {
+      "value": "2350233",
+      "attribute": 43,
+      "dataset": 4
+    }
+  },
+  {
+    "model": "ensembl_metadata.datasetattribute",
+    "pk": 115,
+    "fields": {
+      "value": "251.05",
+      "attribute": 25,
+      "dataset": 4
+    }
+  },
+  {
+    "model": "ensembl_metadata.datasetattribute",
+    "pk": 116,
+    "fields": {
+      "value": "2845.14",
+      "attribute": 28,
+      "dataset": 4
+    }
+  },
+  {
+    "model": "ensembl_metadata.datasetattribute",
+    "pk": 117,
+    "fields": {
+      "value": "2928224",
+      "attribute": 36,
+      "dataset": 4
+    }
+  },
+  {
+    "model": "ensembl_metadata.datasetattribute",
+    "pk": 118,
+    "fields": {
+      "value": "3.85",
+      "attribute": 70,
+      "dataset": 4
+    }
+  },
+  {
+    "model": "ensembl_metadata.datasetattribute",
+    "pk": 119,
+    "fields": {
+      "value": "35",
+      "attribute": 47,
+      "dataset": 4
+    }
+  },
+  {
+    "model": "ensembl_metadata.datasetattribute",
+    "pk": 120,
+    "fields": {
+      "value": "3583",
+      "attribute": 61,
+      "dataset": 4
+    }
+  },
+  {
+    "model": "ensembl_metadata.datasetattribute",
+    "pk": 121,
+    "fields": {
+      "value": "361.19",
+      "attribute": 40,
+      "dataset": 4
+    }
+  },
+  {
+    "model": "ensembl_metadata.datasetattribute",
+    "pk": 122,
+    "fields": {
+      "value": "40",
+      "attribute": 77,
+      "dataset": 4
+    }
+  },
+  {
+    "model": "ensembl_metadata.datasetattribute",
+    "pk": 123,
+    "fields": {
+      "value": "4444.83",
+      "attribute": 54,
+      "dataset": 4
+    }
+  },
+  {
+    "model": "ensembl_metadata.datasetattribute",
+    "pk": 124,
+    "fields": {
+      "value": "449.76",
+      "attribute": 53,
+      "dataset": 4
+    }
+  },
+  {
+    "model": "ensembl_metadata.datasetattribute",
+    "pk": 125,
+    "fields": {
+      "value": "452345",
+      "attribute": 66,
+      "dataset": 4
+    }
+  },
+  {
+    "model": "ensembl_metadata.datasetattribute",
+    "pk": 126,
+    "fields": {
+      "value": "4577",
+      "attribute": 48,
+      "dataset": 4
+    }
+  },
+  {
+    "model": "ensembl_metadata.datasetattribute",
+    "pk": 127,
+    "fields": {
+      "value": "51976",
+      "attribute": 30,
+      "dataset": 4
+    }
+  },
+  {
+    "model": "ensembl_metadata.datasetattribute",
+    "pk": 128,
+    "fields": {
+      "value": "549",
+      "attribute": 45,
+      "dataset": 4
+    }
+  },
+  {
+    "model": "ensembl_metadata.datasetattribute",
+    "pk": 129,
+    "fields": {
+      "value": "550171",
+      "attribute": 68,
+      "dataset": 4
+    }
+  },
+  {
+    "model": "ensembl_metadata.datasetattribute",
+    "pk": 130,
+    "fields": {
+      "value": "55350.20",
+      "attribute": 26,
+      "dataset": 4
+    }
+  },
+  {
+    "model": "ensembl_metadata.datasetattribute",
+    "pk": 131,
+    "fields": {
+      "value": "5911",
+      "attribute": 44,
+      "dataset": 4
+    }
+  },
+  {
+    "model": "ensembl_metadata.datasetattribute",
+    "pk": 132,
+    "fields": {
+      "value": "6009.16",
+      "attribute": 27,
+      "dataset": 4
+    }
+  },
+  {
+    "model": "ensembl_metadata.datasetattribute",
+    "pk": 133,
+    "fields": {
+      "value": "6269",
+      "attribute": 58,
+      "dataset": 4
+    }
+  },
+  {
+    "model": "ensembl_metadata.datasetattribute",
+    "pk": 134,
+    "fields": {
+      "value": "629414",
+      "attribute": 67,
+      "dataset": 4
+    }
+  },
+  {
+    "model": "ensembl_metadata.datasetattribute",
+    "pk": 135,
+    "fields": {
+      "value": "6488",
+      "attribute": 62,
+      "dataset": 4
+    }
+  },
+  {
+    "model": "ensembl_metadata.datasetattribute",
+    "pk": 136,
+    "fields": {
+      "value": "691.65",
+      "attribute": 56,
+      "dataset": 4
+    }
+  },
+  {
+    "model": "ensembl_metadata.datasetattribute",
+    "pk": 137,
+    "fields": {
+      "value": "7.94",
+      "attribute": 23,
+      "dataset": 4
+    }
+  },
+  {
+    "model": "ensembl_metadata.datasetattribute",
+    "pk": 138,
+    "fields": {
+      "value": "7258.10",
+      "attribute": 55,
+      "dataset": 4
+    }
+  },
+  {
+    "model": "ensembl_metadata.datasetattribute",
+    "pk": 139,
+    "fields": {
+      "value": "79243",
+      "attribute": 69,
+      "dataset": 4
+    }
+  },
+  {
+    "model": "ensembl_metadata.datasetattribute",
+    "pk": 140,
+    "fields": {
+      "value": "8.70",
+      "attribute": 22,
+      "dataset": 4
+    }
+  },
+  {
+    "model": "ensembl_metadata.datasetattribute",
+    "pk": 141,
+    "fields": {
+      "value": "804.82",
+      "attribute": 42,
+      "dataset": 4
+    }
+  },
+  {
+    "model": "ensembl_metadata.datasetattribute",
+    "pk": 142,
+    "fields": {
+      "value": "9339.10",
+      "attribute": 78,
+      "dataset": 4
+    }
+  },
+  {
+    "model": "ensembl_metadata.datasetattribute",
+    "pk": 143,
+    "fields": {
+      "value": "EXT01",
+      "attribute": 71,
+      "dataset": 4
+    }
+  },
+  {
+    "model": "ensembl_metadata.datasetattribute",
+    "pk": 144,
+    "fields": {
+      "value": "external_annotation_import",
+      "attribute": 37,
+      "dataset": 4
+    }
+  },
+  {
+    "model": "ensembl_metadata.datasetattribute",
+    "pk": 145,
+    "fields": {
+      "value": "Import",
+      "attribute": 38,
+      "dataset": 4
+    }
+  },
+  {
+    "model": "ensembl_metadata.datasetattribute",
+    "pk": 146,
+    "fields": {
+      "value": "toplevel",
+      "attribute": 35,
+      "dataset": 4
+    }
+  },
+  {
+    "model": "ensembl_metadata.datasetattribute",
+    "pk": 147,
+    "fields": {
+      "value": "MGP_CBAJ_G0018905",
+      "attribute": 72,
+      "dataset": 4
+    }
+  },
+  {
+    "model": "ensembl_metadata.datasetattribute",
+    "pk": 148,
+    "fields": {
+      "value": "4:136860267-137041095",
+      "attribute": 73,
+      "dataset": 4
+    }
+  },
+  {
+    "model": "ensembl_metadata.datasetattribute",
+    "pk": 149,
+    "fields": {
+      "value": "GCA_931346935.2",
+      "attribute": 1,
+      "dataset": 5
+    }
+  },
+  {
+    "model": "ensembl_metadata.datasetattribute",
+    "pk": 150,
+    "fields": {
+      "value": "29",
+      "attribute": 2,
+      "dataset": 5
+    }
+  },
+  {
+    "model": "ensembl_metadata.datasetattribute",
+    "pk": 151,
+    "fields": {
+      "value": "4042",
+      "attribute": 3,
+      "dataset": 5
+    }
+  },
+  {
+    "model": "ensembl_metadata.datasetattribute",
+    "pk": 152,
+    "fields": {
+      "value": "19218354",
+      "attribute": 4,
+      "dataset": 5
+    }
+  },
+  {
+    "model": "ensembl_metadata.datasetattribute",
+    "pk": 153,
+    "fields": {
+      "value": "high",
+      "attribute": 74,
+      "dataset": 5
+    }
+  },
+  {
+    "model": "ensembl_metadata.datasetattribute",
+    "pk": 154,
+    "fields": {
+      "value": "2022-05",
+      "attribute": 5,
+      "dataset": 5
+    }
+  },
+  {
+    "model": "ensembl_metadata.datasetattribute",
+    "pk": 155,
+    "fields": {
+      "value": "Ssal_ALTA",
+      "attribute": 6,
+      "dataset": 5
+    }
+  },
+  {
+    "model": "ensembl_metadata.datasetattribute",
+    "pk": 156,
+    "fields": {
+      "value": "43.51",
+      "attribute": 7,
+      "dataset": 5
+    }
+  },
+  {
+    "model": "ensembl_metadata.datasetattribute",
+    "pk": 157,
+    "fields": {
+      "value": "chromosome",
+      "attribute": 9,
+      "dataset": 5
+    }
+  },
+  {
+    "model": "ensembl_metadata.datasetattribute",
+    "pk": 158,
+    "fields": {
+      "value": "Ssal_ALTA",
+      "attribute": 11,
+      "dataset": 5
+    }
+  },
+  {
+    "model": "ensembl_metadata.datasetattribute",
+    "pk": 159,
+    "fields": {
+      "value": "",
+      "attribute": 12,
+      "dataset": 5
+    }
+  },
+  {
+    "model": "ensembl_metadata.datasetattribute",
+    "pk": 160,
+    "fields": {
+      "value": "",
+      "attribute": 13,
+      "dataset": 5
+    }
+  },
+  {
+    "model": "ensembl_metadata.datasetattribute",
+    "pk": 161,
+    "fields": {
+      "value": "40",
+      "attribute": 14,
+      "dataset": 5
+    }
+  },
+  {
+    "model": "ensembl_metadata.datasetattribute",
+    "pk": 163,
+    "fields": {
+      "value": "3596",
+      "attribute": 16,
+      "dataset": 5
+    }
+  },
+  {
+    "model": "ensembl_metadata.datasetattribute",
+    "pk": 164,
+    "fields": {
+      "value": "61294989",
+      "attribute": 17,
+      "dataset": 5
+    }
+  },
+  {
+    "model": "ensembl_metadata.datasetattribute",
+    "pk": 165,
+    "fields": {
+      "value": "46310",
+      "attribute": 18,
+      "dataset": 5
+    }
+  },
+  {
+    "model": "ensembl_metadata.datasetattribute",
+    "pk": 166,
+    "fields": {
+      "value": "2621787693",
+      "attribute": 19,
+      "dataset": 5
+    }
+  },
+  {
+    "model": "ensembl_metadata.datasetattribute",
+    "pk": 167,
+    "fields": {
+      "value": "NCBI",
+      "attribute": 75,
+      "dataset": 5
+    }
+  },
+  {
+    "model": "ensembl_metadata.datasetattribute",
+    "pk": 168,
+    "fields": {
+      "value": "INSDC Assembly ID",
+      "attribute": 76,
+      "dataset": 5
+    }
+  },
+  {
+    "model": "ensembl_metadata.datasetattribute",
+    "pk": 224,
+    "fields": {
+      "value": "GCA_018473315.1",
+      "attribute": 1,
+      "dataset": 7
+    }
+  },
+  {
+    "model": "ensembl_metadata.datasetattribute",
+    "pk": 225,
+    "fields": {
+      "value": "0",
+      "attribute": 2,
+      "dataset": 7
+    }
+  },
+  {
+    "model": "ensembl_metadata.datasetattribute",
+    "pk": 226,
+    "fields": {
+      "value": "512",
+      "attribute": 3,
+      "dataset": 7
+    }
+  },
+  {
+    "model": "ensembl_metadata.datasetattribute",
+    "pk": 227,
+    "fields": {
+      "value": "34159233",
+      "attribute": 4,
+      "dataset": 7
+    }
+  },
+  {
+    "model": "ensembl_metadata.datasetattribute",
+    "pk": 228,
+    "fields": {
+      "value": "high",
+      "attribute": 74,
+      "dataset": 7
+    }
+  },
+  {
+    "model": "ensembl_metadata.datasetattribute",
+    "pk": 229,
+    "fields": {
+      "value": "2021-05",
+      "attribute": 5,
+      "dataset": 7
+    }
+  },
+  {
+    "model": "ensembl_metadata.datasetattribute",
+    "pk": 230,
+    "fields": {
+      "value": "HG03540.alt.pat.f1_v2",
+      "attribute": 6,
+      "dataset": 7
+    }
+  },
+  {
+    "model": "ensembl_metadata.datasetattribute",
+    "pk": 231,
+    "fields": {
+      "value": "40.83",
+      "attribute": 7,
+      "dataset": 7
+    }
+  },
+  {
+    "model": "ensembl_metadata.datasetattribute",
+    "pk": 232,
+    "fields": {
+      "value": "scaffold",
+      "attribute": 9,
+      "dataset": 7
+    }
+  },
+  {
+    "model": "ensembl_metadata.datasetattribute",
+    "pk": 233,
+    "fields": {
+      "value": "HG03540.alt.pat.f1_v2",
+      "attribute": 11,
+      "dataset": 7
+    }
+  },
+  {
+    "model": "ensembl_metadata.datasetattribute",
+    "pk": 234,
+    "fields": {
+      "value": "",
+      "attribute": 12,
+      "dataset": 7
+    }
+  },
+  {
+    "model": "ensembl_metadata.datasetattribute",
+    "pk": 235,
+    "fields": {
+      "value": "",
+      "attribute": 13,
+      "dataset": 7
+    }
+  },
+  {
+    "model": "ensembl_metadata.datasetattribute",
+    "pk": 236,
+    "fields": {
+      "value": "1",
+      "attribute": 14,
+      "dataset": 7
+    }
+  },
+  {
+    "model": "ensembl_metadata.datasetattribute",
+    "pk": 238,
+    "fields": {
+      "value": "512",
+      "attribute": 16,
+      "dataset": 7
+    }
+  },
+  {
+    "model": "ensembl_metadata.datasetattribute",
+    "pk": 239,
+    "fields": {
+      "value": "34182815",
+      "attribute": 17,
+      "dataset": 7
+    }
+  },
+  {
+    "model": "ensembl_metadata.datasetattribute",
+    "pk": 240,
+    "fields": {
+      "value": "26",
+      "attribute": 18,
+      "dataset": 7
+    }
+  },
+  {
+    "model": "ensembl_metadata.datasetattribute",
+    "pk": 241,
+    "fields": {
+      "value": "3065276644",
+      "attribute": 19,
+      "dataset": 7
+    }
+  },
+  {
+    "model": "ensembl_metadata.datasetattribute",
+    "pk": 242,
+    "fields": {
+      "value": "",
+      "attribute": 20,
+      "dataset": 7
+    }
+  },
+  {
+    "model": "ensembl_metadata.datasetattribute",
+    "pk": 243,
+    "fields": {
+      "value": "NCBI",
+      "attribute": 75,
+      "dataset": 7
+    }
+  },
+  {
+    "model": "ensembl_metadata.datasetattribute",
+    "pk": 244,
+    "fields": {
+      "value": "INSDC Assembly ID",
+      "attribute": 76,
+      "dataset": 7
+    }
+  },
+  {
+    "model": "ensembl_metadata.datasetattribute",
+    "pk": 300,
+    "fields": {
+      "value": "GCA_018469415.1",
+      "attribute": 1,
+      "dataset": 9
+    }
+  },
+  {
+    "model": "ensembl_metadata.datasetattribute",
+    "pk": 301,
+    "fields": {
+      "value": "0",
+      "attribute": 2,
+      "dataset": 9
+    }
+  },
+  {
+    "model": "ensembl_metadata.datasetattribute",
+    "pk": 302,
+    "fields": {
+      "value": "369",
+      "attribute": 3,
+      "dataset": 9
+    }
+  },
+  {
+    "model": "ensembl_metadata.datasetattribute",
+    "pk": 303,
+    "fields": {
+      "value": "55482364",
+      "attribute": 4,
+      "dataset": 9
+    }
+  },
+  {
+    "model": "ensembl_metadata.datasetattribute",
+    "pk": 304,
+    "fields": {
+      "value": "high",
+      "attribute": 74,
+      "dataset": 9
+    }
+  },
+  {
+    "model": "ensembl_metadata.datasetattribute",
+    "pk": 305,
+    "fields": {
+      "value": "2021-05",
+      "attribute": 5,
+      "dataset": 9
+    }
+  },
+  {
+    "model": "ensembl_metadata.datasetattribute",
+    "pk": 306,
+    "fields": {
+      "value": "HG03516.alt.pat.f1_v2",
+      "attribute": 6,
+      "dataset": 9
+    }
+  },
+  {
+    "model": "ensembl_metadata.datasetattribute",
+    "pk": 307,
+    "fields": {
+      "value": "40.85",
+      "attribute": 7,
+      "dataset": 9
+    }
+  },
+  {
+    "model": "ensembl_metadata.datasetattribute",
+    "pk": 308,
+    "fields": {
+      "value": "scaffold",
+      "attribute": 9,
+      "dataset": 9
+    }
+  },
+  {
+    "model": "ensembl_metadata.datasetattribute",
+    "pk": 309,
+    "fields": {
+      "value": "HG03516.alt.pat.f1_v2",
+      "attribute": 11,
+      "dataset": 9
+    }
+  },
+  {
+    "model": "ensembl_metadata.datasetattribute",
+    "pk": 310,
+    "fields": {
+      "value": "",
+      "attribute": 12,
+      "dataset": 9
+    }
+  },
+  {
+    "model": "ensembl_metadata.datasetattribute",
+    "pk": 311,
+    "fields": {
+      "value": "",
+      "attribute": 13,
+      "dataset": 9
+    }
+  },
+  {
+    "model": "ensembl_metadata.datasetattribute",
+    "pk": 312,
+    "fields": {
+      "value": "1",
+      "attribute": 14,
+      "dataset": 9
+    }
+  },
+  {
+    "model": "ensembl_metadata.datasetattribute",
+    "pk": 314,
+    "fields": {
+      "value": "369",
+      "attribute": 16,
+      "dataset": 9
+    }
+  },
+  {
+    "model": "ensembl_metadata.datasetattribute",
+    "pk": 315,
+    "fields": {
+      "value": "34407519",
+      "attribute": 17,
+      "dataset": 9
+    }
+  },
+  {
+    "model": "ensembl_metadata.datasetattribute",
+    "pk": 316,
+    "fields": {
+      "value": "26",
+      "attribute": 18,
+      "dataset": 9
+    }
+  },
+  {
+    "model": "ensembl_metadata.datasetattribute",
+    "pk": 317,
+    "fields": {
+      "value": "3067004974",
+      "attribute": 19,
+      "dataset": 9
+    }
+  },
+  {
+    "model": "ensembl_metadata.datasetattribute",
+    "pk": 318,
+    "fields": {
+      "value": "",
+      "attribute": 20,
+      "dataset": 9
+    }
+  },
+  {
+    "model": "ensembl_metadata.datasetattribute",
+    "pk": 319,
+    "fields": {
+      "value": "NCBI",
+      "attribute": 75,
+      "dataset": 9
+    }
+  },
+  {
+    "model": "ensembl_metadata.datasetattribute",
+    "pk": 320,
+    "fields": {
+      "value": "INSDC Assembly ID",
+      "attribute": 76,
+      "dataset": 9
+    }
+  },
+  {
+    "model": "ensembl_metadata.datasetattribute",
+    "pk": 17990,
+    "fields": {
+      "value": "ENA",
+      "attribute": 84,
+      "dataset": 2
+    }
+  },
+  {
+    "model": "ensembl_metadata.datasetattribute",
+    "pk": 17991,
+    "fields": {
+      "value": "https://ebi.ac.uk/ena",
+      "attribute": 85,
+      "dataset": 2
+    }
+  },
+  {
+    "model": "ensembl_metadata.datasetattribute",
+    "pk": 18264,
+    "fields": {
+      "value": "Mouse Genomes Project",
+      "attribute": 84,
+      "dataset": 4
+    }
+  },
+  {
+    "model": "ensembl_metadata.datasetattribute",
+    "pk": 18265,
+    "fields": {
+      "value": "https://www.sanger.ac.uk/data/mouse-genomes-project/",
+      "attribute": 85,
+      "dataset": 4
+    }
+  },
+  {
+    "model": "ensembl_metadata.datasetattribute",
+    "pk": 18767,
+    "fields": {
+      "value": "escherichia_coli_str_k_12_substr_mg1655_gca_000005845",
+      "attribute": 118,
+      "dataset": 2
+    }
+  },
+  {
+    "model": "ensembl_metadata.datasetattribute",
+    "pk": 18768,
+    "fields": {
+      "value": "mus_musculus_cbaj",
+      "attribute": 118,
+      "dataset": 4
+    }
+  },
+  {
+    "model": "ensembl_metadata.datasetattribute",
+    "pk": 19337,
+    "fields": {
+      "value": "2022-06-Ensembl",
+      "attribute": 65,
+      "dataset": 886
+    }
+  },
+  {
+    "model": "ensembl_metadata.datasetattribute",
+    "pk": 19338,
+    "fields": {
+      "value": "",
+      "attribute": 33,
+      "dataset": 886
+    }
+  },
+  {
+    "model": "ensembl_metadata.datasetattribute",
+    "pk": 19339,
+    "fields": {
+      "value": "52",
+      "attribute": 77,
+      "dataset": 886
+    }
+  },
+  {
+    "model": "ensembl_metadata.datasetattribute",
+    "pk": 19340,
+    "fields": {
+      "value": "full_genebuild",
+      "attribute": 37,
+      "dataset": 886
+    }
+  },
+  {
+    "model": "ensembl_metadata.datasetattribute",
+    "pk": 19341,
+    "fields": {
+      "value": "Ensembl Genebuild",
+      "attribute": 38,
+      "dataset": 886
+    }
+  },
+  {
+    "model": "ensembl_metadata.datasetattribute",
+    "pk": 19342,
+    "fields": {
+      "value": "danio_rerio_core_106_11",
+      "attribute": 79,
+      "dataset": 886
+    }
+  },
+  {
+    "model": "ensembl_metadata.datasetattribute",
+    "pk": 19343,
+    "fields": {
+      "value": "toplevel",
+      "attribute": 35,
+      "dataset": 886
+    }
+  },
+  {
+    "model": "ensembl_metadata.datasetattribute",
+    "pk": 19344,
+    "fields": {
+      "value": "2022-10",
+      "attribute": 34,
+      "dataset": 886
+    }
+  },
+  {
+    "model": "ensembl_metadata.datasetattribute",
+    "pk": 19345,
+    "fields": {
+      "value": "ENS01",
+      "attribute": 71,
+      "dataset": 886
+    }
+  },
+  {
+    "model": "ensembl_metadata.datasetattribute",
+    "pk": 19346,
+    "fields": {
+      "value": "20860.24",
+      "attribute": 26,
+      "dataset": 886
+    }
+  },
+  {
+    "model": "ensembl_metadata.datasetattribute",
+    "pk": 19347,
+    "fields": {
+      "value": "693944",
+      "attribute": 67,
+      "dataset": 886
+    }
+  },
+  {
+    "model": "ensembl_metadata.datasetattribute",
+    "pk": 19348,
+    "fields": {
+      "value": "57",
+      "attribute": 64,
+      "dataset": 886
+    }
+  },
+  {
+    "model": "ensembl_metadata.datasetattribute",
+    "pk": 19349,
+    "fields": {
+      "value": "42434",
+      "attribute": 29,
+      "dataset": 886
+    }
+  },
+  {
+    "model": "ensembl_metadata.datasetattribute",
+    "pk": 19350,
+    "fields": {
+      "value": "1549.56",
+      "attribute": 21,
+      "dataset": 886
+    }
+  },
+  {
+    "model": "ensembl_metadata.datasetattribute",
+    "pk": 19351,
+    "fields": {
+      "value": "2473.31",
+      "attribute": 27,
+      "dataset": 886
+    }
+  },
+  {
+    "model": "ensembl_metadata.datasetattribute",
+    "pk": 19352,
+    "fields": {
+      "value": "1415609",
+      "attribute": 36,
+      "dataset": 886
+    }
+  },
+  {
+    "model": "ensembl_metadata.datasetattribute",
+    "pk": 19353,
+    "fields": {
+      "value": "157.48",
+      "attribute": 24,
+      "dataset": 886
+    }
+  },
+  {
+    "model": "ensembl_metadata.datasetattribute",
+    "pk": 19354,
+    "fields": {
+      "value": "1561.97",
+      "attribute": 28,
+      "dataset": 886
+    }
+  },
+  {
+    "model": "ensembl_metadata.datasetattribute",
+    "pk": 19355,
+    "fields": {
+      "value": "70155",
+      "attribute": 30,
+      "dataset": 886
+    }
+  },
+  {
+    "model": "ensembl_metadata.datasetattribute",
+    "pk": 19356,
+    "fields": {
+      "value": "9.84",
+      "attribute": 22,
+      "dataset": 886
+    }
+  },
+  {
+    "model": "ensembl_metadata.datasetattribute",
+    "pk": 19357,
+    "fields": {
+      "value": "70155",
+      "attribute": 69,
+      "dataset": 886
+    }
+  },
+  {
+    "model": "ensembl_metadata.datasetattribute",
+    "pk": 19358,
+    "fields": {
+      "value": "690322",
+      "attribute": 66,
+      "dataset": 886
+    }
+  },
+  {
+    "model": "ensembl_metadata.datasetattribute",
+    "pk": 19359,
+    "fields": {
+      "value": "9.89",
+      "attribute": 23,
+      "dataset": 886
+    }
+  },
+  {
+    "model": "ensembl_metadata.datasetattribute",
+    "pk": 19360,
+    "fields": {
+      "value": "623789",
+      "attribute": 68,
+      "dataset": 886
+    }
+  },
+  {
+    "model": "ensembl_metadata.datasetattribute",
+    "pk": 19361,
+    "fields": {
+      "value": "1.65",
+      "attribute": 70,
+      "dataset": 886
+    }
+  },
+  {
+    "model": "ensembl_metadata.datasetattribute",
+    "pk": 19362,
+    "fields": {
+      "value": "167.88",
+      "attribute": 25,
+      "dataset": 886
+    }
+  },
+  {
+    "model": "ensembl_metadata.datasetattribute",
+    "pk": 19363,
+    "fields": {
+      "value": "1.65",
+      "attribute": 31,
+      "dataset": 886
+    }
+  },
+  {
+    "model": "ensembl_metadata.datasetattribute",
+    "pk": 19364,
+    "fields": {
+      "value": "27",
+      "attribute": 49,
+      "dataset": 886
+    }
+  },
+  {
+    "model": "ensembl_metadata.datasetattribute",
+    "pk": 19365,
+    "fields": {
+      "value": "175.79",
+      "attribute": 41,
+      "dataset": 886
+    }
+  },
+  {
+    "model": "ensembl_metadata.datasetattribute",
+    "pk": 19366,
+    "fields": {
+      "value": "2496",
+      "attribute": 50,
+      "dataset": 886
+    }
+  },
+  {
+    "model": "ensembl_metadata.datasetattribute",
+    "pk": 19367,
+    "fields": {
+      "value": "2388",
+      "attribute": 48,
+      "dataset": 886
+    }
+  },
+  {
+    "model": "ensembl_metadata.datasetattribute",
+    "pk": 19368,
+    "fields": {
+      "value": "4592.67",
+      "attribute": 78,
+      "dataset": 886
+    }
+  },
+  {
+    "model": "ensembl_metadata.datasetattribute",
+    "pk": 19369,
+    "fields": {
+      "value": "141.37",
+      "attribute": 40,
+      "dataset": 886
+    }
+  },
+  {
+    "model": "ensembl_metadata.datasetattribute",
+    "pk": 19370,
+    "fields": {
+      "value": "52214",
+      "attribute": 43,
+      "dataset": 886
+    }
+  },
+  {
+    "model": "ensembl_metadata.datasetattribute",
+    "pk": 19371,
+    "fields": {
+      "value": "1.00",
+      "attribute": 51,
+      "dataset": 886
+    }
+  },
+  {
+    "model": "ensembl_metadata.datasetattribute",
+    "pk": 19372,
+    "fields": {
+      "value": "52",
+      "attribute": 47,
+      "dataset": 886
+    }
+  },
+  {
+    "model": "ensembl_metadata.datasetattribute",
+    "pk": 19373,
+    "fields": {
+      "value": "2495",
+      "attribute": 46,
+      "dataset": 886
+    }
+  },
+  {
+    "model": "ensembl_metadata.datasetattribute",
+    "pk": 19374,
+    "fields": {
+      "value": "40",
+      "attribute": 44,
+      "dataset": 886
+    }
+  },
+  {
+    "model": "ensembl_metadata.datasetattribute",
+    "pk": 19375,
+    "fields": {
+      "value": "1.01",
+      "attribute": 39,
+      "dataset": 886
+    }
+  },
+  {
+    "model": "ensembl_metadata.datasetattribute",
+    "pk": 19376,
+    "fields": {
+      "value": "67",
+      "attribute": 45,
+      "dataset": 886
+    }
+  },
+  {
+    "model": "ensembl_metadata.datasetattribute",
+    "pk": 19377,
+    "fields": {
+      "value": "142.73",
+      "attribute": 42,
+      "dataset": 886
+    }
+  },
+  {
+    "model": "ensembl_metadata.datasetattribute",
+    "pk": 19378,
+    "fields": {
+      "value": "72",
+      "attribute": 59,
+      "dataset": 886
+    }
+  },
+  {
+    "model": "ensembl_metadata.datasetattribute",
+    "pk": 19379,
+    "fields": {
+      "value": "1513.25",
+      "attribute": 56,
+      "dataset": 886
+    }
+  },
+  {
+    "model": "ensembl_metadata.datasetattribute",
+    "pk": 19380,
+    "fields": {
+      "value": "6725",
+      "attribute": 61,
+      "dataset": 886
+    }
+  },
+  {
+    "model": "ensembl_metadata.datasetattribute",
+    "pk": 19381,
+    "fields": {
+      "value": "8.91",
+      "attribute": 52,
+      "dataset": 886
+    }
+  },
+  {
+    "model": "ensembl_metadata.datasetattribute",
+    "pk": 19382,
+    "fields": {
+      "value": "850",
+      "attribute": 62,
+      "dataset": 886
+    }
+  },
+  {
+    "model": "ensembl_metadata.datasetattribute",
+    "pk": 19383,
+    "fields": {
+      "value": "494396",
+      "attribute": 57,
+      "dataset": 886
+    }
+  },
+  {
+    "model": "ensembl_metadata.datasetattribute",
+    "pk": 19384,
+    "fields": {
+      "value": "7575",
+      "attribute": 60,
+      "dataset": 886
+    }
+  },
+  {
+    "model": "ensembl_metadata.datasetattribute",
+    "pk": 19385,
+    "fields": {
+      "value": "11910.06",
+      "attribute": 54,
+      "dataset": 886
+    }
+  },
+  {
+    "model": "ensembl_metadata.datasetattribute",
+    "pk": 19386,
+    "fields": {
+      "value": "850",
+      "attribute": 58,
+      "dataset": 886
+    }
+  },
+  {
+    "model": "ensembl_metadata.datasetattribute",
+    "pk": 19387,
+    "fields": {
+      "value": "1314.09",
+      "attribute": 55,
+      "dataset": 886
+    }
+  },
+  {
+    "model": "ensembl_metadata.datasetattribute",
+    "pk": 19388,
+    "fields": {
+      "value": "169.80",
+      "attribute": 53,
+      "dataset": 886
+    }
+  },
+  {
+    "model": "ensembl_metadata.datasetattribute",
+    "pk": 19389,
+    "fields": {
+      "value": "1.00",
+      "attribute": 63,
+      "dataset": 886
+    }
+  },
+  {
+    "model": "ensembl_metadata.datasetattribute",
+    "pk": 19390,
+    "fields": {
+      "value": "ENSSSAG00070000036",
+      "attribute": 72,
+      "dataset": 886
+    }
+  },
+  {
+    "model": "ensembl_metadata.datasetattribute",
+    "pk": 19391,
+    "fields": {
+      "value": "ssa01:172826853-172847849",
+      "attribute": 73,
+      "dataset": 886
+    }
+  },
+  {
+    "model": "ensembl_metadata.datasetattribute",
+    "pk": 19392,
+    "fields": {
+      "value": "salmo_salar_gca931346935v2",
+      "attribute": 118,
+      "dataset": 886
+    }
+  },
+  {
+    "model": "ensembl_metadata.datasetattribute",
+    "pk": 19449,
+    "fields": {
+      "value": "2022-08-Ensembl",
+      "attribute": 65,
+      "dataset": 888
+    }
+  },
+  {
+    "model": "ensembl_metadata.datasetattribute",
+    "pk": 19450,
+    "fields": {
+      "value": "2022-08",
+      "attribute": 33,
+      "dataset": 888
+    }
+  },
+  {
+    "model": "ensembl_metadata.datasetattribute",
+    "pk": 19451,
+    "fields": {
+      "value": "homo_sapiens_core_104_38",
+      "attribute": 79,
+      "dataset": 888
+    }
+  },
+  {
+    "model": "ensembl_metadata.datasetattribute",
+    "pk": 19452,
+    "fields": {
+      "value": "51",
+      "attribute": 77,
+      "dataset": 888
+    }
+  },
+  {
+    "model": "ensembl_metadata.datasetattribute",
+    "pk": 19453,
+    "fields": {
+      "value": "projection_build",
+      "attribute": 37,
+      "dataset": 888
+    }
+  },
+  {
+    "model": "ensembl_metadata.datasetattribute",
+    "pk": 19454,
+    "fields": {
+      "value": "toplevel",
+      "attribute": 35,
+      "dataset": 888
+    }
+  },
+  {
+    "model": "ensembl_metadata.datasetattribute",
+    "pk": 19455,
+    "fields": {
+      "value": "2022-08",
+      "attribute": 34,
+      "dataset": 888
+    }
+  },
+  {
+    "model": "ensembl_metadata.datasetattribute",
+    "pk": 19456,
+    "fields": {
+      "value": "Mapping from GRCh38",
+      "attribute": 38,
+      "dataset": 888
+    }
+  },
+  {
+    "model": "ensembl_metadata.datasetattribute",
+    "pk": 19457,
+    "fields": {
+      "value": "ENS01",
+      "attribute": 71,
+      "dataset": 888
+    }
+  },
+  {
+    "model": "ensembl_metadata.datasetattribute",
+    "pk": 19458,
+    "fields": {
+      "value": "66396.37",
+      "attribute": 26,
+      "dataset": 888
+    }
+  },
+  {
+    "model": "ensembl_metadata.datasetattribute",
+    "pk": 19459,
+    "fields": {
+      "value": "1249855",
+      "attribute": 67,
+      "dataset": 888
+    }
+  },
+  {
+    "model": "ensembl_metadata.datasetattribute",
+    "pk": 19460,
+    "fields": {
+      "value": "8",
+      "attribute": 64,
+      "dataset": 888
+    }
+  },
+  {
+    "model": "ensembl_metadata.datasetattribute",
+    "pk": 19461,
+    "fields": {
+      "value": "19817",
+      "attribute": 29,
+      "dataset": 888
+    }
+  },
+  {
+    "model": "ensembl_metadata.datasetattribute",
+    "pk": 19462,
+    "fields": {
+      "value": "1165.04",
+      "attribute": 21,
+      "dataset": 888
+    }
+  },
+  {
+    "model": "ensembl_metadata.datasetattribute",
+    "pk": 19463,
+    "fields": {
+      "value": "6207.11",
+      "attribute": 27,
+      "dataset": 888
+    }
+  },
+  {
+    "model": "ensembl_metadata.datasetattribute",
+    "pk": 19464,
+    "fields": {
+      "value": "2474345",
+      "attribute": 36,
+      "dataset": 888
+    }
+  },
+  {
+    "model": "ensembl_metadata.datasetattribute",
+    "pk": 19465,
+    "fields": {
+      "value": "149.33",
+      "attribute": 24,
+      "dataset": 888
+    }
+  },
+  {
+    "model": "ensembl_metadata.datasetattribute",
+    "pk": 19466,
+    "fields": {
+      "value": "3483.73",
+      "attribute": 28,
+      "dataset": 888
+    }
+  },
+  {
+    "model": "ensembl_metadata.datasetattribute",
+    "pk": 19467,
+    "fields": {
+      "value": "104548",
+      "attribute": 30,
+      "dataset": 888
+    }
+  },
+  {
+    "model": "ensembl_metadata.datasetattribute",
+    "pk": 19468,
+    "fields": {
+      "value": "7.80",
+      "attribute": 22,
+      "dataset": 888
+    }
+  },
+  {
+    "model": "ensembl_metadata.datasetattribute",
+    "pk": 19469,
+    "fields": {
+      "value": "160335",
+      "attribute": 69,
+      "dataset": 888
+    }
+  },
+  {
+    "model": "ensembl_metadata.datasetattribute",
+    "pk": 19470,
+    "fields": {
+      "value": "815604",
+      "attribute": 66,
+      "dataset": 888
+    }
+  },
+  {
+    "model": "ensembl_metadata.datasetattribute",
+    "pk": 19471,
+    "fields": {
+      "value": "7.80",
+      "attribute": 23,
+      "dataset": 888
+    }
+  },
+  {
+    "model": "ensembl_metadata.datasetattribute",
+    "pk": 19472,
+    "fields": {
+      "value": "1089520",
+      "attribute": 68,
+      "dataset": 888
+    }
+  },
+  {
+    "model": "ensembl_metadata.datasetattribute",
+    "pk": 19473,
+    "fields": {
+      "value": "8.09",
+      "attribute": 70,
+      "dataset": 888
+    }
+  },
+  {
+    "model": "ensembl_metadata.datasetattribute",
+    "pk": 19474,
+    "fields": {
+      "value": "247.32",
+      "attribute": 25,
+      "dataset": 888
+    }
+  },
+  {
+    "model": "ensembl_metadata.datasetattribute",
+    "pk": 19475,
+    "fields": {
+      "value": "5.28",
+      "attribute": 31,
+      "dataset": 888
+    }
+  },
+  {
+    "model": "ensembl_metadata.datasetattribute",
+    "pk": 19476,
+    "fields": {
+      "value": "124766",
+      "attribute": 49,
+      "dataset": 888
+    }
+  },
+  {
+    "model": "ensembl_metadata.datasetattribute",
+    "pk": 19477,
+    "fields": {
+      "value": "21667.77",
+      "attribute": 41,
+      "dataset": 888
+    }
+  },
+  {
+    "model": "ensembl_metadata.datasetattribute",
+    "pk": 19478,
+    "fields": {
+      "value": "54475",
+      "attribute": 50,
+      "dataset": 888
+    }
+  },
+  {
+    "model": "ensembl_metadata.datasetattribute",
+    "pk": 19479,
+    "fields": {
+      "value": "5022",
+      "attribute": 48,
+      "dataset": 888
+    }
+  },
+  {
+    "model": "ensembl_metadata.datasetattribute",
+    "pk": 19480,
+    "fields": {
+      "value": "16165.01",
+      "attribute": 78,
+      "dataset": 888
+    }
+  },
+  {
+    "model": "ensembl_metadata.datasetattribute",
+    "pk": 19481,
+    "fields": {
+      "value": "351.62",
+      "attribute": 40,
+      "dataset": 888
+    }
+  },
+  {
+    "model": "ensembl_metadata.datasetattribute",
+    "pk": 19482,
+    "fields": {
+      "value": "1375744",
+      "attribute": 43,
+      "dataset": 888
+    }
+  },
+  {
+    "model": "ensembl_metadata.datasetattribute",
+    "pk": 19483,
+    "fields": {
+      "value": "2.22",
+      "attribute": 51,
+      "dataset": 888
+    }
+  },
+  {
+    "model": "ensembl_metadata.datasetattribute",
+    "pk": 19484,
+    "fields": {
+      "value": "4",
+      "attribute": 47,
+      "dataset": 888
+    }
+  },
+  {
+    "model": "ensembl_metadata.datasetattribute",
+    "pk": 19485,
+    "fields": {
+      "value": "24486",
+      "attribute": 46,
+      "dataset": 888
+    }
+  },
+  {
+    "model": "ensembl_metadata.datasetattribute",
+    "pk": 19486,
+    "fields": {
+      "value": "17147",
+      "attribute": 44,
+      "dataset": 888
+    }
+  },
+  {
+    "model": "ensembl_metadata.datasetattribute",
+    "pk": 19487,
+    "fields": {
+      "value": "3.29",
+      "attribute": 39,
+      "dataset": 888
+    }
+  },
+  {
+    "model": "ensembl_metadata.datasetattribute",
+    "pk": 19488,
+    "fields": {
+      "value": "2317",
+      "attribute": 45,
+      "dataset": 888
+    }
+  },
+  {
+    "model": "ensembl_metadata.datasetattribute",
+    "pk": 19489,
+    "fields": {
+      "value": "1072.40",
+      "attribute": 42,
+      "dataset": 888
+    }
+  },
+  {
+    "model": "ensembl_metadata.datasetattribute",
+    "pk": 19490,
+    "fields": {
+      "value": "1",
+      "attribute": 59,
+      "dataset": 888
+    }
+  },
+  {
+    "model": "ensembl_metadata.datasetattribute",
+    "pk": 19491,
+    "fields": {
+      "value": "812.34",
+      "attribute": 56,
+      "dataset": 888
+    }
+  },
+  {
+    "model": "ensembl_metadata.datasetattribute",
+    "pk": 19492,
+    "fields": {
+      "value": "26562",
+      "attribute": 61,
+      "dataset": 888
+    }
+  },
+  {
+    "model": "ensembl_metadata.datasetattribute",
+    "pk": 19493,
+    "fields": {
+      "value": "2.38",
+      "attribute": 52,
+      "dataset": 888
+    }
+  },
+  {
+    "model": "ensembl_metadata.datasetattribute",
+    "pk": 19494,
+    "fields": {
+      "value": "19198",
+      "attribute": 62,
+      "dataset": 888
+    }
+  },
+  {
+    "model": "ensembl_metadata.datasetattribute",
+    "pk": 19495,
+    "fields": {
+      "value": "909639",
+      "attribute": 57,
+      "dataset": 888
+    }
+  },
+  {
+    "model": "ensembl_metadata.datasetattribute",
+    "pk": 19496,
+    "fields": {
+      "value": "45760",
+      "attribute": 60,
+      "dataset": 888
+    }
+  },
+  {
+    "model": "ensembl_metadata.datasetattribute",
+    "pk": 19497,
+    "fields": {
+      "value": "4206.69",
+      "attribute": 54,
+      "dataset": 888
+    }
+  },
+  {
+    "model": "ensembl_metadata.datasetattribute",
+    "pk": 19498,
+    "fields": {
+      "value": "15765",
+      "attribute": 58,
+      "dataset": 888
+    }
+  },
+  {
+    "model": "ensembl_metadata.datasetattribute",
+    "pk": 19499,
+    "fields": {
+      "value": "4322.62",
+      "attribute": 55,
+      "dataset": 888
+    }
+  },
+  {
+    "model": "ensembl_metadata.datasetattribute",
+    "pk": 19500,
+    "fields": {
+      "value": "354.81",
+      "attribute": 53,
+      "dataset": 888
+    }
+  },
+  {
+    "model": "ensembl_metadata.datasetattribute",
+    "pk": 19501,
+    "fields": {
+      "value": "1.22",
+      "attribute": 63,
+      "dataset": 888
+    }
+  },
+  {
+    "model": "ensembl_metadata.datasetattribute",
+    "pk": 19502,
+    "fields": {
+      "value": "ENSG05120001951",
+      "attribute": 72,
+      "dataset": 888
+    }
+  },
+  {
+    "model": "ensembl_metadata.datasetattribute",
+    "pk": 19503,
+    "fields": {
+      "value": "JAGYVY010000080.1:48379824-48851541",
+      "attribute": 73,
+      "dataset": 888
+    }
+  },
+  {
+    "model": "ensembl_metadata.datasetattribute",
+    "pk": 19504,
+    "fields": {
+      "value": "homo_sapiens_gca018473315v1",
+      "attribute": 118,
+      "dataset": 888
+    }
+  },
+  {
+    "model": "ensembl_metadata.datasetattribute",
+    "pk": 19561,
+    "fields": {
+      "value": "2022-08-Ensembl",
+      "attribute": 65,
+      "dataset": 890
+    }
+  },
+  {
+    "model": "ensembl_metadata.datasetattribute",
+    "pk": 19562,
+    "fields": {
+      "value": "2022-08",
+      "attribute": 33,
+      "dataset": 890
+    }
+  },
+  {
+    "model": "ensembl_metadata.datasetattribute",
+    "pk": 19563,
+    "fields": {
+      "value": "2022-07",
+      "attribute": 34,
+      "dataset": 890
+    }
+  },
+  {
+    "model": "ensembl_metadata.datasetattribute",
+    "pk": 19564,
+    "fields": {
+      "value": "homo_sapiens_core_104_38",
+      "attribute": 79,
+      "dataset": 890
+    }
+  },
+  {
+    "model": "ensembl_metadata.datasetattribute",
+    "pk": 19565,
+    "fields": {
+      "value": "32",
+      "attribute": 77,
+      "dataset": 890
+    }
+  },
+  {
+    "model": "ensembl_metadata.datasetattribute",
+    "pk": 19566,
+    "fields": {
+      "value": "projection_build",
+      "attribute": 37,
+      "dataset": 890
+    }
+  },
+  {
+    "model": "ensembl_metadata.datasetattribute",
+    "pk": 19567,
+    "fields": {
+      "value": "Mapping from GRCh38",
+      "attribute": 38,
+      "dataset": 890
+    }
+  },
+  {
+    "model": "ensembl_metadata.datasetattribute",
+    "pk": 19568,
+    "fields": {
+      "value": "toplevel",
+      "attribute": 35,
+      "dataset": 890
+    }
+  },
+  {
+    "model": "ensembl_metadata.datasetattribute",
+    "pk": 19569,
+    "fields": {
+      "value": "ENS01",
+      "attribute": 71,
+      "dataset": 890
+    }
+  },
+  {
+    "model": "ensembl_metadata.datasetattribute",
+    "pk": 19570,
+    "fields": {
+      "value": "65822.11",
+      "attribute": 26,
+      "dataset": 890
+    }
+  },
+  {
+    "model": "ensembl_metadata.datasetattribute",
+    "pk": 19571,
+    "fields": {
+      "value": "1251612",
+      "attribute": 67,
+      "dataset": 890
+    }
+  },
+  {
+    "model": "ensembl_metadata.datasetattribute",
+    "pk": 19572,
+    "fields": {
+      "value": "8",
+      "attribute": 64,
+      "dataset": 890
+    }
+  },
+  {
+    "model": "ensembl_metadata.datasetattribute",
+    "pk": 19573,
+    "fields": {
+      "value": "20001",
+      "attribute": 29,
+      "dataset": 890
+    }
+  },
+  {
+    "model": "ensembl_metadata.datasetattribute",
+    "pk": 19574,
+    "fields": {
+      "value": "1164.93",
+      "attribute": 21,
+      "dataset": 890
+    }
+  },
+  {
+    "model": "ensembl_metadata.datasetattribute",
+    "pk": 19575,
+    "fields": {
+      "value": "6207.47",
+      "attribute": 27,
+      "dataset": 890
+    }
+  },
+  {
+    "model": "ensembl_metadata.datasetattribute",
+    "pk": 19576,
+    "fields": {
+      "value": "2476271",
+      "attribute": 36,
+      "dataset": 890
+    }
+  },
+  {
+    "model": "ensembl_metadata.datasetattribute",
+    "pk": 19577,
+    "fields": {
+      "value": "149.32",
+      "attribute": 24,
+      "dataset": 890
+    }
+  },
+  {
+    "model": "ensembl_metadata.datasetattribute",
+    "pk": 19578,
+    "fields": {
+      "value": "3468.98",
+      "attribute": 28,
+      "dataset": 890
+    }
+  },
+  {
+    "model": "ensembl_metadata.datasetattribute",
+    "pk": 19579,
+    "fields": {
+      "value": "104773",
+      "attribute": 30,
+      "dataset": 890
+    }
+  },
+  {
+    "model": "ensembl_metadata.datasetattribute",
+    "pk": 19580,
+    "fields": {
+      "value": "7.80",
+      "attribute": 22,
+      "dataset": 890
+    }
+  },
+  {
+    "model": "ensembl_metadata.datasetattribute",
+    "pk": 19581,
+    "fields": {
+      "value": "160574",
+      "attribute": 69,
+      "dataset": 890
+    }
+  },
+  {
+    "model": "ensembl_metadata.datasetattribute",
+    "pk": 19582,
+    "fields": {
+      "value": "817342",
+      "attribute": 66,
+      "dataset": 890
+    }
+  },
+  {
+    "model": "ensembl_metadata.datasetattribute",
+    "pk": 19583,
+    "fields": {
+      "value": "7.79",
+      "attribute": 23,
+      "dataset": 890
+    }
+  },
+  {
+    "model": "ensembl_metadata.datasetattribute",
+    "pk": 19584,
+    "fields": {
+      "value": "1091038",
+      "attribute": 68,
+      "dataset": 890
+    }
+  },
+  {
+    "model": "ensembl_metadata.datasetattribute",
+    "pk": 19585,
+    "fields": {
+      "value": "8.03",
+      "attribute": 70,
+      "dataset": 890
+    }
+  },
+  {
+    "model": "ensembl_metadata.datasetattribute",
+    "pk": 19586,
+    "fields": {
+      "value": "247.26",
+      "attribute": 25,
+      "dataset": 890
+    }
+  },
+  {
+    "model": "ensembl_metadata.datasetattribute",
+    "pk": 19587,
+    "fields": {
+      "value": "5.24",
+      "attribute": 31,
+      "dataset": 890
+    }
+  },
+  {
+    "model": "ensembl_metadata.datasetattribute",
+    "pk": 19588,
+    "fields": {
+      "value": "126332",
+      "attribute": 49,
+      "dataset": 890
+    }
+  },
+  {
+    "model": "ensembl_metadata.datasetattribute",
+    "pk": 19589,
+    "fields": {
+      "value": "21716.60",
+      "attribute": 41,
+      "dataset": 890
+    }
+  },
+  {
+    "model": "ensembl_metadata.datasetattribute",
+    "pk": 19590,
+    "fields": {
+      "value": "54889",
+      "attribute": 50,
+      "dataset": 890
+    }
+  },
+  {
+    "model": "ensembl_metadata.datasetattribute",
+    "pk": 19591,
+    "fields": {
+      "value": "5059",
+      "attribute": 48,
+      "dataset": 890
+    }
+  },
+  {
+    "model": "ensembl_metadata.datasetattribute",
+    "pk": 19592,
+    "fields": {
+      "value": "16089.73",
+      "attribute": 78,
+      "dataset": 890
+    }
+  },
+  {
+    "model": "ensembl_metadata.datasetattribute",
+    "pk": 19593,
+    "fields": {
+      "value": "350.41",
+      "attribute": 40,
+      "dataset": 890
+    }
+  },
+  {
+    "model": "ensembl_metadata.datasetattribute",
+    "pk": 19594,
+    "fields": {
+      "value": "1375866",
+      "attribute": 43,
+      "dataset": 890
+    }
+  },
+  {
+    "model": "ensembl_metadata.datasetattribute",
+    "pk": 19595,
+    "fields": {
+      "value": "2.24",
+      "attribute": 51,
+      "dataset": 890
+    }
+  },
+  {
+    "model": "ensembl_metadata.datasetattribute",
+    "pk": 19596,
+    "fields": {
+      "value": "4",
+      "attribute": 47,
+      "dataset": 890
+    }
+  },
+  {
+    "model": "ensembl_metadata.datasetattribute",
+    "pk": 19597,
+    "fields": {
+      "value": "24520",
+      "attribute": 46,
+      "dataset": 890
+    }
+  },
+  {
+    "model": "ensembl_metadata.datasetattribute",
+    "pk": 19598,
+    "fields": {
+      "value": "17159",
+      "attribute": 44,
+      "dataset": 890
+    }
+  },
+  {
+    "model": "ensembl_metadata.datasetattribute",
+    "pk": 19599,
+    "fields": {
+      "value": "3.30",
+      "attribute": 39,
+      "dataset": 890
+    }
+  },
+  {
+    "model": "ensembl_metadata.datasetattribute",
+    "pk": 19600,
+    "fields": {
+      "value": "2302",
+      "attribute": 45,
+      "dataset": 890
+    }
+  },
+  {
+    "model": "ensembl_metadata.datasetattribute",
+    "pk": 19601,
+    "fields": {
+      "value": "1073.22",
+      "attribute": 42,
+      "dataset": 890
+    }
+  },
+  {
+    "model": "ensembl_metadata.datasetattribute",
+    "pk": 19602,
+    "fields": {
+      "value": "2",
+      "attribute": 59,
+      "dataset": 890
+    }
+  },
+  {
+    "model": "ensembl_metadata.datasetattribute",
+    "pk": 19603,
+    "fields": {
+      "value": "807.20",
+      "attribute": 56,
+      "dataset": 890
+    }
+  },
+  {
+    "model": "ensembl_metadata.datasetattribute",
+    "pk": 19604,
+    "fields": {
+      "value": "26643",
+      "attribute": 61,
+      "dataset": 890
+    }
+  },
+  {
+    "model": "ensembl_metadata.datasetattribute",
+    "pk": 19605,
+    "fields": {
+      "value": "2.38",
+      "attribute": 52,
+      "dataset": 890
+    }
+  },
+  {
+    "model": "ensembl_metadata.datasetattribute",
+    "pk": 19606,
+    "fields": {
+      "value": "19270",
+      "attribute": 62,
+      "dataset": 890
+    }
+  },
+  {
+    "model": "ensembl_metadata.datasetattribute",
+    "pk": 19607,
+    "fields": {
+      "value": "909729",
+      "attribute": 57,
+      "dataset": 890
+    }
+  },
+  {
+    "model": "ensembl_metadata.datasetattribute",
+    "pk": 19608,
+    "fields": {
+      "value": "45913",
+      "attribute": 60,
+      "dataset": 890
+    }
+  },
+  {
+    "model": "ensembl_metadata.datasetattribute",
+    "pk": 19609,
+    "fields": {
+      "value": "4193.05",
+      "attribute": 54,
+      "dataset": 890
+    }
+  },
+  {
+    "model": "ensembl_metadata.datasetattribute",
+    "pk": 19610,
+    "fields": {
+      "value": "15791",
+      "attribute": 58,
+      "dataset": 890
+    }
+  },
+  {
+    "model": "ensembl_metadata.datasetattribute",
+    "pk": 19611,
+    "fields": {
+      "value": "4272.46",
+      "attribute": 55,
+      "dataset": 890
+    }
+  },
+  {
+    "model": "ensembl_metadata.datasetattribute",
+    "pk": 19612,
+    "fields": {
+      "value": "352.72",
+      "attribute": 53,
+      "dataset": 890
+    }
+  },
+  {
+    "model": "ensembl_metadata.datasetattribute",
+    "pk": 19613,
+    "fields": {
+      "value": "1.22",
+      "attribute": 63,
+      "dataset": 890
+    }
+  },
+  {
+    "model": "ensembl_metadata.datasetattribute",
+    "pk": 19614,
+    "fields": {
+      "value": "ENSG04880041724",
+      "attribute": 72,
+      "dataset": 890
+    }
+  },
+  {
+    "model": "ensembl_metadata.datasetattribute",
+    "pk": 19615,
+    "fields": {
+      "value": "JAGYYT010000009.1:63142321-63447379",
+      "attribute": 73,
+      "dataset": 890
+    }
+  },
+  {
+    "model": "ensembl_metadata.datasetattribute",
+    "pk": 19616,
+    "fields": {
+      "value": "homo_sapiens_gca018469415v1",
+      "attribute": 118,
+      "dataset": 890
+    }
+  },
+  {
+    "model": "ensembl_metadata.datasetattribute",
+    "pk": 26761,
+    "fields": {
+      "value": "1054338571",
+      "attribute": 119,
+      "dataset": 1475
+    }
+  },
+  {
+    "model": "ensembl_metadata.datasetattribute",
+    "pk": 26762,
+    "fields": {
+      "value": "JAGYVY010000001.1:710982:rs1737833592",
+      "attribute": 120,
+      "dataset": 1475
+    }
+  },
+  {
+    "model": "ensembl_metadata.datasetattribute",
+    "pk": 26825,
+    "fields": {
+      "value": "1054887454",
+      "attribute": 119,
+      "dataset": 1507
+    }
+  },
+  {
+    "model": "ensembl_metadata.datasetattribute",
+    "pk": 26826,
+    "fields": {
+      "value": "JAGYYT010000001.1:2643538:rs1423484253",
+      "attribute": 120,
+      "dataset": 1507
+    }
+  },
+  {
+    "model": "ensembl_metadata.datasetattribute",
+    "pk": 28122,
+    "fields": {
+      "value": "Pan troglodytes",
+      "attribute": 162,
+      "dataset": 2276
+    }
+  },
+  {
+    "model": "ensembl_metadata.datasetattribute",
+    "pk": 28123,
+    "fields": {
+      "value": "91.2",
+      "attribute": 161,
+      "dataset": 2276
+    }
+  },
+  {
+    "model": "ensembl_metadata.datasetattribute",
+    "pk": 28254,
+    "fields": {
+      "value": "Oreochromis niloticus",
+      "attribute": 162,
+      "dataset": 2342
+    }
+  },
+  {
+    "model": "ensembl_metadata.datasetattribute",
+    "pk": 28255,
+    "fields": {
+      "value": "40.4",
+      "attribute": 161,
+      "dataset": 2342
+    }
+  },
+  {
+    "model": "ensembl_metadata.datasetattribute",
+    "pk": 28280,
+    "fields": {
+      "value": "Rattus norvegicus",
+      "attribute": 162,
+      "dataset": 2355
+    }
+  },
+  {
+    "model": "ensembl_metadata.datasetattribute",
+    "pk": 28281,
+    "fields": {
+      "value": "86.0",
+      "attribute": 161,
+      "dataset": 2355
+    }
+  },
+  {
+    "model": "ensembl_metadata.datasetattribute",
+    "pk": 28386,
+    "fields": {
+      "value": "Pan troglodytes",
+      "attribute": 162,
+      "dataset": 2408
+    }
+  },
+  {
+    "model": "ensembl_metadata.datasetattribute",
+    "pk": 28387,
+    "fields": {
+      "value": "90.6",
+      "attribute": 161,
+      "dataset": 2408
+    }
+  },
+  {
+    "model": "ensembl_metadata.datasetattribute",
+    "pk": 28486,
+    "fields": {
+      "value": "Saccharomyces cerevisiae S288c",
+      "attribute": 162,
+      "dataset": 2458
+    }
+  },
+  {
+    "model": "ensembl_metadata.datasetattribute",
+    "pk": 28487,
+    "fields": {
+      "value": "10.3",
+      "attribute": 161,
+      "dataset": 2458
+    }
+  },
+  {
+    "model": "ensembl_metadata.datasetattribute",
+    "pk": 28618,
+    "fields": {
+      "value": "https://rapid.ensembl.org/info/genome/genebuild/full_genebuild.html",
+      "attribute": 85,
+      "dataset": 886
+    }
+  },
+  {
+    "model": "ensembl_metadata.datasetattribute",
+    "pk": 28619,
+    "fields": {
+      "value": "https://projects.ensembl.org/hprc/",
+      "attribute": 85,
+      "dataset": 888
+    }
+  },
+  {
+    "model": "ensembl_metadata.datasetattribute",
+    "pk": 28620,
+    "fields": {
+      "value": "https://projects.ensembl.org/hprc/",
+      "attribute": 85,
+      "dataset": 890
+    }
+  },
+  {
+    "model": "ensembl_metadata.datasetattribute",
+    "pk": 28684,
+    "fields": {
+      "value": "Ensembl",
+      "attribute": 84,
+      "dataset": 890
+    }
+  },
+  {
+    "model": "ensembl_metadata.datasetattribute",
+    "pk": 28698,
+    "fields": {
+      "value": "Ensembl",
+      "attribute": 84,
+      "dataset": 888
+    }
+  },
+  {
+    "model": "ensembl_metadata.datasetattribute",
+    "pk": 28731,
+    "fields": {
+      "value": "Ensembl",
+      "attribute": 84,
+      "dataset": 886
+    }
+  },
+  {
+    "model": "ensembl_metadata.datasetsource",
+    "pk": 1,
+    "fields": {
+      "type": "core",
+      "name": "bacteria_0_collection_core_57_110_1"
+    }
+  },
+  {
+    "model": "ensembl_metadata.datasetsource",
+    "pk": 2,
+    "fields": {
+      "type": "core",
+      "name": "mus_musculus_cbaj_core_110_1"
+    }
+  },
+  {
+    "model": "ensembl_metadata.datasetsource",
+    "pk": 3,
+    "fields": {
+      "type": "core",
+      "name": "salmo_salar_gca931346935v2_core_110_1"
+    }
+  },
+  {
+    "model": "ensembl_metadata.datasetsource",
+    "pk": 4,
+    "fields": {
+      "type": "core",
+      "name": "homo_sapiens_gca018473315v1_core_110_1"
+    }
+  },
+  {
+    "model": "ensembl_metadata.datasetsource",
+    "pk": 5,
+    "fields": {
+      "type": "core",
+      "name": "homo_sapiens_gca018469415v1_core_110_1"
+    }
+  },
+  {
+    "model": "ensembl_metadata.datasetsource",
+    "pk": 251,
+    "fields": {
+      "type": "compara",
+      "name": "homo_sapiens_gca018473315v1_compara_110"
+    }
+  },
+  {
+    "model": "ensembl_metadata.datasetsource",
+    "pk": 317,
+    "fields": {
+      "type": "compara",
+      "name": "salmo_salar_gca931346935v2_compara_110"
+    }
+  },
+  {
+    "model": "ensembl_metadata.datasetsource",
+    "pk": 330,
+    "fields": {
+      "type": "compara",
+      "name": "mus_musculus_cbaj_compara_110"
+    }
+  },
+  {
+    "model": "ensembl_metadata.datasetsource",
+    "pk": 383,
+    "fields": {
+      "type": "compara",
+      "name": "homo_sapiens_gca018469415v1_compara_110"
+    }
+  },
+  {
+    "model": "ensembl_metadata.datasetsource",
+    "pk": 433,
+    "fields": {
+      "type": "compara",
+      "name": "escherichia_coli_str_k_12_substr_mg1655_gca_000005845_compara_110"
+    }
+  },
+  {
+    "model": "ensembl_metadata.datasetsource",
+    "pk": 576,
+    "fields": {
+      "type": "vcf",
+      "name": "/nfs/production/flicek/ensembl/variation/new_website/v110/api/9caa2cae-d1c8-4cfc-9ffd-2e13bc3e95b1/variation.vcf.gz"
+    }
+  },
+  {
+    "model": "ensembl_metadata.datasetsource",
+    "pk": 608,
+    "fields": {
+      "type": "vcf",
+      "name": "/nfs/production/flicek/ensembl/variation/new_website/v110/api/2020e8d5-4d87-47af-be78-0b15e48970a7/variation.vcf.gz"
+    }
+  },
+  {
+    "model": "ensembl_metadata.datasettype",
+    "pk": 1,
+    "fields": {
+      "name": "assembly",
+      "label": "Genomic assembly",
+      "topic": "core_annotation",
+      "description": "Compilation of sequences for a genome",
+      "details_uri": null,
+      "parent": null,
+      "depends_on": null,
+      "filter_on": null
+    }
+  },
+  {
+    "model": "ensembl_metadata.datasettype",
+    "pk": 2,
+    "fields": {
+      "name": "genebuild",
+      "label": "Genomic Build",
+      "topic": "core_annotation",
+      "description": "Genomic annotations for an assembly",
+      "details_uri": null,
+      "parent": null,
+      "depends_on": null,
+      "filter_on": null
+    }
+  },
+  {
+    "model": "ensembl_metadata.datasettype",
+    "pk": 3,
+    "fields": {
+      "name": "variation",
+      "label": "mRatBN7.2",
+      "topic": "variation_annotation",
+      "description": "Short variant data",
+      "details_uri": null,
+      "parent": null,
+      "depends_on": null,
+      "filter_on": null
+    }
+  },
+  {
+    "model": "ensembl_metadata.datasettype",
+    "pk": 4,
+    "fields": {
+      "name": "evidence",
+      "label": "Variation Evidence",
+      "topic": "variation_annotation",
+      "description": "Variation evidence annotation",
+      "details_uri": null,
+      "parent": null,
+      "depends_on": null,
+      "filter_on": null
+    }
+  },
+  {
+    "model": "ensembl_metadata.datasettype",
+    "pk": 5,
+    "fields": {
+      "name": "core_compute",
+      "label": "Core Database Computation",
+      "topic": "production_process",
+      "description": "Core Database initial Compute",
+      "details_uri": null,
+      "parent": 1,
+      "depends_on": null,
+      "filter_on": null
+    }
+  },
+  {
+    "model": "ensembl_metadata.datasettype",
+    "pk": 6,
+    "fields": {
+      "name": "homologies",
+      "label": "Comparative homologies",
+      "topic": "compara_annotation",
+      "description": "Comparative Genomics annotation",
+      "details_uri": null,
+      "parent": null,
+      "depends_on": "2",
+      "filter_on": null
+    }
+  },
+  {
+    "model": "ensembl_metadata.datasettype",
+    "pk": 7,
+    "fields": {
+      "name": "regulatory_features",
+      "label": "Regulatory Annotation",
+      "topic": "regulation_annotation",
+      "description": "Regulatory annotation for an assembly",
+      "details_uri": null,
+      "parent": null,
+      "depends_on": null,
+      "filter_on": null
+    }
+  },
+  {
+    "model": "ensembl_metadata.datasettype",
+    "pk": 8,
+    "fields": {
+      "name": "core_compute",
+      "label": "External References",
+      "topic": "production_process",
+      "description": "Xref genome annotation for Genebuild",
+      "details_uri": null,
+      "parent": 2,
+      "depends_on": null,
+      "filter_on": null
+    }
+  },
+  {
+    "model": "ensembl_metadata.datasettype",
+    "pk": 9,
+    "fields": {
+      "name": "dumps",
+      "label": "Files dumps",
+      "topic": "production_process",
+      "description": "File Dumps, either internal or for public consumption",
+      "details_uri": null,
+      "parent": 2,
+      "depends_on": "8",
+      "filter_on": null
+    }
+  },
+  {
+    "model": "ensembl_metadata.datasettype",
+    "pk": 10,
+    "fields": {
+      "name": "thoas",
+      "label": "THOAS data load",
+      "topic": "production_process",
+      "description": "THOAS Service Data load (MongoDB)",
+      "details_uri": null,
+      "parent": 2,
+      "depends_on": "9",
+      "filter_on": null
+    }
+  },
+  {
+    "model": "ensembl_metadata.datasettype",
+    "pk": 11,
+    "fields": {
+      "name": "web_gb_content",
+      "label": "Web Geneset contenr",
+      "topic": "production_process",
+      "description": "Web Geneset related content",
+      "details_uri": null,
+      "parent": 2,
+      "depends_on": null,
+      "filter_on": null
+    }
+  },
+  {
+    "model": "ensembl_metadata.datasettype",
+    "pk": 12,
+    "fields": {
+      "name": "refget",
+      "label": "Refget Loading",
+      "topic": "production_process",
+      "description": "Refget provisioning",
+      "details_uri": null,
+      "parent": 2,
+      "depends_on": "11",
+      "filter_on": null
+    }
+  },
+  {
+    "model": "ensembl_metadata.datasettype",
+    "pk": 13,
+    "fields": {
+      "name": "xrefs",
+      "label": "External References",
+      "topic": "production_process",
+      "description": "External annotations linking",
+      "details_uri": null,
+      "parent": 8,
+      "depends_on": null,
+      "filter_on": null
+    }
+  },
+  {
+    "model": "ensembl_metadata.datasettype",
+    "pk": 14,
+    "fields": {
+      "name": "protein_features",
+      "label": "Protein Features annotations",
+      "topic": "production_process",
+      "description": "Proteins annotation",
+      "details_uri": null,
+      "parent": 8,
+      "depends_on": "13",
+      "filter_on": null
+    }
+  },
+  {
+    "model": "ensembl_metadata.datasettype",
+    "pk": 15,
+    "fields": {
+      "name": "alpha_fold",
+      "label": "AlphaFold computation",
+      "topic": "production_process",
+      "description": "Compute Protein structure with Alphafold",
+      "details_uri": null,
+      "parent": 8,
+      "depends_on": "13",
+      "filter_on": null
+    }
+  },
+  {
+    "model": "ensembl_metadata.datasettype",
+    "pk": 16,
+    "fields": {
+      "name": "blast",
+      "label": "Blast tools",
+      "topic": "production_process",
+      "description": "Blast Indexes files",
+      "details_uri": null,
+      "parent": 9,
+      "depends_on": "8",
+      "filter_on": null
+    }
+  },
+  {
+    "model": "ensembl_metadata.datasettype",
+    "pk": 17,
+    "fields": {
+      "name": "ftp_dumps",
+      "label": "Public FTP files",
+      "topic": "production_process",
+      "description": "Public FTP flat files geneset dumps",
+      "details_uri": null,
+      "parent": 9,
+      "depends_on": "8",
+      "filter_on": null
+    }
+  },
+  {
+    "model": "ensembl_metadata.datasettype",
+    "pk": 18,
+    "fields": {
+      "name": "thoas_dumps",
+      "label": "Thoas load flat files",
+      "topic": "production_process",
+      "description": "Dump flat file to load onto THOAS",
+      "details_uri": null,
+      "parent": 10,
+      "depends_on": null,
+      "filter_on": null
+    }
+  },
+  {
+    "model": "ensembl_metadata.datasettype",
+    "pk": 19,
+    "fields": {
+      "name": "thoas_load",
+      "label": "Thoas MongoDB Load",
+      "topic": "production_preparation",
+      "description": "Load dumped files onto THOAS",
+      "details_uri": null,
+      "parent": 10,
+      "depends_on": "18,23",
+      "filter_on": null
+    }
+  },
+  {
+    "model": "ensembl_metadata.datasettype",
+    "pk": 20,
+    "fields": {
+      "name": "gb_browser_files",
+      "label": "Genome Browser BB Geneset files",
+      "topic": "production_preparation",
+      "description": "Production BigBed for Genome Browser",
+      "details_uri": null,
+      "parent": 11,
+      "depends_on": null,
+      "filter_on": null
+    }
+  },
+  {
+    "model": "ensembl_metadata.datasettype",
+    "pk": 21,
+    "fields": {
+      "name": "gb_track_api",
+      "label": "Geneset Tracks API",
+      "topic": "production_preparation",
+      "description": "Register Geneset Track API BigBed files",
+      "details_uri": null,
+      "parent": 11,
+      "depends_on": "20",
+      "filter_on": null
+    }
+  },
+  {
+    "model": "ensembl_metadata.datasettype",
+    "pk": 23,
+    "fields": {
+      "name": "checksums",
+      "label": "Sequences Checksums",
+      "topic": "production_process",
+      "description": "Compute core sequence checksums and update metadata",
+      "details_uri": null,
+      "parent": 12,
+      "depends_on": null,
+      "filter_on": null
+    }
+  },
+  {
+    "model": "ensembl_metadata.datasettype",
+    "pk": 24,
+    "fields": {
+      "name": "refget_load",
+      "label": "Refget Loading",
+      "topic": "production_preparation",
+      "description": "Load sequences and their checksum onto Refget app",
+      "details_uri": null,
+      "parent": 12,
+      "depends_on": "22",
+      "filter_on": null
+    }
+  },
+  {
+    "model": "ensembl_metadata.datasettype",
+    "pk": 25,
+    "fields": {
+      "name": "homology_compute",
+      "label": "Homology annotation",
+      "topic": "production_process",
+      "description": "Compute Genome homology analysis",
+      "details_uri": null,
+      "parent": 6,
+      "depends_on": null,
+      "filter_on": null
+    }
+  },
+  {
+    "model": "ensembl_metadata.datasettype",
+    "pk": 26,
+    "fields": {
+      "name": "homology_load",
+      "label": "Homology dataload",
+      "topic": "production_preparation",
+      "description": "Load homology data onto Compara Service (MongoDB)",
+      "details_uri": null,
+      "parent": 6,
+      "depends_on": "25",
+      "filter_on": null
+    }
+  },
+  {
+    "model": "ensembl_metadata.datasettype",
+    "pk": 27,
+    "fields": {
+      "name": "homology_dumps",
+      "label": "Homology tsv public files",
+      "topic": "production_preparation",
+      "description": "Dump and sync public TSV homology files",
+      "details_uri": null,
+      "parent": 6,
+      "depends_on": "25",
+      "filter_on": null
+    }
+  },
+  {
+    "model": "ensembl_metadata.datasettype",
+    "pk": 28,
+    "fields": {
+      "name": "vcf",
+      "label": "VCF FileSet",
+      "topic": "production_process",
+      "description": "VCF annotation file for geneset",
+      "details_uri": null,
+      "parent": 3,
+      "depends_on": null,
+      "filter_on": null
+    }
+  },
+  {
+    "model": "ensembl_metadata.datasettype",
+    "pk": 29,
+    "fields": {
+      "name": "evidence",
+      "label": "Evidence VCF file",
+      "topic": "production_process",
+      "description": "VCF evidence file for geneset",
+      "details_uri": null,
+      "parent": 3,
+      "depends_on": null,
+      "filter_on": null
+    }
+  },
+  {
+    "model": "ensembl_metadata.datasettype",
+    "pk": 30,
+    "fields": {
+      "name": "web_var_content",
+      "label": "WebBrowser variation data",
+      "topic": "production_process",
+      "description": "Variation GenomeBrowser files",
+      "details_uri": null,
+      "parent": 3,
+      "depends_on": "3",
+      "filter_on": null
+    }
+  },
+  {
+    "model": "ensembl_metadata.datasettype",
+    "pk": 31,
+    "fields": {
+      "name": "var_browser_files",
+      "label": "Variation Browser files",
+      "topic": "production_process",
+      "description": "Variation track browser file",
+      "details_uri": null,
+      "parent": 30,
+      "depends_on": null,
+      "filter_on": null
+    }
+  },
+  {
+    "model": "ensembl_metadata.datasettype",
+    "pk": 32,
+    "fields": {
+      "name": "var_track_api",
+      "label": "Variation Track",
+      "topic": "production_preparation",
+      "description": "Variation Track API",
+      "details_uri": null,
+      "parent": 30,
+      "depends_on": "31",
+      "filter_on": null
+    }
+  },
+  {
+    "model": "ensembl_metadata.datasettype",
+    "pk": 33,
+    "fields": {
+      "name": "reg_browser_files",
+      "label": "Regulation Browser files",
+      "topic": "production_process",
+      "description": "Regulation track browser file",
+      "details_uri": null,
+      "parent": 7,
+      "depends_on": null,
+      "filter_on": null
+    }
+  },
+  {
+    "model": "ensembl_metadata.datasettype",
+    "pk": 34,
+    "fields": {
+      "name": "reg_track_api",
+      "label": "Regulation Track",
+      "topic": "production_preparation",
+      "description": "Regulation Track API",
+      "details_uri": null,
+      "parent": 7,
+      "depends_on": "33",
+      "filter_on": null
+    }
+  },
+  {
+    "model": "ensembl_metadata.datasettype",
+    "pk": 35,
+    "fields": {
+      "name": "regulation",
+      "label": "Regulation Public files",
+      "topic": "production_preparation",
+      "description": "Regulation public files",
+      "details_uri": null,
+      "parent": 7,
+      "depends_on": "33",
+      "filter_on": null
+    }
+  },
+  {
+    "model": "ensembl_metadata.datasettype",
+    "pk": 36,
+    "fields": {
+      "name": "gb_publish",
+      "label": "Genebuild publication",
+      "topic": "production_publication",
+      "description": "Web Content for Geneset publication",
+      "details_uri": null,
+      "parent": 2,
+      "depends_on": "8,9,10,11,12",
+      "filter_on": null
+    }
+  },
+  {
+    "model": "ensembl_metadata.datasettype",
+    "pk": 37,
+    "fields": {
+      "name": "gene_search",
+      "label": "GeneSearch Index",
+      "topic": "production_publication",
+      "description": "Gene search indexes provisioning",
+      "details_uri": null,
+      "parent": 36,
+      "depends_on": "11,12",
+      "filter_on": null
+    }
+  },
+  {
+    "model": "ensembl_metadata.datasettype",
+    "pk": 38,
+    "fields": {
+      "name": "genome_search",
+      "label": "GenomeSearch Index",
+      "topic": "production_publication",
+      "description": "Genomesearch index (SpecieSelector)",
+      "details_uri": null,
+      "parent": 36,
+      "depends_on": "8,9,10,11,12",
+      "filter_on": null
+    }
+  },
+  {
+    "model": "ensembl_metadata.ensemblrelease",
+    "pk": 1,
+    "fields": {
+      "version": "110.1",
+      "release_date": "2023-10-18",
+      "label": "beta-1",
+      "is_current": true,
+      "site": 1,
+      "release_type": "partial"
+    }
+  },
+  {
+    "model": "ensembl_metadata.ensemblrelease",
+    "pk": 2,
+    "fields": {
+      "version": "110.2",
+      "release_date": "2023-09-15",
+      "label": "Scaling Phase 1",
+      "is_current": false,
+      "site": 1,
+      "release_type": "partial"
+    }
+  },
+  {
+    "model": "ensembl_metadata.ensemblrelease",
+    "pk": 3,
+    "fields": {
+      "version": "110.3",
+      "release_date": "2023-11-15",
+      "label": "Scaling Phase 2",
+      "is_current": false,
+      "site": 1,
+      "release_type": "partial"
+    }
+  },
+  {
+    "model": "ensembl_metadata.ensemblrelease",
+    "pk": 4,
+    "fields": {
+      "version": "110.4",
+      "release_date": "2023-12-15",
+      "label": "MVP Release 1",
+      "is_current": false,
+      "site": 1,
+      "release_type": "integrated"
+    }
+  },
+  {
+    "model": "ensembl_metadata.ensemblsite",
+    "pk": 1,
+    "fields": {
+      "name": "Ensembl",
+      "label": "MVP Ensembl",
+      "uri": "https://beta.ensembl.org"
+    }
+  },
+  {
+    "model": "ensembl_metadata.genome",
+    "pk": 1,
+    "fields": {
+      "genome_uuid": "a73351f7-93e7-11ec-a39d-005056b38ce3",
+      "assembly": 1,
+      "organism": 1,
+      "created": "2023-09-22T15:01:44Z",
+      "is_best": false,
+      "production_name": "escherichia_coli_str_k_12_substr_mg1655"
+    }
+  },
+  {
+    "model": "ensembl_metadata.genome",
+    "pk": 2,
+    "fields": {
+      "genome_uuid": "2afef36f-3660-4b8c-819b-d1e5a77c9918",
+      "assembly": 2,
+      "organism": 2,
+      "created": "2023-09-22T15:01:56Z",
+      "is_best": false,
+      "production_name": "mus_musculus_cbaj"
+    }
+  },
+  {
+    "model": "ensembl_metadata.genome",
+    "pk": 3,
+    "fields": {
+      "genome_uuid": "980ccf6b-9841-46fa-b313-b068eb9b668a",
+      "assembly": 3,
+      "organism": 3,
+      "created": "2023-09-22T15:01:59Z",
+      "is_best": false,
+      "production_name": "salmo_salar_gca931346935v2"
+    }
+  },
+  {
+    "model": "ensembl_metadata.genome",
+    "pk": 4,
+    "fields": {
+      "genome_uuid": "9caa2cae-d1c8-4cfc-9ffd-2e13bc3e95b1",
+      "assembly": 4,
+      "organism": 4,
+      "created": "2023-09-22T15:02:00Z",
+      "is_best": false,
+      "production_name": "homo_sapiens_gca018473315v1"
+    }
+  },
+  {
+    "model": "ensembl_metadata.genome",
+    "pk": 5,
+    "fields": {
+      "genome_uuid": "2020e8d5-4d87-47af-be78-0b15e48970a7",
+      "assembly": 5,
+      "organism": 5,
+      "created": "2023-09-22T15:02:01Z",
+      "is_best": false,
+      "production_name": "homo_sapiens_gca018469415v1"
+    }
+  },
+  {
+    "model": "ensembl_metadata.genomedataset",
+    "pk": 1,
+    "fields": {
+      "dataset": 1,
+      "genome": 1,
+      "release": 1,
+      "is_current": true
+    }
+  },
+  {
+    "model": "ensembl_metadata.genomedataset",
+    "pk": 2,
+    "fields": {
+      "dataset": 2,
+      "genome": 1,
+      "release": 1,
+      "is_current": true
+    }
+  },
+  {
+    "model": "ensembl_metadata.genomedataset",
+    "pk": 3,
+    "fields": {
+      "dataset": 3,
+      "genome": 2,
+      "release": 1,
+      "is_current": true
+    }
+  },
+  {
+    "model": "ensembl_metadata.genomedataset",
+    "pk": 4,
+    "fields": {
+      "dataset": 4,
+      "genome": 2,
+      "release": 1,
+      "is_current": true
+    }
+  },
+  {
+    "model": "ensembl_metadata.genomedataset",
+    "pk": 5,
+    "fields": {
+      "dataset": 5,
+      "genome": 3,
+      "release": 1,
+      "is_current": true
+    }
+  },
+  {
+    "model": "ensembl_metadata.genomedataset",
+    "pk": 7,
+    "fields": {
+      "dataset": 7,
+      "genome": 4,
+      "release": 1,
+      "is_current": true
+    }
+  },
+  {
+    "model": "ensembl_metadata.genomedataset",
+    "pk": 9,
+    "fields": {
+      "dataset": 9,
+      "genome": 5,
+      "release": 1,
+      "is_current": true
+    }
+  },
+  {
+    "model": "ensembl_metadata.genomedataset",
+    "pk": 886,
+    "fields": {
+      "dataset": 886,
+      "genome": 3,
+      "release": 1,
+      "is_current": true
+    }
+  },
+  {
+    "model": "ensembl_metadata.genomedataset",
+    "pk": 887,
+    "fields": {
+      "dataset": 888,
+      "genome": 4,
+      "release": 1,
+      "is_current": true
+    }
+  },
+  {
+    "model": "ensembl_metadata.genomedataset",
+    "pk": 888,
+    "fields": {
+      "dataset": 890,
+      "genome": 5,
+      "release": 1,
+      "is_current": true
+    }
+  },
+  {
+    "model": "ensembl_metadata.genomedataset",
+    "pk": 1416,
+    "fields": {
+      "dataset": 1475,
+      "genome": 4,
+      "release": 1,
+      "is_current": true
+    }
+  },
+  {
+    "model": "ensembl_metadata.genomedataset",
+    "pk": 1448,
+    "fields": {
+      "dataset": 1507,
+      "genome": 5,
+      "release": 1,
+      "is_current": true
+    }
+  },
+  {
+    "model": "ensembl_metadata.genomedataset",
+    "pk": 2217,
+    "fields": {
+      "dataset": 2276,
+      "genome": 4,
+      "release": 1,
+      "is_current": true
+    }
+  },
+  {
+    "model": "ensembl_metadata.genomedataset",
+    "pk": 2283,
+    "fields": {
+      "dataset": 2342,
+      "genome": 3,
+      "release": 1,
+      "is_current": true
+    }
+  },
+  {
+    "model": "ensembl_metadata.genomedataset",
+    "pk": 2296,
+    "fields": {
+      "dataset": 2355,
+      "genome": 2,
+      "release": 1,
+      "is_current": true
+    }
+  },
+  {
+    "model": "ensembl_metadata.genomedataset",
+    "pk": 2349,
+    "fields": {
+      "dataset": 2408,
+      "genome": 5,
+      "release": 1,
+      "is_current": true
+    }
+  },
+  {
+    "model": "ensembl_metadata.genomedataset",
+    "pk": 2399,
+    "fields": {
+      "dataset": 2458,
+      "genome": 1,
+      "release": 1,
+      "is_current": true
+    }
+  },
+  {
+    "model": "ensembl_metadata.genomedataset",
+    "pk": 2462,
+    "fields": {
+      "dataset": 2521,
+      "genome": 2,
+      "release": null,
+      "is_current": true
+    }
+  },
+  {
+    "model": "ensembl_metadata.genomedataset",
+    "pk": 2463,
+    "fields": {
+      "dataset": 2522,
+      "genome": 3,
+      "release": null,
+      "is_current": true
+    }
+  },
+  {
+    "model": "ensembl_metadata.genomedataset",
+    "pk": 2464,
+    "fields": {
+      "dataset": 2523,
+      "genome": 2,
+      "release": null,
+      "is_current": true
+    }
+  },
+  {
+    "model": "ensembl_metadata.genomedataset",
+    "pk": 2465,
+    "fields": {
+      "dataset": 2524,
+      "genome": 2,
+      "release": null,
+      "is_current": true
+    }
+  },
+  {
+    "model": "ensembl_metadata.genomedataset",
+    "pk": 2466,
+    "fields": {
+      "dataset": 2525,
+      "genome": 3,
+      "release": null,
+      "is_current": true
+    }
+  },
+  {
+    "model": "ensembl_metadata.genomerelease",
+    "pk": 1,
+    "fields": {
+      "genome": 1,
+      "release": 1,
+      "is_current": true
+    }
+  },
+  {
+    "model": "ensembl_metadata.genomerelease",
+    "pk": 2,
+    "fields": {
+      "genome": 2,
+      "release": 1,
+      "is_current": true
+    }
+  },
+  {
+    "model": "ensembl_metadata.genomerelease",
+    "pk": 3,
+    "fields": {
+      "genome": 3,
+      "release": 1,
+      "is_current": true
+    }
+  },
+  {
+    "model": "ensembl_metadata.genomerelease",
+    "pk": 4,
+    "fields": {
+      "genome": 4,
+      "release": 1,
+      "is_current": true
+    }
+  },
+  {
+    "model": "ensembl_metadata.genomerelease",
+    "pk": 6,
+    "fields": {
+      "genome": 5,
+      "release": 1,
+      "is_current": true
+    }
+  },
+  {
+    "model": "ensembl_metadata.organism",
+    "pk": 1,
+    "fields": {
+      "taxonomy_id": 511145,
+      "species_taxonomy_id": 562,
+      "common_name": "Escherichia coli K-12",
+      "strain": "K-12 substr. MG1655",
+      "scientific_name": "Escherichia coli str. K-12 substr. MG1655 str. K12",
+      "biosample_id": "SAMN02604091",
+      "scientific_parlance_name": "E coli K 12",
+      "organism_uuid": "1e579f8d-3880-424e-9b4f-190eb69280d9",
+      "strain_type": "strain",
+      "rank": 0
+    }
+  },
+  {
+    "model": "ensembl_metadata.organism",
+    "pk": 2,
+    "fields": {
+      "taxonomy_id": 10090,
+      "species_taxonomy_id": 10090,
+      "common_name": "mouse",
+      "strain": "CBA/J",
+      "scientific_name": "Mus musculus",
+      "biosample_id": "SAMN04489823",
+      "scientific_parlance_name": "Mouse",
+      "organism_uuid": "26d004c3-4e02-4027-9a8c-4b2622eb898b",
+      "strain_type": "strain",
+      "rank": 0
+    }
+  },
+  {
+    "model": "ensembl_metadata.organism",
+    "pk": 3,
+    "fields": {
+      "taxonomy_id": 8030,
+      "species_taxonomy_id": 8030,
+      "common_name": "Atlantic salmon",
+      "strain": "European origin",
+      "scientific_name": "Salmo salar",
+      "biosample_id": "SAMEA13013359",
+      "scientific_parlance_name": null,
+      "organism_uuid": "2fe78695-dc61-4c83-b3b8-f61a761c5685",
+      "strain_type": "strain",
+      "rank": 0
+    }
+  },
+  {
+    "model": "ensembl_metadata.organism",
+    "pk": 4,
+    "fields": {
+      "taxonomy_id": 9606,
+      "species_taxonomy_id": 9606,
+      "common_name": "human",
+      "strain": "Gambian in Western Division",
+      "scientific_name": "Homo sapiens",
+      "biosample_id": "SAMN17861670",
+      "scientific_parlance_name": "Human",
+      "organism_uuid": "18bd7042-d861-4a10-b5d0-68c8bccfc87e",
+      "strain_type": "population",
+      "rank": 0
+    }
+  },
+  {
+    "model": "ensembl_metadata.organism",
+    "pk": 5,
+    "fields": {
+      "taxonomy_id": 9606,
+      "species_taxonomy_id": 9606,
+      "common_name": "human",
+      "strain": "Esan in Nigeria",
+      "scientific_name": "Homo sapiens",
+      "biosample_id": "SAMN17861241",
+      "scientific_parlance_name": "Human",
+      "organism_uuid": "a3352834-cea1-40aa-9dad-98581620c36b",
+      "strain_type": "population",
+      "rank": 0
+    }
+  },
+  {
+    "model": "ensembl_metadata.organismgroup",
+    "pk": 1,
+    "fields": {
+      "type": "Division",
+      "name": "EnsemblBacteria",
+      "code": null
+    }
+  },
+  {
+    "model": "ensembl_metadata.organismgroup",
+    "pk": 2,
+    "fields": {
+      "type": "Division",
+      "name": "EnsemblVertebrates",
+      "code": null
+    }
+  },
+  {
+    "model": "ensembl_metadata.organismgroup",
+    "pk": 3,
+    "fields": {
+      "type": "Division",
+      "name": "EnsemblPlants",
+      "code": null
+    }
+  },
+  {
+    "model": "ensembl_metadata.organismgroup",
+    "pk": 5,
+    "fields": {
+      "type": "Division",
+      "name": "EnsemblProtists",
+      "code": null
+    }
+  },
+  {
+    "model": "ensembl_metadata.organismgroup",
+    "pk": 9,
+    "fields": {
+      "type": "Division",
+      "name": "EnsemblMetazoa",
+      "code": null
+    }
+  },
+  {
+    "model": "ensembl_metadata.organismgroup",
+    "pk": 12,
+    "fields": {
+      "type": "Division",
+      "name": "EnsemblFungi",
+      "code": null
+    }
+  },
+  {
+    "model": "ensembl_metadata.organismgroup",
+    "pk": 13,
+    "fields": {
+      "type": "Internal",
+      "name": "Populars",
+      "code": "popular"
+    }
+  },
+  {
+    "model": "ensembl_metadata.organismgroupmember",
+    "pk": 1,
+    "fields": {
+      "is_reference": false,
+      "order": null,
+      "organism": 1,
+      "organism_group": 1
+    }
+  },
+  {
+    "model": "ensembl_metadata.organismgroupmember",
+    "pk": 2,
+    "fields": {
+      "is_reference": false,
+      "order": null,
+      "organism": 2,
+      "organism_group": 2
+    }
+  },
+  {
+    "model": "ensembl_metadata.organismgroupmember",
+    "pk": 3,
+    "fields": {
+      "is_reference": false,
+      "order": null,
+      "organism": 3,
+      "organism_group": 2
+    }
+  },
+  {
+    "model": "ensembl_metadata.organismgroupmember",
+    "pk": 4,
+    "fields": {
+      "is_reference": false,
+      "order": null,
+      "organism": 4,
+      "organism_group": 2
+    }
+  },
+  {
+    "model": "ensembl_metadata.organismgroupmember",
+    "pk": 5,
+    "fields": {
+      "is_reference": false,
+      "order": null,
+      "organism": 5,
+      "organism_group": 2
+    }
+  },
+  {
+    "model": "ensembl_metadata.organismgroupmember",
+    "pk": 233,
+    "fields": {
+      "is_reference": false,
+      "order": 41,
+      "organism": 1,
+      "organism_group": 13
+    }
+  }
+]

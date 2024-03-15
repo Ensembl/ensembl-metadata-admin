@@ -2,10 +2,10 @@
 
 from django.db import migrations, models
 import uuid
+from ensembl.production.metadata.admin.models import UUIDField
 
 
 class Migration(migrations.Migration):
-
     dependencies = [
         ('ensembl_metadata', '0003_auto_20230607_1351'),
     ]
@@ -24,7 +24,7 @@ class Migration(migrations.Migration):
         migrations.AlterField(
             model_name='dataset',
             name='dataset_uuid',
-            field=models.UUIDField(default=uuid.uuid4, editable=False),
+            field=UUIDField(default=uuid.uuid4, editable=False),
         ),
         migrations.AlterField(
             model_name='ensemblrelease',
@@ -39,7 +39,7 @@ class Migration(migrations.Migration):
         migrations.AlterField(
             model_name='genome',
             name='genome_uuid',
-            field=models.UUIDField(default=uuid.uuid4, editable=False),
+            field=UUIDField(default=uuid.uuid4, editable=False),
         ),
         migrations.AlterField(
             model_name='genomedataset',

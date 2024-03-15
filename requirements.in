@@ -6,4 +6,3 @@ Markdown
 mysqlclient
 django-jsonfield~=1.4.1
 urllib3~=1.26.15
-ensembl-metadata-api@git+https://github.com/Ensembl/ensembl-metadata-api.git@2.0.1.dev2

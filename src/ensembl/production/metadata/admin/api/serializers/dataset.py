@@ -8,12 +8,13 @@
 #   distributed under the License is distributed on an "AS IS" BASIS,
 #   WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 #   See the License for the specific language governing permissions and
-#   limitations under the License.from django.apps import AppConfig
-from rest_framework import serializers
+#   limitations under the License.
 from django.db import transaction
+from rest_framework import serializers
+from django.core.exceptions import ObjectDoesNotExist
+
 from ensembl.production.metadata.admin.models import Dataset, Attribute, DatasetAttribute, DatasetSource, DatasetType, \
     Genome, GenomeDataset
-from django.core.exceptions import ObjectDoesNotExist
 
 
 class AttributeSerializer(serializers.ModelSerializer):
@@ -106,6 +107,7 @@ class DatasetSerializer(serializers.ModelSerializer):
             validated_data['dataset_source'] = dataset_source
             new_dataset = Dataset.objects.create(**validated_data)
             GenomeDataset.objects.create(genome=genome, dataset=new_dataset)
+            Dataset.objects.create_child_datasets(new_dataset, genome)
             for attr_data in dataset_attributes_data:
                 attr_value = attr_data.get('value')
                 attr_name = attr_data['attribute']['name']
@@ -120,5 +122,4 @@ class DatasetSerializer(serializers.ModelSerializer):
                     }
                 )
                 DatasetAttribute.objects.create(dataset=new_dataset, attribute=attribute, value=attr_value)
-
         return new_dataset
