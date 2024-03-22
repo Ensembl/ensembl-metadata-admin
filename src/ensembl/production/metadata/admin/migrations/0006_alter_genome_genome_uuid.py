@@ -2,10 +2,10 @@
 
 from django.db import migrations, models
 import uuid
+from ensembl.production.metadata.admin.models import UUIDField
 
 
 class Migration(migrations.Migration):
-
     dependencies = [
         ('ensembl_metadata', '0005_assem_org_uuid_alt_assembly'),
     ]
@@ -14,6 +14,6 @@ class Migration(migrations.Migration):
         migrations.AlterField(
             model_name='genome',
             name='genome_uuid',
-            field=models.UUIDField(default=uuid.uuid4, editable=False, unique=True),
+            field=UUIDField(default=uuid.uuid4, editable=False, unique=True),
         ),
     ]

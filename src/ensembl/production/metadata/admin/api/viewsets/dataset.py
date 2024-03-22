@@ -8,20 +8,19 @@
 #   distributed under the License is distributed on an "AS IS" BASIS,
 #   WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 #   See the License for the specific language governing permissions and
-#   limitations under the License.from django.apps import AppConfig
-import uuid
-from builtins import super
-from django.db import transaction
+#   limitations under the License.
 from django.contrib.auth import get_user_model
+from django.db import transaction
+from django.db.models import Q
+from django.views.decorators.csrf import csrf_exempt
 from rest_framework import viewsets, status
 from rest_framework.exceptions import ValidationError
-from ensembl.production.metadata.admin.api.serializers import DatasetSerializer
-from ensembl.production.metadata.admin.models import Dataset, DatasetType, DatasetSource, DatasetAttribute, Attribute
-from django.db.models import Q
-from rest_framework.response import Response
 from rest_framework.permissions import AllowAny
+from rest_framework.response import Response
+
+from ensembl.production.metadata.admin.api.serializers import DatasetSerializer
+from ensembl.production.metadata.admin.models import Dataset, DatasetSource, DatasetAttribute, Attribute
 from ensembl.production.metadata.admin.models import Genome
-from django.views.decorators.csrf import csrf_exempt
 
 
 class DatasetViewSet(viewsets.ModelViewSet):
