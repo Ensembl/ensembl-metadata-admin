@@ -84,7 +84,7 @@ class DatasetViewSetTestCase(APITestCase):
         response = self.client.get(reverse('ensembl_metadata:dataset-list'))
         self.assertEqual(response.status_code, status.HTTP_200_OK)
         self.assertIsNotNone(response.data)
-        self.assertEqual(response.data['count'], 22)
+        self.assertEqual(response.data['count'], 86)
 
     def test_dataset_viewset_get_individual(self):
         dataset_uuid = '02104faf-3fee-4f28-b53c-605843dac941'
@@ -119,9 +119,10 @@ class DatasetViewSetTestCase(APITestCase):
         self.assertEqual(response.status_code, status.HTTP_400_BAD_REQUEST)
 
     def test_dataset_create_success(self):
+        genome_uuid = '56d9b469-097f-48a7-8501-c8416bcbcdfb'
         payload = {
             'user': 'test_user',
-            'genome_uuid': '980ccf6b-9841-46fa-b313-b068eb9b668a',
+            'genome_uuid': genome_uuid,
             "name": "Test Dataset",
             "description": "This is a test dataset.",
             "label": "This is a test.",
@@ -142,9 +143,9 @@ class DatasetViewSetTestCase(APITestCase):
         }
         response = self.client.post(reverse('ensembl_metadata:dataset-list'), payload, format='json')
         self.assertEqual(response.status_code, status.HTTP_201_CREATED)
-        sub_datasets = Dataset.objects.filter(genomes__genome_uuid='980ccf6b-9841-46fa-b313-b068eb9b668a').all()
+        sub_datasets = Dataset.objects.filter(genomes__genome_uuid=genome_uuid).all()
         # Expected sub datasets to be automatically created
-        self.assertEqual(len(sub_datasets), 11)
+        self.assertEqual(len(sub_datasets), 8)
         # Check that the data has been properly added.
         dataset = Dataset.objects.get(name=payload['name'])
         self.assertEqual(dataset.name, payload['name'])
@@ -167,14 +168,14 @@ class DatasetViewSetTestCase(APITestCase):
     def test_dataset_delete_success(self):
         payload = {
             'user': 'test_user',
-            'genome_uuid': '2afef36f-3660-4b8c-819b-d1e5a77c9918',
+            'genome_uuid': '63b4ffbf-0147-4aa7-b0af-7575bb822740',
             "name": "Test Dataset",
             "description": "This is a test dataset.",
             "label": "This is a test.",
             "dataset_type": "variation",
             "dataset_source": {
-                "name": "homo_sapiens_core_108_38",
-                "type": "core"
+                "name": "/home/test/file.vcf",
+                "type": "vcf"
             },
             "dataset_attribute": [
                 {

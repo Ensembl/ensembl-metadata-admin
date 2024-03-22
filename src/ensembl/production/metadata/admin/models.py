@@ -24,20 +24,6 @@ class UUIDField(models.UUIDField):
         super(models.UUIDField, self).__init__(verbose_name, **kwargs)
 
 
-class SharedAlchemyModel:
-    def get_connexion_uri(self):
-        from django.db import connections
-        db_settings = connections.databases[self._state.db]
-        # FIXME engine actually returns "django.db.backends.mysql"
-        db_engine = db_settings['ENGINE']
-        db_name = db_settings['NAME']
-        db_user = db_settings['USER']
-        db_password = db_settings['PASSWORD']
-        db_host = db_settings['HOST']
-        db_port = db_settings['PORT']
-        return f"mysql://{db_user}:{db_password}@{db_host}:{db_port}/{db_name}"
-
-
 class Assembly(models.Model):
     assembly_id = models.AutoField(primary_key=True)
     ucsc_name = models.CharField(max_length=16, blank=True, null=True)
@@ -153,7 +139,7 @@ class DatasetManager(models.Manager):
             self.create_child_datasets(ds, genome)
 
 
-class Dataset(SharedAlchemyModel, models.Model):
+class Dataset(models.Model):
     class DatasetStatus(models.TextChoices):
         SUBMITTED = 'SUBMITTED', 'Submitted'
         PROCESSING = 'PROCESSING', 'Processing'
@@ -253,15 +239,22 @@ class DatasetType(models.Model):
 
 
 class EnsemblRelease(models.Model):
+    class ReleaseStatus(models.TextChoices):
+        PLANNED = 'PLANNED', 'Planned'
+        PREPARING = 'PREPARING', 'Preparing'
+        PREPARED = 'PREPARED', 'Prepared'
+        RELEASED = 'RELEASED', 'Released'
+
     release_id = models.AutoField(primary_key=True)
     version = models.DecimalField(max_digits=10, decimal_places=1)
-    release_date = models.DateField()
+    release_date = models.DateField(null=True, blank=True)
     label = models.CharField(max_length=64, blank=True, null=True)
     is_current = models.BooleanField(default=False)
     site = models.ForeignKey('EnsemblSite', on_delete=models.SET_NULL, blank=True, null=True)
     release_type = models.CharField(max_length=16)
     genomes = models.ManyToManyField('Genome', through='GenomeRelease')
     datasets = models.ManyToManyField('Dataset', through='GenomeDataset')
+    status = models.CharField(max_length=12, choices=ReleaseStatus.choices, default=ReleaseStatus.PLANNED)
 
     class Meta:
         db_table = 'ensembl_release'
@@ -313,6 +306,14 @@ class Genome(models.Model):
 
 
 class GenomeDataset(models.Model):
+    class Meta:
+        db_table = 'genome_dataset'
+        constraints = [
+            models.UniqueConstraint(
+                fields=['dataset', 'genome'], name='unique_dataset_genome'
+            )
+        ]
+
     genome_dataset_id = models.AutoField(primary_key=True)
     dataset = models.ForeignKey(Dataset, on_delete=models.CASCADE, related_name='genome_datasets')
     genome = models.ForeignKey(Genome, on_delete=models.CASCADE)
@@ -329,9 +330,6 @@ class GenomeDataset(models.Model):
             raise ValidationError('Released data cannot be deleted')
         super().delete(*args, **kwargs)
 
-    class Meta:
-        db_table = 'genome_dataset'
-
     @property
     def name(self):
         return self.dataset.name
@@ -346,6 +344,13 @@ class GenomeDataset(models.Model):
 
 
 class GenomeRelease(models.Model):
+    class Meta:
+        constraints = [
+            models.UniqueConstraint(
+                fields=['release', 'genome'], name='unique_release_genome'
+            )
+        ]
+
     genome_release_id = models.AutoField(primary_key=True)
     genome = models.ForeignKey(Genome, on_delete=models.CASCADE)
     release = models.ForeignKey(EnsemblRelease, on_delete=models.CASCADE)
