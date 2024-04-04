@@ -233,6 +233,7 @@ class DatasetType(models.Model):
 
     class Meta:
         db_table = 'dataset_type'
+        ordering = ['label']
 
     def __str__(self):
         return self.name
@@ -287,6 +288,8 @@ class Genome(models.Model):
     datasets = models.ManyToManyField('Dataset', through='GenomeDataset')
     releases = models.ManyToManyField('EnsemblRelease', through='GenomeRelease')
     production_name = models.CharField(max_length=255)
+    genebuild_version = models.CharField(max_length=20, null=True, unique=False)
+    genebuild_date = models.CharField(max_length=20, null=True, unique=False)
 
     def save(self, *args, **kwargs):
         if self.pk is not None and self.releases.exists():
