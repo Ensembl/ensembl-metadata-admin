@@ -439,11 +439,20 @@ class SourceAdmin(AdminMetadata, admin.ModelAdmin):
     list_filter = ['type']
 
 
+class SubDatasetTypeInline(MetadataInline, admin.TabularInline):
+    model = DatasetType
+    fields = ('name', 'label', 'topic', 'description')
+
+
 @admin.register(DatasetType)
 class TypeAdmin(AdminMetadata, admin.ModelAdmin):
-    fields = ('name', 'label', 'topic', 'description', 'details_uri')
+    fields = ('name', 'label', 'topic', 'description')
     readonly_fields = ['name']
-    list_display = ['name', 'label', 'topic', 'description', 'details_uri']
+    list_display = ['name', 'label', 'topic', 'description']
+    inlines = [SubDatasetTypeInline]
+
+    def get_queryset(self, request):
+        return super().get_queryset(request)
 
     def has_delete_permission(self, request, obj=None):
         return False

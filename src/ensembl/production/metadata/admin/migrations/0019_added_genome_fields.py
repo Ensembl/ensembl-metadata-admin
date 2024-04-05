@@ -22,7 +22,7 @@ class Migration(migrations.Migration):
         migrations.AddField(
             model_name='genome',
             name='genebuild_version',
-            field=models.CharField(max_length=20, null=True),
+            field=models.CharField(max_length=64, null=True),
         ),
         migrations.AddConstraint(
             model_name='genomedataset',

@@ -73,9 +73,13 @@ ROOT_URLCONF = 'metadata_admin.urls'
 # Database
 # https://docs.djangoproject.com/en/3.1/ref/settings/#databases
 DATABASES = {
-    'default': {
+    "default": {
+        "ENGINE": "django.db.backends.sqlite3",
+        "NAME": "django_db"
+    },
+    'metadata': {
         'ENGINE': 'django.db.backends.mysql',
-        'NAME': os.getenv("REGISTRY_DB", "marco_ensembl_genome_metadata"),
+        'NAME': os.getenv("REGISTRY_DB", "ensembl_genome_metadata"),
         'USER': os.getenv("DATABASE_USER", "ensembl"),
         'PASSWORD': os.getenv("DATABASE_PASSWORD", ""),
         'HOST': os.getenv("DATABASE_HOST", "localhost"),
