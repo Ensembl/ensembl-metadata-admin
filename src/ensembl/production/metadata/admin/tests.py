@@ -21,6 +21,7 @@ from ensembl.production.metadata.admin.models import Dataset, Attribute, Dataset
 
 class GenomeViewSetTestCase(APITestCase):
     fixtures = ['django.json', 'ensembl_genome_data.json']
+    databases = ['metadata', 'ncbi_taxonomy']
 
     def setUp(self):
         self.client = APIClient()
@@ -39,6 +40,8 @@ class GenomeViewSetTestCase(APITestCase):
 
 
 class CascadeDeleteTestCase(TestCase):
+    databases = ['default', 'metadata', 'ncbi_taxonomy']
+
     def setUp(self):
         self.organism = Organism.objects.create(
             taxonomy_id=12345,
@@ -74,6 +77,7 @@ class CascadeDeleteTestCase(TestCase):
 
 class DatasetViewSetTestCase(APITestCase):
     fixtures = ['django.json', 'ensembl_genome_data.json']
+    databases = ['default', 'metadata', 'ncbi_taxonomy']
 
     def setUp(self):
         # self.client = APIClient()
