@@ -8,7 +8,7 @@
 #   distributed under the License is distributed on an "AS IS" BASIS,
 #   WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 #   See the License for the specific language governing permissions and
-#   limitations under the License.from django.apps import AppConfig
+#   limitations under the License.
 
 
 """
@@ -25,11 +25,11 @@ https://docs.djangoproject.com/en/3.1/ref/settings/
 
 from pathlib import Path
 import os
+
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent.parent
 
 SECRET_KEY = '0141utf8&0hq3%0(=7#*wfv7(27g-j&_opk4&9truxr_41yxgm'
-
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/3.1/howto/deployment/checklist/
@@ -40,7 +40,6 @@ DEBUG = True
 ALLOWED_HOSTS = ['localhost', '127.0.0.1']
 
 DATABASE_ROUTERS = ['metadata_admin.routers.MetaDataRegistryRouter']
-
 
 # Application definition
 
@@ -74,28 +73,30 @@ ROOT_URLCONF = 'metadata_admin.urls'
 # Database
 # https://docs.djangoproject.com/en/3.1/ref/settings/#databases
 DATABASES = {
-    'default': {
+    "default": {
+        "ENGINE": "django.db.backends.sqlite3",
+        "NAME": "django_db"
+    },
+    'metadata': {
         'ENGINE': 'django.db.backends.mysql',
         'NAME': os.getenv("REGISTRY_DB", "ensembl_genome_metadata"),
         'USER': os.getenv("DATABASE_USER", "ensembl"),
         'PASSWORD': os.getenv("DATABASE_PASSWORD", ""),
         'HOST': os.getenv("DATABASE_HOST", "localhost"),
-        'PORT': os.getenv("DATABASE_PORT", 3306),
+        'PORT': os.getenv("DATABASE_PORT", 3306)
     },
     'ncbi_taxonomy': {
         'ENGINE': 'django.db.backends.mysql',
-        'NAME': os.getenv("TAXONOMY_DB", "ncbi_taxonomy"),
+        'NAME': os.getenv("TAXONOMY_DB", "marco_ncbi_taxonomy"),
         'USER': os.getenv("DATABASE_USER", "ensembl"),
         'PASSWORD': os.getenv("DATABASE_PASSWORD", ""),
         'HOST': os.getenv("DATABASE_HOST", "localhost"),
         'PORT': os.getenv("DATABASE_PORT", 3306),
     }
 }
-
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [BASE_DIR / 'templates'],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -109,7 +110,6 @@ TEMPLATES = [
 ]
 
 WSGI_APPLICATION = 'metadata_admin.wsgi.application'
-
 
 # Password validation
 # https://docs.djangoproject.com/en/3.1/ref/settings/#auth-password-validators
@@ -129,7 +129,6 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
-
 # Internationalization
 # https://docs.djangoproject.com/en/3.1/topics/i18n/
 
@@ -142,7 +141,6 @@ USE_I18N = True
 USE_L10N = True
 
 USE_TZ = True
-
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/3.1/howto/static-files/

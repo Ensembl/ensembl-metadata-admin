@@ -8,43 +8,20 @@
 #   distributed under the License is distributed on an "AS IS" BASIS,
 #   WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 #   See the License for the specific language governing permissions and
-#   limitations under the License.from django.apps import AppConfig
+#   limitations under the License.
 import uuid
 
+import jsonfield.fields
 from django.core.exceptions import ValidationError
 from django.db import models
-from django.db.models.lookups import IContains
-import jsonfield.fields
-
-from ensembl.production.metadata.api.models.dataset import DatasetStatus
 
 
 class UUIDField(models.UUIDField):
 
     def __init__(self, verbose_name=None, **kwargs):
-        super().__init__(verbose_name, **kwargs)
-        self.max_length = 40
-
-    def get_internal_type(self):
-        return "CharField"
-
-    def get_db_prep_value(self, value, connection, prepared=False):
-        if value is None:
-            return None
-        if not isinstance(value, uuid.UUID):
-            try:
-                value = uuid.UUID(value)
-            except AttributeError:
-                raise TypeError(self.error_messages['invalid'] % {'value': value})
-
-        if connection.features.has_native_uuid_field:
-            return value
-        return str(value)
-
-
-@UUIDField.register_lookup
-class UUIDIContains(IContains):
-    pass
+        kwargs['max_length'] = 36
+        # jump over first parent hierarchy
+        super(models.UUIDField, self).__init__(verbose_name, **kwargs)
 
 
 class Assembly(models.Model):
@@ -59,7 +36,7 @@ class Assembly(models.Model):
     tol_id = models.CharField(unique=True, max_length=32, blank=True, null=True)
     created = models.DateTimeField(blank=True, null=True, auto_now_add=True)
     ensembl_name = models.CharField(unique=True, max_length=255, blank=True, null=True)
-    assembly_uuid = models.UUIDField(default=uuid.uuid4, editable=False, unique=True)
+    assembly_uuid = UUIDField(default=uuid.uuid4, editable=False, unique=True)
     is_reference = models.BooleanField(default=False, null=False)
     url_name = models.CharField(max_length=128, null=True)
 
@@ -146,32 +123,52 @@ class Attribute(models.Model):
         return self.name
 
 
+class DatasetManager(models.Manager):
+    def create_child_datasets(self, instance, genome):
+        # FYI Needs to be correlated with SQLAlchemy counter part:
+        # https://github.com/Ensembl/ensembl-metadata-api/blob/main/src/ensembl/production/metadata/api/factories/datasets.py#L26
+        kids_type = DatasetType.objects.filter(parent=instance.dataset_type)
+        for kid in kids_type.all():
+            ds = self.create(dataset_type=kid,
+                             label=f"{kid.name} from {instance.dataset_type.name}",
+                             dataset_source=instance.dataset_source,
+                             name=kid.name,
+                             status=instance.status,
+                             parent=instance)
+            GenomeDataset.objects.create(genome=genome, dataset=ds)
+            self.create_child_datasets(ds, genome)
+
+
 class Dataset(models.Model):
+    class DatasetStatus(models.TextChoices):
+        SUBMITTED = 'SUBMITTED', 'Submitted'
+        PROCESSING = 'PROCESSING', 'Processing'
+        PROCESSED = 'PROCESSED', 'Processed'
+        RELEASED = 'RELEASED', 'Released'
+
+    objects = DatasetManager()
     dataset_id = models.AutoField(primary_key=True)
     name = models.CharField(max_length=128)
     version = models.CharField(max_length=128, blank=True, null=True)
     created = models.DateTimeField(auto_now_add=True)
     dataset_source = models.ForeignKey('DatasetSource', on_delete=models.CASCADE)
     label = models.CharField(max_length=128)
-    # attributes = models.ManyToManyField('Attribute', through=DatasetAttribute)
-    statuses = [
-        (DatasetStatus.Submitted.value, DatasetStatus.Submitted.value),
-        (DatasetStatus.Processing.value, DatasetStatus.Processing.value),
-        (DatasetStatus.Processed.value, DatasetStatus.Processed.value),
-        (DatasetStatus.Released.value, DatasetStatus.Released.value),
-    ]
-    status = models.CharField(max_length=12, choices=statuses, default='Submitted')
+    attributes = models.ManyToManyField('Attribute', through='DatasetAttribute', related_name='dataset_attributes')
+    status = models.CharField(max_length=12, choices=DatasetStatus.choices, default=DatasetStatus.SUBMITTED)
     genomes = models.ManyToManyField('Genome', through='GenomeDataset')
     dataset_type = models.ForeignKey('DatasetType', models.DO_NOTHING)
     dataset_uuid = UUIDField(default=uuid.uuid4, editable=False)
+    parent = models.ForeignKey('Dataset', default=None, null=True, db_column='parent_id',
+                               on_delete=models.CASCADE)
 
     class Meta:
         db_table = 'dataset'
 
     def save(self, *args, **kwargs):
-        if self.pk is not None:
-            if self.genomes.filter(releases__isnull=False).exists():
-                raise ValidationError('Released data cannot be modified')
+        if self.pk and self.genomes.filter(releases__isnull=False).exists():
+            raise ValidationError('Released data cannot be modified')
+        else:
+            created = True
         super().save(*args, **kwargs)
 
     def delete(self, *args, **kwargs):
@@ -183,14 +180,14 @@ class Dataset(models.Model):
         return f"{self.status}"
 
     def __str__(self):
-        return self.name
+        return f"{self.name}[{self.dataset_uuid}]"
 
 
 class DatasetAttribute(models.Model):
     dataset_attribute_id = models.AutoField(primary_key=True)
     value = models.CharField(max_length=128)
     attribute = models.ForeignKey('Attribute', on_delete=models.CASCADE, related_name='datasets_set')
-    dataset = models.ForeignKey('Dataset', on_delete=models.CASCADE, related_name='attributes')
+    dataset = models.ForeignKey('Dataset', on_delete=models.CASCADE, related_name='attributes_set')
 
     class Meta:
         db_table = 'dataset_attribute'
@@ -236,21 +233,29 @@ class DatasetType(models.Model):
 
     class Meta:
         db_table = 'dataset_type'
+        ordering = ['label']
 
     def __str__(self):
         return self.name
 
 
 class EnsemblRelease(models.Model):
+    class ReleaseStatus(models.TextChoices):
+        PLANNED = 'PLANNED', 'Planned'
+        PREPARING = 'PREPARING', 'Preparing'
+        PREPARED = 'PREPARED', 'Prepared'
+        RELEASED = 'RELEASED', 'Released'
+
     release_id = models.AutoField(primary_key=True)
     version = models.DecimalField(max_digits=10, decimal_places=1)
-    release_date = models.DateField()
+    release_date = models.DateField(null=True, blank=True)
     label = models.CharField(max_length=64, blank=True, null=True)
     is_current = models.BooleanField(default=False)
     site = models.ForeignKey('EnsemblSite', on_delete=models.SET_NULL, blank=True, null=True)
     release_type = models.CharField(max_length=16)
     genomes = models.ManyToManyField('Genome', through='GenomeRelease')
     datasets = models.ManyToManyField('Dataset', through='GenomeDataset')
+    status = models.CharField(max_length=12, choices=ReleaseStatus.choices, default=ReleaseStatus.PLANNED)
 
     class Meta:
         db_table = 'ensembl_release'
@@ -283,6 +288,8 @@ class Genome(models.Model):
     datasets = models.ManyToManyField('Dataset', through='GenomeDataset')
     releases = models.ManyToManyField('EnsemblRelease', through='GenomeRelease')
     production_name = models.CharField(max_length=255)
+    genebuild_version = models.CharField(max_length=64, null=True, unique=False)
+    genebuild_date = models.CharField(max_length=20, null=True, unique=False)
 
     def save(self, *args, **kwargs):
         if self.pk is not None and self.releases.exists():
@@ -302,6 +309,14 @@ class Genome(models.Model):
 
 
 class GenomeDataset(models.Model):
+    class Meta:
+        db_table = 'genome_dataset'
+        constraints = [
+            models.UniqueConstraint(
+                fields=['dataset', 'genome'], name='unique_dataset_genome'
+            )
+        ]
+
     genome_dataset_id = models.AutoField(primary_key=True)
     dataset = models.ForeignKey(Dataset, on_delete=models.CASCADE, related_name='genome_datasets')
     genome = models.ForeignKey(Genome, on_delete=models.CASCADE)
@@ -318,9 +333,6 @@ class GenomeDataset(models.Model):
             raise ValidationError('Released data cannot be deleted')
         super().delete(*args, **kwargs)
 
-    class Meta:
-        db_table = 'genome_dataset'
-
     @property
     def name(self):
         return self.dataset.name
@@ -335,6 +347,13 @@ class GenomeDataset(models.Model):
 
 
 class GenomeRelease(models.Model):
+    class Meta:
+        constraints = [
+            models.UniqueConstraint(
+                fields=['release', 'genome'], name='unique_release_genome'
+            )
+        ]
+
     genome_release_id = models.AutoField(primary_key=True)
     genome = models.ForeignKey(Genome, on_delete=models.CASCADE)
     release = models.ForeignKey(EnsemblRelease, on_delete=models.CASCADE)
@@ -371,7 +390,7 @@ class Organism(models.Model):
     scientific_parlance_name = models.CharField(max_length=255, blank=True, null=True)
     groups = models.ManyToManyField('OrganismGroup', through='OrganismGroupMember')
     assemblies = models.ManyToManyField('Assembly', through='Genome')
-    organism_uuid = models.UUIDField(default=uuid.uuid4, editable=False, unique=True)
+    organism_uuid = UUIDField(default=uuid.uuid4, editable=False, unique=True)
     strain_type = models.CharField(max_length=128, blank=True, null=True)
     rank = models.IntegerField(blank=True, null=True)
 

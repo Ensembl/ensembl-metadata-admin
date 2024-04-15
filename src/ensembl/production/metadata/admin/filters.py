@@ -8,7 +8,7 @@
 #   distributed under the License is distributed on an "AS IS" BASIS,
 #   WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 #   See the License for the specific language governing permissions and
-#   limitations under the License.from django.apps import AppConfig
+#   limitations under the License.
 
 from django.contrib import admin
 from django.utils.translation import gettext_lazy as _
@@ -42,3 +42,35 @@ class MetadataOrganismFilter(admin.SimpleListFilter):
         if self.value():
             organism = Organism.objects.get(pk=self.value())
             return queryset.filter(genome__organism=organism)
+
+
+class DatasetTypeListFilter(admin.SimpleListFilter):
+    title = _("Dataset Type")
+
+    # Parameter for the filter that will be used in the URL query.
+    parameter_name = "dataset_type"
+
+    def lookups(self, request, model_admin):
+        """
+        Returns a list of tuples. The first element in each
+        tuple is the coded value for the option that will
+        appear in the URL query. The second element is the
+        human-readable name for the option that will appear
+        in the right sidebar.
+        """
+        if request.user.is_superuser:
+            types = DatasetType.objects.all()
+        else:
+            types = DatasetType.objects.filter(parent__isnull=True)
+        return [(t.dataset_type_id, t.label) for t in types]
+
+    def queryset(self, request, queryset):
+        """
+        Returns the filtered queryset based on the value
+        provided in the query string and retrievable via
+        `self.value()`.
+        """
+        if self.value():
+            dataset_type = DatasetType.objects.get(pk=self.value())
+            return queryset.filter(dataset_type=dataset_type)
+

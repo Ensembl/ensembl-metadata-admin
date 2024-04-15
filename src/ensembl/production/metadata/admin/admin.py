@@ -8,7 +8,7 @@
 #   distributed under the License is distributed on an "AS IS" BASIS,
 #   WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 #   See the License for the specific language governing permissions and
-#   limitations under the License.from django.apps import AppConfig
+#   limitations under the License.
 from django.contrib.admin.options import InlineModelAdmin
 from django.urls import reverse
 from django.utils.safestring import mark_safe
@@ -301,6 +301,7 @@ class DatasetAttributeInline(MetadataInline, admin.TabularInline):
     model = DatasetAttribute
     fields = ['attribute', 'value']
     ordering = ['attribute']
+    filter = ''
 
     def has_change_permission(self, request, obj=None):
         return super().has_delete_permission(request, obj) or request.user.is_superuser
@@ -338,11 +339,12 @@ class DatasetAdmin(AdminMetadata, admin.ModelAdmin):
                      'genomes__assembly__tol_id', 'genomes__assembly__ensembl_name')
     list_display = ('dataset_uuid', 'name', 'label', 'version', 'status_display', 'dataset_source', 'dataset_type')
     ordering = ('-genomes__releases__version', 'genomes__organism__name')
-    list_filter = (MetadataReleaseFilter, 'dataset_type', 'status')
+    list_filter = (MetadataReleaseFilter, DatasetTypeListFilter, 'dataset_type__topic', 'status')
     inlines = (DatasetAttributeInline,)
 
     def get_queryset(self, request):
         qs = super().get_queryset(request)
+        qs.filter(parent__isnull=True)
         return qs.prefetch_related('genomes__organism', 'genomes__assembly', 'genomes__releases')
 
     def status_display(self, obj):
@@ -437,11 +439,20 @@ class SourceAdmin(AdminMetadata, admin.ModelAdmin):
     list_filter = ['type']
 
 
+class SubDatasetTypeInline(MetadataInline, admin.TabularInline):
+    model = DatasetType
+    fields = ('name', 'label', 'topic', 'description')
+
+
 @admin.register(DatasetType)
 class TypeAdmin(AdminMetadata, admin.ModelAdmin):
-    fields = ('name', 'label', 'topic', 'description', 'details_uri')
+    fields = ('name', 'label', 'topic', 'description')
     readonly_fields = ['name']
-    list_display = ['name', 'label', 'topic', 'description', 'details_uri']
+    list_display = ['name', 'label', 'topic', 'description']
+    inlines = [SubDatasetTypeInline]
+
+    def get_queryset(self, request):
+        return super().get_queryset(request)
 
     def has_delete_permission(self, request, obj=None):
         return False
