@@ -14,6 +14,7 @@ import uuid
 import jsonfield.fields
 from django.core.exceptions import ValidationError
 from django.db import models
+from django.db.models.lookups import IContains
 
 
 class UUIDField(models.UUIDField):
@@ -22,6 +23,27 @@ class UUIDField(models.UUIDField):
         kwargs['max_length'] = 36
         # jump over first parent hierarchy
         super(models.UUIDField, self).__init__(verbose_name, **kwargs)
+
+    def get_internal_type(self):
+        return "CharField"
+
+    def get_db_prep_value(self, value, connection, prepared=False):
+        if value is None:
+            return None
+        if not isinstance(value, uuid.UUID):
+            try:
+                value = uuid.UUID(value)
+            except AttributeError:
+                raise TypeError(self.error_messages['invalid'] % {'value': value})
+
+            if connection.features.has_native_uuid_field:
+                return value
+            return str(value)
+
+
+@UUIDField.register_lookup
+class UUIDIContains(IContains):
+    pass
 
 
 class Assembly(models.Model):
