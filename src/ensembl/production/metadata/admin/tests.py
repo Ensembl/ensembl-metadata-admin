@@ -9,6 +9,8 @@
 #   WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 #   See the License for the specific language governing permissions and
 #   limitations under the License.
+import uuid
+
 from django.contrib.auth.models import User
 from django.test import TestCase
 from rest_framework import status
@@ -29,7 +31,6 @@ class GenomeViewSetTestCase(APITestCase):
     def test_genome_viewset_get(self):
         response = self.client.get(reverse('ensembl_metadata:genome-list'))
         self.assertEqual(response.status_code, status.HTTP_200_OK)
-        print(reverse('ensembl_metadata:genome-list'))
         self.assertIsNotNone(response.data)
 
     def test_genome_viewset_get_individual(self):
@@ -48,18 +49,21 @@ class CascadeDeleteTestCase(TestCase):
             common_name='Test Organism',
             biosample_id='test_organism',
             scientific_name='Testus organismus',
+            organism_uuid=str(uuid.uuid4())
         )
 
         self.assembly = Assembly.objects.create(
             accession='Test Accession',
             level='Test Level',
             name='Test Name',
+            assembly_uuid=str(uuid.uuid4())
         )
 
         self.genome = Genome.objects.create(
             organism=self.organism,
             assembly=self.assembly,
             production_name='Test Production Name',
+            genome_uuid=str(uuid.uuid4())
         )
 
     def test_cascade_delete_organism(self):
@@ -193,14 +197,17 @@ class DatasetViewSetTestCase(APITestCase):
         }
 
         create_response = self.client.post(reverse('ensembl_metadata:dataset-list'), payload, format='json')
-        self.assertEqual(create_response.status_code, status.HTTP_201_CREATED)
+        self.assertEqual(create_response.status_code, status.HTTP_201_CREATED, "Dataset is created")
 
         dataset_uuid = create_response.data['dataset_uuid']
+        kids = Dataset.objects.filter(parent__dataset_uuid=dataset_uuid).all()
+        self.assertGreaterEqual(2, len(kids), "Children have been created")
         delete_response = self.client.delete(reverse('ensembl_metadata:dataset-detail', args=[dataset_uuid]))
-        self.assertEqual(delete_response.status_code, status.HTTP_204_NO_CONTENT)
-
+        self.assertEqual(delete_response.status_code, status.HTTP_204_NO_CONTENT, "Delete return expected code")
         get_response = self.client.get(reverse('ensembl_metadata:dataset-detail', args=[dataset_uuid]))
-        self.assertEqual(get_response.status_code, status.HTTP_404_NOT_FOUND)
+        self.assertEqual(get_response.status_code, status.HTTP_404_NOT_FOUND, "Parent dataset is deleted")
+        kids_deleted = Dataset.objects.filter(dataset_uuid__in=[kid.dataset_uuid for kid in kids])
+        self.assertEqual(0, len(kids_deleted), "Cascade delete child datasets")
 
     def test_dataset_update_no_dataset(self):
         payload = {
