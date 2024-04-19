@@ -3,6 +3,6 @@ django-filter
 djangorestframework~=3.12.4
 drf-spectacular
 Markdown
-mysqlclient
+mysqlclient~=2.1.0
 django-jsonfield~=1.4.1
 urllib3~=1.26.15
