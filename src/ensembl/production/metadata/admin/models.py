@@ -39,6 +39,7 @@ class UUIDField(models.UUIDField):
             if connection.features.has_native_uuid_field:
                 return value
             return str(value)
+        return value
 
 
 @UUIDField.register_lookup
@@ -58,7 +59,7 @@ class Assembly(models.Model):
     tol_id = models.CharField(unique=True, max_length=32, blank=True, null=True)
     created = models.DateTimeField(blank=True, null=True, auto_now_add=True)
     ensembl_name = models.CharField(unique=True, max_length=255, blank=True, null=True)
-    assembly_uuid = UUIDField(default=uuid.uuid4, editable=False, unique=True)
+    assembly_uuid = UUIDField(default=str(uuid.uuid4()), editable=False, unique=True)
     is_reference = models.BooleanField(default=False, null=False)
     url_name = models.CharField(max_length=128, null=True)
 
@@ -156,6 +157,7 @@ class DatasetManager(models.Manager):
                              dataset_source=instance.dataset_source,
                              name=kid.name,
                              status=instance.status,
+                             dataset_uuid=uuid.uuid4(),
                              parent=instance)
             GenomeDataset.objects.create(genome=genome, dataset=ds)
             self.create_child_datasets(ds, genome)
@@ -179,7 +181,7 @@ class Dataset(models.Model):
     status = models.CharField(max_length=12, choices=DatasetStatus.choices, default=DatasetStatus.SUBMITTED)
     genomes = models.ManyToManyField('Genome', through='GenomeDataset')
     dataset_type = models.ForeignKey('DatasetType', models.DO_NOTHING)
-    dataset_uuid = UUIDField(default=uuid.uuid4, editable=False)
+    dataset_uuid = UUIDField(default=str(uuid.uuid4()), editable=False)
     parent = models.ForeignKey('Dataset', default=None, null=True, db_column='parent_id',
                                on_delete=models.CASCADE)
 
@@ -302,7 +304,7 @@ class EnsemblSite(models.Model):
 
 class Genome(models.Model):
     genome_id = models.AutoField(primary_key=True)
-    genome_uuid = UUIDField(default=uuid.uuid4, editable=False, unique=True)
+    genome_uuid = UUIDField(default=str(uuid.uuid4()), editable=False, unique=True)
     assembly = models.ForeignKey(Assembly, on_delete=models.CASCADE)
     organism = models.ForeignKey('Organism', on_delete=models.CASCADE)
     created = models.DateTimeField(auto_now_add=True)
@@ -364,7 +366,6 @@ class GenomeDataset(models.Model):
         return self.dataset.dataset_type.name if self.dataset.dataset_type else 'n/a'
 
     def release_version(self):
-        print("Release!!!!", self.release)
         return self.release.version if self.release else 'Unreleased'
 
 
@@ -412,7 +413,7 @@ class Organism(models.Model):
     scientific_parlance_name = models.CharField(max_length=255, blank=True, null=True)
     groups = models.ManyToManyField('OrganismGroup', through='OrganismGroupMember')
     assemblies = models.ManyToManyField('Assembly', through='Genome')
-    organism_uuid = UUIDField(default=uuid.uuid4, editable=False, unique=True)
+    organism_uuid = UUIDField(default=str(uuid.uuid4()), editable=False, unique=True)
     strain_type = models.CharField(max_length=128, blank=True, null=True)
     rank = models.IntegerField(blank=True, null=True)
 
