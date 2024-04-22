@@ -204,7 +204,7 @@ class Dataset(models.Model):
         return f"{self.status}"
 
     def __str__(self):
-        return f"{self.name}[{self.dataset_uuid}]"
+        return f"{self.name} [{self.dataset_uuid}]"
 
 
 class DatasetAttribute(models.Model):
@@ -284,6 +284,7 @@ class EnsemblRelease(models.Model):
     class Meta:
         db_table = 'ensembl_release'
         unique_together = (('version', 'site'),)
+        ordering = ('version',)
 
     def __str__(self):
         return str(self.version)
@@ -366,7 +367,7 @@ class GenomeDataset(models.Model):
         return self.dataset.dataset_type.name if self.dataset.dataset_type else 'n/a'
 
     def release_version(self):
-        return self.release.version if self.release else 'Unreleased'
+        return f"{self.release.version} [{self.release.status}]" if self.release else 'Unreleased'
 
 
 class GenomeRelease(models.Model):

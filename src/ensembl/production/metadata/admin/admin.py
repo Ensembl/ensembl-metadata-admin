@@ -207,13 +207,17 @@ class GenomeReleaseInLine(MetadataInline, admin.TabularInline):
 
 @admin.register(EnsemblRelease)
 class ReleaseAdmin(AdminMetadata, admin.ModelAdmin):
-    fields = ('release_date', 'site', 'release_type', 'is_current', 'label')
-    readonly_fields = ('release_date', 'site', 'release_type', 'is_current')
+    fields = ('get_status_display', 'release_date', 'release_type', 'is_current', 'label')
+    readonly_fields = ('get_status_display', 'release_date', 'site', 'release_type', 'is_current')
     search_fields = ('version',)
     list_filter = ('is_current', 'release_type', 'site')
-    list_display = ('version', 'release_date', 'label', 'site', 'release_type', 'is_current')
-    ordering = ('-is_current', '-release_date',)
+    list_display = ('version', 'release_date', 'label', 'release_type', 'is_current', 'get_status_display')
     inlines = (GenomeReleaseInLine,)
+
+    def get_status_display(self, obj):
+        return obj.status
+
+    get_status_display.short_description = "Release status"
 
     def genome_assembly(self, obj):
         output = ''
@@ -330,9 +334,20 @@ class DatasetAttributeInline(MetadataInline, admin.TabularInline):
         return super(DatasetAttributeInline, self).get_formset(request, obj, **kwargs)
 
 
+class DatasetGenomeInline(MetadataInline, admin.TabularInline):
+    model = GenomeDataset
+    fields = ['genome_uuid', 'release_version']
+    extra = 0
+    can_update = False
+    can_delete = False
+
+    def genome_uuid(self, obj):
+        return obj.genome.genome_uuid
+
+
 @admin.register(Dataset)
 class DatasetAdmin(AdminMetadata, admin.ModelAdmin):
-    fields = ('name', 'version', 'dataset_type', 'dataset_source', 'label', 'status', 'dataset_uuid')
+    fields = ('name', 'version', 'dataset_type', 'dataset_source', 'label', 'status_display')
     search_fields = ('genomes__genome_uuid', 'genomes__organism__common_name',
                      'genomes__organism__biosample_id', 'genomes__organism__scientific_name',
                      'genomes__assembly__accession', 'genomes__assembly__name',
@@ -340,7 +355,7 @@ class DatasetAdmin(AdminMetadata, admin.ModelAdmin):
     list_display = ('dataset_uuid', 'name', 'label', 'version', 'status_display', 'dataset_source', 'dataset_type')
     ordering = ('-genomes__releases__version', 'genomes__organism__name')
     list_filter = (MetadataReleaseFilter, DatasetTypeListFilter, 'dataset_type__topic', 'status')
-    inlines = (DatasetAttributeInline,)
+    inlines = (DatasetGenomeInline, DatasetAttributeInline)
 
     def get_queryset(self, request):
         qs = super().get_queryset(request)
@@ -352,16 +367,8 @@ class DatasetAdmin(AdminMetadata, admin.ModelAdmin):
 
     status_display.short_description = "Status"
 
-    #
-    # def changeform_view(self, request, object_id=None, form_url='', extra_context=None):
-    #     extra_context = extra_context or {}
-    #     if object_id:
-    #         dataset = self.get_object(request, object_id)
-    #         extra_context['status_display'] = dataset.get_status_display()
-    #     return super().changeform_view(request, object_id, form_url, extra_context=extra_context)
-
     def get_readonly_fields(self, request, obj=None):
-        return self.readonly_fields + ('dataset_uuid', 'created',)
+        return self.readonly_fields + ('created',)
 
 
 #
@@ -395,8 +402,10 @@ class OrganismGroupAdmin(AdminMetadata, admin.ModelAdmin):
 
 class GenomeDatasetInline(MetadataInline, admin.TabularInline):
     model = Genome.datasets.through
-    fields = ['display_dataset', 'name', 'type', 'release_version', 'is_current']  # Updated fields list
-    readonly_fields = ['display_dataset', 'name', 'type', 'release_version', 'is_current']  # Updated readonly fields
+    fields = ['display_dataset', 'name', 'type', 'release_version', 'is_current',
+              'status_display']  # Updated fields list
+    readonly_fields = ['display_dataset', 'name', 'type', 'release_version', 'is_current',
+                       'status_display']  # Updated readonly fields
     can_delete = False
     extra = 0
 
@@ -407,7 +416,11 @@ class GenomeDatasetInline(MetadataInline, admin.TabularInline):
         url = reverse('admin:ensembl_metadata_dataset_change', args=[obj.dataset.pk])
         return format_html("<a href='{}'>{}</a>", url, obj.dataset.dataset_uuid)
 
+    def status_display(self, obj):
+        return obj.dataset.get_status_display()
+
     display_dataset.short_description = 'Dataset'
+    status_display.short_description = 'Status'
 
 
 class GenomeReleaseInline(MetadataInline, admin.TabularInline):
