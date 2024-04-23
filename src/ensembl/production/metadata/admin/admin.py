@@ -359,7 +359,8 @@ class DatasetAdmin(AdminMetadata, admin.ModelAdmin):
 
     def get_queryset(self, request):
         qs = super().get_queryset(request)
-        qs.filter(parent__isnull=True)
+        if not request.user.is_superuser:
+            qs = qs.filter(parent__isnull=True)
         return qs.prefetch_related('genomes__organism', 'genomes__assembly', 'genomes__releases')
 
     def status_display(self, obj):
@@ -421,6 +422,12 @@ class GenomeDatasetInline(MetadataInline, admin.TabularInline):
 
     display_dataset.short_description = 'Dataset'
     status_display.short_description = 'Status'
+
+    def get_queryset(self, request):
+        queryset = super().get_queryset(request)
+        if not request.user.is_superuser:
+            queryset = queryset.filter(dataset__parent__isnull=True)
+        return queryset
 
 
 class GenomeReleaseInline(MetadataInline, admin.TabularInline):
