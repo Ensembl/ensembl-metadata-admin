@@ -22,10 +22,12 @@ class MetadataReleaseFilter(admin.SimpleListFilter):
 
     def lookups(self, request, model_admin):
         releases = EnsemblRelease.objects.all()
-        return [(r.release_id, r.version) for r in releases]
+        return [(r.release_id, r.version) for r in releases] + [('-', '-')]
 
     def queryset(self, request, queryset):
         if self.value():
+            if self.value() == '-':
+                return queryset.exclude(genome__releases__isnull=False)
             ensembl_release = EnsemblRelease.objects.get(pk=self.value())
             return queryset.filter(genome__releases=ensembl_release)
 
