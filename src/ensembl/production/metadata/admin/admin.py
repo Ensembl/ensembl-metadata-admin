@@ -171,11 +171,17 @@ class AssemblyAdmin(AdminMetadata, admin.ModelAdmin):
 # #####RELEASE ADMIN PAGE#####
 class GenomeReleaseInLine(MetadataInline, admin.TabularInline):
     model = GenomeRelease
-    fields = ['genome_genome', 'genome_assembly', 'genome_organism', 'genome_datasets', 'is_current']
-    readonly_fields = ['genome_genome', 'genome_assembly', 'genome_organism', 'genome_datasets', 'is_current']
+    verbose_name = 'Genome in Release'
+    verbose_name_plural = 'Genomes in Release'
+    fields = ['genome_genome', 'genome_assembly', 'genome_organism', 'is_current']
+    readonly_fields = ['genome_genome', 'genome_assembly', 'genome_organism', 'is_current']
     can_delete = False
     can_update = False
     extra = 0
+    ordering = ['genome__genome_uuid']
+
+    def has_add_permission(self, request, obj):
+        return False
 
     def genome_genome(self, obj):
         url_view = reverse('admin:ensembl_metadata_genome_change',
@@ -199,20 +205,60 @@ class GenomeReleaseInLine(MetadataInline, admin.TabularInline):
 
     genome_organism.short_description = "Organism"
 
-    def genome_datasets(self, obj):
-        return ', '.join([d['dataset_type__name'] for d in obj.genome.datasets.values('dataset_type__name')])
 
-    genome_datasets.short_description = "Datasets"
+class ReleaseDatasetInline(MetadataInline, admin.TabularInline):
+    model = GenomeDataset
+    verbose_name = 'Dataset in Release'
+    verbose_name_plural = 'Datasets in Release'
+    fields = ['dataset_uuid', 'genome_uuid', 'dataset_topic', 'dataset_status']
+    readonly_fields = ['dataset_uuid', 'genome_uuid', 'dataset_topic', 'dataset_status']
+    can_delete = False
+    can_update = False
+    extra = 0
+    ordering = ['genome__genome_uuid', 'dataset__name']
+
+    def get_queryset(self, request):
+        qs = super().get_queryset(request)
+        if not request.user.is_superuser:
+            qs = qs.filter(dataset__parent__isnull=True)
+        qs = qs.prefetch_related('dataset', 'genome', 'dataset__dataset_type')
+        return qs
+
+    def has_add_permission(self, request, obj):
+        return False
+
+    def dataset_uuid(self, obj):
+        url = reverse('admin:ensembl_metadata_dataset_change', args=[obj.dataset.pk])
+        return format_html("<a href='{}'>{}</a>", url, obj.dataset.dataset_uuid)
+
+    dataset_uuid.short_description = "Dataset uuid"
+
+    def genome_uuid(self, obj):
+        url = reverse('admin:ensembl_metadata_genome_change', args=[obj.genome.pk])
+        return format_html("<a href='{}'>{}</a>", url, obj.genome.genome_uuid)
+
+    genome_uuid.short_description = "Genome uuid"
+
+    def dataset_topic(self, obj):
+        return obj.dataset.dataset_type.topic
+
+    dataset_topic.short_description = "Dataset topic"
+
+    def dataset_status(self, obj):
+        return obj.dataset.status
+
+    dataset_status.short_description = "Dataset status"
 
 
 @admin.register(EnsemblRelease)
 class ReleaseAdmin(AdminMetadata, admin.ModelAdmin):
+    # TODO add message for inconsistency detected in metadata release
     fields = ('get_status_display', 'release_date', 'release_type', 'is_current', 'label')
     readonly_fields = ('get_status_display', 'release_date', 'site', 'release_type', 'is_current')
     search_fields = ('version',)
     list_filter = ('is_current', 'release_type', 'site')
     list_display = ('version', 'release_date', 'label', 'release_type', 'is_current', 'get_status_display')
-    inlines = (GenomeReleaseInLine,)
+    inlines = (GenomeReleaseInLine, ReleaseDatasetInline)
 
     def get_status_display(self, obj):
         return obj.status
@@ -317,29 +363,37 @@ class DatasetAttributeInline(MetadataInline, admin.TabularInline):
         return request.user.is_superuser
 
     def get_field_queryset(self, db, db_field, request):
-        return super().get_field_queryset(db, db_field, request).filter(name__startswith=self.filter)
+        if db_field.name == 'attribute':
+            return super().get_field_queryset(db, db_field, request).filter(name__startswith=self.filter)
+        else:
+            return super().get_field_queryset(db, db_field, request)
 
     def get_formset(self, request, obj=None, **kwargs):
-        # TODO: Manage this with ClassConstants or a field in DatasetAttribute
-        if obj.name in ('assembly', 'genebuild'):
-            self.filter = obj.name
-        elif obj.name in ('regulation_build', 'regulatory_features'):
-            self.filter = 'regulation'
-        elif obj.name in ('variation', 'evidence'):
-            self.filter = 'variation'
-        elif obj.name == 'compara_homologies':
-            self.filter = 'compara'
-        else:
-            self.filter = ''
+        if obj is not None:
+            type_name = obj.dataset_type.name
+            if type_name in ('assembly', 'genebuild'):
+                self.filter = type_name
+            elif type_name in ('regulation_build', 'regulatory_features'):
+                self.filter = 'regulation'
+            elif type_name in ('variation', 'evidence'):
+                self.filter = 'variation'
+            elif type_name == 'homologies':
+                self.filter = 'compara'
+            else:
+                self.filter = 'dataset'
         return super(DatasetAttributeInline, self).get_formset(request, obj, **kwargs)
 
 
 class DatasetGenomeInline(MetadataInline, admin.TabularInline):
     model = GenomeDataset
     fields = ['genome_uuid', 'release_version']
+    readonly_fields = ['genome_uuid', 'release_version']
     extra = 0
     can_update = False
     can_delete = False
+
+    def has_add_permission(self, request, obj):
+        return False
 
     def genome_uuid(self, obj):
         return obj.genome.genome_uuid
@@ -348,14 +402,15 @@ class DatasetGenomeInline(MetadataInline, admin.TabularInline):
 @admin.register(Dataset)
 class DatasetAdmin(AdminMetadata, admin.ModelAdmin):
     fields = ('name', 'version', 'dataset_type', 'dataset_source', 'label', 'status_display')
-    search_fields = ('genomes__genome_uuid', 'genomes__organism__common_name',
+    search_fields = ('dataset_uuid', 'genomes__genome_uuid', 'genomes__organism__common_name',
                      'genomes__organism__biosample_id', 'genomes__organism__scientific_name',
                      'genomes__assembly__accession', 'genomes__assembly__name',
                      'genomes__assembly__tol_id', 'genomes__assembly__ensembl_name')
     list_display = ('dataset_uuid', 'name', 'label', 'version', 'status_display', 'dataset_source', 'dataset_type')
     ordering = ('-genomes__releases__version', 'genomes__organism__name')
     list_filter = (MetadataReleaseFilter, DatasetTypeListFilter, 'dataset_type__topic', 'status')
-    inlines = (DatasetGenomeInline, DatasetAttributeInline)
+    inlines = (DatasetGenomeInline, DatasetAttributeInline, ReleaseDatasetInline)
+    readonly_fields = ('status_display', 'dataset_type', 'dataset_source',)
 
     def get_queryset(self, request):
         qs = super().get_queryset(request)
@@ -403,10 +458,10 @@ class OrganismGroupAdmin(AdminMetadata, admin.ModelAdmin):
 
 class GenomeDatasetInline(MetadataInline, admin.TabularInline):
     model = Genome.datasets.through
-    fields = ['display_dataset', 'name', 'type', 'release_version', 'is_current',
+    fields = ['display_dataset', 'name', 'type', 'release_version', 'is_current', 'dataset_topic',
               'status_display']  # Updated fields list
     readonly_fields = ['display_dataset', 'name', 'type', 'release_version', 'is_current',
-                       'status_display']  # Updated readonly fields
+                       'status_display', 'dataset_topic']  # Updated readonly fields
     can_delete = False
     extra = 0
 
@@ -419,6 +474,9 @@ class GenomeDatasetInline(MetadataInline, admin.TabularInline):
 
     def status_display(self, obj):
         return obj.dataset.get_status_display()
+
+    def dataset_topic(self, obj):
+        return obj.dataset.dataset_type.topic
 
     display_dataset.short_description = 'Dataset'
     status_display.short_description = 'Status'
@@ -446,6 +504,7 @@ class GenomeReleaseInline(MetadataInline, admin.TabularInline):
 class GenomeAdmin(AdminMetadata, admin.ModelAdmin):
     list_display = ['genome_uuid', 'assembly', 'organism', 'is_best']
     list_filter = ['releases', 'is_best']
+    # TODO add an item to list with NULL value
     search_fields = ['assembly__name', 'organism__common_name', 'genome_uuid']
     fields = ['genome_uuid', 'assembly', 'organism', 'production_name', 'is_best', 'created']
     readonly_fields = ['production_name', 'genome_uuid', 'assembly', 'organism', 'created']

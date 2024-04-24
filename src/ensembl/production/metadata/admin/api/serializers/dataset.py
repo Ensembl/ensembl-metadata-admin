@@ -17,6 +17,7 @@ from ensembl.production.metadata.admin.models import Dataset, Attribute, Dataset
     Genome, GenomeDataset
 
 
+# TODO Filter on root DatasetTypes!
 class AttributeSerializer(serializers.ModelSerializer):
     class Meta:
         model = Attribute
