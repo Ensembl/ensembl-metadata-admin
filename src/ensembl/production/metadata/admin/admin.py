@@ -407,7 +407,7 @@ class DatasetAdmin(AdminMetadata, admin.ModelAdmin):
                      'genomes__assembly__accession', 'genomes__assembly__name',
                      'genomes__assembly__tol_id', 'genomes__assembly__ensembl_name')
     list_display = ('dataset_uuid', 'name', 'label', 'version', 'status_display', 'dataset_source', 'dataset_type')
-    ordering = ('-genomes__releases__version', 'genomes__organism__name')
+    ordering = ('-ensemblrelease__version', 'genomes__organism__name',)
     list_filter = (MetadataReleaseFilter, DatasetTypeListFilter, 'dataset_type__topic', 'status')
     inlines = (DatasetGenomeInline, DatasetAttributeInline, ReleaseDatasetInline)
     readonly_fields = ('status_display', 'dataset_type', 'dataset_source',)
@@ -416,7 +416,8 @@ class DatasetAdmin(AdminMetadata, admin.ModelAdmin):
         qs = super().get_queryset(request)
         if not request.user.is_superuser:
             qs = qs.filter(parent__isnull=True)
-        return qs.prefetch_related('genomes__organism', 'genomes__assembly', 'genomes__releases')
+        qs = qs.prefetch_related('genomes__organism', 'genomes__assembly', 'genomes__releases')
+        return qs
 
     def status_display(self, obj):
         return obj.get_status_display()
