@@ -54,7 +54,7 @@ class MetadataInline(InlineModelAdmin):
 class GenomeInLine(MetadataInline, admin.TabularInline):
     model = Genome
     fields = ['display_genome_uuid', 'organism', 'production_name', 'is_best']  # Specify the fields to display
-    readonly_fields = ['display_genome_uuid']  # Not editable field
+    readonly_fields = ['display_genome_uuid']
     can_delete = False
     extra = 0
 
@@ -386,7 +386,7 @@ class DatasetAttributeInline(MetadataInline, admin.TabularInline):
 
 class DatasetGenomeInline(MetadataInline, admin.TabularInline):
     model = GenomeDataset
-    fields = ['genome_uuid', 'release_version']
+    fields = ['genome_uuid', 'release_version', 'is_current']
     readonly_fields = ['genome_uuid', 'release_version']
     extra = 0
     can_update = False
@@ -406,11 +406,11 @@ class DatasetAdmin(AdminMetadata, admin.ModelAdmin):
                      'genomes__organism__biosample_id', 'genomes__organism__scientific_name',
                      'genomes__assembly__accession', 'genomes__assembly__name',
                      'genomes__assembly__tol_id', 'genomes__assembly__ensembl_name')
-    list_display = ('dataset_uuid', 'name', 'label', 'version', 'status_display', 'dataset_source', 'dataset_type')
+    list_display = ('dataset_uuid', 'name', 'label', 'version', 'status_display', 'dataset_type')
     ordering = ('-ensemblrelease__version', 'genomes__organism__name',)
     list_filter = (MetadataReleaseFilter, DatasetTypeListFilter, 'dataset_type__topic', 'status')
     inlines = (DatasetGenomeInline, DatasetAttributeInline, ReleaseDatasetInline)
-    readonly_fields = ('status_display', 'dataset_type', 'dataset_source',)
+    readonly_fields = ('status_display', 'dataset_type', 'dataset_source', )
 
     def get_queryset(self, request):
         qs = super().get_queryset(request)
@@ -426,7 +426,6 @@ class DatasetAdmin(AdminMetadata, admin.ModelAdmin):
 
     def get_readonly_fields(self, request, obj=None):
         return self.readonly_fields + ('created',)
-
 
 #
 class OrganismGroupInLine(MetadataInline, admin.TabularInline):
