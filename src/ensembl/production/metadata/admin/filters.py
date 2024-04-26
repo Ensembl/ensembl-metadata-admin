@@ -29,7 +29,18 @@ class MetadataReleaseFilter(admin.SimpleListFilter):
             if self.value() == '-':
                 return queryset.exclude(genome__releases__isnull=False)
             ensembl_release = EnsemblRelease.objects.get(pk=self.value())
-            return queryset.filter(genome__releases=ensembl_release)
+            queryset = queryset.filter(genome__releases=ensembl_release)
+            return queryset
+
+
+class MetadataDatasetReleaseFilter(MetadataReleaseFilter):
+    def queryset(self, request, queryset):
+        if self.value():
+            if self.value() == '-':
+                return queryset.exclude(genome_datasets__release__isnull=False)
+            ensembl_release = EnsemblRelease.objects.get(pk=self.value())
+            queryset = queryset.filter(genome_datasets__release=ensembl_release)
+            return queryset
 
 
 class MetadataOrganismFilter(admin.SimpleListFilter):
@@ -64,7 +75,8 @@ class DatasetTypeListFilter(admin.SimpleListFilter):
             types = DatasetType.objects.all()
         else:
             types = DatasetType.objects.filter(parent__isnull=True)
-        return [(t.dataset_type_id, t.label) for t in types]
+
+        return [(t.dataset_type_id, f"{t.label} ({t.name})") for t in types]
 
     def queryset(self, request, queryset):
         """
@@ -75,4 +87,3 @@ class DatasetTypeListFilter(admin.SimpleListFilter):
         if self.value():
             dataset_type = DatasetType.objects.get(pk=self.value())
             return queryset.filter(dataset_type=dataset_type)
-

@@ -19,6 +19,11 @@ from django.utils.html import format_html, format_html_join
 from django.contrib import admin, messages
 
 
+def display_genome_uuid(obj):
+    url = reverse('admin:ensembl_metadata_genome_change', args=[obj.pk])
+    return format_html("<a href='{}'>{}</a>", url, obj.genome_uuid)
+
+
 # Class to allow access only to turn everything readonly
 class AdminMetadata(admin.ModelAdmin):
     def has_view_permission(self, request, obj=None):
@@ -62,8 +67,7 @@ class GenomeInLine(MetadataInline, admin.TabularInline):
         return False
 
     def display_genome_uuid(self, obj):
-        url = reverse('admin:ensembl_metadata_genome_change', args=[obj.pk])
-        return format_html("<a href='{}'>{}</a>", url, obj.genome_uuid)
+        return display_genome_uuid(obj)
 
     display_genome_uuid.short_description = 'Genome UUID'
 
@@ -184,9 +188,7 @@ class GenomeReleaseInLine(MetadataInline, admin.TabularInline):
         return False
 
     def genome_genome(self, obj):
-        url_view = reverse('admin:ensembl_metadata_genome_change',
-                           args=(obj.genome.genome_id,))
-        return mark_safe(u"<a href='" + url_view + "'>" + str(obj.genome.genome_uuid) + "</a>")
+        return display_genome_uuid(obj.genome)
 
     genome_genome.short_description = "Genome"
 
@@ -234,8 +236,7 @@ class ReleaseDatasetInline(MetadataInline, admin.TabularInline):
     dataset_uuid.short_description = "Dataset uuid"
 
     def genome_uuid(self, obj):
-        url = reverse('admin:ensembl_metadata_genome_change', args=[obj.genome.pk])
-        return format_html("<a href='{}'>{}</a>", url, obj.genome.genome_uuid)
+        return display_genome_uuid(obj.genome)
 
     genome_uuid.short_description = "Genome uuid"
 
@@ -396,7 +397,7 @@ class DatasetGenomeInline(MetadataInline, admin.TabularInline):
         return False
 
     def genome_uuid(self, obj):
-        return obj.genome.genome_uuid
+        return display_genome_uuid(obj.genome)
 
 
 @admin.register(Dataset)
@@ -408,9 +409,9 @@ class DatasetAdmin(AdminMetadata, admin.ModelAdmin):
                      'genomes__assembly__tol_id', 'genomes__assembly__ensembl_name')
     list_display = ('dataset_uuid', 'name', 'label', 'version', 'status_display', 'dataset_type')
     ordering = ('-ensemblrelease__version', 'genomes__organism__name',)
-    list_filter = (MetadataReleaseFilter, DatasetTypeListFilter, 'dataset_type__topic', 'status')
-    inlines = (DatasetGenomeInline, DatasetAttributeInline, ReleaseDatasetInline)
-    readonly_fields = ('status_display', 'dataset_type', 'dataset_source', )
+    list_filter = (MetadataDatasetReleaseFilter, DatasetTypeListFilter, 'dataset_type__topic', 'status')
+    inlines = (DatasetGenomeInline, DatasetAttributeInline)
+    readonly_fields = ('status_display', 'dataset_type', 'dataset_source')
 
     def get_queryset(self, request):
         qs = super().get_queryset(request)
@@ -426,6 +427,7 @@ class DatasetAdmin(AdminMetadata, admin.ModelAdmin):
 
     def get_readonly_fields(self, request, obj=None):
         return self.readonly_fields + ('created',)
+
 
 #
 class OrganismGroupInLine(MetadataInline, admin.TabularInline):
@@ -511,11 +513,25 @@ class GenomeAdmin(AdminMetadata, admin.ModelAdmin):
     inlines = [GenomeDatasetInline, GenomeReleaseInline]
 
 
+class DatasetInline(MetadataInline, admin.TabularInline):
+    model = Dataset
+    fields = ('dataset_uuid', 'name', 'version', 'label', 'status', 'created')
+    readonly_fields = ('dataset_uuid', 'name', 'version', 'label', 'status', 'created')
+    ordering = ('-created',)
+
+    def has_add_permission(self, request, obj):
+        return False
+
+    def has_delete_permission(self, request, obj=None):
+        return request.user.is_superuser
+
+
 @admin.register(DatasetSource)
 class SourceAdmin(AdminMetadata, admin.ModelAdmin):
     list_display = ['name', 'type']
     search_fields = ['type', 'name']
     list_filter = ['type']
+    inlines = [DatasetInline]
 
 
 class SubDatasetTypeInline(MetadataInline, admin.TabularInline):
