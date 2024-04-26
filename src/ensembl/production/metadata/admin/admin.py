@@ -10,6 +10,7 @@
 #   See the License for the specific language governing permissions and
 #   limitations under the License.
 from django.contrib.admin.options import InlineModelAdmin
+from django import forms
 from django.urls import reverse
 from django.utils.safestring import mark_safe
 from ensembl.production.metadata.admin.filters import *
@@ -408,7 +409,7 @@ class DatasetAdmin(AdminMetadata, admin.ModelAdmin):
                      'genomes__assembly__accession', 'genomes__assembly__name',
                      'genomes__assembly__tol_id', 'genomes__assembly__ensembl_name')
     list_display = ('dataset_uuid', 'name', 'label', 'version', 'status_display', 'dataset_type')
-    ordering = ('-ensemblrelease__version', 'genomes__organism__name',)
+    # ordering = ('-ensemblrelease__version', 'genomes__organism__name',)
     list_filter = (MetadataDatasetReleaseFilter, DatasetTypeListFilter, 'dataset_type__topic', 'status')
     inlines = (DatasetGenomeInline, DatasetAttributeInline)
     readonly_fields = ('status_display', 'dataset_type', 'dataset_source')
@@ -539,12 +540,29 @@ class SubDatasetTypeInline(MetadataInline, admin.TabularInline):
     fields = ('name', 'label', 'topic', 'description')
 
 
+class AdminTypeForm(forms.ModelForm):
+    TOPIC_CHOICES = (
+        ('assembly', 'Assembly'),
+        ('genebuild_annotation', 'Genebuild Annotation'),
+        ('compara_annotation', 'Compara Annotation'),
+        ('regulation_annotation', 'Regulation Annotation'),
+        ('variation_annotation', 'Variation Annotation'),
+        ('production_process', 'Production Processing'),
+        ('production_preparation', 'Production Preparation'),
+        ('production_publication', 'Production Publication')
+    )
+    topic = forms.ChoiceField(choices=TOPIC_CHOICES)
+
+
 @admin.register(DatasetType)
 class TypeAdmin(AdminMetadata, admin.ModelAdmin):
-    fields = ('name', 'label', 'topic', 'description')
+    fields = ('name', 'label', 'topic', 'description', 'parent')
     readonly_fields = ['name']
     list_display = ['name', 'label', 'topic', 'description']
+    list_filter = ['topic']
     inlines = [SubDatasetTypeInline]
+    ordering = ['name']
+    form = AdminTypeForm
 
     def get_queryset(self, request):
         return super().get_queryset(request)
