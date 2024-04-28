@@ -79,7 +79,7 @@ DATABASES = {
     },
     'metadata': {
         'ENGINE': 'django.db.backends.mysql',
-        'NAME': os.getenv("REGISTRY_DB", "ensembl_genome_metadata"),
+        'NAME': os.getenv("REGISTRY_DB", "marco_ensembl_genome_metadata"),
         'USER': os.getenv("DATABASE_USER", "ensembl"),
         'PASSWORD': os.getenv("DATABASE_PASSWORD", ""),
         'HOST': os.getenv("DATABASE_HOST", "localhost"),
@@ -87,7 +87,7 @@ DATABASES = {
     },
     'ncbi_taxonomy': {
         'ENGINE': 'django.db.backends.mysql',
-        'NAME': os.getenv("TAXONOMY_DB", "ncbi_taxonomy"),
+        'NAME': os.getenv("TAXONOMY_DB", "marco_ncbi_taxonomy"),
         'USER': os.getenv("DATABASE_USER", "ensembl"),
         'PASSWORD': os.getenv("DATABASE_PASSWORD", ""),
         'HOST': os.getenv("DATABASE_HOST", "localhost"),
