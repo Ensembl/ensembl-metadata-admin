@@ -47,7 +47,12 @@ Start the development server
  ./manage.py runserver
 ```
 
+Configuration present a sqlite db for the Django related tables `src/django_db`.
+Two Backend users
+- ensprod / Ensembl : superuser
+- ensuser / Ensembl : standard user
+
 Check in the browser
 ```
-http://localhost
+http://localhost:8000
 ```

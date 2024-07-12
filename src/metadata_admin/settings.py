@@ -37,7 +37,7 @@ SECRET_KEY = '0141utf8&0hq3%0(=7#*wfv7(27g-j&_opk4&9truxr_41yxgm'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['localhost', '127.0.0.1']
+ALLOWED_HOSTS = ['localhost', '127.0.0.1', '*']
 
 DATABASE_ROUTERS = ['metadata_admin.routers.MetaDataRegistryRouter']
 
