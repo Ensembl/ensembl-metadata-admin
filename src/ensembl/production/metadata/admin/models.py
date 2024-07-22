@@ -209,7 +209,7 @@ class Dataset(models.Model):
 
 class DatasetAttribute(models.Model):
     dataset_attribute_id = models.AutoField(primary_key=True)
-    value = models.CharField(max_length=128)
+    value = models.CharField(max_length=255)
     attribute = models.ForeignKey('Attribute', on_delete=models.CASCADE, related_name='datasets_set')
     dataset = models.ForeignKey('Dataset', on_delete=models.CASCADE, related_name='attributes_set')
 
