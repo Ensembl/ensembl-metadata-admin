@@ -43,15 +43,17 @@ setup(
     install_requires=import_requirements(),
     classifiers=[
         'Development Status :: 3 - Alpha',
-        'Intended Audience :: Developers',
-        'Environment :: Console',
-        'License :: OSI Approved :: APACHE 2.0 License',
-        'Programming Language :: Python',
-        'Programming Language :: Python :: 3',
-        'Programming Language :: Python :: 3.8',
-        'Topic :: Utilities',
-        'Topic :: System :: Distributed Computing',
-        'Operating System :: POSIX',
-        'Operating System :: Unix'
+        "Environment :: Console",
+        "Intended Audience :: Developers",
+        "License :: OSI Approved :: Apache Software License",
+        "Operating System :: POSIX",
+        "Operating System :: Unix",
+        "Programming Language :: Python",
+        "Programming Language :: Python :: 3",
+        "Programming Language :: Python :: 3 :: Only",
+        "Programming Language :: Python :: 3.10",
+        "Programming Language :: Python :: 3.11",
+        "Topic :: Utilities",
+        "Topic :: System :: Distributed Computing",
     ]
 )
