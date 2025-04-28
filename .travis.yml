@@ -1,8 +1,9 @@
 language: python
 os: linux
+dist: jammy
 
 python:
-  - "3.8"
+  - "3.10"
 
 services:
   - mysql
