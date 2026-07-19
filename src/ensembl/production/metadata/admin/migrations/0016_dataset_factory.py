@@ -2,7 +2,6 @@
 
 from django.db import migrations, models
 import django.db.models.deletion
-import jsonfield.fields
 
 
 class Migration(migrations.Migration):
@@ -20,7 +19,12 @@ class Migration(migrations.Migration):
         migrations.AddField(
             model_name='datasettype',
             name='filter_on',
-            field=jsonfield.fields.JSONField(blank=True, null=True),
+            # Historically django-jsonfield's JSONField, a TextField subclass with
+            # app-level (de)serialization - recorded here as TextField (its real
+            # underlying column type) since that abandoned package no longer imports
+            # under Django 5.2. See migration 0022 for the move to Django's native
+            # JSONField.
+            field=models.TextField(blank=True, null=True),
         ),
         migrations.AddField(
             model_name='datasettype',

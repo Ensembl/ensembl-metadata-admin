@@ -11,7 +11,6 @@
 #   limitations under the License.
 import uuid
 
-import jsonfield.fields
 from django.core.exceptions import ValidationError
 from django.db import models
 from django.db.models.lookups import IContains
@@ -20,7 +19,7 @@ from django.db.models.lookups import IContains
 class UUIDField(models.UUIDField):
 
     def __init__(self, verbose_name=None, **kwargs):
-        kwargs['max_length'] = 36
+        kwargs['max_length'] = 40
         # jump over first parent hierarchy
         super(models.UUIDField, self).__init__(verbose_name, **kwargs)
 
@@ -51,17 +50,14 @@ class Assembly(models.Model):
     assembly_id = models.AutoField(primary_key=True)
     ucsc_name = models.CharField(max_length=16, blank=True, null=True)
     accession = models.CharField(unique=True, max_length=16)
-    alt_accession = models.CharField(max_length=16, null=True)
     level = models.CharField(max_length=32)
     name = models.CharField(max_length=128)
     accession_body = models.CharField(max_length=32, blank=True, null=True)
     assembly_default = models.CharField(max_length=128, blank=True, null=True)
-    tol_id = models.CharField(unique=True, max_length=32, blank=True, null=True)
     created = models.DateTimeField(blank=True, null=True, auto_now_add=True)
     ensembl_name = models.CharField(unique=True, max_length=255, blank=True, null=True)
     assembly_uuid = UUIDField(default=str(uuid.uuid4()), editable=False, unique=True)
     is_reference = models.BooleanField(default=False, null=False)
-    url_name = models.CharField(max_length=128, null=True)
 
     def save(self, *args, **kwargs):
         if self.pk is not None:
@@ -91,6 +87,9 @@ class AssemblySequence(models.Model):
         CHROMOSOME = 'chromosome', 'Chromosome'
         SCAFFOLD = 'scaffold', 'Scaffold'
         SUPERCONTIG = 'supercontig', 'Supercontig'
+        LRG = 'lrg', 'LRG'
+        SUPSCAFFOLD = 'supscaffold', 'Supscaffold'
+        NON_REF_SCAFFOLD = 'non_ref_scaffold', 'Non-reference scaffold'
 
     assembly_sequence_id = models.AutoField(primary_key=True)
     name = models.CharField(max_length=128, blank=True, null=True)
@@ -105,6 +104,8 @@ class AssemblySequence(models.Model):
     type = models.CharField(choices=SequenceType.choices, max_length=26, blank=True, null=False,
                             default=SequenceType.PRIMARY)
     is_circular = models.BooleanField(null=False, default=False)
+    additional = models.BooleanField(default=False, null=False)
+    source = models.CharField(max_length=120, blank=True, null=True)
 
     def save(self, *args, **kwargs):
         if self.pk is not None:
@@ -125,6 +126,19 @@ class AssemblySequence(models.Model):
         return str(self.name)
 
 
+class SequenceAlias(models.Model):
+    sequence_alias_id = models.AutoField(primary_key=True)
+    assembly_sequence = models.ForeignKey(AssemblySequence, on_delete=models.CASCADE)
+    alias = models.CharField(max_length=128)
+    source = models.CharField(max_length=128, blank=True, null=True)
+
+    class Meta:
+        db_table = 'sequence_alias'
+
+    def __str__(self):
+        return self.alias
+
+
 class Attribute(models.Model):
     class AttributeType(models.TextChoices):
         integer = 'integer', 'Integer'
@@ -138,6 +152,8 @@ class Attribute(models.Model):
     label = models.CharField(max_length=128)
     description = models.CharField(max_length=255, blank=True, null=True)
     type = models.CharField(max_length=8, choices=AttributeType.choices, default='string')
+    required = models.BooleanField(default=False, null=False)
+    required_dataset_type = models.CharField(max_length=32, blank=True, null=True)
 
     class Meta:
         db_table = 'attribute'
@@ -165,10 +181,12 @@ class DatasetManager(models.Manager):
 
 class Dataset(models.Model):
     class DatasetStatus(models.TextChoices):
-        SUBMITTED = 'SUBMITTED', 'Submitted'
-        PROCESSING = 'PROCESSING', 'Processing'
-        PROCESSED = 'PROCESSED', 'Processed'
-        RELEASED = 'RELEASED', 'Released'
+        SUBMITTED = 'Submitted', 'Submitted'
+        PROCESSING = 'Processing', 'Processing'
+        PROCESSED = 'Processed', 'Processed'
+        RELEASED = 'Released', 'Released'
+        FAULTY = 'Faulty', 'Faulty'
+        SUPPRESSED = 'Suppressed', 'Suppressed'
 
     objects = DatasetManager()
     dataset_id = models.AutoField(primary_key=True)
@@ -236,6 +254,7 @@ class DatasetSource(models.Model):
     dataset_source_id = models.AutoField(primary_key=True)
     type = models.CharField(max_length=32)
     name = models.CharField(unique=True, max_length=255)
+    location = models.CharField(max_length=120, blank=True, null=True)
 
     class Meta:
         db_table = 'dataset_source'
@@ -250,10 +269,8 @@ class DatasetType(models.Model):
     label = models.CharField(max_length=128)
     topic = models.CharField(max_length=32)
     description = models.CharField(max_length=255, blank=True, null=True)
-    details_uri = models.CharField(max_length=255, blank=True, null=True)
     parent = models.ForeignKey("DatasetType", db_column='parent_id', blank=True, null=True, on_delete=models.SET_NULL)
-    depends_on = models.CharField(max_length=128, blank=True, null=True)
-    filter_on = jsonfield.JSONField(blank=True, null=True)  # JSON field
+    multiple_current = models.BooleanField(default=False, null=False)
 
     class Meta:
         db_table = 'dataset_type'
@@ -265,10 +282,11 @@ class DatasetType(models.Model):
 
 class EnsemblRelease(models.Model):
     class ReleaseStatus(models.TextChoices):
-        PLANNED = 'PLANNED', 'Planned'
-        PREPARING = 'PREPARING', 'Preparing'
-        PREPARED = 'PREPARED', 'Prepared'
-        RELEASED = 'RELEASED', 'Released'
+        PLANNED = 'Planned', 'Planned'
+        PREPARING = 'Preparing', 'Preparing'
+        PREPARED = 'Prepared', 'Prepared'
+        RELEASED = 'Released', 'Released'
+        ARCHIVED = 'Archived', 'Archived'
 
     release_id = models.AutoField(primary_key=True)
     version = models.DecimalField(max_digits=10, decimal_places=1)
@@ -280,6 +298,7 @@ class EnsemblRelease(models.Model):
     genomes = models.ManyToManyField('Genome', through='GenomeRelease')
     datasets = models.ManyToManyField('Dataset', through='GenomeDataset')
     status = models.CharField(max_length=12, choices=ReleaseStatus.choices, default=ReleaseStatus.PLANNED)
+    name = models.CharField(max_length=3, blank=True, null=True)
 
     class Meta:
         db_table = 'ensembl_release'
@@ -308,12 +327,15 @@ class Genome(models.Model):
     assembly = models.ForeignKey(Assembly, on_delete=models.CASCADE)
     organism = models.ForeignKey('Organism', on_delete=models.CASCADE)
     created = models.DateTimeField(auto_now_add=True)
-    is_best = models.BooleanField(default=False)
     datasets = models.ManyToManyField('Dataset', through='GenomeDataset')
     releases = models.ManyToManyField('EnsemblRelease', through='GenomeRelease')
     production_name = models.CharField(max_length=255)
-    genebuild_version = models.CharField(max_length=64, null=True, unique=False)
     genebuild_date = models.CharField(max_length=20, null=True, unique=False)
+    annotation_source = models.CharField(max_length=120)
+    provider_name = models.CharField(max_length=120)
+    suppressed = models.BooleanField(default=False, null=False)
+    suppression_details = models.CharField(max_length=255, blank=True, null=True)
+    url_name = models.CharField(max_length=128, blank=True, null=True)
 
     def save(self, *args, **kwargs):
         if self.pk is not None and self.releases.exists():
@@ -369,6 +391,42 @@ class GenomeDataset(models.Model):
         return f"{self.release.version} [{self.release.status}]" if self.release else 'Unreleased'
 
 
+class GenomeGroup(models.Model):
+    class GenomeGroupType(models.TextChoices):
+        COMPARA_REFERENCE = 'compara_reference', 'Compara reference'
+        STRUCTURAL_VARIANT = 'structural_variant', 'Structural variant'
+        PROJECT = 'project', 'Project'
+        CUSTOM = 'custom', 'Custom'
+
+    genome_group_id = models.AutoField(primary_key=True)
+    type = models.CharField(max_length=19, choices=GenomeGroupType.choices)
+    name = models.CharField(max_length=128)
+    label = models.CharField(max_length=128)
+    searchable = models.BooleanField(default=False, null=False)
+    description = models.CharField(max_length=255, blank=True, null=True)
+
+    class Meta:
+        db_table = 'genome_group'
+
+    def __str__(self):
+        return self.name
+
+
+class GenomeGroupMember(models.Model):
+    genome_group_member_id = models.AutoField(primary_key=True)
+    is_reference = models.BooleanField(default=False, null=False)
+    genome = models.ForeignKey(Genome, on_delete=models.CASCADE)
+    genome_group = models.ForeignKey(GenomeGroup, on_delete=models.CASCADE)
+    release = models.ForeignKey(EnsemblRelease, on_delete=models.SET_NULL, blank=True, null=True)
+    is_current = models.BooleanField(default=False, null=False)
+
+    class Meta:
+        db_table = 'genome_group_member'
+
+    def __str__(self):
+        return str(self.genome_group_member_id)
+
+
 class GenomeRelease(models.Model):
     class Meta:
         constraints = [
@@ -381,6 +439,7 @@ class GenomeRelease(models.Model):
     genome = models.ForeignKey(Genome, on_delete=models.CASCADE)
     release = models.ForeignKey(EnsemblRelease, on_delete=models.CASCADE)
     is_current = models.BooleanField(default=False)
+    default = models.BooleanField(default=False)
 
     def delete(self, *args, **kwargs):
         if self.genome.releases.exists():
@@ -416,6 +475,7 @@ class Organism(models.Model):
     organism_uuid = UUIDField(default=str(uuid.uuid4()), editable=False, unique=True)
     strain_type = models.CharField(max_length=128, blank=True, null=True)
     rank = models.IntegerField(blank=True, null=True)
+    tol_id = models.CharField(max_length=32, blank=True, null=True)
 
     def save(self, *args, **kwargs):
         if self.pk is not None:

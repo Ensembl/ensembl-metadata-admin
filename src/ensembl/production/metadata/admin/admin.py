@@ -15,7 +15,7 @@ from django.urls import reverse
 from django.utils.safestring import mark_safe
 from ensembl.production.metadata.admin.filters import *
 from .models import Attribute, AssemblySequence, Assembly, EnsemblRelease, Organism, Dataset, OrganismGroup, Genome, \
-    DatasetAttribute
+    DatasetAttribute, SequenceAlias, GenomeGroup, GenomeGroupMember
 from django.utils.html import format_html, format_html_join
 from django.contrib import admin, messages
 
@@ -59,7 +59,7 @@ class MetadataInline(InlineModelAdmin):
 
 class GenomeInLine(MetadataInline, admin.TabularInline):
     model = Genome
-    fields = ['display_genome_uuid', 'organism', 'production_name', 'is_best']  # Specify the fields to display
+    fields = ['display_genome_uuid', 'organism', 'production_name']  # Specify the fields to display
     readonly_fields = ['display_genome_uuid']
     can_delete = False
     extra = 0
@@ -106,10 +106,17 @@ class DAttributeInLine(MetadataInline, admin.TabularInline):
 @admin.register(Attribute)
 class AttributeAdmin(AdminMetadata, admin.ModelAdmin):
     search_fields = ('name', 'type',)
-    list_display = ('name', 'label', 'description', 'type')
+    list_display = ('name', 'label', 'description', 'type', 'required')
+    list_filter = ('required',)
     list_per_page = 30
     ordering = ('name',)
     inlines = (DAttributeInLine,)
+
+
+class SequenceAliasInLine(MetadataInline, admin.TabularInline):
+    model = SequenceAlias
+    fields = ('alias', 'source')
+    readonly_fields = ('alias', 'source')
 
 
 @admin.register(AssemblySequence)
@@ -123,6 +130,7 @@ class AssemblySequenceAdmin(AdminMetadata, admin.ModelAdmin):
     search_fields = ['name', 'accession', 'md5', 'sha512t24u']
     list_per_page = 30
     object_id = None
+    inlines = (SequenceAliasInLine,)
 
     def has_delete_permission(self, request, obj=None):
         return request.user.is_superuser
@@ -141,19 +149,19 @@ class AssemblySequenceAdmin(AdminMetadata, admin.ModelAdmin):
 
 @admin.register(Assembly)
 class AssemblyAdmin(AdminMetadata, admin.ModelAdmin):
-    readonly_fields = ['name', 'accession', 'created', 'assembly_uuid', 'assembly_sequence', 'tol_id', 'level',
-                       'alt_accession', 'ucsc_name']
+    readonly_fields = ['name', 'accession', 'created', 'assembly_uuid', 'assembly_sequence', 'level',
+                       'ucsc_name']
     search_fields = ('accession', 'assembly_uuid', 'name')
     ordering = ('accession',)
-    list_display = ['accession', 'assembly_uuid', 'name', 'ucsc_name', 'level', 'assembly_sequence', 'alt_accession',
+    list_display = ['accession', 'assembly_uuid', 'name', 'ucsc_name', 'level', 'assembly_sequence',
                     'is_reference']
     fieldsets = (
         (None, {
-            'fields': ('name', 'assembly_uuid', 'accession', 'alt_accession', 'ucsc_name', 'tol_id', 'level')
+            'fields': ('name', 'assembly_uuid', 'accession', 'ucsc_name', 'level')
         }),
         ('Details', {
             'fields': ('created', 'is_reference', 'assembly_sequence',
-                       'assembly_default', 'accession_body', 'url_name'),
+                       'assembly_default', 'accession_body'),
         })
     )
     list_filter = ('level', 'is_reference')
@@ -407,7 +415,7 @@ class DatasetAdmin(AdminMetadata, admin.ModelAdmin):
     search_fields = ('dataset_uuid', 'genomes__genome_uuid', 'genomes__organism__common_name',
                      'genomes__organism__biosample_id', 'genomes__organism__scientific_name',
                      'genomes__assembly__accession', 'genomes__assembly__name',
-                     'genomes__assembly__tol_id', 'genomes__assembly__ensembl_name')
+                     'genomes__organism__tol_id', 'genomes__assembly__ensembl_name')
     list_display = ('dataset_uuid', 'name', 'label', 'version', 'status_display', 'dataset_type')
     # ordering = ('-ensemblrelease__version', 'genomes__organism__name',)
     list_filter = (MetadataDatasetReleaseFilter, DatasetTypeListFilter, 'dataset_type__topic', 'status')
@@ -459,6 +467,28 @@ class OrganismGroupAdmin(AdminMetadata, admin.ModelAdmin):
     inlines = (OrganismGroupInLine,)
 
 
+class GenomeGroupInLine(MetadataInline, admin.TabularInline):
+    model = GenomeGroupMember
+    fields = ('group_genome', 'is_reference', 'is_current', 'release')
+    readonly_fields = ('group_genome',)
+    can_delete = False
+
+    def group_genome(self, obj):
+        url_view = reverse('admin:ensembl_metadata_genome_change', args=(obj.genome.genome_id,))
+        return mark_safe(u"<a href='" + url_view + "'>" + str(obj.genome) + "</a>")
+
+    group_genome.short_description = 'Genome'
+
+
+@admin.register(GenomeGroup)
+class GenomeGroupAdmin(AdminMetadata, admin.ModelAdmin):
+    fields = ('name', 'type', 'label', 'searchable', 'description')
+    list_display = ('name', 'type', 'label', 'searchable')
+    list_filter = ('type', 'searchable')
+    search_fields = ('name', 'label')
+    inlines = (GenomeGroupInLine,)
+
+
 class GenomeDatasetInline(MetadataInline, admin.TabularInline):
     model = Genome.datasets.through
     fields = ['display_dataset', 'name', 'type', 'release_version', 'is_current', 'dataset_topic',
@@ -505,12 +535,15 @@ class GenomeReleaseInline(MetadataInline, admin.TabularInline):
 
 @admin.register(Genome)
 class GenomeAdmin(AdminMetadata, admin.ModelAdmin):
-    list_display = ['genome_uuid', 'assembly', 'organism', 'is_best']
-    list_filter = ['releases', 'is_best']
+    list_display = ['genome_uuid', 'assembly', 'organism', 'production_name', 'genebuild_date',
+                    'annotation_source', 'provider_name', 'suppressed']
+    list_filter = ['releases', 'suppressed']
     # TODO add an item to list with NULL value
     search_fields = ['assembly__name', 'organism__common_name', 'genome_uuid']
-    fields = ['genome_uuid', 'assembly', 'organism', 'production_name', 'is_best', 'created']
-    readonly_fields = ['production_name', 'genome_uuid', 'assembly', 'organism', 'created']
+    fields = ['genome_uuid', 'assembly', 'organism', 'production_name', 'genebuild_date',
+             'annotation_source', 'provider_name', 'suppressed', 'created']
+    readonly_fields = ['production_name', 'genome_uuid', 'assembly', 'organism', 'genebuild_date',
+                       'annotation_source', 'provider_name', 'suppressed', 'created']
     inlines = [GenomeDatasetInline, GenomeReleaseInline]
 
 

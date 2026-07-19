@@ -2,15 +2,16 @@ language: python
 os: linux
 
 python:
-  - "3.8"
+  - "3.12"
 
 services:
   - mysql
 
 install:
-  - pip install -r requirements.txt
+  - pip install ".[cicd]"
 
 script:
   - export DJANGO_SETTINGS_MODULE=metadata_admin.settings
   - export DATABASE_USER=travis
   - python src/manage.py test ./src/ensembl/production/*
+  - python scripts/check_models_in_sync.py

@@ -1,0 +1,85 @@
+# .. See the NOTICE file distributed with this work for additional information
+#    regarding copyright ownership.
+#    Licensed under the Apache License, Version 2.0 (the "License");
+#    you may not use this file except in compliance with the License.
+#    You may obtain a copy of the License at
+#        http://www.apache.org/licenses/LICENSE-2.0
+#    Unless required by applicable law or agreed to in writing, software
+#    distributed under the License is distributed on an "AS IS" BASIS,
+#    WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+#    See the License for the specific language governing permissions and
+#    limitations under the License.
+
+[build-system]
+build-backend = "setuptools.build_meta"
+requires = [
+    "setuptools",
+    "wheel",
+]
+
+[project]
+name = "ensembl-metadata-admin"
+description = "Ensembl Production metadata Django admin pages"
+requires-python = ">=3.12,<3.13"
+dynamic = ["version", "readme"]
+authors = [
+    { name = "Marc Chakiachvili", email = "mchakiachvili@ebi.ac.uk" },
+    { name = "Daniel Poppleton", email = "danielp@ebi.ac.uk" },
+    { name = "Vinay Kaikala", email = "vinay@ebi.ac.uk" },
+]
+maintainers = [
+    { name = "Ensembl Production Team", email = "ensembl-production@ebi.ac.uk" },
+]
+license = { text = "APACHE 2.0" }
+classifiers = [
+    "Development Status :: 3 - Alpha",
+    "Intended Audience :: Developers",
+    "Environment :: Console",
+    "License :: OSI Approved :: Apache Software License",
+    "Programming Language :: Python",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.12",
+    "Topic :: Utilities",
+    "Topic :: System :: Distributed Computing",
+    "Operating System :: POSIX",
+    "Operating System :: Unix",
+]
+# Django is pinned to the 5.2 LTS line, which requires Python >=3.12.
+# NOTE: django-jsonfield dropped in favor of Django's builtin JSONField
+# (see migration 0022) - it doesn't even import under Django 5.2 (removed
+# ugettext_lazy). Its only usage, DatasetType.filter_on, has no queries or
+# fixtures relying on lookup semantics, so this swap carries none of the
+# `contains`-lookup risk found in ensembl-prodinf-masterdb's equivalent field.
+dependencies = [
+    "Django>=5.2,<5.3",
+    "django-filter>=23.5",
+    "djangorestframework>=3.15.1",
+    "drf-spectacular>=0.27.1",
+    "Markdown",
+    "mysqlclient>=2.2.0",
+    "urllib3>=2.2.0",
+]
+
+[project.optional-dependencies]
+# ensembl-metadata-api owns the real ensembl_genome_metadata schema via its
+# SQLAlchemy models. Only needed to run scripts/check_models_in_sync.py,
+# which fails CI if these Django models drift from that schema.
+cicd = [
+    "ensembl-metadata-api @ git+https://github.com/Ensembl/ensembl-metadata-api.git",
+]
+
+[project.urls]
+Homepage = "https://github.com/Ensembl/ensembl-metadata-admin"
+Repository = "https://github.com/Ensembl/ensembl-metadata-admin"
+
+[tool.setuptools]
+package-dir = { "" = "src" }
+include-package-data = true
+
+[tool.setuptools.packages.find]
+where = ["src"]
+include = ["ensembl.production.*"]
+
+[tool.setuptools.dynamic]
+version = { attr = "metadata_admin._version.__version__" }
+readme = { file = ["README.md"] }
