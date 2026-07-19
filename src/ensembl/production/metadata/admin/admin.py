@@ -469,15 +469,33 @@ class OrganismGroupAdmin(AdminMetadata, admin.ModelAdmin):
 
 class GenomeGroupInLine(MetadataInline, admin.TabularInline):
     model = GenomeGroupMember
-    fields = ('group_genome', 'is_reference', 'is_current', 'release')
-    readonly_fields = ('group_genome',)
+    fields = ('group_genome_uuid', 'production_name', 'genebuild_date', 'annotation_source',
+              'provider_name', 'suppressed', 'is_reference', 'is_current', 'release')
+    readonly_fields = ('group_genome_uuid', 'production_name', 'genebuild_date', 'annotation_source',
+                       'provider_name', 'suppressed')
     can_delete = False
 
-    def group_genome(self, obj):
+    def group_genome_uuid(self, obj):
         url_view = reverse('admin:ensembl_metadata_genome_change', args=(obj.genome.genome_id,))
-        return mark_safe(u"<a href='" + url_view + "'>" + str(obj.genome) + "</a>")
+        return mark_safe(u"<a href='" + url_view + "'>" + str(obj.genome.genome_uuid) + "</a>")
 
-    group_genome.short_description = 'Genome'
+    def production_name(self, obj):
+        return obj.genome.production_name
+
+    def genebuild_date(self, obj):
+        return obj.genome.genebuild_date
+
+    def annotation_source(self, obj):
+        return obj.genome.annotation_source
+
+    def provider_name(self, obj):
+        return obj.genome.provider_name
+
+    def suppressed(self, obj):
+        return obj.genome.suppressed
+
+    group_genome_uuid.short_description = 'Genome UUID'
+    suppressed.boolean = True
 
 
 @admin.register(GenomeGroup)

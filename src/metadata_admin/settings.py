@@ -165,4 +165,4 @@ SPECTACULAR_SETTINGS = {
     'TITLE': 'Ensembl Metadata Registry',
     'DESCRIPTION': 'REST endpoints for querying Ensembl metadata and taxonomy databases.',
     'VERSION': '1.0.0',
-}
+} 
